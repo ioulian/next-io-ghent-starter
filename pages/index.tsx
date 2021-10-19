@@ -39,6 +39,16 @@ const Home: NextPage = ({}: InferGetStaticPropsType<typeof getStaticProps>) => {
               ))}
             </ul>
           </nav>
+
+          <nav>
+            <Link
+              href={{
+                pathname: "/serverside",
+              }}
+            >
+              Go to server side example
+            </Link>
+          </nav>
         </main>
       </div>
     </>

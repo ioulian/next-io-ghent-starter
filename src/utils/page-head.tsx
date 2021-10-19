@@ -1,5 +1,9 @@
 import Head from "next/head";
 
+/**
+ * Add page title to the head.
+ * Will be suffixed with "NEXT_PUBLIC_HEAD_TITLE" env variable.
+ */
 export const PageTitle = ({ name }: { name?: string }) => {
   const titleArray = [];
 
@@ -29,7 +33,11 @@ export const PageViewport = () => {
   );
 };
 
-// https://realfavicongenerator.net/
+/**
+ * Add common favicon links to the head.
+ *
+ * If you wish to update this data, use https://realfavicongenerator.net/.
+ */
 export const PageFavicons = () => {
   return (
     <Head>
