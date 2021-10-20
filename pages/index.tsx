@@ -1,3 +1,5 @@
+import Image from "next/image";
+import { NextSeo } from "next-seo";
 import type {
   GetStaticProps,
   GetStaticPropsContext,
@@ -9,7 +11,9 @@ import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-import { PageTitle } from "@/utils/page-head";
+import { StyledMain, StyledPage } from "@/components/styled/Demo";
+
+import logo from "@/img/logo.png";
 
 const Home: NextPage = ({}: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { t } = useTranslation("common");
@@ -17,9 +21,23 @@ const Home: NextPage = ({}: InferGetStaticPropsType<typeof getStaticProps>) => {
 
   return (
     <>
-      <PageTitle name="Home" />
-      <div>
-        <main>
+      <NextSeo
+        title="Home"
+        description="This will be the page meta description"
+      />
+      <StyledPage>
+        <StyledMain>
+          <div className="logo">
+            <Image
+              alt="Logo"
+              src={logo}
+              layout="fixed"
+              width={128}
+              height={128}
+              quality={90}
+              priority
+            />
+          </div>
           <h1>{t("title")}</h1>
 
           <nav>
@@ -49,8 +67,8 @@ const Home: NextPage = ({}: InferGetStaticPropsType<typeof getStaticProps>) => {
               Go to server side example
             </Link>
           </nav>
-        </main>
-      </div>
+        </StyledMain>
+      </StyledPage>
     </>
   );
 };

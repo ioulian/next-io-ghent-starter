@@ -1,14 +1,18 @@
+import Image from "next/image";
+import { NextSeo } from "next-seo";
 import type {
   GetServerSideProps,
   GetServerSidePropsContext,
   InferGetServerSidePropsType,
   NextPage,
 } from "next";
+import useSWR, { SWRConfig } from "swr";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-import { PageTitle } from "@/utils/page-head";
-import { fetcher } from "@/utils/swr";
-import useSWR, { SWRConfig } from "swr";
+import { fetcher } from "@/lib/swr";
+import { StyledMain, StyledPage } from "@/components/styled/Demo";
+
+import logo from "@/img/logo.png";
 
 const API = "https://api.github.com/repos/vercel/swr";
 
@@ -37,13 +41,27 @@ const ServerSide: NextPage = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
     <SWRConfig value={{ fallback }}>
-      <PageTitle name="Server side example" />
-      <div>
-        <main>
+      <NextSeo
+        title="Serverside example"
+        description="This will be the page meta description"
+      />
+      <StyledPage>
+        <StyledMain>
+          <div className="logo">
+            <Image
+              alt="Logo"
+              src={logo}
+              layout="fixed"
+              width={128}
+              height={128}
+              quality={90}
+              priority
+            />
+          </div>
           <h1>Server side example</h1>
           <Repo />
-        </main>
-      </div>
+        </StyledMain>
+      </StyledPage>
     </SWRConfig>
   );
 };
@@ -52,6 +70,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   locale,
 }: GetServerSidePropsContext) => {
   const repoInfo = await fetcher(API);
+
   return {
     props: {
       ...(await serverSideTranslations(locale as string, ["common"])),

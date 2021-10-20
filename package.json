@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "next-sitemap",
     "start": "next start",
     "analyze": "cross-env ANALYZE=true yarn build",
     "serve": "serve .next/analyze",
@@ -14,9 +15,11 @@
     "next": "11.1.2",
     "next-i18next": "^8.9.0",
     "next-pwa": "^5.4.0",
+    "next-seo": "^4.28.1",
     "nextjs-progressbar": "^0.0.11",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "sharp": "^0.29.1",
     "styled-normalize": "^8.0.7",
     "swr": "^1.0.1"
   },
@@ -27,6 +30,7 @@
     "cross-env": "^7.0.3",
     "eslint": "^7.32.0",
     "eslint-config-next": "11.1.2",
+    "next-sitemap": "^1.6.192",
     "serve": "^12.0.1",
     "styled-components": "^5.3.1",
     "typescript": "4.4.4"
