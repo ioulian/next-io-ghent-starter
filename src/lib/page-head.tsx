@@ -1,9 +1,13 @@
+import Head from "next/head";
+
 export const PageViewport = () => {
   return (
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+    <Head>
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no"
+      />
+    </Head>
   );
 };
 
@@ -14,7 +18,7 @@ export const PageViewport = () => {
  */
 export const PageFavicons = () => {
   return (
-    <>
+    <Head>
       <link
         rel="apple-touch-icon"
         sizes="180x180"
@@ -36,6 +40,6 @@ export const PageFavicons = () => {
       <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#f38a5d" />
       <meta name="msapplication-TileColor" content="#f38a5d" />
       <meta name="theme-color" content="#f38a5d" />
-    </>
+    </Head>
   );
 };

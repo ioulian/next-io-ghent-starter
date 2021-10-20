@@ -1,5 +1,4 @@
 import type { AppProps } from "next/app";
-import Head from "next/head";
 import Script from "next/script";
 import { ThemeProvider } from "styled-components";
 import { Normalize } from "styled-normalize";
@@ -29,10 +28,8 @@ const App = ({ Component, pageProps }: AppProps) => {
   // TODO: make GTM tree-shakable
   return (
     <>
-      <Head>
-        <PageViewport />
-        <PageFavicons />
-      </Head>
+      <PageViewport />
+      <PageFavicons />
       {GTM_ID && (
         <Script
           id="GTM"

@@ -43,3 +43,5 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## TODO
 
 - add <https://github.com/vercel/next.js/tree/canary/examples/with-why-did-you-render>
+- add svg spritesheet geenrator
+- find a good PWA geenerator
