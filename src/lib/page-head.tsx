@@ -15,6 +15,7 @@ export const PageViewport = () => {
  * Add common favicon links to the head.
  *
  * If you wish to update this data, use https://realfavicongenerator.net/.
+ * Do not forget to add maskable icon: https://maskable.app/editor. (RFG does not generate it, yet)
  */
 export const PageFavicons = () => {
   return (
