@@ -1,5 +1,8 @@
 import type { AppProps } from "next/app";
+import Head from "next/head";
 import Script from "next/script";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 import { ThemeProvider } from "styled-components";
 import { Normalize } from "styled-normalize";
 import NextNprogress from "nextjs-progressbar";
@@ -13,8 +16,6 @@ import { fetcher } from "@/lib/swr";
 
 import SEO from "../next-seo.config";
 import { GTM_ID, sendPageView } from "@/lib/gtm";
-import { useEffect } from "react";
-import { useRouter } from "next/router";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
