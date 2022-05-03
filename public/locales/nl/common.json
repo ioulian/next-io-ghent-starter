@@ -1,3 +1,7 @@
 {
-  "title": "IO Ghent starter template NL"
+  "title": "IO Ghent starter template NL",
+  "hellow": {
+    "test1": "test 1",
+    "test2": "test 2"
+  }
 }

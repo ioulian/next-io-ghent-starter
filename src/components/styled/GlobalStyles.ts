@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
+// Use types
 export const theme = {
   colors: {
     white: "#fff",

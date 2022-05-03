@@ -1,5 +1,5 @@
 import type { AppProps } from "next/app";
-import Head from "next/head";
+// import Head from "next/head";
 import Script from "next/script";
 import { useEffect } from "react";
 import { useRouter } from "next/router";

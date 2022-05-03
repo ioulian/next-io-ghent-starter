@@ -14,5 +14,13 @@ module.exports = withBundleAnalyzer(
       register: false,
       disable: process.env.NODE_ENV === "development",
     },
+    compiler: {
+      // ssr and displayName are configured by default
+      styledComponents: true,
+    },
+    swcMinify: true,
+    images: {
+      formats: ["image/avif", "image/webp"],
+    },
   })
 );
