@@ -4,10 +4,10 @@ import path from "path";
 import fs from "fs";
 import i18nextConfig from "./../next-i18next.config";
 
-const PRIMARY_LOCALE = i18nextConfig.i18n.defaultLocale;
-const POSSIBLE_LOCALES = i18nextConfig.i18n.locales.filter(
-  (locale) => locale !== PRIMARY_LOCALE
-);
+// Colors: https://stackoverflow.com/questions/9781218/how-to-change-node-jss-console-font-color
+
+// const PRIMARY_LOCALE = i18nextConfig.i18n.defaultLocale;
+const POSSIBLE_LOCALES = i18nextConfig.i18n.locales;
 
 const getKeysOfObjectRecursively = (object = {}, parentKey = ""): string[] => {
   // @ts-ignore
@@ -43,42 +43,60 @@ const getTranslationFile = (locale: string, name: string): {} | undefined => {
 const check = async (): Promise<boolean> =>
   new Promise(async (resolve) => {
     let isCorrect = true;
-    const primaryTranslationFiles = getTranslationFiles(PRIMARY_LOCALE);
 
-    for (const primaryTranslationFileName of primaryTranslationFiles) {
-      const primaryTranslationFile = getTranslationFile(
-        PRIMARY_LOCALE,
-        primaryTranslationFileName
-      );
-      const primaryTranslationFileKeys = getKeysOfObjectRecursively(
-        primaryTranslationFile
-      );
-      for (const locale of POSSIBLE_LOCALES) {
-        const localeTranslationFile = getTranslationFile(
-          locale,
+    // Loop through each locale
+    for (const primaryLocale of POSSIBLE_LOCALES) {
+      // Get all files for current locale
+      const primaryTranslationFiles = getTranslationFiles(primaryLocale);
+
+      // Loop through all files inside this locale
+      for (const primaryTranslationFileName of primaryTranslationFiles) {
+        const primaryTranslationFile = getTranslationFile(
+          primaryLocale,
           primaryTranslationFileName
         );
+        const primaryTranslationFileKeys = getKeysOfObjectRecursively(
+          primaryTranslationFile
+        );
 
-        if (!localeTranslationFile) {
-          console.error(
-            `Translation file "${primaryTranslationFileName}" is missing for "${locale}".`
-          );
-          isCorrect = false;
-        } else {
-          const translationFileKeys = getKeysOfObjectRecursively(
-            localeTranslationFile
-          );
-          const missingKeys = primaryTranslationFileKeys.filter(
-            (key) => !translationFileKeys.includes(key)
+        // Check the rest of the locales
+        for (const locale of POSSIBLE_LOCALES.filter(
+          (currentLocale) => currentLocale !== primaryLocale
+        )) {
+          const localeTranslationFile = getTranslationFile(
+            locale,
+            primaryTranslationFileName
           );
 
-          if (missingKeys.length !== 0) {
-            missingKeys.forEach((missingKey) => {
-              console.error(
-                `Translation key "${missingKey}" is missing from "${primaryTranslationFileName}" for "${locale}".`
-              );
-            });
+          // Check if the file exists for the locale
+          if (!localeTranslationFile) {
+            console.error(
+              "\x1b[41m",
+              "\x1b[1m[File]",
+              "\x1b[0m",
+              `"\x1b[1m${primaryTranslationFileName}\x1b[0m" is missing for "\x1b[1m${locale}\x1b[0m".`
+            );
             isCorrect = false;
+          } else {
+            // Check if there are missing keys
+            const translationFileKeys = getKeysOfObjectRecursively(
+              localeTranslationFile
+            );
+            const missingKeys = primaryTranslationFileKeys.filter(
+              (key) => !translationFileKeys.includes(key)
+            );
+
+            if (missingKeys.length !== 0) {
+              missingKeys.forEach((missingKey) => {
+                console.error(
+                  "\x1b[41m",
+                  "\x1b[1m[Key]",
+                  "\x1b[0m",
+                  `"\x1b[1m${missingKey}\x1b[0m" from "\x1b[1m${primaryLocale}\x1b[0m" is missing from "\x1b[1m${primaryTranslationFileName}\x1b[0m" for "\x1b[1m${locale}\x1b[0m".`
+                );
+              });
+              isCorrect = false;
+            }
           }
         }
       }
@@ -87,22 +105,18 @@ const check = async (): Promise<boolean> =>
     resolve(isCorrect);
   });
 
-console.log(
-  "We assume primary locale is fully filled in (all files are set + all keys are set)."
-);
-console.log(
-  "We don't check if there are more files or more keys in non-primary locales."
-);
-console.log("");
-
 check().then((isCorrect) => {
   console.log("");
 
   if (!isCorrect) {
-    console.log("Some errors have been found! You can see them above.");
+    console.log(
+      "\x1b[31m",
+      "Some errors have been found! You can see them above.",
+      "\x1b[0m"
+    );
     process.exit(1);
   }
 
-  console.log("Everything checks out!");
+  console.log("\x1b[32m", "Everything checks out!", "\x1b[0m");
   process.exit(0);
 });
