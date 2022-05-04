@@ -14,6 +14,7 @@ import Link from "next/link";
 import { StyledMain, StyledPage } from "@/components/styled/Demo";
 
 import logo from "@/img/logo.png";
+import { Counter } from "src/features/counter/Counter";
 
 const Home: NextPage = ({}: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { t } = useTranslation("common");
@@ -67,6 +68,10 @@ const Home: NextPage = ({}: InferGetStaticPropsType<typeof getStaticProps>) => {
               Go to server side example
             </Link>
           </nav>
+
+          <div>
+            <Counter />
+          </div>
         </StyledMain>
       </StyledPage>
     </>
