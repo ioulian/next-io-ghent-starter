@@ -41,6 +41,7 @@
     "incremental": true
   },
   "include": [
+    "i18n-resources.d.ts",
     "next-env.d.ts",
     "additional.d.ts",
     "**/*.ts",

@@ -40,6 +40,20 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - `next-i18next.config.js`
 - `src/lib/page-head.tsx` ans make sure the favicons are all regenerated
 
+## Features
+
+- Full Typescript
+- Translations intellisense (TS) + checks for missing translations
+- easy GTM (auto tracking of pages)
+- SWR
+- React 18 en Next 12 -> fast minification and dev server enabled
+- Favicons (manual, but we have helpers)
+- Avif/webm conversion of images
+- SEO + Sitemap
+- Bundle analyser
+- NVM
+- .env variables
+
 ## TODO
 
 - add <https://github.com/vercel/next.js/tree/canary/examples/with-why-did-you-render>
