@@ -1,5 +1,4 @@
 import type { AppProps } from "next/app";
-import { Provider } from "react-redux";
 import Script from "next/script";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
@@ -13,10 +12,10 @@ import { DefaultSeo } from "next-seo";
 import { GlobalStyle, theme } from "@/styles/GlobalStyles";
 import { PageFavicons, PageViewport } from "@/lib/page-head";
 import { fetcher } from "@/lib/swr";
-import store from "../src/store/store";
 
 import SEO from "../next-seo.config";
 import { GTM_ID, sendPageView } from "@/lib/gtm";
+import { wrapper } from "src/store/store";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
@@ -30,40 +29,38 @@ const App = ({ Component, pageProps }: AppProps) => {
   // TODO: make GTM tree-shakable
   return (
     <>
-      <Provider store={store}>
-        <PageViewport />
-        <PageFavicons />
-        {GTM_ID && (
-          <Script
-            id="GTM"
-            strategy="afterInteractive"
-            dangerouslySetInnerHTML={{
-              __html: `
+      <PageViewport />
+      <PageFavicons />
+      {GTM_ID && (
+        <Script
+          id="GTM"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
             j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
             })(window,document,'script','dataLayer', '${GTM_ID}');
           `,
-            }}
-          />
-        )}
-        <DefaultSeo {...SEO} />
-        <Normalize />
-        <GlobalStyle />
-        <ThemeProvider theme={theme}>
-          <SWRConfig
-            value={{
-              fetcher,
-            }}
-          >
-            <NextNprogress showOnShallow={true} color={theme.colors.primary} />
-            <Component {...pageProps} />
-          </SWRConfig>
-        </ThemeProvider>
-      </Provider>
+          }}
+        />
+      )}
+      <DefaultSeo {...SEO} />
+      <Normalize />
+      <GlobalStyle />
+      <ThemeProvider theme={theme}>
+        <SWRConfig
+          value={{
+            fetcher,
+          }}
+        >
+          <NextNprogress showOnShallow={true} color={theme.colors.primary} />
+          <Component {...pageProps} />
+        </SWRConfig>
+      </ThemeProvider>
     </>
   );
 };
 
-export default appWithTranslation(App);
+export default wrapper.withRedux(appWithTranslation(App));

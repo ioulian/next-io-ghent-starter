@@ -15,6 +15,8 @@ import { StyledMain, StyledPage } from "@/components/styled/Demo";
 
 import logo from "@/img/logo.png";
 import { Counter } from "src/features/counter/Counter";
+import { wrapper } from "src/store/store";
+import { counterSlice } from "src/features/counter/counterSlice";
 
 const Home: NextPage = ({}: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { t } = useTranslation("common");
@@ -78,14 +80,17 @@ const Home: NextPage = ({}: InferGetStaticPropsType<typeof getStaticProps>) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({
-  locale,
-}: GetStaticPropsContext) => {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale as string, ["common"])),
-    },
-  };
-};
+export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
+  (store) =>
+    async ({ locale }: GetStaticPropsContext) => {
+      await store.dispatch(counterSlice.actions.incrementByAmount(5));
+
+      return {
+        props: {
+          ...(await serverSideTranslations(locale as string, ["common"])),
+        },
+      };
+    }
+);
 
 export default Home;

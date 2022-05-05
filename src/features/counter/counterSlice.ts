@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { HYDRATE } from "next-redux-wrapper";
 import { AppState, AppThunk } from "src/store/store";
 
 import { fetchCount } from "./counter-api";
@@ -46,6 +47,12 @@ export const counterSlice = createSlice({
       .addCase(incrementAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.value += action.payload;
+      })
+      .addCase(HYDRATE, (state, action: any) => {
+        return {
+          ...state,
+          ...action.payload.counter,
+        };
       });
   },
 });
