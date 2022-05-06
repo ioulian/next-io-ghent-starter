@@ -14,9 +14,12 @@ import Link from "next/link";
 import { StyledMain, StyledPage } from "@/components/styled/Demo";
 
 import logo from "@/img/logo.png";
+import logoSvg from "@/img/logo.svg";
+import logoSvgSprite from "@/img/logo-sprite.svg";
 import { Counter } from "src/features/counter/Counter";
 import { wrapper } from "src/store/store";
 import { counterSlice } from "src/features/counter/counterSlice";
+import { SvgSprite } from "@/components/styled/SvgSpite";
 
 const Home: NextPage = ({}: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { t } = useTranslation("common");
@@ -31,6 +34,7 @@ const Home: NextPage = ({}: InferGetStaticPropsType<typeof getStaticProps>) => {
       <StyledPage>
         <StyledMain>
           <div className="logo">
+            <SvgSprite src={logoSvgSprite} title=".svg sprite" />
             <Image
               alt="Logo"
               src={logo}
@@ -39,6 +43,17 @@ const Home: NextPage = ({}: InferGetStaticPropsType<typeof getStaticProps>) => {
               height={128}
               quality={90}
               priority
+              title=".png image"
+            />
+            <Image
+              alt="Logo"
+              src={logoSvg.src}
+              layout="fixed"
+              width={128}
+              height={128}
+              quality={90}
+              priority
+              title=".svg image"
             />
           </div>
           <h1>{t("title")}</h1>

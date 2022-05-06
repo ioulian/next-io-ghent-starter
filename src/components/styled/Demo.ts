@@ -11,11 +11,12 @@ export const StyledPage = styled.div`
 export const StyledMain = styled.main`
   > .logo {
     margin-bottom: 2rem;
-    width: 128px;
+    width: ${128 * 3}px;
     height: 128px;
     margin-inline: auto;
     border-radius: 10px;
     overflow: hidden;
+    display: flex;
   }
 
   h1 {

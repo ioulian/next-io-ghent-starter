@@ -38,7 +38,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - `.env`
 - `next-seo.config.js`
 - `next-i18next.config.js`
-- `src/lib/page-head.tsx` ans make sure the favicons are all regenerated
+- `src/lib/page-head.tsx` and make sure the favicons are all regenerated
 
 ## Features
 
@@ -55,9 +55,10 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - .env variables
 - PWA ready (but not fully battle tested)
 - REDUX + hydration
+- JWT Auth starter kit
 
 ## TODO
 
 - add <https://github.com/vercel/next.js/tree/canary/examples/with-why-did-you-render>
-- add svg spritesheet geenrator
 - find a good PWA geenerator
+- add .env checker

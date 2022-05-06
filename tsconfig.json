@@ -41,6 +41,7 @@
     "incremental": true
   },
   "include": [
+    "process.d.ts",
     "i18n-resources.d.ts",
     "next-env.d.ts",
     "additional.d.ts",

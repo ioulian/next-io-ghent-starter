@@ -22,5 +22,17 @@ module.exports = withBundleAnalyzer(
     images: {
       formats: ["image/avif", "image/webp"],
     },
+    webpack(config) {
+      const fileLoaderRule = config.module.rules.find(
+        (rule) => rule.test && rule.test.test(".svg")
+      );
+      fileLoaderRule.exclude = /-sprite\.svg$/;
+      config.module.rules.push({
+        test: /-sprite\.svg$/,
+        use: ["svg-sprite-loader", "svgo-loader"],
+      });
+
+      return config;
+    },
   })
 );
