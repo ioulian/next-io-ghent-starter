@@ -18,7 +18,7 @@ import logoSvg from "@/img/logo.svg";
 import logoSvgSprite from "@/img/logo-sprite.svg";
 import { Counter } from "@/features/counter/Counter";
 import { wrapper } from "src/store/store";
-import { counterSlice } from "src/features/counter/counterSlice";
+import { counterSlice } from "@/features/counter/counterSlice";
 import { SvgSprite } from "@/components/styled/SvgSpite";
 
 const Home: NextPage = ({}: InferGetStaticPropsType<typeof getStaticProps>) => {
