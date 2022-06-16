@@ -1,7 +1,7 @@
-import { createGlobalStyle, DefaultTheme } from "styled-components";
+import { createGlobalStyle } from "styled-components";
 
 // Use types
-export const theme: DefaultTheme = {
+export const theme = {
   colors: {
     white: "#fff",
     black: "#000",
