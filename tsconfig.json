@@ -45,6 +45,7 @@
   },
   "include": [
     "process.d.ts",
+    "styled.d.ts",
     "i18n-resources.d.ts",
     "next-env.d.ts",
     "additional.d.ts",
