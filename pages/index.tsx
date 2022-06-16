@@ -16,7 +16,7 @@ import { StyledMain, StyledPage } from "@/components/styled/Demo";
 import logo from "@/img/logo.png";
 import logoSvg from "@/img/logo.svg";
 import logoSvgSprite from "@/img/logo-sprite.svg";
-import { Counter } from "src/features/counter/Counter";
+import { Counter } from "@/features/counter/Counter";
 import { wrapper } from "src/store/store";
 import { counterSlice } from "src/features/counter/counterSlice";
 import { SvgSprite } from "@/components/styled/SvgSpite";

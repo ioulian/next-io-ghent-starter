@@ -36,6 +36,9 @@
       ],
       "@/styles/*": [
         "src/components/styled/*"
+      ],
+      "@/features/*": [
+        "src/features/*"
       ]
     },
     "incremental": true
