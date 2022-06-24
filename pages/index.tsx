@@ -19,7 +19,7 @@ import logoSvgSprite from "@/img/logo-sprite.svg";
 import { Counter } from "@/features/counter/Counter";
 import { wrapper } from "src/store/store";
 import { counterSlice } from "@/features/counter/counterSlice";
-import { SvgSprite } from "@/components/styled/SvgSpite";
+import { SvgSprite } from "@/components/styled/SvgSprite";
 
 const Home: NextPage = ({}: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { t } = useTranslation("common");
