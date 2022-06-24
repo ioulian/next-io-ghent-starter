@@ -56,6 +56,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - PWA ready (but not fully battle tested)
 - REDUX + hydration
 - JWT Auth starter kit
+- SVG Sprites
 
 ## TODO
 
