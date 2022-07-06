@@ -9,10 +9,10 @@ import type {
 import useSWR, { SWRConfig } from "swr";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-import { fetcher } from "@/lib/swr";
 import { StyledMain, StyledPage } from "@/components/styled/Demo";
 
 import logo from "@/img/logo.png";
+import { getFetcher } from "@/services/api.service";
 
 const API = "https://api.github.com/repos/vercel/swr";
 
@@ -69,7 +69,7 @@ const ServerSide: NextPage = ({
 export const getServerSideProps: GetServerSideProps = async ({
   locale,
 }: GetServerSidePropsContext) => {
-  const repoInfo = await fetcher(API);
+  const repoInfo = await getFetcher()(API);
 
   return {
     props: {

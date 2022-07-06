@@ -1,11 +1,10 @@
 import {
-  getAuthTokens,
-  getRememberMe,
-  isTokenExpired,
   logout,
-  refreshToken,
-  setAuthTokens,
-} from "./auth.service";
+  selectAuthTokens,
+  setTokens,
+} from "../features/auth/authSlice";
+import { AppStore } from "../store/store";
+import { isTokenExpired, refreshTokens } from "./../features/auth/api";
 
 export type API_REQUEST_STATUS = "idle" | "loading" | "succeeded" | "failed";
 
@@ -16,47 +15,72 @@ export const getContentTypeHeaders = (): { [key: string]: string } => {
   };
 };
 
-export const getAuthHeaders = async (): Promise<{ [key: string]: string }> => {
-  let tokens = getAuthTokens();
+export const getAuthHeaders = async (
+  store: AppStore
+): Promise<{ [key: string]: string }> => {
+  let tokens = selectAuthTokens(store.getState());
 
-  if (tokens && tokens.token) {
-    const tokenExpired = isTokenExpired(tokens.token);
+  if (tokens && tokens.access_token) {
+    const tokenExpired = isTokenExpired(tokens.access_token);
 
     if (tokenExpired) {
-      const rememberMe = getRememberMe();
-      if (!rememberMe) {
-        logout();
-        return {};
-      }
-
-      tokens = await refreshToken(tokens);
-      setAuthTokens(tokens);
+      tokens = await refreshTokens(tokens);
+      store.dispatch(setTokens(tokens));
     }
 
-    return { Authorization: `Bearer ${tokens.token}` };
+    return { Authorization: `Bearer ${tokens.access_token}` };
   } else {
     return {};
   }
 };
 
 export const apiToJson =
-  (reject: (reason?: any) => void, redirectOn401: boolean = true) =>
-  (res: Response) =>
-    res.json().then((json) => {
-      if (!res.ok) {
-        if (json.code === 401 && redirectOn401) {
-          logout();
-          return;
-        }
+  <T = any>() =>
+  (res: Response): Promise<T> =>
+    res.ok
+      ? res.json()
+      : new Promise((resolve, reject) => {
+          reject(res.status);
+        });
 
-        reject(
-          new Error(
-            (json?.detail || json?.message || json?.title) ??
-              "Error had occured, try again later"
-          )
-        );
-        return;
+export const getFetcher =
+  <T = any>() =>
+  async (...args: [input: RequestInfo, init?: RequestInit]) => {
+    const res = await fetch(...args);
+    return apiToJson<T>()(res);
+  };
+
+export const getAuthFetcher =
+  <T = any>(store: AppStore) =>
+  async (...args: [input: RequestInfo, init?: RequestInit]) => {
+    const [input, init] = args;
+    const newInit = await injectHeaders(store, init);
+    return getFetcher<T>()(input, newInit).catch((err: number) => {
+      if (err === 401) {
+        store.dispatch(logout());
       }
-
-      return json;
     });
+  };
+
+const injectHeaders = async (
+  store: AppStore,
+  init?: RequestInit
+): Promise<RequestInit> => {
+  let toReturn: RequestInit = {};
+
+  if (init) {
+    toReturn = init;
+  }
+
+  if (!toReturn.headers) {
+    toReturn.headers = {} as HeadersInit;
+  }
+
+  toReturn.headers = {
+    ...toReturn.headers,
+    ...getContentTypeHeaders(),
+    ...(await getAuthHeaders(store)),
+  };
+
+  return toReturn;
+};

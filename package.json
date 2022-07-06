@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "NODE_TLS_REJECT_UNAUTHORIZED=0 next dev",
     "build": "next build",
     "postbuild": "next-sitemap",
     "start": "next start",
@@ -13,9 +13,11 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "1.8.2",
+    "jwt-decode": "3.1.2",
     "next": "12.1.6",
     "next-i18next": "11.0.0",
     "next-pwa": "5.5.4",
+    "next-redux-cookie-wrapper": "2.1.2",
     "next-redux-wrapper": "7.0.5",
     "next-seo": "5.4.0",
     "nextjs-progressbar": "0.0.14",

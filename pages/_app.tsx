@@ -11,11 +11,11 @@ import { DefaultSeo } from "next-seo";
 
 import { GlobalStyle, theme } from "@/styles/GlobalStyles";
 import { PageFavicons, PageViewport } from "@/lib/page-head";
-import { fetcher } from "@/lib/swr";
 
 import SEO from "../next-seo.config";
 import { GTM_ID, sendPageView } from "@/lib/gtm";
 import { wrapper } from "src/store/store";
+import { getFetcher } from "@/services/api.service";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
@@ -52,7 +52,9 @@ const App = ({ Component, pageProps }: AppProps) => {
       <ThemeProvider theme={theme}>
         <SWRConfig
           value={{
-            fetcher,
+            fetcher: getFetcher(),
+            // const { store } = useContext(ReactReduxContext);
+            // fetcher: getAuthFetcher(store),
           }}
         >
           <NextNprogress showOnShallow={true} color={theme.colors.primary} />
