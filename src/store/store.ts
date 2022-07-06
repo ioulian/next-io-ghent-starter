@@ -10,7 +10,7 @@ import { counterSlice } from "./../features/counter/counterSlice";
 
 const getExpirationDate = (): Date => {
   const date = new Date();
-  date.setDate(date.getDate() + 30);
+  date.setDate(date.getDate() + process.env.NEXT_PUBLIC_AUTH_COOKIE_MAX_AGE);
   return date;
 };
 
