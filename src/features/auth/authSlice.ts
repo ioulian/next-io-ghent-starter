@@ -56,8 +56,22 @@ export const useAuth = () => {
   const tokens = useAppSelector(selectAuthTokens);
 
   return {
+    /**
+     * Is user logged in.
+     */
     isLoggedIn: tokens !== null,
+
+    /**
+     * Will dispatch logout action.
+     */
     logout: () => dispatch(logout()),
+
+    /**
+     * Will dispatch login action.
+     *
+     * @param username Username
+     * @param password Password
+     */
     login: (username: string, password: string) =>
       dispatch(login({ username, password })),
   };
