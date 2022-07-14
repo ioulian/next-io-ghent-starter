@@ -1,3 +1,4 @@
+import { isClient } from "@/utils/general-utils";
 import { useRouter } from "next/router";
 import { FC, ReactNode } from "react";
 import { useAuth } from "./authSlice";
@@ -10,7 +11,7 @@ export const AuthCheck: FC<{
   redirectTo?: string;
 
   /**
-   * You can disable this on login page for example.
+   * You can disable this on login page for example
    */
   check?: boolean;
   children: ReactNode;
@@ -19,7 +20,7 @@ export const AuthCheck: FC<{
   const router = useRouter();
 
   if (check && !isLoggedIn) {
-    if (redirectTo) {
+    if (redirectTo && isClient()) {
       router.push(redirectTo);
     }
 
