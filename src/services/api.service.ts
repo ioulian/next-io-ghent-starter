@@ -81,9 +81,9 @@ const injectHeaders = async (
   }
 
   toReturn.headers = {
-    ...toReturn.headers,
     ...getContentTypeHeaders(),
     ...(await getAuthHeaders(store)),
+    ...toReturn.headers,
   };
 
   return toReturn;
