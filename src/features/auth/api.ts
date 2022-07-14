@@ -77,8 +77,6 @@ export const refreshTokens = ({
         resolve(body as unknown as AuthTokens);
       })
       .catch((e) => {
-        // TODO
-        // logout();
         reject(e);
       });
   });

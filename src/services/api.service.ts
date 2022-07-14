@@ -24,8 +24,12 @@ export const getAuthHeaders = async (
     const tokenExpired = isTokenExpired(tokens.access_token);
 
     if (tokenExpired) {
-      tokens = await refreshTokens(tokens);
-      store.dispatch(setTokens(tokens));
+      try {
+        tokens = await refreshTokens(tokens);
+        store.dispatch(setTokens(tokens));
+      } catch {
+        store.dispatch(logout());
+      }
     }
 
     return { Authorization: `Bearer ${tokens.access_token}` };
