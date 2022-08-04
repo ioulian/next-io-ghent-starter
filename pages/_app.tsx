@@ -53,6 +53,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         <SWRConfig
           value={{
             fetcher: getFetcher(),
+            fallback: pageProps.fallback,
             // const { store } = useContext(ReactReduxContext);
             // fetcher: getAuthFetcher(store),
           }}
