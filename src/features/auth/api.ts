@@ -1,5 +1,6 @@
-import { apiToJson, getContentTypeHeaders } from "./../../services/api.service";
 import jwtDecode from "jwt-decode";
+
+import { apiToJson, getContentTypeHeaders } from "./../../services/api.service";
 
 export enum GrantType {
   Password = "password",

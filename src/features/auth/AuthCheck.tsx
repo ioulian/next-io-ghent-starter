@@ -1,6 +1,8 @@
-import { isClient } from "@/utils/general-utils";
 import { useRouter } from "next/router";
 import { FC, ReactNode } from "react";
+
+import { isClient } from "@/utils/general-utils";
+
 import { useAuth } from "./authSlice";
 
 export const AuthCheck: FC<{
