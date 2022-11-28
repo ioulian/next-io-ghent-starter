@@ -4,24 +4,27 @@ import type {
   GetStaticProps,
   GetStaticPropsContext,
   InferGetStaticPropsType,
-  NextPage,
 } from "next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-import { StyledMain, StyledPage } from "@/components/styled/Demo";
+import { wrapper } from "src/store/store";
 
+import { StyledMain, StyledPage } from "@/components/styled/Demo";
 import logo from "@/img/logo.png";
 import logoSvg from "@/img/logo.svg";
 import logoSvgSprite from "@/img/logo-sprite.svg";
 import { Counter } from "@/features/counter/Counter";
-import { wrapper } from "src/store/store";
-import { counterSlice } from "@/features/counter/counterSlice";
 import { SvgSprite } from "@/components/styled/SvgSprite";
+import { requireTranslations } from "@/services/translation.service";
+import { requireAnonymous } from "@/features/auth/utilities";
 
-const Home: NextPage = ({}: InferGetStaticPropsType<typeof getStaticProps>) => {
+import { NextPageWithLayout } from "./_app";
+
+const Home: NextPageWithLayout = ({}: InferGetStaticPropsType<
+  typeof getStaticProps
+>) => {
   const { t } = useTranslation("common");
   const router = useRouter();
 
@@ -38,7 +41,6 @@ const Home: NextPage = ({}: InferGetStaticPropsType<typeof getStaticProps>) => {
             <Image
               alt="Logo"
               src={logo}
-              layout="fixed"
               width={128}
               height={128}
               quality={90}
@@ -48,7 +50,6 @@ const Home: NextPage = ({}: InferGetStaticPropsType<typeof getStaticProps>) => {
             <Image
               alt="Logo"
               src={logoSvg.src}
-              layout="fixed"
               width={128}
               height={128}
               quality={90}
@@ -62,14 +63,14 @@ const Home: NextPage = ({}: InferGetStaticPropsType<typeof getStaticProps>) => {
             <ul>
               {router.locales?.map((locale) => (
                 <li key={locale}>
-                  <Link href={router.route} locale={locale}>
-                    <a
-                      onClick={() => {
-                        document.cookie = `NEXT_LOCALE=${locale}`;
-                      }}
-                    >
-                      {locale}
-                    </a>
+                  <Link
+                    href={router.route}
+                    locale={locale}
+                    onClick={() => {
+                      document.cookie = `NEXT_LOCALE=${locale}`;
+                    }}
+                  >
+                    {locale}
                   </Link>
                 </li>
               ))}
@@ -96,16 +97,15 @@ const Home: NextPage = ({}: InferGetStaticPropsType<typeof getStaticProps>) => {
 };
 
 export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
-  (store) =>
-    async ({ locale }: GetStaticPropsContext) => {
-      await store.dispatch(counterSlice.actions.incrementByAmount(5));
-
-      return {
-        props: {
-          ...(await serverSideTranslations(locale as string, ["common"])),
-        },
-      };
-    }
+  () =>
+    ({ locale }: GetStaticPropsContext) =>
+      new Promise((resolve) => {
+        requireAnonymous()
+          .then(requireTranslations(locale!, ["common"]))
+          .then(({ result }) => {
+            resolve(result);
+          });
+      })
 );
 
 export default Home;

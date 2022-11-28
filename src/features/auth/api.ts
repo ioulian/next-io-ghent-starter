@@ -5,6 +5,8 @@ import { apiToJson, getContentTypeHeaders } from "./../../services/api.service";
 export enum GrantType {
   Password = "password",
   RefreshToken = "refresh_token",
+  Facebook = "facebook",
+  Google = "google",
 }
 export interface AuthTokens {
   token_type: string;
@@ -38,6 +40,40 @@ export const login = (
       .then(async (body) => {
         const { access_token, refresh_token } = body as unknown as AuthTokens;
         if (!access_token || !refresh_token) {
+          reject(new Error("No tokens received, please try again later."));
+          return;
+        }
+
+        resolve(body as unknown as AuthTokens);
+      })
+      .catch(reject);
+  });
+};
+
+export const loginSocial = (
+  grantType: GrantType,
+  token: string
+): Promise<AuthTokens> => {
+  return new Promise((resolve, reject) => {
+    fetch(
+      `${process.env.NEXT_PUBLIC_API_DOMAIN}${process.env.NEXT_PUBLIC_AUTH_LOGIN_URL}`,
+      {
+        method: "POST",
+        headers: {
+          ...getContentTypeHeaders(),
+        },
+        body: JSON.stringify({
+          grant_type: grantType,
+          access_token: token,
+          client_id: process.env.NEXT_PUBLIC_AUTH_CLIENT_ID,
+          client_secret: process.env.NEXT_PUBLIC_AUTH_CLIENT_SECRET,
+        }),
+      }
+    )
+      .then(apiToJson())
+      .then(async (body) => {
+        const { access_token } = body as unknown as AuthTokens;
+        if (!access_token) {
           reject(new Error("No tokens received, please try again later."));
           return;
         }
@@ -85,5 +121,8 @@ export const refreshTokens = ({
 
 export const isTokenExpired = (token: string): boolean => {
   const decoded = jwtDecode(token) as { exp: number };
-  return decoded.exp * 1000 < new Date().getTime();
+  const expiresIn = decoded.exp * 1000;
+
+  // We add 2 seconds of overlay to make sure we refresh token before doing the request
+  return expiresIn - new Date().getTime() - 2000 <= 0;
 };

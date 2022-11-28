@@ -4,15 +4,15 @@ import type {
   GetServerSideProps,
   GetServerSidePropsContext,
   InferGetServerSidePropsType,
-  NextPage,
 } from "next";
 import useSWR, { SWRConfig } from "swr";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import { StyledMain, StyledPage } from "@/components/styled/Demo";
-
 import logo from "@/img/logo.png";
 import { getFetcher } from "@/services/api.service";
+
+import { NextPageWithLayout } from "./_app";
 
 const API = "https://api.github.com/repos/vercel/swr";
 
@@ -36,7 +36,7 @@ const Repo = () => {
   );
 };
 
-const ServerSide: NextPage = ({
+const ServerSide: NextPageWithLayout = ({
   fallback,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
@@ -73,7 +73,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   return {
     props: {
-      ...(await serverSideTranslations(locale as string, ["common"])),
+      ...(await serverSideTranslations(locale!, ["common"])),
       fallback: {
         [API]: repoInfo,
       },

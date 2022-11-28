@@ -5,7 +5,7 @@ import {
   StyledComponentInnerOtherProps,
 } from "styled-components";
 
-export type InferStyledComponentProps<T> = T extends AnyStyledComponent
+export type InferComponentProps<T> = T extends AnyStyledComponent
   ? ComponentPropsWithRef<StyledComponentInnerComponent<T>> &
       StyledComponentInnerOtherProps<T>
   : // eslint-disable-next-line no-undef

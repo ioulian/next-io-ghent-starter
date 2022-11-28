@@ -1,4 +1,11 @@
 import { createGlobalStyle, DefaultTheme } from "styled-components";
+import { Source_Sans_Pro } from "@next/font/google";
+
+const sourceSansPro = Source_Sans_Pro({
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+});
 
 // Use types
 export const theme: DefaultTheme = {
@@ -9,8 +16,8 @@ export const theme: DefaultTheme = {
     body: "#3C4346",
   },
   fonts: {
-    familyRegular: "'Source Sans Pro', sans-serif",
-    familyHeadings: "'Source Sans Pro', sans-serif",
+    familyRegular: "Arial, sans-serif",
+    familyHeadings: sourceSansPro.style.fontFamily,
   },
   breakpoints: {
     xsUp: "min-width: 481px",

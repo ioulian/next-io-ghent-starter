@@ -39,6 +39,15 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - `next-seo.config.js`
 - `next-i18next.config.js`
 - `src/lib/page-head.tsx` and make sure the favicons are all regenerated
+- `.gitignore` Generated files should be enabled if no build step exists
+
+## Redux
+
+If you want to use redux on the server (authentication for example), you'll need
+to convert your app to use SSR on every page where you want to use redux. You'll
+want to enable cookie storage for select redux values.
+
+If you want to use redux, but with SSG, you should remove HYDRATION from slices
 
 ## Features
 
@@ -46,7 +55,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - Translations intellisense (TS) + checks for missing translations
 - easy GTM (auto tracking of pages)
 - SWR
-- React 18 en Next 12 -> fast minification and dev server enabled
+- React 18 en Next 13 -> fast minification and dev server enabled
 - Favicons (manual, but we have helpers)
 - Avif/webm conversion of images
 - SEO + Sitemap

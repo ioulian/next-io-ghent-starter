@@ -1,10 +1,12 @@
 {
-  "plugins": ["@typescript-eslint"],
-  "extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended"],
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "extends": [
+    "next/core-web-vitals"
+  ],
   "rules": {
     "@typescript-eslint/no-unused-vars": "error",
-    "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/no-non-null-assertion": "off",
     "import/order": [
       "error",
       {
@@ -24,7 +26,9 @@
           }
         ],
         "newlines-between": "always",
-        "pathGroupsExcludedImportTypes": ["builtin"]
+        "pathGroupsExcludedImportTypes": [
+          "builtin"
+        ]
       }
     ]
   }
