@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
+
 import { AppState, AppThunk } from "src/store/store";
 
 import { fetchCount } from "./counter-api";

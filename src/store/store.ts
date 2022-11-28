@@ -6,7 +6,7 @@ import {
 } from "next-redux-cookie-wrapper";
 
 import { authSlice } from "../features/auth/authSlice";
-import { counterSlice } from "./../features/counter/counterSlice";
+import { counterSlice } from "../features/counter/counterSlice";
 
 const getExpirationDate = (): Date => {
   const date = new Date();

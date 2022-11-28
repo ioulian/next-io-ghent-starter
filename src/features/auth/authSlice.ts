@@ -1,7 +1,9 @@
-import { useAppDispatch, useAppSelector } from "./../../store/hooks";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
+
 import { AppState } from "src/store/store";
+
+import { useAppDispatch, useAppSelector } from "./../../store/hooks";
 import { AuthTokens, login as loginApi } from "./api";
 
 export interface AuthState {
