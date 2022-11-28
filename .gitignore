@@ -35,5 +35,9 @@ yarn-error.log*
 *.tsbuildinfo
 
 # Generated files
+# Those files will be generated in build step. If you don't have a build step
+# (building locally) you should comment these lines so the files will be
+# included on the server.
 /public/sw.*
 /public/workbox*
+/public/sitemap*.xml
