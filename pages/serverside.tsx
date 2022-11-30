@@ -6,11 +6,16 @@ import type {
   InferGetServerSidePropsType,
 } from "next";
 import useSWR, { SWRConfig } from "swr";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import merge from "lodash/merge";
 
-import { StyledMain, StyledPage } from "@/components/styled/Demo";
+import { wrapper } from "src/store/store";
+
+import { StyledMain, StyledPage } from "@/components/Demo";
 import logo from "@/img/logo.png";
 import { getFetcher } from "@/services/api.service";
+import { requireAnonymous } from "@/features/auth/utilities";
+import { requireTranslations } from "@/services/translation.service";
+import { catchServerSideProps } from "@/services/serverSideProps.service";
 
 import { NextPageWithLayout } from "./_app";
 
@@ -51,7 +56,6 @@ const ServerSide: NextPageWithLayout = ({
             <Image
               alt="Logo"
               src={logo}
-              layout="fixed"
               width={128}
               height={128}
               quality={90}
@@ -66,19 +70,34 @@ const ServerSide: NextPageWithLayout = ({
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({
-  locale,
-}: GetServerSidePropsContext) => {
-  const repoInfo = await getFetcher()(API);
+export const getServerSideProps: GetServerSideProps =
+  wrapper.getServerSideProps(
+    (store) =>
+      ({ locale, resolvedUrl, res }: GetServerSidePropsContext) =>
+        new Promise((resolve, reject) => {
+          requireAnonymous()
+            .then(requireTranslations(locale!, ["common"]))
+            .then(async ({ result }) => {
+              const repoInfo = await getFetcher()(API);
 
-  return {
-    props: {
-      ...(await serverSideTranslations(locale!, ["common"])),
-      fallback: {
-        [API]: repoInfo,
-      },
-    },
-  };
-};
+              return {
+                result: merge(result, {
+                  props: {
+                    fallback: {
+                      [API]: repoInfo,
+                    },
+                  },
+                }),
+                response: repoInfo,
+              };
+            })
+            .then(({ result }) => {
+              resolve(result);
+            })
+            .catch(
+              catchServerSideProps(resolve, reject, store, resolvedUrl, res)
+            );
+        })
+  );
 
 export default ServerSide;

@@ -13,10 +13,11 @@ import { NextPage } from "next";
 
 import { wrapper } from "src/store/store";
 
-import { GlobalStyle, theme } from "@/styles/GlobalStyles";
+import { GlobalStyle } from "@/styles/GlobalStyles";
 import { PageFavicons, PageViewport } from "@/lib/page-head";
 import { GTM_ID, sendPageView } from "@/lib/gtm";
 import { getFetcher } from "@/services/api.service";
+import { theme } from "@/components/styled/Theme";
 
 import SEO from "../next-seo.config";
 

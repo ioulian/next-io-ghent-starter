@@ -11,12 +11,12 @@ import Link from "next/link";
 
 import { wrapper } from "src/store/store";
 
-import { StyledMain, StyledPage } from "@/components/styled/Demo";
+import { StyledMain, StyledPage } from "@/components/Demo";
 import logo from "@/img/logo.png";
 import logoSvg from "@/img/logo.svg";
 import logoSvgSprite from "@/img/logo-sprite.svg";
 import { Counter } from "@/features/counter/Counter";
-import { SvgSprite } from "@/components/styled/SvgSprite";
+import { SvgSprite } from "@/components/svg/SvgSprite";
 import { requireTranslations } from "@/services/translation.service";
 import { requireAnonymous } from "@/features/auth/utilities";
 
