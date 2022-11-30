@@ -27,5 +27,42 @@ declare module "styled-components" {
       normal: number;
       slow: number;
     };
+    borderRadius: {
+      normal: number;
+    };
+    zIndex: {
+      expandButton: number;
+      overlay: number;
+    };
+    form: {
+      input: {
+        color: string;
+        border: string;
+        background: string;
+        shadow: string;
+      };
+      select: {
+        indicator: string;
+      };
+      asterisk: {
+        color: string;
+      };
+      outline: {
+        color: string;
+      };
+      checkbox: {
+        checked: {
+          border: string;
+          background: string;
+          color: string;
+        };
+      };
+      requiredMessage: {
+        color: string;
+      };
+      error: {
+        color: string;
+      };
+    };
   }
 }

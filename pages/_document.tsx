@@ -48,6 +48,7 @@ export default class MyDocument extends Document {
             </noscript>
           ) : undefined}
           <Main />
+          <div id="expand-button-root"></div>
           <NextScript />
         </body>
       </Html>

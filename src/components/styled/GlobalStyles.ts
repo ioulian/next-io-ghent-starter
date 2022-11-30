@@ -1,3 +1,4 @@
+import { rgba } from "polished";
 import { createGlobalStyle } from "styled-components";
 
 import { theme } from "./Theme";
@@ -159,5 +160,50 @@ export const GlobalStyle = createGlobalStyle`
     clip: rect(0,0,0,0)!important;
     white-space: nowrap!important;
     border: 0!important;
+  }
+
+  .ReactModalPortal {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    .ReactModal {
+      &__Overlay {
+        background-color: ${rgba(theme.colors.black, 0.8)} !important;
+        overflow-y: auto;
+        overflow-x: hidden;
+        opacity: 0;
+        transition: opacity 250ms ease-in-out;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        // TODO: remove if performance suffers
+        backdrop-filter: blur(10px);
+
+        &--after-open {
+          opacity: 1;
+        }
+        &--before-close {
+          opacity: 0;
+        }
+      }
+
+      &__Content {
+        max-height: 100%;
+        min-width: 100%;
+        position: initial !important;
+        inset: initial !important;
+        border: initial !important;
+        background: initial !important;
+        overflow: initial !important;
+        border-radius: initial !important;
+        padding: initial !important;
+
+        @media (${theme.breakpoints.smUp}) {
+          min-width: auto;
+        }
+      }
+    }
   }
 `;

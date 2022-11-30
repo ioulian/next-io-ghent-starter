@@ -17,7 +17,8 @@ export const theme: DefaultTheme = {
   },
   fonts: {
     familyRegular: "Arial, sans-serif",
-    familyHeadings: sourceSansPro.style.fontFamily,
+    familyHeadings:
+      sourceSansPro.style?.fontFamily ?? '"Source Sans Pro", sans-serif',
   },
   breakpoints: {
     xsUp: "min-width: 481px",
@@ -33,5 +34,42 @@ export const theme: DefaultTheme = {
     fast: 100,
     normal: 250,
     slow: 400,
+  },
+  borderRadius: {
+    normal: 4,
+  },
+  zIndex: {
+    expandButton: 100,
+    overlay: 200,
+  },
+  form: {
+    input: {
+      color: "#000",
+      border: "rgba(0, 0, 0, 0.6)",
+      background: "rgba(239, 242, 243, 0.2)",
+      shadow: "0px 4px 4px rgba(0, 0, 0, 0.1)",
+    },
+    select: {
+      indicator: "rgba(0, 0, 0, 0.6)",
+    },
+    asterisk: {
+      color: "#b30000",
+    },
+    outline: {
+      color: "#000",
+    },
+    checkbox: {
+      checked: {
+        border: "#b30000",
+        background: "#b30000",
+        color: "#fff",
+      },
+    },
+    requiredMessage: {
+      color: "#b30000",
+    },
+    error: {
+      color: "#b30000",
+    },
   },
 };

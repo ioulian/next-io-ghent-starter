@@ -5,10 +5,9 @@ import {
 } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 
-import { AppState } from "src/store/store";
-
 import { API_REQUEST_STATUS } from "@/services/api.service";
 
+import { AppState } from "../../store/store";
 import { thunkHandler } from "../utilities";
 
 import { useAppDispatch, useAppSelector } from "./../../store/hooks";

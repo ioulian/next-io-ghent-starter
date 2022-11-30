@@ -8,14 +8,14 @@ import type {
 import useSWR, { SWRConfig } from "swr";
 import merge from "lodash/merge";
 
-import { wrapper } from "src/store/store";
-
 import { StyledMain, StyledPage } from "@/components/Demo";
 import logo from "@/img/logo.png";
 import { getFetcher } from "@/services/api.service";
 import { requireAnonymous } from "@/features/auth/utilities";
 import { requireTranslations } from "@/services/translation.service";
 import { catchServerSideProps } from "@/services/serverSideProps.service";
+
+import { wrapper } from "../src/store/store";
 
 import { NextPageWithLayout } from "./_app";
 
