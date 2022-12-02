@@ -67,6 +67,7 @@ If you want to use redux, but with SSG, you should remove HYDRATION from slices
 - JWT Auth starter kit
 - SVG Sprites
 - Next13 Font optimisation
+- Storybook
 
 ## TODO
 
