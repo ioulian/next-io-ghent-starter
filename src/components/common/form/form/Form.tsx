@@ -25,8 +25,15 @@ export const Form = forwardRef<
     ref
   ) => {
     const methods = useForm({ defaultValues, mode: "onChange" });
-    const { handleSubmit, getValues, setError, clearErrors, watch, setFocus } =
-      methods;
+    const {
+      handleSubmit,
+      getValues,
+      setError,
+      clearErrors,
+      watch,
+      setFocus,
+      reset,
+    } = methods;
 
     useEffect(() => {
       onChange?.(getValues());
@@ -62,6 +69,12 @@ export const Form = forwardRef<
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [error]);
+
+    // Update form when defaultValues change
+    useEffect(() => {
+      reset(defaultValues);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [defaultValues]);
 
     return (
       <FormProvider {...methods}>
