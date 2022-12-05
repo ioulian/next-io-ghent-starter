@@ -15,6 +15,7 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@floating-ui/react-dom-interactions": "0.13.0",
     "@popperjs/core": "2.11.6",
     "@reduxjs/toolkit": "1.9.0",
     "body-scroll-lock": "4.0.0-beta.0",
@@ -35,6 +36,7 @@
     "react-dom": "18.2.0",
     "react-hook-form": "7.40.0",
     "react-i18next": "12.0.0",
+    "react-merge-refs": "2.0.1",
     "react-modal": "3.16.1",
     "react-popper": "2.3.0",
     "react-redux": "8.0.5",

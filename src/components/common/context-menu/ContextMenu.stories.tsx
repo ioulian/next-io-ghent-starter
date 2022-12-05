@@ -1,5 +1,7 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
+import { Button } from "../button/Button";
+
 import { ContextMenu } from "./ContextMenu";
 
 export default {
@@ -13,7 +15,7 @@ const Template: ComponentStory<typeof ContextMenu> = ({ ...args }) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  trigger: <button>trigger element (auto placement)</button>,
+  trigger: <Button>trigger element (auto placement)</Button>,
   children: <>Content</>,
 };
 
@@ -34,6 +36,6 @@ PlacementAutoEnd.args = {
 export const PlacementBottom = Template.bind({});
 PlacementBottom.args = {
   placement: "bottom",
-  trigger: <button>trigger element (auto-bottom placement)</button>,
+  trigger: <Button>trigger element (bottom placement)</Button>,
   children: <>Content</>,
 };

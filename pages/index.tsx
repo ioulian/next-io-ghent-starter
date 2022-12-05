@@ -17,6 +17,11 @@ import { Counter } from "@/features/counter/Counter";
 import { SvgSprite } from "@/components/common/svg/SvgSprite";
 import { requireTranslations } from "@/services/translation.service";
 import { requireAnonymous } from "@/features/auth/utilities";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/common/floating/tooltip/Tooltip";
 
 import { wrapper } from "../src/store/store";
 
@@ -78,6 +83,10 @@ const Home: NextPageWithLayout = ({}: InferGetStaticPropsType<
           </nav>
 
           <nav>
+            <Tooltip>
+              <TooltipTrigger>My trigger</TooltipTrigger>
+              <TooltipContent className="Tooltip">My tooltip</TooltipContent>
+            </Tooltip>
             <Link
               href={{
                 pathname: "/serverside",
