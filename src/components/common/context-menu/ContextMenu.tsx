@@ -12,29 +12,30 @@ import {
 import { createPortal } from "react-dom";
 import { usePopper } from "react-popper";
 import { Placement } from "@popperjs/core";
+import { useTheme } from "styled-components";
 
 import { InferComponentProps } from "@/types/styled";
 
 import {
-  StyledExpandButton,
-  StyledExpandDropdown,
-  StyledExpandDropdownArrow,
-  StyledExpandDropdownUnstyled,
-} from "./ExpandButton.styles";
+  StyledContextMenu,
+  StyledContextMenuDropdown,
+  StyledContextMenuArrow,
+  StyledContextMenuDropdownUnstyled,
+} from "./ContextMenu.styles";
 
 /**
  * Dropdown button that shows more actions when clicked
  */
-export const ExpandButton: FC<
+export const ContextMenu: FC<
   {
     trigger: ReactElement;
     placement?: Placement;
     unstyled?: boolean;
     closeOnClickInside?: boolean;
-  } & InferComponentProps<typeof StyledExpandButton>
+  } & InferComponentProps<typeof StyledContextMenu>
 > = ({
   trigger,
-  placement = "bottom",
+  placement = "auto",
   children,
   unstyled = false,
   closeOnClickInside = false,
@@ -49,14 +50,24 @@ export const ExpandButton: FC<
     null
   );
 
+  const theme = useTheme();
   const ref = useRef(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { styles, attributes } = usePopper(referenceElement, popperElement, {
     placement,
     modifiers: [
-      { name: "arrow", options: { element: arrowElement, padding: 6 } },
-      { name: "offset", options: { offset: [14, 14] } },
-      { name: "preventOverflow", options: { padding: 14 } },
+      {
+        name: "arrow",
+        options: {
+          element: arrowElement,
+          padding: theme.contextMenu.arrowPadding,
+        },
+      },
+      { name: "offset", options: { offset: theme.contextMenu.offset } },
+      {
+        name: "preventOverflow",
+        options: { padding: theme.contextMenu.windowPadding },
+      },
     ],
   });
 
@@ -97,11 +108,11 @@ export const ExpandButton: FC<
   }, [isOpen, popperElement]);
 
   const Wrapper = unstyled
-    ? StyledExpandDropdownUnstyled
-    : StyledExpandDropdown;
+    ? StyledContextMenuDropdownUnstyled
+    : StyledContextMenuDropdown;
 
   return (
-    <StyledExpandButton>
+    <StyledContextMenu>
       {trigger &&
         Children.map(trigger, (child) => {
           return cloneElement(child, {
@@ -122,7 +133,7 @@ export const ExpandButton: FC<
             {...attributes.popper}
           >
             {!unstyled && (
-              <StyledExpandDropdownArrow
+              <StyledContextMenuArrow
                 ref={setArrowElement}
                 style={styles.arrow}
               />
@@ -140,6 +151,6 @@ export const ExpandButton: FC<
           </Wrapper>,
           document.getElementById("expand-button-root") as HTMLElement
         )}
-    </StyledExpandButton>
+    </StyledContextMenu>
   );
 };

@@ -30,8 +30,14 @@ declare module "styled-components" {
     borderRadius: {
       normal: number;
     };
+    contextMenu: {
+      arrowSize: number;
+      arrowPadding: number;
+      offset: [number, number];
+      windowPadding: number;
+    };
     zIndex: {
-      expandButton: number;
+      contextMenu: number;
       overlay: number;
     };
     form: {

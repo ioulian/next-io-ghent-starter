@@ -4,6 +4,11 @@ import { createGlobalStyle } from "styled-components";
 import { theme } from "./Theme";
 
 export const GlobalStyle = createGlobalStyle`
+  html,
+  body {
+    -webkit-overflow-scrolling: touch;
+  }
+
   *,
   *::before,
   *::after {
@@ -190,6 +195,7 @@ export const GlobalStyle = createGlobalStyle`
       }
 
       &__Content {
+        margin: 0 3rem;
         max-height: 100%;
         min-width: 100%;
         position: initial !important;

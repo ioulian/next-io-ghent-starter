@@ -38,8 +38,14 @@ export const theme: DefaultTheme = {
   borderRadius: {
     normal: 4,
   },
+  contextMenu: {
+    arrowSize: 12,
+    arrowPadding: 7,
+    offset: [14, 14],
+    windowPadding: 14,
+  },
   zIndex: {
-    expandButton: 100,
+    contextMenu: 100,
     overlay: 200,
   },
   form: {

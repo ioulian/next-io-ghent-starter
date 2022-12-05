@@ -3,21 +3,13 @@ import { rgba } from "polished";
 
 import { StyledButton } from "../button/Button.styles";
 
-export const StyledExpandButton = styled.div`
+export const StyledContextMenu = styled.div`
   position: relative;
 `;
 
-export const StyledDropdownButton = styled.div`
-  position: relative;
-
-  > div {
-    display: flex;
-  }
-`;
-
-export const StyledExpandDropdownArrow = styled.span`
-  width: 12px;
-  height: 12px;
+export const StyledContextMenuArrow = styled.span`
+  width: ${({ theme }) => theme.contextMenu.arrowSize}px;
+  height: ${({ theme }) => theme.contextMenu.arrowSize}px;
   display: block;
 
   &::before {
@@ -32,15 +24,15 @@ export const StyledExpandDropdownArrow = styled.span`
   }
 `;
 
-export const StyledExpandDropdownUnstyled = styled.div`
-  z-index: ${({ theme }) => theme.zIndex.expandButton};
+export const StyledContextMenuDropdownUnstyled = styled.div`
+  z-index: ${({ theme }) => theme.zIndex.contextMenu};
 
-  &[data-popper-placement="bottom"] > ${StyledExpandDropdownArrow} {
-    top: -6px;
+  &[data-popper-placement="bottom"] > ${StyledContextMenuArrow} {
+    top: -${({ theme }) => theme.contextMenu.arrowSize / 2}px;
   }
 
-  &[data-popper-placement="top"] > ${StyledExpandDropdownArrow} {
-    bottom: -6px;
+  &[data-popper-placement="top"] > ${StyledContextMenuArrow} {
+    bottom: -${({ theme }) => theme.contextMenu.arrowSize / 2}px;
 
     &::before {
       transform: rotate(135deg);
@@ -48,12 +40,14 @@ export const StyledExpandDropdownUnstyled = styled.div`
   }
 `;
 
-export const StyledExpandDropdown = styled(StyledExpandDropdownUnstyled)`
+export const StyledContextMenuDropdown = styled(
+  StyledContextMenuDropdownUnstyled
+)`
   > div {
     border: 1px solid ${({ theme }) => theme.colors.primary};
     background-color: ${({ theme }) => theme.colors.white};
     box-shadow: 0px 4px 12px ${({ theme }) => rgba(theme.colors.black, 0.25)};
-    border-radius: 4px;
+    border-radius: ${({ theme }) => theme.borderRadius.normal}px;
     max-height: 400px;
     overflow-x: hidden;
     overflow-y: auto;
@@ -63,18 +57,6 @@ export const StyledExpandDropdown = styled(StyledExpandDropdownUnstyled)`
     > ${StyledButton} {
       width: 100%;
       white-space: nowrap;
-    }
-  }
-
-  &[data-popper-placement*="bottom"] > ${StyledExpandDropdownArrow} {
-    top: -6px;
-  }
-
-  &[data-popper-placement*="top"] > ${StyledExpandDropdownArrow} {
-    bottom: -6px;
-
-    &::before {
-      transform: rotate(135deg);
     }
   }
 `;
