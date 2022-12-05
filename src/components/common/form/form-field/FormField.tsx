@@ -3,6 +3,7 @@ import {
   Children,
   cloneElement,
   FC,
+  isValidElement,
   PropsWithChildren,
   ReactElement,
   ReactNode,
@@ -98,10 +99,8 @@ export const FormField: FC<
       ) : (
         <InputWrapper>
           {Children.map(children, (child) =>
-            // @ts-ignore
-            child?.props
+            isValidElement(child)
               ? cloneElement(child as ReactElement<any>, {
-                  // @ts-ignore
                   ...child.props,
                   ...registerProps,
                   "aria-describedby": getAriaDescribedBy(
@@ -118,12 +117,9 @@ export const FormField: FC<
       )}
       {errorForThisField && (
         <Error id={getErrorId(name)}>
-          {
-            // @ts-ignore
-            errorForThisField.type === BE_VALIDATION
-              ? (errorForThisField.message as unknown as string)
-              : (errorForThisField.message as string)
-          }
+          {errorForThisField.type === BE_VALIDATION
+            ? (errorForThisField.message as unknown as string)
+            : (errorForThisField.message as string)}
         </Error>
       )}
       {description && (
