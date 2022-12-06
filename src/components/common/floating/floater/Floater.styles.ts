@@ -9,7 +9,7 @@ export const StyledFloater = styled.div`
   box-shadow: 0px 4px 12px ${({ theme }) => rgba(theme.colors.black, 0.25)};
   border-radius: ${({ theme }) => theme.borderRadius.normal}px;
   padding: 4px;
-  max-width: max-content;
+  width: max-content;
   padding: 5px;
 `;
 
@@ -18,9 +18,12 @@ export const StyledFloaterArrow = styled.div`
   border-top: 1px solid ${({ theme }) => theme.colors.primary};
   border-right: 1px solid ${({ theme }) => theme.colors.primary};
   background-color: ${({ theme }) => theme.colors.white};
-  width: 8px;
-  height: 8px;
-  transform: rotate(-45deg);
+  width: ${({ theme }) =>
+    theme.floating.floater.arrow.size -
+    2}px; // Account for 1px border on each side
+  height: ${({ theme }) =>
+    theme.floating.floater.arrow.size -
+    2}px; // Account for 1px border on each side
   content: "";
   display: block;
 `;

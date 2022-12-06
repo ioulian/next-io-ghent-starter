@@ -36,6 +36,16 @@ declare module "styled-components" {
       offset: [number, number];
       windowPadding: number;
     };
+    floating: {
+      tooltip: {
+        offset: number;
+      };
+      floater: {
+        arrow: {
+          size: number;
+        };
+      };
+    };
     zIndex: {
       contextMenu: number;
       overlay: number;

@@ -10,7 +10,17 @@ export default {
 } as ComponentMeta<typeof Tooltip>;
 
 const Template: ComponentStory<typeof Tooltip> = ({ ...args }) => (
-  <Tooltip {...args} />
+  <div
+    style={{
+      width: "100%",
+      height: "500px",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    }}
+  >
+    <Tooltip {...args} />
+  </div>
 );
 
 export const Uncontrolled = Template.bind({});
@@ -25,21 +35,33 @@ Uncontrolled.args = {
 
 export const Controlled = Template.bind({});
 Controlled.args = {
+  open: true,
   children: (
     <>
-      <Tooltip open={true}>
-        <TooltipTrigger>My trigger</TooltipTrigger>
-        <TooltipContent>My tooltip</TooltipContent>
-      </Tooltip>
+      <TooltipTrigger>My trigger</TooltipTrigger>
+      <TooltipContent>My tooltip</TooltipContent>
     </>
   ),
 };
 
-export const AsChild = Template.bind({});
-AsChild.args = {
+export const CustomElements = Template.bind({});
+CustomElements.args = {
   children: (
     <>
-      <TooltipTrigger asChild>
+      <TooltipTrigger>
+        <Button>My trigger</Button>
+      </TooltipTrigger>
+      <TooltipContent>My tooltip</TooltipContent>
+    </>
+  ),
+};
+
+export const Placement = Template.bind({});
+Placement.args = {
+  placement: "right",
+  children: (
+    <>
+      <TooltipTrigger>
         <Button>My trigger</Button>
       </TooltipTrigger>
       <TooltipContent>My tooltip</TooltipContent>

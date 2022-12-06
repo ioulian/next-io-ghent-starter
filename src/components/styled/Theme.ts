@@ -38,6 +38,16 @@ export const theme: DefaultTheme = {
   borderRadius: {
     normal: 4,
   },
+  floating: {
+    tooltip: {
+      offset: 10,
+    },
+    floater: {
+      arrow: {
+        size: 10,
+      },
+    },
+  },
   contextMenu: {
     arrowSize: 12,
     arrowPadding: 7,

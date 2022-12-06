@@ -54,6 +54,8 @@ export const GlobalStyle = createGlobalStyle`
     background: none;
     cursor: pointer;
     color: inherit;
+    padding: 0;
+    font-size: inherit;
   }
 
   // Remove 300ms delay on buttons:
@@ -165,6 +167,20 @@ export const GlobalStyle = createGlobalStyle`
     clip: rect(0,0,0,0)!important;
     white-space: nowrap!important;
     border: 0!important;
+  }
+
+  .app-dialog-overlay {
+    background-color: ${rgba(theme.colors.black, 0.8)} !important;
+    //overflow-y: auto;
+    //overflow-x: hidden;
+    //opacity: 0;
+    //transition: opacity 250ms ease-in-out;
+    //display: flex;
+    //align-items: center;
+    //justify-content: center;
+    //height: 100vh;
+    // TODO: remove if performance suffers
+    backdrop-filter: blur(10px);
   }
 
   .ReactModalPortal {
