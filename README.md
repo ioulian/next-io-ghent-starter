@@ -74,3 +74,4 @@ If you want to use redux, but with SSG, you should remove HYDRATION from slices
 - add <https://github.com/vercel/next.js/tree/canary/examples/with-why-did-you-render>
 - find a good PWA geenerator
 - add .env checker
+- Show errors only on dev

@@ -9,6 +9,7 @@ module.exports = {
       },
     },
     "@storybook/addon-interactions",
+    "@storybook/addon-a11y",
     "storybook-addon-styled-component-theme/dist/preset",
     "storybook-react-i18next",
     // https://github.com/lifeiscontent/storybook-addon-next-router/issues/60

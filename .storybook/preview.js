@@ -5,6 +5,7 @@ import { theme } from "./../src/components/styled/Theme";
 import { GlobalStyle } from "./../src/components/styled/GlobalStyles";
 import i18n from "./i18next.js";
 import { RouterContext } from "next/dist/shared/lib/router-context";
+import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 
 // https://github.com/vercel/next.js/issues/36417#issuecomment-1117360509
 // const OriginalNextImage = NextImage.default;
@@ -42,6 +43,9 @@ export const parameters = {
     fr: "Français",
     nl: "Nederlands",
     en: "English",
+  },
+  viewport: {
+    viewports: INITIAL_VIEWPORTS,
   },
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {

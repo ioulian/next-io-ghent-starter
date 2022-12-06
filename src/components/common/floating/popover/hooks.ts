@@ -53,7 +53,7 @@ export const usePopover = ({
     onOpenChange: setOpen,
     whileElementsMounted: autoUpdate,
     middleware: [
-      offset(theme.floating.tooltip.offset),
+      offset(theme.floating.popover.offset),
       flip(),
       shift(),
       arrow({ element: arrowRef }),

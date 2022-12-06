@@ -2,6 +2,7 @@ import "styled-components";
 
 declare module "styled-components" {
   export interface DefaultTheme {
+    name: string;
     colors: {
       white: string;
       black: string;
@@ -30,15 +31,15 @@ declare module "styled-components" {
     borderRadius: {
       normal: number;
     };
-    contextMenu: {
-      arrowSize: number;
-      arrowPadding: number;
-      offset: [number, number];
-      windowPadding: number;
-    };
     floating: {
       tooltip: {
         offset: number;
+      };
+      popover: {
+        offset: number;
+      };
+      dropdown: {
+        offset: 10;
       };
       floater: {
         arrow: {

@@ -9,6 +9,7 @@ const sourceSansPro = Source_Sans_Pro({
 
 // Use types
 export const theme: DefaultTheme = {
+  name: "Default",
   colors: {
     white: "#fff",
     black: "#000",
@@ -42,17 +43,17 @@ export const theme: DefaultTheme = {
     tooltip: {
       offset: 10,
     },
+    popover: {
+      offset: 10,
+    },
+    dropdown: {
+      offset: 10,
+    },
     floater: {
       arrow: {
         size: 10,
       },
     },
-  },
-  contextMenu: {
-    arrowSize: 12,
-    arrowPadding: 7,
-    offset: [14, 14],
-    windowPadding: 14,
   },
   zIndex: {
     contextMenu: 100,

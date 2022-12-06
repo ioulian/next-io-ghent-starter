@@ -51,7 +51,8 @@ export const StyledButton = styled.button<{
 
       &:hover,
       &:focus {
-        background-color: grey;
+        color: ${({ theme }) => theme.colors.white};
+        background-color: ${({ theme }) => theme.colors.primary};
       }
     `}
 
