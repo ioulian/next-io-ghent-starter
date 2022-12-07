@@ -1,4 +1,10 @@
-import { ReactNode, forwardRef, MouseEvent as ReactMouseEvent } from "react";
+import {
+  ReactNode,
+  forwardRef,
+  MouseEvent as ReactMouseEvent,
+  isValidElement,
+  cloneElement,
+} from "react";
 
 import { InferComponentProps } from "@/types/styled";
 
@@ -45,9 +51,17 @@ export const Button = forwardRef<
       >
         <>
           <span>
-            {iconBefore}
+            {isValidElement(iconBefore) &&
+              cloneElement(iconBefore, {
+                // @ts-ignore
+                "aria-hidden": "true",
+              })}
             {children && <span>{children}</span>}
-            {iconAfter}
+            {isValidElement(iconAfter) &&
+              cloneElement(iconAfter, {
+                // @ts-ignore
+                "aria-hidden": "true",
+              })}
           </span>
           <Spinner />
         </>

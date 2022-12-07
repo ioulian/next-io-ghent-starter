@@ -11,6 +11,10 @@ export const StyledFormField = styled.div<{
   $error?: boolean;
   $isToggle?: boolean;
 }>`
+  border: 0;
+  margin: 0;
+  padding: 0;
+
   &:not(:last-child) {
     margin-bottom: 1.25rem;
   }

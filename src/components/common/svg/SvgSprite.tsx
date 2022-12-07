@@ -1,4 +1,4 @@
-import { FC, HTMLProps } from "react";
+import { FC, HTMLProps, useId } from "react";
 
 export const SvgSprite: FC<{ src: any } & HTMLProps<SVGElement>> = ({
   src,
@@ -16,9 +16,15 @@ export const SvgSprite: FC<{ src: any } & HTMLProps<SVGElement>> = ({
     ...typedProps
   }: Partial<HTMLProps<SVGElement>> = props;
 
+  const titleId = useId();
   return (
-    <svg {...typedProps} viewBox={src.viewBox}>
-      {title && <title>{title}</title>}
+    <svg
+      {...typedProps}
+      viewBox={src.viewBox}
+      role="img"
+      aria-labelledby={title && titleId}
+    >
+      {title && <title id={titleId}>{title}</title>}
       <use xlinkHref={`#${src.id}`} />
     </svg>
   );

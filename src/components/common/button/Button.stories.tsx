@@ -70,7 +70,7 @@ FullWidth.args = {
 export const WithIconBefore = Template.bind({});
 WithIconBefore.args = {
   $type: "primary",
-  iconBefore: <SvgSprite src={iconSample} />,
+  iconBefore: <SvgSprite src={iconSample} title="test-title" />,
   children: "Button",
 };
 

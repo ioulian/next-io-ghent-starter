@@ -43,6 +43,7 @@ type RenderProps = (props: {
 
 export const FormField: FC<
   {
+    asFieldSet?: boolean;
     options?: RegisterOptions<FieldValues, FieldPath<FieldValues>>;
     name: string;
     label?: ReactNode;
@@ -52,6 +53,7 @@ export const FormField: FC<
     children?: ReactI18NextChild | Iterable<ReactI18NextChild> | RenderProps;
   } & InferComponentProps<typeof StyledFormField>
 > = ({
+  asFieldSet,
   name,
   label,
   description,
@@ -82,9 +84,17 @@ export const FormField: FC<
   });
 
   return (
-    <StyledFormField $error={!!errorForThisField} {...props}>
+    <StyledFormField
+      as={asFieldSet ? "fieldset" : "div"}
+      $error={!!errorForThisField}
+      {...props}
+    >
       {label && (
-        <Label htmlFor={name} required={!!options?.required}>
+        <Label
+          as={asFieldSet ? "legend" : "label"}
+          htmlFor={asFieldSet ? undefined : name}
+          required={!!options?.required}
+        >
           {label}
         </Label>
       )}
@@ -110,6 +120,7 @@ export const FormField: FC<
                   ),
                   name,
                   id: name,
+                  ...(errorForThisField && { "aria-invalid": "true" }),
                 })
               : null
           )}

@@ -97,6 +97,7 @@ WithRadioList.args = {
     ...required,
   },
   inputWrapper: List,
+  asFieldSet: true,
   children: [
     <Radio key="1" inputValue="value1">
       Value 1
@@ -117,6 +118,7 @@ WithCheckboxList.args = {
   options: {
     ...required,
   },
+  asFieldSet: true,
   inputWrapper: List,
   children: [
     <Checkbox key="1" inputValue="value1">

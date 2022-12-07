@@ -5,7 +5,10 @@ import { InferComponentProps } from "@/types/styled";
 import { StyledLabel } from "./Label.styles";
 
 export const Label: FC<
-  { required?: boolean } & InferComponentProps<typeof StyledLabel>
+  {
+    as?: keyof JSX.IntrinsicElements;
+    required?: boolean;
+  } & InferComponentProps<typeof StyledLabel>
 > = ({ required, children, ...props }) => {
   return (
     <StyledLabel {...props}>
