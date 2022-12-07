@@ -13,7 +13,7 @@ export const Label: FC<
   return (
     <StyledLabel {...props}>
       {children}
-      {required && <span aria-hidden>*</span>}
+      {required && <span aria-label="(required)">*</span>}
     </StyledLabel>
   );
 };
