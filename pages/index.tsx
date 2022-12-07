@@ -25,7 +25,7 @@ import { NextPageWithLayout } from "./_app";
 const Home: NextPageWithLayout = ({}: InferGetStaticPropsType<
   typeof getStaticProps
 >) => {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation("app");
   const router = useRouter();
 
   return (
@@ -101,7 +101,7 @@ export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
     ({ locale }: GetStaticPropsContext) =>
       new Promise((resolve) => {
         requireAnonymous()
-          .then(requireTranslations(locale!, ["common"]))
+          .then(requireTranslations(locale!, ["app"]))
           .then(({ result }) => {
             resolve(result);
           });

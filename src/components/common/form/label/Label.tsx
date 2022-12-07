@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { useTranslation } from "react-i18next";
 
 import { InferComponentProps } from "@/types/styled";
 
@@ -10,10 +11,11 @@ export const Label: FC<
     required?: boolean;
   } & InferComponentProps<typeof StyledLabel>
 > = ({ required, children, ...props }) => {
+  const { t } = useTranslation();
   return (
     <StyledLabel {...props}>
       {children}
-      {required && <span aria-label="(required)">*</span>}
+      {required && <span aria-label={t("form.label.required")}>*</span>}
     </StyledLabel>
   );
 };

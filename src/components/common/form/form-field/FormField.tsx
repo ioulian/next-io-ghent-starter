@@ -19,7 +19,7 @@ import {
   useFormContext,
   UseFormStateReturn,
 } from "react-hook-form";
-import { ReactI18NextChild } from "react-i18next";
+import { ReactI18NextChild, useTranslation } from "react-i18next";
 
 import { InferComponentProps } from "@/types/styled";
 
@@ -70,6 +70,7 @@ export const FormField: FC<
     control,
     formState: { errors },
   } = useFormContext();
+  const { t } = useTranslation("common");
 
   useEffect(() => {
     return () => {
@@ -130,7 +131,10 @@ export const FormField: FC<
         <Error id={getErrorId(name)}>
           {errorForThisField.type === BE_VALIDATION
             ? (errorForThisField.message as unknown as string)
-            : (errorForThisField.message as string)}
+            : (t(
+                // @ts-ignore
+                `form.validationErrors.${errorForThisField.message as string}`
+              ) as string)}
         </Error>
       )}
       {description && (

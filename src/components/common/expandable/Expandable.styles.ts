@@ -5,8 +5,7 @@ export const StyledExpandableSummary = styled.summary`
   font-weight: 700;
   cursor: pointer;
   position: relative;
-  display: flex;
-  justify-content: space-between;
+  display: block;
 
   &::-webkit-details-marker {
     display: none;

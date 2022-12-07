@@ -1,4 +1,5 @@
 import { forwardRef } from "react";
+import { useTranslation } from "react-i18next";
 
 import { InferComponentProps } from "@/types/styled";
 
@@ -10,9 +11,13 @@ export const Select = forwardRef<
     addEmptyOption?: boolean;
   } & InferComponentProps<typeof StyledSelect>
 >(({ addEmptyOption = false, children, ...props }, ref) => {
+  const { t } = useTranslation("common");
+
   return (
     <StyledSelect {...props} ref={ref}>
-      {addEmptyOption && <option value="">Select...</option>}
+      {addEmptyOption && (
+        <option value="">{t("form.select.emptyValue")}</option>
+      )}
       {children}
     </StyledSelect>
   );

@@ -1,3 +1,27 @@
 {
-  "title": "IO Ghent starter template EN"
+  "overlay": {
+    "close-button": {
+      "label": "Close"
+    }
+  },
+  "form": {
+    "description": {
+      "prefix": "Description:"
+    },
+    "error": {
+      "prefix": "Error:"
+    },
+    "label": {
+      "required": "(required)"
+    },
+    "select": {
+      "emptyValue": "Select..."
+    },
+    "validationErrors": {
+      "required": "This field is required",
+      "email": "This must be a valid email address",
+      "password": "Password is not strong enough",
+      "passwordMatch": "Passwords do not match"
+    }
+  }
 }

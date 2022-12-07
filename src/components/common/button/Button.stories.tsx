@@ -11,7 +11,7 @@ export default {
   subcomponents: { SvgSprite, Spinner },
   argTypes: {
     $type: {
-      options: ["primary", "secondary", "tertiary", "outline"],
+      options: ["primary", "secondary"],
       control: {
         type: "select",
       },
