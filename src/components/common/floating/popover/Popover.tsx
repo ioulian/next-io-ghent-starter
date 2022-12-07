@@ -94,7 +94,11 @@ export const PopoverContent = forwardRef<
         <FloatingFocusManager context={state.context} modal={state.modal}>
           <Floater
             ref={ref}
-            state={state}
+            position={{ x: state.x, y: state.y }}
+            arrowPosition={state.middlewareData.arrow}
+            strategy={state.strategy}
+            placement={state.placement}
+            arrowCallback={state.arrowCallback}
             aria-labelledby={state.labelId}
             aria-describedby={state.descriptionId}
             {...state.getFloatingProps(props)}

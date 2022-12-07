@@ -94,7 +94,10 @@ export const DialogContent = forwardRef<
             <Floater
               ref={ref}
               showArrow={false}
-              state={state}
+              position={{ x: state.x, y: state.y }}
+              arrowPosition={state.middlewareData.arrow}
+              strategy={state.strategy}
+              placement={state.placement}
               aria-labelledby={state.labelId}
               aria-describedby={state.descriptionId}
               {...state.getFloatingProps(props)}

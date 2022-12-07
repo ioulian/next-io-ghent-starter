@@ -1,4 +1,5 @@
 import {
+  arrow,
   autoUpdate,
   flip,
   FloatingFocusManager,
@@ -29,6 +30,7 @@ import {
   HTMLProps,
   isValidElement,
   ReactNode,
+  useCallback,
   useEffect,
   useMemo,
   useRef,
@@ -37,7 +39,7 @@ import {
 import { mergeRefs } from "react-merge-refs";
 import { useTheme } from "styled-components";
 
-import { StyledFloater } from "../floater/Floater.styles";
+import { Floater } from "../floater/Floater";
 
 import { StyledMenuWrapper } from "./Dropdown.styles";
 
@@ -100,16 +102,39 @@ const DropdownMenu = forwardRef<
   const parentId = useFloatingParentNodeId();
   const nested = parentId !== null;
   const theme = useTheme();
+  const arrowRef = useRef<HTMLDivElement | null>(null);
 
-  const { x, y, reference, floating, strategy, context } =
-    useFloating<HTMLButtonElement>({
-      open,
-      nodeId,
-      onOpenChange: setOpen,
-      placement: nested ? "right-start" : "bottom-start",
-      middleware: [offset(theme.floating.popover.offset), flip(), shift()],
-      whileElementsMounted: autoUpdate,
-    });
+  const {
+    x,
+    y,
+    reference,
+    floating,
+    strategy,
+    context,
+    placement,
+    update,
+    middlewareData,
+  } = useFloating<HTMLButtonElement>({
+    open,
+    nodeId,
+    onOpenChange: setOpen,
+    placement: nested ? "right-start" : "bottom-start",
+    middleware: [
+      offset(theme.floating.popover.offset),
+      flip(),
+      shift(),
+      arrow({ element: arrowRef }),
+    ],
+    whileElementsMounted: autoUpdate,
+  });
+
+  const arrowCallback = useCallback(
+    (node: HTMLDivElement | null) => {
+      arrowRef.current = node;
+      update();
+    },
+    [update]
+  );
 
   const { getReferenceProps, getFloatingProps, getItemProps } = useInteractions(
     [
@@ -218,14 +243,13 @@ const DropdownMenu = forwardRef<
             // without selecting anything.
             visuallyHiddenDismiss
           >
-            <StyledFloater
+            <Floater
               ref={floating}
-              style={{
-                transform: `translate3d(${Math.round(x ?? 0)}px, ${Math.round(
-                  y ?? 0
-                )}px, 0)`,
-                position: strategy,
-              }}
+              position={{ x, y }}
+              arrowPosition={middlewareData.arrow}
+              strategy={strategy}
+              placement={placement}
+              arrowCallback={arrowCallback}
               {...getFloatingProps({
                 // Pressing tab dismisses the menu and places focus
                 // back on the trigger.
@@ -263,7 +287,7 @@ const DropdownMenu = forwardRef<
                     )
                 )}
               </StyledMenuWrapper>
-            </StyledFloater>
+            </Floater>
           </FloatingFocusManager>
         )}
       </FloatingPortal>

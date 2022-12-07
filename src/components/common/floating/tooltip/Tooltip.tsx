@@ -83,7 +83,15 @@ export const TooltipContent = forwardRef<
   return (
     <FloatingPortal>
       {state.open && (
-        <Floater ref={ref} state={state} {...state.getFloatingProps(props)} />
+        <Floater
+          ref={ref}
+          position={{ x: state.x, y: state.y }}
+          arrowPosition={state.middlewareData.arrow}
+          strategy={state.strategy}
+          placement={state.placement}
+          arrowCallback={state.arrowCallback}
+          {...state.getFloatingProps(props)}
+        />
       )}
     </FloatingPortal>
   );
