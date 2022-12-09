@@ -1,3 +1,4 @@
+import { darken } from "polished";
 import styled, { css } from "styled-components";
 
 import { StyledSpinner } from "../spinner/Spinner.styles";
@@ -38,8 +39,8 @@ export const StyledButton = styled.button<{
 
       &:hover,
       &:focus {
-        background-color: ${({ theme }) => theme.colors.primary};
-        border-color: ${({ theme }) => theme.colors.primary};
+        background-color: ${({ theme }) => darken(0.1)(theme.colors.primary)};
+        border-color: ${({ theme }) => darken(0.1)(theme.colors.primary)};
       }
     `}
 
@@ -52,7 +53,8 @@ export const StyledButton = styled.button<{
       &:hover,
       &:focus {
         color: ${({ theme }) => theme.colors.white};
-        background-color: ${({ theme }) => theme.colors.primary};
+        background-color: ${({ theme }) => darken(0.1)(theme.colors.primary)};
+        border-color: ${({ theme }) => darken(0.1)(theme.colors.primary)};
       }
     `}
 
@@ -93,21 +95,14 @@ export const StyledButton = styled.button<{
       flex-shrink: 0;
 
       ${({ $size }) =>
+        ($size === "normal" || $size === "large") &&
+        css`
+          width: 1.5rem;
+          height: 1.5rem;
+        `}
+
+      ${({ $size }) =>
         $size === "small" &&
-        css`
-          width: 1rem;
-          height: 1rem;
-        `}
-
-      ${({ $size }) =>
-        $size === "normal" &&
-        css`
-          width: 0.75rem;
-          height: 0.75rem;
-        `}
-
-      ${({ $size }) =>
-        $size === "large" &&
         css`
           width: 1rem;
           height: 1rem;

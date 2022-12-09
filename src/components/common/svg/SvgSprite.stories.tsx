@@ -1,10 +1,12 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
+import iconSample2 from "@tabler/icons/123.svg";
 
 import iconSample from "./../../../../public/img/logo-sprite.svg";
 import { SvgSprite } from "./SvgSprite";
 
 const icons = {
   iconSample,
+  iconSample2,
 };
 
 export default {

@@ -5,8 +5,8 @@ export const StyledOverlayCloseButton = styled.button`
   border: 0;
   padding: 0;
   margin: 0;
-  width: 1rem;
-  height: 1rem;
+  width: 1.5rem;
+  height: 1.5rem;
   color: ${({ theme }) => theme.colors.white};
   border-radius: 50%;
   position: fixed;

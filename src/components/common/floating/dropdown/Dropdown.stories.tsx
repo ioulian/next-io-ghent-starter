@@ -1,6 +1,8 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
+import iconChevron from "@tabler/icons/chevron-right.svg";
 
 import { Button } from "../../button/Button";
+import { SvgSprite } from "../../svg/SvgSprite";
 
 import { Dropdown, DropdownMenuItem } from "./Dropdown";
 
@@ -77,7 +79,9 @@ CustomElements.args = {
     </DropdownMenuItem>,
     <Dropdown
       key="4"
-      trigger={<Button>Copy as &gt;</Button>}
+      trigger={
+        <Button iconAfter={<SvgSprite src={iconChevron} />}>Copy as</Button>
+      }
       typeaheadKey="Copy as"
     >
       <DropdownMenuItem typeaheadKey="Text">
@@ -86,7 +90,12 @@ CustomElements.args = {
       <DropdownMenuItem typeaheadKey="Video">
         <Button>Video</Button>
       </DropdownMenuItem>
-      <Dropdown trigger={<Button>Image &gt;</Button>} typeaheadKey="Image">
+      <Dropdown
+        trigger={
+          <Button iconAfter={<SvgSprite src={iconChevron} />}>Image</Button>
+        }
+        typeaheadKey="Image"
+      >
         <DropdownMenuItem typeaheadKey=".png">
           <Button>.png</Button>
         </DropdownMenuItem>
@@ -106,7 +115,9 @@ CustomElements.args = {
     </Dropdown>,
     <Dropdown
       key="5"
-      trigger={<Button>Share &gt;</Button>}
+      trigger={
+        <Button iconAfter={<SvgSprite src={iconChevron} />}>Share</Button>
+      }
       typeaheadKey="Share"
     >
       <DropdownMenuItem typeaheadKey="Mail">

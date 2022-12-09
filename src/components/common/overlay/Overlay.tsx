@@ -4,6 +4,7 @@ import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import { useTheme } from "styled-components";
 
 import { OverlayCloseButton } from "./close-button/OverlayCloseButton";
+import { StyledOverlayContainer } from "./Overlay.styles";
 
 Modal.setAppElement("#__next");
 
@@ -49,7 +50,7 @@ export const Overlay: FC<{
         ref={setRef}
       >
         <OverlayCloseButton onClick={onClose} />
-        {children}
+        <StyledOverlayContainer>{children}</StyledOverlayContainer>
       </Modal>
     </>
   );

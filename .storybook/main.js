@@ -1,3 +1,5 @@
+const { resolve } = require("path");
+
 module.exports = {
   stories: ["../src/**/*.stories.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
@@ -28,10 +30,20 @@ module.exports = {
     const fileLoaderRule = config.module.rules.find(
       (rule) => rule.test && rule.test.test(".svg")
     );
-    fileLoaderRule.exclude = /-sprite\.svg$/;
+    fileLoaderRule.exclude = [/\@tabler\/icons\//, /-sprite\.svg$/];
     config.module.rules.push({
-      test: /-sprite\.svg$/,
+      test: function (path) {
+        return (
+          path.indexOf("@tabler/icons") !== -1 ||
+          path.indexOf("-sprite.svg") !== -1
+        );
+      },
       use: ["svg-sprite-loader", "svgo-loader"],
+      include: [
+        resolve("node_modules/@tabler/icons"),
+        resolve("src"),
+        resolve("public"),
+      ],
     });
 
     return config;

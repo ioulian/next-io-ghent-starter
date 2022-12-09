@@ -1,11 +1,11 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
+import iconClose from "@tabler/icons/x.svg";
 
 import { InferComponentProps } from "@/types/styled";
 
 import { SvgSprite } from "../../svg/SvgSprite";
 
-import iconClose from "./overlay-close-sprite.svg";
 import { StyledOverlayCloseButton } from "./OverlayCloseButton.styles";
 
 export const OverlayCloseButton: FC<

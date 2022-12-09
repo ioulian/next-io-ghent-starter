@@ -171,14 +171,6 @@ export const GlobalStyle = createGlobalStyle`
 
   .app-dialog-overlay {
     background-color: ${rgba(theme.colors.black, 0.8)} !important;
-    //overflow-y: auto;
-    //overflow-x: hidden;
-    //opacity: 0;
-    //transition: opacity 250ms ease-in-out;
-    //display: flex;
-    //align-items: center;
-    //justify-content: center;
-    //height: 100vh;
     // TODO: remove if performance suffers
     backdrop-filter: blur(10px);
   }
@@ -211,7 +203,6 @@ export const GlobalStyle = createGlobalStyle`
       }
 
       &__Content {
-        margin: 0 3rem;
         max-height: 100%;
         min-width: 100%;
         position: initial !important;

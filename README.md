@@ -68,6 +68,7 @@ If you want to use redux, but with SSG, you should remove HYDRATION from slices
 - SVG Sprites
 - Next13 Font optimisation
 - Storybook
+- [Tabler icons](https://tabler-icons.io/) svg sprite
 
 ## TODO
 

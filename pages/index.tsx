@@ -8,6 +8,7 @@ import type {
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import sampleSvgSprite from "@tabler/icons/123.svg";
 
 import { StyledMain, StyledPage } from "@/components/Demo";
 import logo from "@/img/logo.png";
@@ -60,6 +61,12 @@ const Home: NextPageWithLayout = ({}: InferGetStaticPropsType<
           <h1>{t("title")}</h1>
 
           <nav>
+            <SvgSprite
+              src={sampleSvgSprite}
+              title=".svg sprite"
+              width={24}
+              height={24}
+            />
             <ul>
               {router.locales?.map((locale) => (
                 <li key={locale}>

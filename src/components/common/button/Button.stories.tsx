@@ -1,9 +1,10 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
+import iconChevronRight from "@tabler/icons/chevron-right.svg";
+import iconChevronLeft from "@tabler/icons/chevron-left.svg";
 
 import { Button } from "./Button";
 import { Spinner } from "./../spinner/Spinner";
 import { SvgSprite } from "./../svg/SvgSprite";
-import iconSample from "./../../../../public/img/logo-sprite.svg";
 
 export default {
   title: "UI/Buttons/Button",
@@ -51,12 +52,24 @@ Disabled.args = {
 export const Large = Template.bind({});
 Large.args = {
   $size: "large",
+  iconBefore: <SvgSprite src={iconChevronLeft} />,
+  iconAfter: <SvgSprite src={iconChevronRight} />,
   children: "Button",
 };
 
 export const Normal = Template.bind({});
 Normal.args = {
   $size: "normal",
+  iconBefore: <SvgSprite src={iconChevronLeft} />,
+  iconAfter: <SvgSprite src={iconChevronRight} />,
+  children: "Button",
+};
+
+export const Small = Template.bind({});
+Small.args = {
+  $size: "small",
+  iconBefore: <SvgSprite src={iconChevronLeft} />,
+  iconAfter: <SvgSprite src={iconChevronRight} />,
   children: "Button",
 };
 
@@ -70,30 +83,30 @@ FullWidth.args = {
 export const WithIconBefore = Template.bind({});
 WithIconBefore.args = {
   $type: "primary",
-  iconBefore: <SvgSprite src={iconSample} title="test-title" />,
+  iconBefore: <SvgSprite src={iconChevronLeft} title="test-title" />,
   children: "Button",
 };
 
 export const WithIconAfter = Template.bind({});
 WithIconAfter.args = {
   $type: "primary",
-  iconAfter: <SvgSprite src={iconSample} />,
+  iconAfter: <SvgSprite src={iconChevronRight} />,
   children: "Button",
 };
 
 export const WithIconBeforeAndAfter = Template.bind({});
 WithIconBeforeAndAfter.args = {
   $type: "primary",
-  iconBefore: <SvgSprite src={iconSample} />,
-  iconAfter: <SvgSprite src={iconSample} />,
+  iconBefore: <SvgSprite src={iconChevronLeft} />,
+  iconAfter: <SvgSprite src={iconChevronRight} />,
   children: "Button",
 };
 
 export const WithIsLoading = Template.bind({});
 WithIsLoading.args = {
   $type: "primary",
-  iconBefore: <SvgSprite src={iconSample} />,
-  iconAfter: <SvgSprite src={iconSample} />,
+  iconBefore: <SvgSprite src={iconChevronLeft} />,
+  iconAfter: <SvgSprite src={iconChevronRight} />,
   children: "Button",
   isLoading: true,
 };
