@@ -1,6 +1,7 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import iconChevronRight from "@tabler/icons/chevron-right.svg";
 import iconChevronLeft from "@tabler/icons/chevron-left.svg";
+import iconSettings from "@tabler/icons/settings.svg";
 
 import { Button } from "./Button";
 import { Spinner } from "./../spinner/Spinner";
@@ -10,20 +11,6 @@ export default {
   title: "UI/Buttons/Button",
   component: Button,
   subcomponents: { SvgSprite, Spinner },
-  argTypes: {
-    $type: {
-      options: ["primary", "secondary"],
-      control: {
-        type: "select",
-      },
-    },
-    $size: {
-      options: ["normal", "large"],
-      control: {
-        type: "select",
-      },
-    },
-  },
 } as ComponentMeta<typeof Button>;
 
 const Template: ComponentStory<typeof Button> = ({ ...args }) => (
@@ -39,6 +26,12 @@ Primary.args = {
 export const Secondary = Template.bind({});
 Secondary.args = {
   $type: "secondary",
+  children: "Button",
+};
+
+export const Simple = Template.bind({});
+Simple.args = {
+  $type: "simple",
   children: "Button",
 };
 
@@ -68,6 +61,14 @@ Normal.args = {
 export const Small = Template.bind({});
 Small.args = {
   $size: "small",
+  iconBefore: <SvgSprite src={iconChevronLeft} />,
+  iconAfter: <SvgSprite src={iconChevronRight} />,
+  children: "Button",
+};
+
+export const Base = Template.bind({});
+Base.args = {
+  $size: "base",
   iconBefore: <SvgSprite src={iconChevronLeft} />,
   iconAfter: <SvgSprite src={iconChevronRight} />,
   children: "Button",
@@ -109,4 +110,13 @@ WithIsLoading.args = {
   iconAfter: <SvgSprite src={iconChevronRight} />,
   children: "Button",
   isLoading: true,
+};
+
+export const IconOnly = Template.bind({});
+IconOnly.args = {
+  $size: "base",
+  $type: "simple",
+  iconBefore: <SvgSprite src={iconSettings} />,
+  iconOnly: true,
+  children: "Button",
 };

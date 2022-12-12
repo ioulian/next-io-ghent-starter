@@ -9,6 +9,7 @@ import {
 import { InferComponentProps } from "@/types/styled";
 
 import { Spinner } from "../spinner/Spinner";
+import { Offscreen } from "../offscreen/Offscreen";
 
 import { StyledButton } from "./Button.styles";
 
@@ -19,10 +20,12 @@ export const Button = forwardRef<
     iconBefore?: ReactNode;
     iconAfter?: ReactNode;
     isLoading?: boolean;
+    iconOnly?: boolean;
   } & InferComponentProps<typeof StyledButton>
 >(
   (
     {
+      iconOnly,
       iconBefore,
       iconAfter,
       isLoading = false,
@@ -49,22 +52,25 @@ export const Button = forwardRef<
             : undefined
         }
       >
-        <>
-          <span>
-            {isValidElement(iconBefore) &&
-              cloneElement(iconBefore, {
-                // @ts-ignore
-                "aria-hidden": "true",
-              })}
-            {children && <span>{children}</span>}
-            {isValidElement(iconAfter) &&
-              cloneElement(iconAfter, {
-                // @ts-ignore
-                "aria-hidden": "true",
-              })}
-          </span>
-          <Spinner />
-        </>
+        <span>
+          {isValidElement(iconBefore) &&
+            cloneElement(iconBefore, {
+              // @ts-ignore
+              "aria-hidden": "true",
+            })}
+          {children &&
+            (iconOnly ? (
+              <Offscreen>{children}</Offscreen>
+            ) : (
+              <span>{children}</span>
+            ))}
+          {isValidElement(iconAfter) &&
+            cloneElement(iconAfter, {
+              // @ts-ignore
+              "aria-hidden": "true",
+            })}
+        </span>
+        <Spinner />
       </StyledButton>
     );
   }
