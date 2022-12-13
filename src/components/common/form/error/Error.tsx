@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 
 import { InferComponentProps } from "@/types/styled";
 
-import { Offscreen } from "../../offscreen/Offscreen";
+import { VisuallyHidden } from "../../visually-hidden/VisuallyHidden";
 
 import { StyledError } from "./Error.styles";
 
@@ -13,7 +13,7 @@ export const Error: FC<
   const { t } = useTranslation("common");
   return (
     <StyledError id={id} {...props}>
-      <Offscreen>{t("form.error.prefix")}</Offscreen>
+      <VisuallyHidden>{t("form.error.prefix")}</VisuallyHidden>
       {children}
     </StyledError>
   );

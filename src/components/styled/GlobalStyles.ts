@@ -158,7 +158,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .app-dialog-overlay {
-    background-color: ${rgba(theme.colors.black, 0.8)} !important;
+    background-color: ${rgba(theme.colors.black, 0.5)} !important;
     // TODO: remove if performance suffers
     backdrop-filter: blur(10px);
   }
@@ -170,7 +170,7 @@ export const GlobalStyle = createGlobalStyle`
 
     .ReactModal {
       &__Overlay {
-        background-color: ${rgba(theme.colors.black, 0.8)} !important;
+        background-color: ${rgba(theme.colors.black, 0.5)} !important;
         overflow-y: auto;
         overflow-x: hidden;
         opacity: 0;

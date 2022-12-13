@@ -4,6 +4,7 @@ import {
   cloneElement,
   FC,
   isValidElement,
+  JSXElementConstructor,
   PropsWithChildren,
   ReactElement,
   ReactNode,
@@ -19,7 +20,7 @@ import {
   useFormContext,
   UseFormStateReturn,
 } from "react-hook-form";
-import { ReactI18NextChild, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 import { InferComponentProps } from "@/types/styled";
 
@@ -36,7 +37,7 @@ const BaseWrapper: FC<{ children: ReactNode }> = ({ children }) => (
 );
 
 type RenderProps = (props: {
-  field: ControllerRenderProps<FieldValues>;
+  field: ControllerRenderProps<FieldValues, FieldPath<FieldValues>>;
   fieldState: ControllerFieldState;
   formState: UseFormStateReturn<FieldValues>;
 }) => ReactElement;
@@ -50,8 +51,11 @@ export const FormField: FC<
     description?: ReactNode;
     inputWrapper?: FC<PropsWithChildren>;
     watchValidate?: any;
-    children?: ReactI18NextChild | Iterable<ReactI18NextChild> | RenderProps;
-  } & InferComponentProps<typeof StyledFormField>
+    children?:
+      | ReactElement<any, JSXElementConstructor<any>>
+      | ReactElement<any, JSXElementConstructor<any>>[]
+      | RenderProps;
+  } & Omit<InferComponentProps<typeof StyledFormField>, "children">
 > = ({
   asFieldSet,
   name,

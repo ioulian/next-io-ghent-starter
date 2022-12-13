@@ -9,7 +9,7 @@ import {
 import { InferComponentProps } from "@/types/styled";
 
 import { Spinner } from "../spinner/Spinner";
-import { Offscreen } from "../offscreen/Offscreen";
+import { VisuallyHidden } from "../visually-hidden/VisuallyHidden";
 
 import { StyledButton } from "./Button.styles";
 
@@ -60,7 +60,7 @@ export const Button = forwardRef<
             })}
           {children &&
             (iconOnly ? (
-              <Offscreen>{children}</Offscreen>
+              <VisuallyHidden>{children}</VisuallyHidden>
             ) : (
               <span>{children}</span>
             ))}

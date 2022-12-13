@@ -1,15 +1,32 @@
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 
 import { InferComponentProps } from "@/types/styled";
 
-import { StyledSpinner } from "./Spinner.styles";
+import {
+  StyledSpinner,
+  StyledSpinnerIcon,
+  StyledSpinnerLabel,
+} from "./Spinner.styles";
 
-export const Spinner: FC<InferComponentProps<typeof StyledSpinner>> = ({
+export const Spinner: FC<
+  {
+    label?: ReactNode;
+    primaryColor?: string;
+    secondaryColor?: string;
+  } & InferComponentProps<typeof StyledSpinner>
+> = ({
+  label,
+  primaryColor = "currentColor",
+  secondaryColor = "transparent",
   ...props
 }) => (
   <StyledSpinner {...props}>
-    <div>
+    <StyledSpinnerIcon
+      $primaryColor={primaryColor}
+      $secondaryColor={secondaryColor}
+    >
       <div></div>
-    </div>
+    </StyledSpinnerIcon>
+    {label && <StyledSpinnerLabel>{label}</StyledSpinnerLabel>}
   </StyledSpinner>
 );

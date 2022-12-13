@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 
 import { InferComponentProps } from "@/types/styled";
 
-import { Offscreen } from "../../offscreen/Offscreen";
+import { VisuallyHidden } from "../../visually-hidden/VisuallyHidden";
 
 import { StyledDescription } from "./Description.styles";
 
@@ -13,7 +13,7 @@ export const Description: FC<
   const { t } = useTranslation("common");
   return (
     <StyledDescription id={id} {...props}>
-      <Offscreen>{t("form.description.prefix")}</Offscreen>
+      <VisuallyHidden>{t("form.description.prefix")}</VisuallyHidden>
       {children}
     </StyledDescription>
   );

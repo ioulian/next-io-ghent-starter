@@ -73,6 +73,8 @@ If you want to use redux, but with SSG, you should remove HYDRATION from slices
 ## TODO
 
 - add <https://github.com/vercel/next.js/tree/canary/examples/with-why-did-you-render>
-- find a good PWA geenerator
+- find a good PWA generator
 - add .env checker
-- Show errors only on dev
+- Check <https://www.npmjs.com/package/styled-tools>
+- Check code structure <https://github.com/yannvr/react-components-cli>
+- <https://github.com/Brew-Brew/css-in-js-media>

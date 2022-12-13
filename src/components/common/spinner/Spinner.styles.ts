@@ -10,13 +10,44 @@ const spinnerAnimation = keyframes`
   }
 `;
 
-export const StyledSpinner = styled.div<{
-  $fullWidth?: boolean;
-  $fullHeight?: boolean;
+export const StyledSpinnerIcon = styled.div<{
+  $primaryColor?: string;
+  $secondaryColor?: string;
 }>`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  > div {
+    border-width: 2px;
+    border-style: solid;
+    border-top-color: ${({ $primaryColor }) => $primaryColor ?? "currentColor"};
+    border-right-color: ${({ $secondaryColor }) =>
+      $secondaryColor ?? "transparent"};
+    border-bottom-color: ${({ $secondaryColor }) =>
+      $secondaryColor ?? "transparent"};
+    border-left-color: ${({ $secondaryColor }) =>
+      $secondaryColor ?? "transparent"};
+    border-radius: 50%;
+    animation: ${spinnerAnimation} 1s linear infinite;
+    width: 16px;
+    height: 16px;
+    border-width: 2px;
+  }
+`;
+
+export const StyledSpinnerLabel = styled.div`
+  font-size: 0.875rem;
+`;
+
+export const StyledSpinner = styled.div<{
+  $fullWidth?: boolean;
+  $fullHeight?: boolean;
+}>`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
 
   ${({ $fullWidth }) =>
     $fullWidth
@@ -31,24 +62,4 @@ export const StyledSpinner = styled.div<{
           height: 100%;
         `
       : ""}
-
-  > div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    > div {
-      border-width: 2px;
-      border-style: solid;
-      border-top-color: currentColor;
-      border-right-color: transparent;
-      border-bottom-color: transparent;
-      border-left-color: transparent;
-      border-radius: 50%;
-      animation: ${spinnerAnimation} 1s linear infinite;
-      width: 16px;
-      height: 16px;
-      border-width: 2px;
-    }
-  }
 `;

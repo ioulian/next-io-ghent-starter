@@ -115,8 +115,10 @@ export const PopoverContext = createContext<ContextType>(null);
 export const usePopoverState = () => {
   const context = useContext(PopoverContext);
 
-  if (context == null) {
-    throw new Error("Popover components must be wrapped in <Popover />");
+  if (process.env.NODE_ENV !== "production") {
+    if (context == null) {
+      throw new Error("Popover components must be wrapped in <Popover />");
+    }
   }
 
   return context;
