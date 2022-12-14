@@ -1,7 +1,10 @@
 import { rgba } from "polished";
 import { createGlobalStyle } from "styled-components";
+import media, { setBreakPoints } from "css-in-js-media";
 
 import { theme } from "./Theme";
+
+setBreakPoints(theme.breakpoints);
 
 export const GlobalStyle = createGlobalStyle`
   html,
@@ -22,7 +25,7 @@ export const GlobalStyle = createGlobalStyle`
     color: ${theme.colors.body};
     letter-spacing: 0.01em;
 
-    @media (${theme.breakpoints.smUp}) {
+    ${media(">=tablet")} {
       font-size: 1.125rem;
       line-height: 1.5rem;
     }
@@ -94,69 +97,6 @@ export const GlobalStyle = createGlobalStyle`
     height: auto;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5 {
-    font-family: ${theme.fonts.familyHeadings};
-    font-weight: 400;
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-
-  h1 {
-    font-size: 1.875rem;
-    line-height: 2.25rem;
-    letter-spacing: 0.04em;
-
-    @media (${theme.breakpoints.smUp}) {
-      font-size: 2.125rem;
-      line-height: 2.625rem;
-    }
-  }
-
-  h2 {
-    font-size: 1.5rem;
-    line-height: 1.875rem;
-    letter-spacing: 0.04em;
-
-    @media (${theme.breakpoints.smUp}) {
-      font-size: 1.875rem;
-      line-height: 2.25rem;
-    }
-  }
-
-  h3 {
-    font-size: 1.25rem;
-    line-height: 1.5rem;
-    letter-spacing: 0.04em;
-
-    @media (${theme.breakpoints.smUp}) {
-      font-size: 1.375rem;
-      line-height: 1.625rem;
-    }
-  }
-
-  h4 {
-    font-size: 1.125rem;
-    line-height: 1.375rem;
-    letter-spacing: 0.02em;
-    font-weight: 600;
-
-    @media (${theme.breakpoints.smUp}) {
-      font-size: 1.25rem;
-      line-height: 1.5rem;
-    }
-  }
-
-  h5 {
-    font-size: 1rem;
-    line-height: 1.25rem;
-    letter-spacing: 0.02em;
-    font-weight: 600;
-  }
-
   .app-dialog-overlay {
     background-color: ${rgba(theme.colors.black, 0.5)} !important;
     // TODO: remove if performance suffers
@@ -201,7 +141,7 @@ export const GlobalStyle = createGlobalStyle`
         border-radius: initial !important;
         padding: initial !important;
 
-        @media (${theme.breakpoints.smUp}) {
+        ${media(">=tablet")} {
           min-width: auto;
         }
       }

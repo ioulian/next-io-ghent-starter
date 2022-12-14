@@ -14,10 +14,11 @@ declare module "styled-components" {
       familyHeadings: string;
     };
     breakpoints: {
-      xsUp: string;
-      smUp: string;
-      mdUp: string;
-      lgUp: string;
+      smallPhone: number;
+      phone: number;
+      tablet: number;
+      desktop: number;
+      largeDesktop: number;
     };
     container: {
       maxWidth: number;

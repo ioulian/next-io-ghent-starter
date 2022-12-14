@@ -20,6 +20,7 @@
     "@tabler/icons": "1.116.1",
     "body-scroll-lock": "4.0.0-beta.0",
     "colorjs.io": "0.4.2",
+    "css-in-js-media": "2.0.1",
     "easing-coordinates": "2.0.2",
     "i18next": "22.0.6",
     "i18next-browser-languagedetector": "7.0.1",

@@ -1,3 +1,4 @@
+import media from "css-in-js-media";
 import styled, { css } from "styled-components";
 
 export type HeadingType = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
@@ -15,7 +16,7 @@ export const StyledHeading = styled.div<{ $size?: HeadingSize }>`
           font-size: 1.625rem;
           line-height: 1.24;
 
-          @media (${({ theme }) => theme.breakpoints.mdUp}) {
+          ${media(">=tablet")} {
             font-size: 3rem;
           }
         `
@@ -24,7 +25,7 @@ export const StyledHeading = styled.div<{ $size?: HeadingSize }>`
           font-size: 1.75rem;
           line-height: 1.24;
 
-          @media (${({ theme }) => theme.breakpoints.mdUp}) {
+          ${media(">=tablet")} {
             font-size: 2.25rem;
           }
         `
@@ -33,7 +34,7 @@ export const StyledHeading = styled.div<{ $size?: HeadingSize }>`
           font-size: 1.5rem;
           line-height: 1.24;
 
-          @media (${({ theme }) => theme.breakpoints.mdUp}) {
+          ${media(">=tablet")} {
             font-size: 2rem;
           }
         `
@@ -42,7 +43,7 @@ export const StyledHeading = styled.div<{ $size?: HeadingSize }>`
           font-size: 1.25rem;
           line-height: 1.5;
 
-          @media (${({ theme }) => theme.breakpoints.mdUp}) {
+          ${media(">=tablet")} {
             font-size: 1.375rem;
           }
         `
@@ -51,7 +52,7 @@ export const StyledHeading = styled.div<{ $size?: HeadingSize }>`
           font-size: 1rem;
           line-height: 1.5;
 
-          @media (${({ theme }) => theme.breakpoints.mdUp}) {
+          ${media(">=tablet")} {
             font-size: 1.125rem;
           }
         `
@@ -60,7 +61,7 @@ export const StyledHeading = styled.div<{ $size?: HeadingSize }>`
           font-size: 0.875rem;
           line-height: 1.5;
 
-          @media (${({ theme }) => theme.breakpoints.mdUp}) {
+          ${media(">=tablet")} {
             font-size: 1rem;
           }
         `
@@ -69,7 +70,7 @@ export const StyledHeading = styled.div<{ $size?: HeadingSize }>`
           font-size: 0.75rem;
           line-height: 1.5;
 
-          @media (${({ theme }) => theme.breakpoints.mdUp}) {
+          ${media(">=tablet")} {
             font-size: 0.875rem;
           }
         `

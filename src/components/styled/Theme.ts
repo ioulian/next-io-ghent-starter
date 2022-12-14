@@ -22,10 +22,11 @@ export const theme: DefaultTheme = {
       sourceSansPro.style?.fontFamily ?? '"Source Sans Pro", sans-serif',
   },
   breakpoints: {
-    xsUp: "min-width: 481px",
-    smUp: "min-width: 769px",
-    mdUp: "min-width: 1025px",
-    lgUp: "min-width: 1201px",
+    smallPhone: 320,
+    phone: 375,
+    tablet: 768,
+    desktop: 1024,
+    largeDesktop: 1440,
   },
   container: {
     maxWidth: 1200,

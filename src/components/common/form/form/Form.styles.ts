@@ -1,3 +1,4 @@
+import media from "css-in-js-media";
 import styled from "styled-components";
 
 export const StyledForm = styled.form``;
@@ -8,7 +9,7 @@ export const StyledFormActions = styled.div`
   > * {
     width: 100%;
 
-    @media (${({ theme }) => theme.breakpoints.mdUp}) {
+    ${media(">=tablet")} {
       width: auto;
     }
   }
@@ -19,7 +20,7 @@ export const StyledFormRow = styled.div`
     margin-bottom: 1.25rem;
   }
 
-  @media (${({ theme }) => theme.breakpoints.mdUp}) {
+  ${media(">=tablet")} {
     display: flex;
     gap: 1.25rem;
 
