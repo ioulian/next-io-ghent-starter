@@ -62,8 +62,8 @@ const App = ({ Component, ...rest }: AppPropsWithLayout) => {
         ) : undefined}
         <DefaultSeo {...SEO} />
         <Normalize />
-        <GlobalStyle />
         <ThemeProvider theme={theme}>
+          <GlobalStyle />
           <SWRConfig
             value={{
               fetcher: getFetcher(),

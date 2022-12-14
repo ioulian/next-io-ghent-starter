@@ -96,10 +96,8 @@ export const TooltipContext = createContext<ContextType>(null);
 export const useTooltipState = () => {
   const context = useContext(TooltipContext);
 
-  if (process.env.NODE_ENV !== "production") {
-    if (context == null) {
-      throw new Error("Tooltip components must be wrapped in <Tooltip />");
-    }
+  if (context == null) {
+    throw new Error("Tooltip components must be wrapped in <Tooltip />");
   }
 
   return context;

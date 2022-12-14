@@ -2,11 +2,11 @@ import { rgba } from "polished";
 import { createGlobalStyle } from "styled-components";
 import media, { setBreakPoints } from "css-in-js-media";
 
-import { theme } from "./Theme";
-
-setBreakPoints(theme.breakpoints);
-
 export const GlobalStyle = createGlobalStyle`
+  ${({ theme }) => {
+    setBreakPoints(theme.breakpoints);
+    return "";
+  }}
   html,
   body {
     -webkit-overflow-scrolling: touch;
@@ -19,10 +19,10 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: ${theme.fonts.familyRegular};
+    font-family: ${({ theme }) => theme.fonts.familyRegular};
     font-size: 1rem;
     line-height: 1.25rem;
-    color: ${theme.colors.body};
+    color: ${({ theme }) => theme.colors.body};
     letter-spacing: 0.01em;
 
     ${media(">=tablet")} {
@@ -44,7 +44,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   a {
-    color: ${theme.colors.primary};
+    color: ${({ theme }) => theme.colors.primary};
 
     &:hover {
       text-decoration: none;
@@ -98,7 +98,8 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .app-dialog-overlay {
-    background-color: ${rgba(theme.colors.black, 0.5)} !important;
+    background-color: ${({ theme }) =>
+      rgba(theme.colors.black, 0.5)} !important;
     // TODO: remove if performance suffers
     backdrop-filter: blur(10px);
   }
@@ -110,7 +111,8 @@ export const GlobalStyle = createGlobalStyle`
 
     .ReactModal {
       &__Overlay {
-        background-color: ${rgba(theme.colors.black, 0.5)} !important;
+        background-color: ${({ theme }) =>
+          rgba(theme.colors.black, 0.5)} !important;
         overflow-y: auto;
         overflow-x: hidden;
         opacity: 0;

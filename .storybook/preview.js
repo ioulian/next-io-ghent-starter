@@ -25,9 +25,6 @@ import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 //   value: true,
 // });
 
-// Add theme support
-addDecorator(withThemesProvider([theme], ThemeProvider));
-
 // Global wrapper to apply Global style
 addDecorator((storyFn) => (
   <>
@@ -35,6 +32,9 @@ addDecorator((storyFn) => (
     {storyFn()}
   </>
 ));
+
+// Add theme support
+addDecorator(withThemesProvider([theme], ThemeProvider));
 
 export const parameters = {
   i18n,

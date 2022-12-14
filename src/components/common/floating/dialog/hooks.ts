@@ -71,13 +71,11 @@ type ContextType =
 
 export const DialogContext = createContext<ContextType>(null);
 
-export const useDialogState = () => {
+export const useDialogState = (): ContextType => {
   const context = useContext(DialogContext);
 
-  if (process.env.NODE_ENV !== "production") {
-    if (context == null) {
-      throw new Error("Dialog components must be wrapped in <Dialog />");
-    }
+  if (context == null) {
+    throw new Error("Dialog components must be wrapped in <Dialog />");
   }
 
   return context;
