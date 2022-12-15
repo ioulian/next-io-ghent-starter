@@ -70,6 +70,7 @@ If you want to use redux, but with SSG, you should remove HYDRATION from slices
 - Storybook
 - [Tabler icons](https://tabler-icons.io/) svg sprite
 - Common components preset
+- Accessibility in components (and also checks in Storybook)
 
 ## TODO
 

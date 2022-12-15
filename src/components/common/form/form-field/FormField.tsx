@@ -40,6 +40,11 @@ type RenderProps = (props: {
   field: ControllerRenderProps<FieldValues, FieldPath<FieldValues>>;
   fieldState: ControllerFieldState;
   formState: UseFormStateReturn<FieldValues>;
+  props: {
+    "aria-describedby"?: string;
+    "aria-invalid"?: "false" | "true";
+    id: string;
+  };
 }) => ReactElement;
 
 const FormField: FC<
@@ -87,6 +92,11 @@ const FormField: FC<
     ...options,
     ...(watchValidate?.(watch) ?? {}),
   });
+  const describedBy = getAriaDescribedBy(
+    name,
+    !!description,
+    !!errorForThisField
+  );
 
   return (
     <StyledFormField
@@ -108,7 +118,16 @@ const FormField: FC<
           <Controller
             control={control}
             {...{ name, options }}
-            render={children}
+            render={(args) => {
+              return children({
+                ...args,
+                props: {
+                  id: name,
+                  ...(describedBy && { "aria-describedby": describedBy }),
+                  ...(errorForThisField && { "aria-invalid": "true" }),
+                },
+              });
+            }}
           />
         </InputWrapper>
       ) : (
@@ -118,13 +137,9 @@ const FormField: FC<
               ? cloneElement(child as ReactElement<any>, {
                   ...child.props,
                   ...registerProps,
-                  "aria-describedby": getAriaDescribedBy(
-                    name,
-                    !!description,
-                    !!errorForThisField
-                  ),
                   name,
                   id: name,
+                  ...(describedBy && { "aria-describedby": describedBy }),
                   ...(errorForThisField && { "aria-invalid": "true" }),
                 })
               : null

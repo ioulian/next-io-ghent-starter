@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledVisuallyHidden = styled.div`
+export const StyledVisuallyHidden = styled.span`
   position: absolute !important;
   height: 1px;
   width: 1px;

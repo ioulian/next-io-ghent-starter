@@ -165,9 +165,11 @@ WithReactSelect.args = {
     ...required,
   },
   asFieldSet: true,
-  children: ({ field }) => (
+  children: ({ field, props: { id, ...props } }) => (
     <ReactSelect
       {...field}
+      {...props}
+      inputId={id}
       defaultValue={colourOptions[0]}
       className="react-select"
       classNamePrefix="react-select"
