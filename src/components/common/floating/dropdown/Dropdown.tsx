@@ -301,7 +301,7 @@ if (process.env.NODE_ENV !== "production") {
   DropdownMenu.displayName = "DropdownMenu";
 }
 
-export const Dropdown = forwardRef<
+const Dropdown = forwardRef<
   HTMLButtonElement,
   DropdownMenuProps & WithTypeAheadKey & HTMLProps<HTMLButtonElement>
 >((props, ref) => {
@@ -321,3 +321,5 @@ export const Dropdown = forwardRef<
 if (process.env.NODE_ENV !== "production") {
   Dropdown.displayName = "Dropdown";
 }
+
+export default Dropdown;

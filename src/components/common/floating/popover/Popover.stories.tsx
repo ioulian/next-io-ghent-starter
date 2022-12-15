@@ -4,14 +4,7 @@ import Button from "../../button/Button";
 import Heading from "../../heading/Heading";
 import Text from "../../text/Text";
 
-import {
-  Popover,
-  PopoverClose,
-  PopoverContent,
-  PopoverDescription,
-  PopoverHeading,
-  PopoverTrigger,
-} from "./Popover";
+import Popover from "./Popover";
 
 export default {
   title: "UI/Floating UI/Popover",
@@ -36,12 +29,12 @@ export const Uncontrolled = Template.bind({});
 Uncontrolled.args = {
   children: (
     <>
-      <PopoverTrigger>My trigger</PopoverTrigger>
-      <PopoverContent>
-        <PopoverHeading>My popover heading</PopoverHeading>
-        <PopoverDescription>My popover description</PopoverDescription>
-        <PopoverClose>Close</PopoverClose>
-      </PopoverContent>
+      <Popover.Trigger>My trigger</Popover.Trigger>
+      <Popover.Content>
+        <Popover.Heading>My popover heading</Popover.Heading>
+        <Popover.Description>My popover description</Popover.Description>
+        <Popover.Close>Close</Popover.Close>
+      </Popover.Content>
     </>
   ),
 };
@@ -51,12 +44,12 @@ Controlled.args = {
   open: true,
   children: (
     <>
-      <PopoverTrigger>My trigger</PopoverTrigger>
-      <PopoverContent>
-        <PopoverHeading>My popover heading</PopoverHeading>
-        <PopoverDescription>My popover description</PopoverDescription>
-        <PopoverClose>Close</PopoverClose>
-      </PopoverContent>
+      <Popover.Trigger>My trigger</Popover.Trigger>
+      <Popover.Content>
+        <Popover.Heading>My popover heading</Popover.Heading>
+        <Popover.Description>My popover description</Popover.Description>
+        <Popover.Close>Close</Popover.Close>
+      </Popover.Content>
     </>
   ),
 };
@@ -65,22 +58,22 @@ export const CustomElements = Template.bind({});
 CustomElements.args = {
   children: (
     <>
-      <PopoverTrigger>
+      <Popover.Trigger>
         <Button>My trigger</Button>
-      </PopoverTrigger>
-      <PopoverContent>
-        <PopoverHeading>
+      </Popover.Trigger>
+      <Popover.Content>
+        <Popover.Heading>
           <Heading>My popover heading</Heading>
-        </PopoverHeading>
-        <PopoverDescription>
+        </Popover.Heading>
+        <Popover.Description>
           <Text>
             <p>My popover description</p>
           </Text>
-        </PopoverDescription>
-        <PopoverClose>
+        </Popover.Description>
+        <Popover.Close>
           <Button>Close</Button>
-        </PopoverClose>
-      </PopoverContent>
+        </Popover.Close>
+      </Popover.Content>
     </>
   ),
 };
@@ -90,14 +83,14 @@ Placement.args = {
   placement: "right",
   children: (
     <>
-      <PopoverTrigger>
+      <Popover.Trigger>
         <Button>My trigger</Button>
-      </PopoverTrigger>
-      <PopoverContent>
-        <PopoverHeading>My popover heading</PopoverHeading>
-        <PopoverDescription>My popover description</PopoverDescription>
-        <PopoverClose>Close</PopoverClose>
-      </PopoverContent>
+      </Popover.Trigger>
+      <Popover.Content>
+        <Popover.Heading>My popover heading</Popover.Heading>
+        <Popover.Description>My popover description</Popover.Description>
+        <Popover.Close>Close</Popover.Close>
+      </Popover.Content>
     </>
   ),
 };

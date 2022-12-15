@@ -2,6 +2,7 @@ import { mergeRefs } from "react-merge-refs";
 import { FloatingPortal } from "@floating-ui/react-dom-interactions";
 import {
   cloneElement,
+  FC,
   forwardRef,
   HTMLProps,
   isValidElement,
@@ -18,23 +19,7 @@ import {
   useTooltipState,
 } from "./hooks";
 
-// Based on: https://floating-ui.com/docs/tooltip
-
-export const Tooltip = ({
-  children,
-  ...options
-}: { children: ReactNode } & TooltipOptions) => {
-  // This can accept any props as options, e.g. `placement`,
-  // or other positioning options.
-  const tooltip = useTooltip(options);
-  return (
-    <TooltipContext.Provider value={tooltip}>
-      {children}
-    </TooltipContext.Provider>
-  );
-};
-
-export const TooltipTrigger = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
+const TooltipTrigger = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
   function TooltipTrigger({ children, ...props }, propRef) {
     const state = useTooltipState();
 
@@ -69,30 +54,49 @@ export const TooltipTrigger = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
   }
 );
 
-export const TooltipContent = forwardRef<
-  HTMLDivElement,
-  HTMLProps<HTMLDivElement>
->(function TooltipContent(props, propRef) {
-  const state = useTooltipState();
+const TooltipContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
+  function TooltipContent(props, propRef) {
+    const state = useTooltipState();
 
-  const ref = useMemo(
-    () => mergeRefs([state.floating, propRef]),
-    [state.floating, propRef]
-  );
+    const ref = useMemo(
+      () => mergeRefs([state.floating, propRef]),
+      [state.floating, propRef]
+    );
 
+    return (
+      <FloatingPortal>
+        {state.open && (
+          <Floater
+            ref={ref}
+            position={{ x: state.x, y: state.y }}
+            arrowPosition={state.middlewareData.arrow}
+            strategy={state.strategy}
+            placement={state.placement}
+            arrowCallback={state.arrowCallback}
+            {...state.getFloatingProps(props)}
+          />
+        )}
+      </FloatingPortal>
+    );
+  }
+);
+
+// Based on: https://floating-ui.com/docs/tooltip
+const Tooltip: FC<{ children: ReactNode } & TooltipOptions> & {
+  Trigger: typeof TooltipTrigger;
+  Content: typeof TooltipContent;
+} = ({ children, ...options }) => {
+  // This can accept any props as options, e.g. `placement`,
+  // or other positioning options.
+  const tooltip = useTooltip(options);
   return (
-    <FloatingPortal>
-      {state.open && (
-        <Floater
-          ref={ref}
-          position={{ x: state.x, y: state.y }}
-          arrowPosition={state.middlewareData.arrow}
-          strategy={state.strategy}
-          placement={state.placement}
-          arrowCallback={state.arrowCallback}
-          {...state.getFloatingProps(props)}
-        />
-      )}
-    </FloatingPortal>
+    <TooltipContext.Provider value={tooltip}>
+      {children}
+    </TooltipContext.Provider>
   );
-});
+};
+
+Tooltip.Trigger = TooltipTrigger;
+Tooltip.Content = TooltipContent;
+
+export default Tooltip;

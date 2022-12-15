@@ -1,8 +1,8 @@
 import { addDecorator } from "@storybook/react";
 import { withThemesProvider } from "storybook-addon-styled-component-theme";
 import { ThemeProvider } from "styled-components";
-import { theme } from "./../src/components/styled/Theme";
-import { GlobalStyle } from "./../src/components/styled/GlobalStyles";
+import theme from "./../src/components/styled/Theme";
+import GlobalStyle from "./../src/components/styled/GlobalStyles";
 import i18n from "./i18next.js";
 import { RouterContext } from "next/dist/shared/lib/router-context";
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";

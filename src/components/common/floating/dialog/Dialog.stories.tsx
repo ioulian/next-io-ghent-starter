@@ -4,14 +4,7 @@ import Button from "../../button/Button";
 import Heading from "../../heading/Heading";
 import Text from "../../text/Text";
 
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogHeading,
-  DialogTrigger,
-} from "./Dialog";
+import Dialog from "./Dialog";
 
 export default {
   title: "UI/Floating UI/Dialog",
@@ -36,12 +29,12 @@ export const Uncontrolled = Template.bind({});
 Uncontrolled.args = {
   children: (
     <>
-      <DialogTrigger>My trigger</DialogTrigger>
-      <DialogContent>
-        <DialogHeading>My dialog heading</DialogHeading>
-        <DialogDescription>My dialog description</DialogDescription>
-        <DialogClose>Close</DialogClose>
-      </DialogContent>
+      <Dialog.Trigger>My trigger</Dialog.Trigger>
+      <Dialog.Content>
+        <Dialog.Heading>My dialog heading</Dialog.Heading>
+        <Dialog.Description>My dialog description</Dialog.Description>
+        <Dialog.Close>Close</Dialog.Close>
+      </Dialog.Content>
     </>
   ),
 };
@@ -51,12 +44,12 @@ Controlled.args = {
   open: true,
   children: (
     <>
-      <DialogTrigger>My trigger</DialogTrigger>
-      <DialogContent>
-        <DialogHeading>My dialog heading</DialogHeading>
-        <DialogDescription>My dialog description</DialogDescription>
-        <DialogClose>Close</DialogClose>
-      </DialogContent>
+      <Dialog.Trigger>My trigger</Dialog.Trigger>
+      <Dialog.Content>
+        <Dialog.Heading>My dialog heading</Dialog.Heading>
+        <Dialog.Description>My dialog description</Dialog.Description>
+        <Dialog.Close>Close</Dialog.Close>
+      </Dialog.Content>
     </>
   ),
 };
@@ -65,22 +58,22 @@ export const CustomElements = Template.bind({});
 CustomElements.args = {
   children: (
     <>
-      <DialogTrigger>
+      <Dialog.Trigger>
         <Button>My trigger</Button>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeading>
+      </Dialog.Trigger>
+      <Dialog.Content>
+        <Dialog.Heading>
           <Heading>My popover heading</Heading>
-        </DialogHeading>
-        <DialogDescription>
+        </Dialog.Heading>
+        <Dialog.Description>
           <Text>
             <p>My popover description</p>
           </Text>
-        </DialogDescription>
-        <DialogClose>
+        </Dialog.Description>
+        <Dialog.Close>
           <Button>Close</Button>
-        </DialogClose>
-      </DialogContent>
+        </Dialog.Close>
+      </Dialog.Content>
     </>
   ),
 };

@@ -6,6 +6,7 @@ import {
 } from "@floating-ui/react-dom-interactions";
 import {
   cloneElement,
+  FC,
   forwardRef,
   HTMLProps,
   isValidElement,
@@ -23,26 +24,7 @@ import {
   usePopoverState,
 } from "./hooks";
 
-// Based on: https://floating-ui.com/docs/popover
-
-export function Popover({
-  children,
-  modal = false,
-  ...restOptions
-}: {
-  children: ReactNode;
-} & PopoverOptions) {
-  // This can accept any props as options, e.g. `placement`,
-  // or other positioning options.
-  const popover = usePopover({ modal, ...restOptions });
-  return (
-    <PopoverContext.Provider value={popover}>
-      {children}
-    </PopoverContext.Provider>
-  );
-}
-
-export const PopoverTrigger = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
+const PopoverTrigger = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
   function PopoverTrigger({ children, ...props }, propRef) {
     const state = usePopoverState();
     const childrenRef = (children as any).ref;
@@ -77,41 +59,40 @@ export const PopoverTrigger = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
   }
 );
 
-export const PopoverContent = forwardRef<
-  HTMLDivElement,
-  HTMLProps<HTMLDivElement>
->(function PopoverContent(props, propRef) {
-  const state = usePopoverState();
+const PopoverContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
+  function PopoverContent(props, propRef) {
+    const state = usePopoverState();
 
-  const ref = useMemo(
-    () => mergeRefs([state.floating, propRef]),
-    [state.floating, propRef]
-  );
+    const ref = useMemo(
+      () => mergeRefs([state.floating, propRef]),
+      [state.floating, propRef]
+    );
 
-  return (
-    <FloatingPortal>
-      {state.open && (
-        <FloatingFocusManager context={state.context} modal={state.modal}>
-          <Floater
-            ref={ref}
-            position={{ x: state.x, y: state.y }}
-            arrowPosition={state.middlewareData.arrow}
-            strategy={state.strategy}
-            placement={state.placement}
-            arrowCallback={state.arrowCallback}
-            aria-labelledby={state.labelId}
-            aria-describedby={state.descriptionId}
-            {...state.getFloatingProps(props)}
-          >
-            {props.children}
-          </Floater>
-        </FloatingFocusManager>
-      )}
-    </FloatingPortal>
-  );
-});
+    return (
+      <FloatingPortal>
+        {state.open && (
+          <FloatingFocusManager context={state.context} modal={state.modal}>
+            <Floater
+              ref={ref}
+              position={{ x: state.x, y: state.y }}
+              arrowPosition={state.middlewareData.arrow}
+              strategy={state.strategy}
+              placement={state.placement}
+              arrowCallback={state.arrowCallback}
+              aria-labelledby={state.labelId}
+              aria-describedby={state.descriptionId}
+              {...state.getFloatingProps(props)}
+            >
+              {props.children}
+            </Floater>
+          </FloatingFocusManager>
+        )}
+      </FloatingPortal>
+    );
+  }
+);
 
-export const PopoverHeading = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
+const PopoverHeading = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
   function PopoverHeading({ children, ...props }, ref) {
     const { setLabelId } = usePopoverState();
     const id = useId();
@@ -144,41 +125,40 @@ export const PopoverHeading = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
   }
 );
 
-export const PopoverDescription = forwardRef<
-  HTMLElement,
-  HTMLProps<HTMLElement>
->(function PopoverDescription({ children, ...props }, ref) {
-  const { setDescriptionId } = usePopoverState();
-  const id = useId();
+const PopoverDescription = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
+  function PopoverDescription({ children, ...props }, ref) {
+    const { setDescriptionId } = usePopoverState();
+    const id = useId();
 
-  // Only sets `aria-describedby` on the Popover root element
-  // if this component is mounted inside it.
-  useLayoutEffect(() => {
-    setDescriptionId(id);
-    return () => setDescriptionId(undefined);
-  }, [id, setDescriptionId]);
+    // Only sets `aria-describedby` on the Popover root element
+    // if this component is mounted inside it.
+    useLayoutEffect(() => {
+      setDescriptionId(id);
+      return () => setDescriptionId(undefined);
+    }, [id, setDescriptionId]);
 
-  if (isValidElement(children)) {
-    return cloneElement(children, {
-      ref,
-      id,
-      ...props,
-    });
+    if (isValidElement(children)) {
+      return cloneElement(children, {
+        ref,
+        id,
+        ...props,
+      });
+    }
+
+    return (
+      <p
+        {...props}
+        // @ts-ignore
+        ref={ref}
+        id={id}
+      >
+        {children}
+      </p>
+    );
   }
+);
 
-  return (
-    <p
-      {...props}
-      // @ts-ignore
-      ref={ref}
-      id={id}
-    >
-      {children}
-    </p>
-  );
-});
-
-export const PopoverClose = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
+const PopoverClose = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
   function PopoverClose({ children, ...props }, ref) {
     const state = usePopoverState();
 
@@ -202,3 +182,33 @@ export const PopoverClose = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
     );
   }
 );
+
+// Based on: https://floating-ui.com/docs/popover
+const Popover: FC<
+  {
+    children: ReactNode;
+  } & PopoverOptions
+> & {
+  Trigger: typeof PopoverTrigger;
+  Close: typeof PopoverClose;
+  Content: typeof PopoverContent;
+  Heading: typeof PopoverHeading;
+  Description: typeof PopoverDescription;
+} = ({ children, modal = false, ...restOptions }) => {
+  // This can accept any props as options, e.g. `placement`,
+  // or other positioning options.
+  const popover = usePopover({ modal, ...restOptions });
+  return (
+    <PopoverContext.Provider value={popover}>
+      {children}
+    </PopoverContext.Provider>
+  );
+};
+
+Popover.Trigger = PopoverTrigger;
+Popover.Close = PopoverClose;
+Popover.Content = PopoverContent;
+Popover.Heading = PopoverHeading;
+Popover.Description = PopoverDescription;
+
+export default Popover;

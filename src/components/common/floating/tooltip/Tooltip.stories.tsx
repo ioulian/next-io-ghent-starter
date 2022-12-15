@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import Button from "../../button/Button";
 
-import { Tooltip, TooltipContent, TooltipTrigger } from "./Tooltip";
+import Tooltip from "./Tooltip";
 
 export default {
   title: "UI/Floating UI/Tooltip",
@@ -27,8 +27,8 @@ export const Uncontrolled = Template.bind({});
 Uncontrolled.args = {
   children: (
     <>
-      <TooltipTrigger>My trigger</TooltipTrigger>
-      <TooltipContent>My tooltip</TooltipContent>
+      <Tooltip.Trigger>My trigger</Tooltip.Trigger>
+      <Tooltip.Content>My tooltip</Tooltip.Content>
     </>
   ),
 };
@@ -38,8 +38,8 @@ Controlled.args = {
   open: true,
   children: (
     <>
-      <TooltipTrigger>My trigger</TooltipTrigger>
-      <TooltipContent>My tooltip</TooltipContent>
+      <Tooltip.Trigger>My trigger</Tooltip.Trigger>
+      <Tooltip.Content>My tooltip</Tooltip.Content>
     </>
   ),
 };
@@ -48,10 +48,10 @@ export const CustomElements = Template.bind({});
 CustomElements.args = {
   children: (
     <>
-      <TooltipTrigger>
+      <Tooltip.Trigger>
         <Button>My trigger</Button>
-      </TooltipTrigger>
-      <TooltipContent>My tooltip</TooltipContent>
+      </Tooltip.Trigger>
+      <Tooltip.Content>My tooltip</Tooltip.Content>
     </>
   ),
 };
@@ -61,10 +61,10 @@ Placement.args = {
   placement: "right",
   children: (
     <>
-      <TooltipTrigger>
+      <Tooltip.Trigger>
         <Button>My trigger</Button>
-      </TooltipTrigger>
-      <TooltipContent>My tooltip</TooltipContent>
+      </Tooltip.Trigger>
+      <Tooltip.Content>My tooltip</Tooltip.Content>
     </>
   ),
 };

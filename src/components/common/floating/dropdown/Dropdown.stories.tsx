@@ -4,7 +4,7 @@ import iconChevron from "@tabler/icons/chevron-right.svg";
 import Button from "../../button/Button";
 import SvgSprite from "../../svg/SvgSprite";
 
-import { Dropdown, DropdownMenuItem } from "./Dropdown";
+import Dropdown, { DropdownMenuItem } from "./Dropdown";
 
 export default {
   title: "UI/Floating UI/Dropdown",
