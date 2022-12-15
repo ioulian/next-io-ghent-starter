@@ -2,7 +2,7 @@ import { FC } from "react";
 
 import { ApiError } from "@/types/error";
 
-export const hasValidationErrors = (propertyPath: string, error?: ApiError) => {
+const hasValidationErrors = (propertyPath: string, error?: ApiError) => {
   if (!error || !error.violations) {
     return false;
   }
@@ -18,7 +18,7 @@ export const hasValidationErrors = (propertyPath: string, error?: ApiError) => {
   return true;
 };
 
-export const ApiFormFieldError: FC<{
+const ApiFormFieldError: FC<{
   error?: ApiError;
   propertyPath: string;
 }> = ({ error, propertyPath }) => {
@@ -34,3 +34,5 @@ export const ApiFormFieldError: FC<{
     </>
   );
 };
+
+export default ApiFormFieldError;

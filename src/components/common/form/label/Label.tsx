@@ -5,7 +5,7 @@ import { InferComponentProps } from "@/types/styled";
 
 import { StyledLabel } from "./Label.styles";
 
-export const Label: FC<
+const Label: FC<
   {
     as?: keyof JSX.IntrinsicElements;
     required?: boolean;
@@ -19,3 +19,5 @@ export const Label: FC<
     </StyledLabel>
   );
 };
+
+export default Label;

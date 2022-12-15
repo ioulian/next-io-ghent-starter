@@ -8,7 +8,7 @@ const sourceSansPro = Source_Sans_Pro({
 });
 
 // Use types
-export const theme: DefaultTheme = {
+const theme: DefaultTheme = {
   name: "Default",
   colors: {
     white: "#fff",
@@ -91,3 +91,5 @@ export const theme: DefaultTheme = {
     },
   },
 };
+
+export default theme;

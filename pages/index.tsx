@@ -15,9 +15,10 @@ import logo from "@/img/logo.png";
 import logoSvg from "@/img/logo.svg";
 import logoSvgSprite from "@/img/logo-sprite.svg";
 import { Counter } from "@/features/counter/Counter";
-import { SvgSprite } from "@/components/common/svg/SvgSprite";
+import SvgSprite from "@/components/common/svg/SvgSprite";
 import { requireTranslations } from "@/services/translation.service";
 import { requireAnonymous } from "@/features/auth/utilities";
+import Heading from "@/components/common/heading/Heading";
 
 import { wrapper } from "../src/store/store";
 
@@ -58,7 +59,7 @@ const Home: NextPageWithLayout = ({}: InferGetStaticPropsType<
               title=".svg image"
             />
           </div>
-          <h1>{t("title")}</h1>
+          <Heading>{t("title")}</Heading>
 
           <nav>
             <SvgSprite

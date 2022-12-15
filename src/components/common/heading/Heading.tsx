@@ -4,7 +4,7 @@ import { InferComponentProps } from "@/types/styled";
 
 import { HeadingSize, HeadingType, StyledHeading } from "./Heading.styles";
 
-export const Heading: FC<
+const Heading: FC<
   {
     type?: HeadingType;
     size?: HeadingSize;
@@ -23,3 +23,5 @@ export const Heading: FC<
     </StyledHeading>
   );
 };
+
+export default Heading;

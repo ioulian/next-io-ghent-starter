@@ -2,12 +2,12 @@ import { forwardRef } from "react";
 
 import { InferComponentProps } from "@/types/styled";
 
-import { Label } from "../../label/Label";
+import Label from "../../label/Label";
 
 import { StyledInput } from "./../../input/Input.styles";
 import { StyledCheckbox } from "./Checkbox.styles";
 
-export const Checkbox = forwardRef<
+const Checkbox = forwardRef<
   HTMLInputElement,
   { inputValue: string } & InferComponentProps<typeof StyledInput>
 >(
@@ -39,4 +39,8 @@ export const Checkbox = forwardRef<
   }
 );
 
-Checkbox.displayName = "Checkbox";
+if (process.env.NODE_ENV !== "production") {
+  Checkbox.displayName = "Checkbox";
+}
+
+export default Checkbox;

@@ -69,6 +69,7 @@ If you want to use redux, but with SSG, you should remove HYDRATION from slices
 - Next13 Font optimisation
 - Storybook
 - [Tabler icons](https://tabler-icons.io/) svg sprite
+- Common components preset
 
 ## TODO
 
@@ -76,3 +77,7 @@ If you want to use redux, but with SSG, you should remove HYDRATION from slices
 - find a good PWA generator
 - add .env checker
 - Check code structure <https://github.com/yannvr/react-components-cli>
+
+## Component export convention
+
+We use `export default` in an component, see discussion here: <https://esdiscuss.org/topic/moduleimport>

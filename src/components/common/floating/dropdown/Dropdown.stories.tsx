@@ -1,8 +1,8 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import iconChevron from "@tabler/icons/chevron-right.svg";
 
-import { Button } from "../../button/Button";
-import { SvgSprite } from "../../svg/SvgSprite";
+import Button from "../../button/Button";
+import SvgSprite from "../../svg/SvgSprite";
 
 import { Dropdown, DropdownMenuItem } from "./Dropdown";
 

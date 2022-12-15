@@ -8,7 +8,7 @@ import {
   StyledSpinnerLabel,
 } from "./Spinner.styles";
 
-export const Spinner: FC<
+const Spinner: FC<
   {
     label?: ReactNode;
     primaryColor?: string;
@@ -30,3 +30,5 @@ export const Spinner: FC<
     {label && <StyledSpinnerLabel>{label}</StyledSpinnerLabel>}
   </StyledSpinner>
 );
+
+export default Spinner;

@@ -11,11 +11,11 @@ import { DefaultSeo } from "next-seo";
 import { Provider } from "react-redux";
 import { NextPage } from "next";
 
-import { GlobalStyle } from "@/styles/GlobalStyles";
+import GlobalStyle from "@/styles/GlobalStyles";
 import { PageFavicons, PageViewport } from "@/lib/page-head";
 import { GTM_ID, sendPageView } from "@/lib/gtm";
 import { getFetcher } from "@/services/api.service";
-import { theme } from "@/components/styled/Theme";
+import theme from "@/components/styled/Theme";
 
 import { wrapper } from "../src/store/store";
 import SEO from "../next-seo.config";

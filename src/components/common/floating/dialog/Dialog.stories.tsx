@@ -1,8 +1,8 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { Button } from "../../button/Button";
-import { Heading } from "../../heading/Heading";
-import { Text } from "../../text/Text";
+import Button from "../../button/Button";
+import Heading from "../../heading/Heading";
+import Text from "../../text/Text";
 
 import {
   Dialog,

@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Tab, TabList, TabPanel } from "react-tabs";
 
-import { Tabs } from "./Tabs";
+import Tabs from "./Tabs";
 
 export default {
   title: "UI/Tabs",

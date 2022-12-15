@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { Expandable } from "./Expandable";
+import Expandable from "./Expandable";
 
 export default {
   title: "UI/Expandable",

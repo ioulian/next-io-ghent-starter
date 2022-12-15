@@ -4,11 +4,11 @@ import iconClose from "@tabler/icons/x.svg";
 
 import { InferComponentProps } from "@/types/styled";
 
-import { SvgSprite } from "../../svg/SvgSprite";
+import SvgSprite from "../../svg/SvgSprite";
 
 import { StyledOverlayCloseButton } from "./OverlayCloseButton.styles";
 
-export const OverlayCloseButton: FC<
+const OverlayCloseButton: FC<
   InferComponentProps<typeof StyledOverlayCloseButton>
 > = ({ ...props }) => {
   const { t } = useTranslation("common");
@@ -22,3 +22,5 @@ export const OverlayCloseButton: FC<
     </StyledOverlayCloseButton>
   );
 };
+
+export default OverlayCloseButton;

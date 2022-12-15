@@ -80,7 +80,9 @@ export const DropdownMenuItem = forwardRef<
   return makeMenuItem(children, props, ref);
 });
 
-DropdownMenuItem.displayName = "DropdownMenuItem";
+if (process.env.NODE_ENV !== "production") {
+  DropdownMenuItem.displayName = "DropdownMenuItem";
+}
 
 const DropdownMenu = forwardRef<
   HTMLButtonElement,
@@ -295,7 +297,9 @@ const DropdownMenu = forwardRef<
   );
 });
 
-DropdownMenu.displayName = "DropdownMenu";
+if (process.env.NODE_ENV !== "production") {
+  DropdownMenu.displayName = "DropdownMenu";
+}
 
 export const Dropdown = forwardRef<
   HTMLButtonElement,
@@ -314,4 +318,6 @@ export const Dropdown = forwardRef<
   return <DropdownMenu {...props} ref={ref} />;
 });
 
-Dropdown.displayName = "Dropdown";
+if (process.env.NODE_ENV !== "production") {
+  Dropdown.displayName = "Dropdown";
+}

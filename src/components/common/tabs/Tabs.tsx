@@ -5,7 +5,7 @@ import { InferComponentProps } from "@/types/styled";
 
 import { StyledTabs } from "./Tabs.styles";
 
-export const Tabs: FC<InferComponentProps<typeof ReactTabs>> = ({
+const Tabs: FC<InferComponentProps<typeof ReactTabs>> = ({
   children,
   ...props
 }) => {
@@ -15,3 +15,5 @@ export const Tabs: FC<InferComponentProps<typeof ReactTabs>> = ({
     </StyledTabs>
   );
 };
+
+export default Tabs;

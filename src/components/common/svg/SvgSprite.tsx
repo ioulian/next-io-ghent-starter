@@ -1,6 +1,6 @@
 import { FC, HTMLProps, useId } from "react";
 
-export const SvgSprite: FC<{ src: any } & HTMLProps<SVGElement>> = ({
+const SvgSprite: FC<{ src: any } & HTMLProps<SVGElement>> = ({
   src,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   children,
@@ -29,3 +29,5 @@ export const SvgSprite: FC<{ src: any } & HTMLProps<SVGElement>> = ({
     </svg>
   );
 };
+
+export default SvgSprite;

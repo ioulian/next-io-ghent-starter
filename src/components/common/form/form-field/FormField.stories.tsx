@@ -2,17 +2,17 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import ReactSelect from "react-select";
 
 import { email, required } from "../rules";
-import { Form } from "../form/Form";
-import { Select } from "../select/Select";
-import { TextArea } from "../textarea/TextArea";
-import { SingleCheckbox } from "../single-checkbox/SingleCheckbox";
-import { Radio } from "../collection/radio/Radio";
-import { List } from "../collection/List";
-import { Checkbox } from "../collection/checkbox/Checkbox";
+import Form from "../form/Form";
+import Select from "../select/Select";
+import TextArea from "../textarea/TextArea";
+import SingleCheckbox from "../single-checkbox/SingleCheckbox";
+import Radio from "../collection/radio/Radio";
+import List from "../collection/List";
+import Checkbox from "../collection/checkbox/Checkbox";
 import { StyledReactSelect } from "../react-select/ReactSelect.styles";
 
-import { Input } from "./../input/Input";
-import { FormField } from "./FormField";
+import Input from "./../input/Input";
+import FormField from "./FormField";
 
 const ExampleApiError = {
   type: "https://tools.ietf.org/html/rfc2616#section-10",

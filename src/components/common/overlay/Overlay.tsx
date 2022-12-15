@@ -3,12 +3,12 @@ import Modal from "react-modal";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import { useTheme } from "styled-components";
 
-import { OverlayCloseButton } from "./close-button/OverlayCloseButton";
+import OverlayCloseButton from "./close-button/OverlayCloseButton";
 import { StyledOverlayContainer } from "./Overlay.styles";
 
 Modal.setAppElement("#__next");
 
-export const Overlay: FC<{
+const Overlay: FC<{
   isOpen: boolean;
   title: string;
   onClose?: () => void;
@@ -55,3 +55,5 @@ export const Overlay: FC<{
     </>
   );
 };
+
+export default Overlay;

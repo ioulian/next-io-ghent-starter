@@ -4,13 +4,13 @@ import { FormProvider, useForm } from "react-hook-form";
 import { ApiError } from "@/types/error";
 import { InferComponentProps } from "@/types/styled";
 
-import { ApiFormError } from "../ApiFormError";
+import ApiFormError from "../ApiFormError";
 
 import { StyledForm } from "./Form.styles";
 
 export const BE_VALIDATION: string = "BE";
 
-export const Form = forwardRef<
+const Form = forwardRef<
   HTMLFormElement,
   {
     error?: ApiError;
@@ -91,4 +91,8 @@ export const Form = forwardRef<
   }
 );
 
-Form.displayName = "Form";
+if (process.env.NODE_ENV !== "production") {
+  Form.displayName = "Form";
+}
+
+export default Form;

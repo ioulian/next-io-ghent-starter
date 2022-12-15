@@ -5,7 +5,7 @@ import { InferComponentProps } from "@/types/styled";
 
 import { StyledSelect } from "./Select.styles";
 
-export const Select = forwardRef<
+const Select = forwardRef<
   HTMLSelectElement,
   {
     addEmptyOption?: boolean;
@@ -23,4 +23,8 @@ export const Select = forwardRef<
   );
 });
 
-Select.displayName = "Select";
+if (process.env.NODE_ENV !== "production") {
+  Select.displayName = "Select";
+}
+
+export default Select;

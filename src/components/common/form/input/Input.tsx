@@ -4,11 +4,15 @@ import { InferComponentProps } from "@/types/styled";
 
 import { StyledInput } from "./Input.styles";
 
-export const Input = forwardRef<
+const Input = forwardRef<
   HTMLInputElement,
   InferComponentProps<typeof StyledInput>
 >(({ ...props }, ref) => {
   return <StyledInput {...props} ref={ref} />;
 });
 
-Input.displayName = "Input";
+if (process.env.NODE_ENV !== "production") {
+  Input.displayName = "Input";
+}
+
+export default Input;

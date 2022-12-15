@@ -8,12 +8,12 @@ import {
 
 import { InferComponentProps } from "@/types/styled";
 
-import { Spinner } from "../spinner/Spinner";
-import { VisuallyHidden } from "../visually-hidden/VisuallyHidden";
+import Spinner from "../spinner/Spinner";
+import VisuallyHidden from "../visually-hidden/VisuallyHidden";
 
 import { StyledButton } from "./Button.styles";
 
-export const Button = forwardRef<
+const Button = forwardRef<
   HTMLButtonElement,
   {
     as?: keyof JSX.IntrinsicElements;
@@ -76,4 +76,8 @@ export const Button = forwardRef<
   }
 );
 
-Button.displayName = "Button";
+if (process.env.NODE_ENV !== "production") {
+  Button.displayName = "Button";
+}
+
+export default Button;

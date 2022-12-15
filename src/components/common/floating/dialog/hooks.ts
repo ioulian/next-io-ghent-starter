@@ -71,7 +71,7 @@ type ContextType =
 
 export const DialogContext = createContext<ContextType>(null);
 
-export const useDialogState = (): ContextType => {
+export const useDialogState = () => {
   const context = useContext(DialogContext);
 
   if (context == null) {

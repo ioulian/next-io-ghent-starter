@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { Label } from "./Label";
+import Label from "./Label";
 
 export default {
   title: "UI/Form/Label",

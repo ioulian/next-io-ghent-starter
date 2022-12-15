@@ -2,12 +2,12 @@ import { forwardRef } from "react";
 
 import { InferComponentProps } from "@/types/styled";
 
-import { Label } from "../../label/Label";
+import Label from "../../label/Label";
 
 import { StyledInput } from "./../../input/Input.styles";
 import { StyledRadio } from "./Radio.styles";
 
-export const Radio = forwardRef<
+const Radio = forwardRef<
   HTMLInputElement,
   { inputValue: string } & InferComponentProps<typeof StyledInput>
 >(
@@ -39,4 +39,8 @@ export const Radio = forwardRef<
   }
 );
 
-Radio.displayName = "Radio";
+if (process.env.NODE_ENV !== "production") {
+  Radio.displayName = "Radio";
+}
+
+export default Radio;

@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { Button } from "../../button/Button";
+import Button from "../../button/Button";
 
 import { Tooltip, TooltipContent, TooltipTrigger } from "./Tooltip";
 

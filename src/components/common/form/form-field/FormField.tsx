@@ -24,9 +24,9 @@ import { useTranslation } from "react-i18next";
 
 import { InferComponentProps } from "@/types/styled";
 
-import { Description } from "../description/Description";
-import { Error } from "../error/Error";
-import { Label } from "../label/Label";
+import Description from "../description/Description";
+import Error from "../error/Error";
+import Label from "../label/Label";
 import { getAriaDescribedBy, getDescriptionId, getErrorId } from "../utils";
 import { BE_VALIDATION } from "../form/Form";
 
@@ -42,7 +42,7 @@ type RenderProps = (props: {
   formState: UseFormStateReturn<FieldValues>;
 }) => ReactElement;
 
-export const FormField: FC<
+const FormField: FC<
   {
     asFieldSet?: boolean;
     options?: RegisterOptions<FieldValues, FieldPath<FieldValues>>;
@@ -147,3 +147,5 @@ export const FormField: FC<
     </StyledFormField>
   );
 };
+
+export default FormField;

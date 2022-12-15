@@ -3,14 +3,12 @@ import iconChevronRight from "@tabler/icons/chevron-right.svg";
 import iconChevronLeft from "@tabler/icons/chevron-left.svg";
 import iconSettings from "@tabler/icons/settings.svg";
 
-import { Button } from "./Button";
-import { Spinner } from "./../spinner/Spinner";
-import { SvgSprite } from "./../svg/SvgSprite";
+import Button from "./Button";
+import SvgSprite from "./../svg/SvgSprite";
 
 export default {
   title: "UI/Buttons/Button",
   component: Button,
-  subcomponents: { SvgSprite, Spinner },
 } as ComponentMeta<typeof Button>;
 
 const Template: ComponentStory<typeof Button> = ({ ...args }) => (

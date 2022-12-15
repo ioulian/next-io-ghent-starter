@@ -2,7 +2,7 @@ import { rgba } from "polished";
 import { createGlobalStyle } from "styled-components";
 import media, { setBreakPoints } from "css-in-js-media";
 
-export const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle`
   ${({ theme }) => {
     setBreakPoints(theme.breakpoints);
     return "";
@@ -150,3 +150,5 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
 `;
+
+export default GlobalStyle;
