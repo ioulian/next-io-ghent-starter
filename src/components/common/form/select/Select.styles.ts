@@ -17,4 +17,7 @@ export const StyledSelect = styled.select`
   padding-right: 3rem;
   appearance: none;
   height: 2.75rem;
+  line-height: 1.5rem;
+  padding: 9px 17px;
+  font-size: 1rem;
 `;
