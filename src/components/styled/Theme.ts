@@ -78,8 +78,8 @@ const theme: DefaultTheme = {
     },
     checkbox: {
       checked: {
-        border: "#b30000",
-        background: "#b30000",
+        border: "#f38a5d",
+        background: "#f38a5d",
         color: "#fff",
       },
     },
