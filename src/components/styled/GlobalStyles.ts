@@ -36,6 +36,14 @@ const GlobalStyle = createGlobalStyle`
     margin-bottom: 0;
   }
 
+  hr {
+    width: 100%;
+    height: 1px;
+    border: 0;
+    background-color: currentColor;
+    margin: 0;
+  }
+
   ul {
     margin-top: 0;
     margin-bottom: 0;
