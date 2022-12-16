@@ -55,16 +55,3 @@ CustomElements.args = {
     </>
   ),
 };
-
-export const Placement = Template.bind({});
-Placement.args = {
-  placement: "right",
-  children: (
-    <>
-      <Tooltip.Trigger>
-        <Button>My trigger</Button>
-      </Tooltip.Trigger>
-      <Tooltip.Content>My tooltip</Tooltip.Content>
-    </>
-  ),
-};
