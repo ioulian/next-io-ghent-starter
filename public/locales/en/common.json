@@ -23,5 +23,13 @@
       "password": "Password is not strong enough",
       "passwordMatch": "Passwords do not match"
     }
+  },
+  "languageSwitcher": {
+    "current": "Selected language: {{ locale }}",
+    "locales": {
+      "nl": "Dutch",
+      "fr": "French",
+      "en": "English"
+    }
   }
 }
