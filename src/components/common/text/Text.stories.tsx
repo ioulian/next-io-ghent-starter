@@ -1,22 +1,23 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import Text from "./Text";
 
-export default {
+const meta: Meta<typeof Text> = {
   title: "UI/Typography/Text",
   component: Text,
-} as ComponentMeta<typeof Text>;
+  tags: ["autodocs"],
+};
 
-const Template: ComponentStory<typeof Text> = ({ ...args }) => (
-  <Text {...args} />
-);
+export default meta;
+type Story = StoryObj<typeof Text>;
 
-export const Default = Template.bind({});
-Default.args = {
-  children: (
-    <>
-      <p>Paragraph 1</p>
-      <p>Paragraph 2</p>
-    </>
-  ),
+export const Default: Story = {
+  args: {
+    children: (
+      <>
+        <p>Paragraph 1</p>
+        <p>Paragraph 2</p>
+      </>
+    ),
+  },
 };

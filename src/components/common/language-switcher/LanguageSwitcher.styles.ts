@@ -7,9 +7,12 @@ export const StyledLanguageSwitcher = styled.div`
     position: relative;
     overflow: hidden;
     display: flex;
+    gap: 0.25rem;
 
     > li {
       > a {
+        text-decoration: none;
+
         &:hover,
         &:focus,
         &.active {

@@ -1,15 +1,23 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 
-import { LanguageSwitcher } from "./LanguageSwitcher";
+import LanguageSwitcher from "./LanguageSwitcher";
 
-export default {
+const meta: Meta<typeof LanguageSwitcher> = {
   title: "UI/Language Switcher",
   component: LanguageSwitcher,
-} as ComponentMeta<typeof LanguageSwitcher>;
+  tags: ["autodocs"],
+};
 
-const Template: ComponentStory<typeof LanguageSwitcher> = ({ ...args }) => (
-  <LanguageSwitcher {...args} />
-);
+export default meta;
+type Story = StoryObj<typeof LanguageSwitcher>;
 
-export const Default = Template.bind({});
-Default.args = {};
+export const Default: Story = {
+  args: {
+    children: (
+      <>
+        <p>Paragraph 1</p>
+        <p>Paragraph 2</p>
+      </>
+    ),
+  },
+};

@@ -79,6 +79,7 @@ If you want to use redux, but with SSG, you should remove HYDRATION from slices
 - find a good PWA generator
 - add .env checker
 - Check code structure <https://github.com/yannvr/react-components-cli>
+- fix translations from react-i18next
 
 ## Component export convention
 

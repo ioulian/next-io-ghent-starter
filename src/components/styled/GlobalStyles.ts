@@ -105,6 +105,10 @@ const GlobalStyle = createGlobalStyle`
     height: auto;
   }
 
+  svg {
+    width: 100%;
+  }
+
   h1,
   h2,
   h3,

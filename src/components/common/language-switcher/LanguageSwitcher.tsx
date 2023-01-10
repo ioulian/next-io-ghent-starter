@@ -8,7 +8,7 @@ import { InferComponentProps } from "@/types/styled";
 
 import { StyledLanguageSwitcher } from "./LanguageSwitcher.styles";
 
-export const LanguageSwitcher: FC<
+const LanguageSwitcher: FC<
   InferComponentProps<typeof StyledLanguageSwitcher>
 > = ({ ...props }) => {
   const { t } = useTranslation("common");
@@ -33,36 +33,32 @@ export const LanguageSwitcher: FC<
                     query: router?.query,
                   }}
                   locale={locale}
-                  passHref
-                >
-                  <a
-                    lang={locale}
-                    hrefLang={locale}
-                    className={isActiveLanguage ? "active" : undefined}
-                    aria-label={
-                      isActiveLanguage
-                        ? t("languageSwitcher.current", { locale })
-                        : undefined
-                    }
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      e.preventDefault();
-                      setCookie("NEXT_LOCALE", locale, {
-                        maxAge: 31536000,
-                        path: "/",
-                      });
+                  lang={locale}
+                  hrefLang={locale}
+                  className={isActiveLanguage ? "active" : undefined}
+                  aria-label={
+                    isActiveLanguage
+                      ? t("languageSwitcher.current", { locale })
+                      : undefined
+                  }
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    setCookie("NEXT_LOCALE", locale, {
+                      maxAge: 31536000,
+                      path: "/",
+                    });
 
-                      // @ts-ignore
-                      window.location = e.currentTarget.href;
-                    }}
+                    // @ts-ignore
+                    window.location = e.currentTarget.href;
+                  }}
+                >
+                  <abbr
+                    // @ts-ignore
+                    title={t(`languageSwitcher.locales.${locale}`)}
                   >
-                    <abbr
-                      // @ts-ignore
-                      title={t(`languageSwitcher.locales.${locale}`)}
-                    >
-                      {locale}
-                    </abbr>
-                  </a>
+                    {locale}
+                  </abbr>
                 </Link>
               </li>
             );
@@ -72,3 +68,5 @@ export const LanguageSwitcher: FC<
     </StyledLanguageSwitcher>
   );
 };
+
+export default LanguageSwitcher;

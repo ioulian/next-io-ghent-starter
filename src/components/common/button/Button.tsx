@@ -17,9 +17,25 @@ const Button = forwardRef<
   HTMLButtonElement,
   {
     as?: keyof JSX.IntrinsicElements;
+
+    /**
+     * Add an icon before
+     */
     iconBefore?: ReactNode;
+
+    /**
+     * Add an icon after
+     */
     iconAfter?: ReactNode;
+
+    /**
+     * Show progress bar
+     */
     isLoading?: boolean;
+
+    /**
+     * Will hide children and show icons only
+     */
     iconOnly?: boolean;
   } & InferComponentProps<typeof StyledButton>
 >(
@@ -32,6 +48,7 @@ const Button = forwardRef<
       disabled,
       onClick,
       children,
+      $isLoading,
       ...props
     },
     ref

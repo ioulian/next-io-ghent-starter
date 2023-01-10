@@ -1,10 +1,7 @@
 const { resolve } = require("path");
 
 module.exports = {
-  stories: ["../src/**/*.stories.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
-  reactOptions: {
-    strictMode: false,
-  },
+  stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
     "@storybook/addon-links",
     {
@@ -15,14 +12,16 @@ module.exports = {
     },
     "@storybook/addon-interactions",
     "@storybook/addon-a11y",
-    "storybook-addon-styled-component-theme/dist/preset",
-    "storybook-react-i18next",
-    // https://github.com/lifeiscontent/storybook-addon-next-router/issues/60
-    // "storybook-addon-next-router", Breaks storybook
   ],
-  framework: "@storybook/react",
-  core: {
-    builder: "@storybook/builder-webpack5",
+  reactOptions: {
+    strictMode: false,
+  },
+  framework: {
+    name: "@storybook/nextjs",
+    options: {},
+  },
+  docs: {
+    autodocs: "tag",
   },
   webpackFinal: async (config, { configType }) => {
     config.resolve.alias = {
