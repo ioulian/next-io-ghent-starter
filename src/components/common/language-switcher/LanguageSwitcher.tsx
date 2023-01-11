@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { useCookies } from "react-cookie";
 
 import { InferComponentProps } from "@/types/styled";
@@ -38,7 +38,10 @@ const LanguageSwitcher: FC<
                   className={isActiveLanguage ? "active" : undefined}
                   aria-label={
                     isActiveLanguage
-                      ? t("languageSwitcher.current", { locale })
+                      ? t("languageSwitcher.current", {
+                          // @ts-ignore
+                          locale: t(`languageSwitcher.locales.${locale}`),
+                        })
                       : undefined
                   }
                   onClick={(e) => {
