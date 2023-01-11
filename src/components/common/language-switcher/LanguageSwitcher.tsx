@@ -41,8 +41,8 @@ const LanguageSwitcher: FC<
                       ? t("languageSwitcher.current", {
                           // @ts-ignore
                           locale: t(`languageSwitcher.locales.${locale}`),
-                        })
-                      : undefined
+                        }) // @ts-ignore
+                      : t(`languageSwitcher.locales.${locale}`)
                   }
                   onClick={(e) => {
                     e.stopPropagation();

@@ -25,10 +25,10 @@
     }
   },
   "languageSwitcher": {
-    "current": "Selected language: {{ locale }}",
+    "current": "Langue courante: {{ locale }}",
     "locales": {
-      "nl": "Dutch",
-      "fr": "French",
+      "nl": "Nederlands",
+      "fr": "Français",
       "en": "English"
     }
   }
