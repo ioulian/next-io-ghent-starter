@@ -172,10 +172,10 @@ const PopoverClose = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
 
     return (
       <button
+        onClick={() => state.setOpen(false)}
         {...props}
         // @ts-ignore
         ref={ref}
-        onClick={() => state.setOpen(false)}
       >
         {children}
       </button>

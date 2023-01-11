@@ -1,11 +1,11 @@
-import { addDecorator } from "@storybook/react";
-import { withThemesProvider } from "storybook-addon-styled-component-theme";
-import { ThemeProvider } from "styled-components";
 import theme from "./../src/components/styled/Theme";
 import GlobalStyle from "./../src/components/styled/GlobalStyles";
-import i18n from "./i18next.js";
-import { RouterContext } from "next/dist/shared/lib/router-context";
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
+import { i18n as i18nConfig } from "../next-i18next.config";
+
+import { ThemeProvider } from "styled-components";
 
 // https://github.com/vercel/next.js/issues/36417#issuecomment-1117360509
 // const OriginalNextImage = NextImage.default;
@@ -25,25 +25,7 @@ import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 //   value: true,
 // });
 
-// Global wrapper to apply Global style
-addDecorator((storyFn) => (
-  <>
-    <GlobalStyle />
-    {storyFn()}
-  </>
-));
-
-// Add theme support
-addDecorator(withThemesProvider([theme], ThemeProvider));
-
 export const parameters = {
-  i18n,
-  locale: "nl",
-  locales: {
-    fr: "Français",
-    nl: "Nederlands",
-    en: "English",
-  },
   viewport: {
     viewports: INITIAL_VIEWPORTS,
   },
@@ -54,7 +36,42 @@ export const parameters = {
       date: /Date$/,
     },
   },
-  nextRouter: {
-    Provider: RouterContext.Provider,
-  },
 };
+
+export const decorators = [
+  // Global wrapper to apply Global style and theme
+  (storyFn) => (
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      {storyFn()}
+    </ThemeProvider>
+  ),
+
+  (Story, Context) => {
+    const ns = ["common"];
+    const supportedLngs = i18nConfig.locales;
+    const resources = ns.reduce((acc, n) => {
+      supportedLngs.forEach((lng) => {
+        if (!acc[lng]) acc[lng] = {};
+        acc[lng] = {
+          ...acc[lng],
+          [n]: require(`../public/locales/${lng}/${n}.json`),
+        };
+      });
+      return acc;
+    }, {});
+
+    i18n.use(initReactI18next).init({
+      lng: i18nConfig.defaultLocale,
+      fallbackLng: i18nConfig.defaultLocale,
+      defaultNS: "common",
+      ns,
+      interpolation: { escapeValue: false },
+      react: { useSuspense: false },
+      supportedLngs,
+      resources,
+    });
+
+    return <Story />;
+  },
+];

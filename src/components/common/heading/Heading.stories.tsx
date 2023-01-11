@@ -1,48 +1,20 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import Heading from "./Heading";
 
-export default {
+const meta: Meta<typeof Heading> = {
   title: "UI/Typography/Heading",
   component: Heading,
-} as ComponentMeta<typeof Heading>;
-
-const Template: ComponentStory<typeof Heading> = ({ ...args }) => (
-  <Heading {...args} />
-);
-
-export const Default = Template.bind({});
-Default.args = {
-  children: "Heading",
+  tags: ["autodocs"],
 };
 
-export const Display = Template.bind({});
-Display.args = {
-  children: "Display",
-  type: "h1",
-  size: "display",
-};
+export default meta;
+type Story = StoryObj<typeof Heading>;
 
-export const H1 = Template.bind({});
-H1.args = {
-  children: "Heading H1",
-  type: "h1",
-};
-
-export const H2 = Template.bind({});
-H2.args = {
-  children: "Heading H2",
-  type: "h2",
-};
-
-export const H3 = Template.bind({});
-H3.args = {
-  children: "Heading H3",
-  type: "h3",
-};
-
-export const H4 = Template.bind({});
-H4.args = {
-  children: "Heading H4",
-  type: "h4",
+export const Default: Story = {
+  args: {
+    type: "h1",
+    size: "display",
+    children: "Heading",
+  },
 };

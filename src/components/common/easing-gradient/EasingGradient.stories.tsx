@@ -1,4 +1,4 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import { FC } from "react";
 
 import { createEasingGradient } from "./utilities";
@@ -40,7 +40,7 @@ const easings = {
   easeInOutSine: "cubic-bezier(0.445, 0.05, 0.55, 0.95)",
 };
 
-export default {
+const meta: Meta<typeof EasingGradient> = {
   title: "UI/Easing Gradient",
   component: EasingGradient,
   argTypes: {
@@ -58,18 +58,17 @@ export default {
       control: { type: "select" },
     },
   },
-} as ComponentMeta<typeof EasingGradient>;
+};
+export default meta;
+type Story = StoryObj<typeof EasingGradient>;
 
-const Template: ComponentStory<typeof EasingGradient> = ({ ...args }) => (
-  <EasingGradient {...args} />
-);
-
-export const Example = Template.bind({});
-Example.args = {
-  from: "rgba(129,254,233,1)",
-  to: "rgba(246,110,255,1)",
-  useEasing: true,
-  direction: 0,
-  stops: 16,
-  easing: easings.default,
+export const Example: Story = {
+  args: {
+    from: "rgba(129,254,233,1)",
+    to: "rgba(246,110,255,1)",
+    useEasing: true,
+    direction: 0,
+    stops: 16,
+    easing: easings.default,
+  },
 };

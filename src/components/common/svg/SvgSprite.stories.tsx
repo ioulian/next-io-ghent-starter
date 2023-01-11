@@ -1,4 +1,4 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import iconSample2 from "@tabler/icons/123.svg";
 
 import iconSample from "./../../../../public/img/logo-sprite.svg";
@@ -9,7 +9,8 @@ const icons = {
   iconSample2,
 };
 
-export default {
+const meta: Meta<typeof SvgSprite> = {
+  tags: ["autodocs"],
   title: "UI/Icon",
   component: SvgSprite,
   argTypes: {
@@ -26,14 +27,14 @@ export default {
       },
     },
   },
-} as ComponentMeta<typeof SvgSprite>;
+};
 
-const Template: ComponentStory<typeof SvgSprite> = ({ ...args }) => (
-  <SvgSprite style={{ width: 24, height: 24 }} {...args} />
-);
+export default meta;
+type Story = StoryObj<typeof SvgSprite>;
 
-export const Default = Template.bind({});
-Default.args = {
-  src: iconSample,
-  title: "Svg icon",
+export const Default: Story = {
+  args: {
+    src: iconSample,
+    title: "Svg icon",
+  },
 };

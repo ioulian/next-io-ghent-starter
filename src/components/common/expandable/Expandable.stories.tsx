@@ -1,18 +1,19 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import Expandable from "./Expandable";
 
-export default {
+const meta: Meta<typeof Expandable> = {
   title: "UI/Expandable",
   component: Expandable,
-} as ComponentMeta<typeof Expandable>;
+  tags: ["autodocs"],
+};
 
-const Template: ComponentStory<typeof Expandable> = ({ ...args }) => (
-  <Expandable {...args} />
-);
+export default meta;
+type Story = StoryObj<typeof Expandable>;
 
-export const Default = Template.bind({});
-Default.args = {
-  summary: "Click to expand",
-  children: "More details ...",
+export const Default: Story = {
+  args: {
+    summary: "Click to expand",
+    children: "More details ...",
+  },
 };

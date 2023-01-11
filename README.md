@@ -38,7 +38,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - `.env`
 - `next-seo.config.js`
 - `next-i18next.config.js`
-- `src/lib/page-head.tsx` and make sure the favicons are all regenerated
+- `src/lib/page-head.tsx` and make sure the favicons are all regenerated. Make
+  sure "short_name" in `public/site.webmanifest` is <= 12 chars
 - `.gitignore` Generated files should be enabled if no build step exists
 
 ## Redux

@@ -1,24 +1,28 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import Text from "../text/Text";
 
 import VisuallyHidden from "./VisuallyHidden";
 
-export default {
+const meta: Meta<typeof VisuallyHidden> = {
   title: "UI/Visually Hidden",
   component: VisuallyHidden,
-} as ComponentMeta<typeof VisuallyHidden>;
+  tags: ["autodocs"],
+};
 
-const Template: ComponentStory<typeof VisuallyHidden> = ({ ...args }) => (
-  <Text>
-    <p>
-      The text between (<VisuallyHidden {...args} />) is visually hidden, but
-      still readable by screen readers.
-    </p>
-  </Text>
-);
+export default meta;
+type Story = StoryObj<typeof VisuallyHidden>;
 
-export const Default = Template.bind({});
-Default.args = {
-  children: "this text",
+export const Default: Story = {
+  render: (args) => (
+    <Text>
+      <p>
+        The text between (<VisuallyHidden {...args} />) is visually hidden, but
+        still readable by screen readers.
+      </p>
+    </Text>
+  ),
+  args: {
+    children: "this text",
+  },
 };

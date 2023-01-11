@@ -1,28 +1,23 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import Stepper from "./Stepper";
 import Step from "./Step";
 
-export default {
+const meta: Meta<typeof Stepper> = {
   title: "UI/Stepper",
   component: Stepper,
-} as ComponentMeta<typeof Stepper>;
+  tags: ["autodocs"],
+};
 
-const Template: ComponentStory<typeof Stepper> = ({ ...args }) => (
-  <Stepper {...args} />
-);
+export default meta;
+type Story = StoryObj<typeof Stepper>;
 
-export const Default = Template.bind({});
-Default.args = {
-  children: [
-    <Step key="1" state="complete">
-      Step 1
-    </Step>,
-    <Step key="2" state="current">
-      Step 2
-    </Step>,
-    <Step key="3" state="future">
-      Step 3
-    </Step>,
-  ],
+export const Default: Story = {
+  render: (args) => (
+    <Stepper {...args}>
+      <Step state="complete">Step 1</Step>
+      <Step state="current">Step 2</Step>
+      <Step state="future">Step 3</Step>
+    </Stepper>
+  ),
 };

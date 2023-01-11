@@ -6,7 +6,6 @@ import type {
   InferGetStaticPropsType,
 } from "next";
 import { useTranslation } from "next-i18next";
-import { useRouter } from "next/router";
 import Link from "next/link";
 import sampleSvgSprite from "@tabler/icons/123.svg";
 
@@ -19,6 +18,7 @@ import SvgSprite from "@/components/common/svg/SvgSprite";
 import { requireTranslations } from "@/services/translation.service";
 import { requireAnonymous } from "@/features/auth/utilities";
 import Heading from "@/components/common/heading/Heading";
+import LanguageSwitcher from "@/components/common/language-switcher/LanguageSwitcher";
 
 import { wrapper } from "../src/store/store";
 
@@ -28,7 +28,6 @@ const Home: NextPageWithLayout = ({}: InferGetStaticPropsType<
   typeof getStaticProps
 >) => {
   const { t } = useTranslation("app");
-  const router = useRouter();
 
   return (
     <>
@@ -65,24 +64,12 @@ const Home: NextPageWithLayout = ({}: InferGetStaticPropsType<
             <SvgSprite
               src={sampleSvgSprite}
               title=".svg sprite"
-              width={24}
-              height={24}
+              style={{
+                width: 24,
+                height: 24,
+              }}
             />
-            <ul>
-              {router.locales?.map((locale) => (
-                <li key={locale}>
-                  <Link
-                    href={router.route}
-                    locale={locale}
-                    onClick={() => {
-                      document.cookie = `NEXT_LOCALE=${locale}`;
-                    }}
-                  >
-                    {locale}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <LanguageSwitcher />
           </nav>
 
           <nav>
@@ -109,7 +96,7 @@ export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
     ({ locale }: GetStaticPropsContext) =>
       new Promise((resolve) => {
         requireAnonymous()
-          .then(requireTranslations(locale!, ["app"]))
+          .then(requireTranslations(locale!, ["app", "common"]))
           .then(({ result }) => {
             resolve(result);
           });

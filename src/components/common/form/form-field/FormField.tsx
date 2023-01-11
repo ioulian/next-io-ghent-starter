@@ -20,7 +20,7 @@ import {
   useFormContext,
   UseFormStateReturn,
 } from "react-hook-form";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 import { InferComponentProps } from "@/types/styled";
 

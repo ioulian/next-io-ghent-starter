@@ -8,7 +8,12 @@ import SvgSprite from "../svg/SvgSprite";
 import { StyledExpandable, StyledExpandableSummary } from "./Expandable.styles";
 
 const Expandable: FC<
-  { summary: ReactNode } & InferComponentProps<typeof StyledExpandable>
+  {
+    /**
+     * Title of the block
+     */
+    summary: ReactNode;
+  } & InferComponentProps<typeof StyledExpandable>
 > = ({ summary, children, ...props }) => {
   return (
     <StyledExpandable {...props}>

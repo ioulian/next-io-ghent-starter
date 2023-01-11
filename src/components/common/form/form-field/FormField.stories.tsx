@@ -1,4 +1,4 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import ReactSelect from "react-select";
 
 import { email, required } from "../rules";
@@ -28,111 +28,130 @@ const ExampleApiError = {
   ],
 };
 
-export default {
+const meta: Meta<typeof FormField> = {
   title: "UI/Form/FormField",
   component: FormField,
-  subcomponents: { Input },
-} as ComponentMeta<typeof FormField>;
-
-const Template: ComponentStory<typeof FormField> = ({ ...args }) => (
-  <Form onSubmit={() => {}} error={ExampleApiError}>
-    <FormField {...args} />
-  </Form>
-);
-
-export const WithInput = Template.bind({});
-WithInput.args = {
-  label: "Email Address",
-  name: "emailAddress",
-  options: {
-    ...required,
-    ...email,
-  },
-  description: "Description",
-  children: <Input />,
+  tags: ["autodocs"],
 };
 
-export const WithSelect = Template.bind({});
-WithSelect.args = {
-  label: "Role",
-  name: "emailAddress",
-  options: {
-    ...required,
-  },
-  description: "Description",
-  children: (
-    <Select addEmptyOption>
-      <option value="1">Value 1</option>
-      <option value="2">Value 2</option>
-      <option value="3">Value 3</option>
-    </Select>
+export default meta;
+type Story = StoryObj<typeof FormField>;
+
+export const Default: Story = {
+  render: (args) => (
+    <Form onSubmit={() => {}} error={ExampleApiError}>
+      <FormField {...args} />
+    </Form>
   ),
+  args: {
+    label: "Email Address",
+    name: "emailAddress",
+    options: {
+      ...required,
+      ...email,
+    },
+    description: "Description",
+    children: <Input />,
+  },
 };
 
-export const WithTextarea = Template.bind({});
-WithTextarea.args = {
-  label: "Textarea",
-  name: "emailAddress",
-  options: {
-    ...required,
+export const WithSelect: Story = {
+  render: (args) => (
+    <Form onSubmit={() => {}} error={ExampleApiError}>
+      <FormField {...args} />
+    </Form>
+  ),
+  args: {
+    label: "Role",
+    name: "emailAddress",
+    options: {
+      ...required,
+    },
+    description: "Description",
+    children: (
+      <Select addEmptyOption>
+        <option value="1">Value 1</option>
+        <option value="2">Value 2</option>
+        <option value="3">Value 3</option>
+      </Select>
+    ),
   },
-  description: "Description",
-  children: <TextArea />,
 };
 
-export const WithSingleCheckbox = Template.bind({});
-WithSingleCheckbox.args = {
-  label: "I accept privacy policy",
-  name: "emailAddress",
-  $isToggle: true,
-  options: {
-    ...required,
+export const WithTextarea: Story = {
+  render: (args) => (
+    <Form onSubmit={() => {}} error={ExampleApiError}>
+      <FormField {...args} />
+    </Form>
+  ),
+  args: {
+    label: "Textarea",
+    name: "emailAddress",
+    options: {
+      ...required,
+    },
+    description: "Description",
+    children: <TextArea />,
   },
-  children: <SingleCheckbox />,
 };
 
-export const WithRadioList = Template.bind({});
-WithRadioList.args = {
-  label: "Choose one",
-  name: "emailAddress",
-  options: {
-    ...required,
+export const WithSingleCheckbox: Story = {
+  render: (args) => (
+    <Form onSubmit={() => {}} error={ExampleApiError}>
+      <FormField {...args} />
+    </Form>
+  ),
+  args: {
+    label: "I accept privacy policy",
+    name: "emailAddress",
+    $isToggle: true,
+    options: {
+      ...required,
+    },
+    children: <SingleCheckbox />,
   },
-  inputWrapper: List,
-  asFieldSet: true,
-  children: [
-    <Radio key="1" inputValue="value1">
-      Value 1
-    </Radio>,
-    <Radio key="2" inputValue="value2">
-      Value 2
-    </Radio>,
-    <Radio key="3" inputValue="value3">
-      Value 3
-    </Radio>,
-  ],
 };
 
-export const WithCheckboxList = Template.bind({});
-WithCheckboxList.args = {
-  label: "Choose multiple",
-  name: "emailAddress",
-  options: {
-    ...required,
+export const WithRadioList: Story = {
+  render: (args) => (
+    <Form onSubmit={() => {}} error={ExampleApiError}>
+      <FormField {...args}>
+        <Radio inputValue="value1">Value 1</Radio>
+        <Radio inputValue="value2">Value 2</Radio>
+        <Radio inputValue="value3">Value 3</Radio>
+      </FormField>
+    </Form>
+  ),
+  args: {
+    label: "Choose one",
+    name: "emailAddress",
+    options: {
+      ...required,
+    },
+    inputWrapper: List,
+    asFieldSet: true,
   },
-  asFieldSet: true,
-  inputWrapper: List,
-  children: [
-    <Checkbox key="1" inputValue="value1">
-      Value 1
-    </Checkbox>,
-    <Checkbox key="2" inputValue="value2">
-      Value 2
-    </Checkbox>,
-    <Checkbox key="3" inputValue="value3">
-      Value 3
-    </Checkbox>,
-  ],
+};
+
+export const WithCheckboxList: Story = {
+  render: (args) => (
+    <Form onSubmit={() => {}} error={ExampleApiError}>
+      <FormField {...args}>
+        <Checkbox inputValue="value1">Value 1</Checkbox>
+        <Checkbox inputValue="value2">Value 2</Checkbox>
+        <Checkbox inputValue="value3">Value 3</Checkbox>
+      </FormField>
+    </Form>
+  ),
+  args: {
+    label: "Choose one",
+    name: "emailAddress",
+    options: {
+      ...required,
+    },
+    inputWrapper: List,
+    asFieldSet: true,
+  },
 };
 
 interface ColourOption {
@@ -156,24 +175,30 @@ const colourOptions: readonly ColourOption[] = [
   { value: "silver", label: "Silver", color: "#666666" },
 ];
 
-export const WithReactSelect = Template.bind({});
-WithReactSelect.args = {
-  label: "Choose multiple",
-  name: "emailAddress",
-  inputWrapper: StyledReactSelect,
-  options: {
-    ...required,
-  },
-  asFieldSet: true,
-  children: ({ field, props: { id, ...props } }) => (
-    <ReactSelect
-      {...field}
-      {...props}
-      inputId={id}
-      defaultValue={colourOptions[0]}
-      className="react-select"
-      classNamePrefix="react-select"
-      options={colourOptions}
-    />
+export const WithReactSelect: Story = {
+  render: (args) => (
+    <Form onSubmit={() => {}} error={ExampleApiError}>
+      <FormField {...args} />
+    </Form>
   ),
+  args: {
+    label: "Choose",
+    name: "emailAddress",
+    inputWrapper: StyledReactSelect,
+    options: {
+      ...required,
+    },
+    asFieldSet: true,
+    children: ({ field, props: { id, ...props } }) => (
+      <ReactSelect
+        {...field}
+        {...props}
+        inputId={id}
+        defaultValue={colourOptions[0]}
+        className="react-select"
+        classNamePrefix="react-select"
+        options={colourOptions}
+      />
+    ),
+  },
 };
