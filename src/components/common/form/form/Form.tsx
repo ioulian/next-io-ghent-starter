@@ -74,7 +74,7 @@ const Form = forwardRef<
     useEffect(() => {
       reset(defaultValues);
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [defaultValues]);
+    }, [JSON.stringify(defaultValues)]);
 
     return (
       <FormProvider {...methods}>
