@@ -85,6 +85,7 @@ contributions are welcome!
 
 ## TODO
 
+- <https://storybook.js.org/recipes/styled-components> Implement dark themes
 - find a good PWA generator
 - add .env checker
 

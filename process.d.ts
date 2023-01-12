@@ -11,5 +11,6 @@ declare namespace NodeJS {
     NEXT_PUBLIC_AUTH_CLIENT_SECRET: string;
     NEXT_PUBLIC_AUTH_REDIRECT_IF_LOGGED_OUT: string;
     NEXT_PUBLIC_AUTH_REDIRECT_IF_LOGGED_IN: string;
+    NEXT_PUBLIC_WDYR_ENABLE: string;
   }
 }
