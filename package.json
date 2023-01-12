@@ -12,7 +12,7 @@
     "lint": "yarn check-types && next lint",
     "check-translations": "ts-node -O '{\"module\":\"commonjs\"}' scripts/check-translations.ts",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build -o docs"
   },
   "dependencies": {
     "@floating-ui/react-dom-interactions": "0.13.3",
