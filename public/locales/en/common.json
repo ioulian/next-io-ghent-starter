@@ -27,8 +27,8 @@
   "languageSwitcher": {
     "current": "Selected language: {{ locale }}",
     "locales": {
-      "nl": "Dutch",
-      "fr": "French",
+      "nl": "Nederlands",
+      "fr": "Français",
       "en": "English"
     }
   }
