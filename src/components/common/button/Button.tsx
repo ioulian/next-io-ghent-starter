@@ -7,6 +7,7 @@ import {
   memo,
 } from "react";
 import isEqual from "lodash/isEqual";
+import { useCallback } from "react";
 
 import { InferComponentProps } from "@/types/styled";
 
@@ -55,21 +56,22 @@ const Button = forwardRef<
     },
     ref
   ) => {
+    const newOnClick = useCallback(
+      (e: ReactMouseEvent<HTMLButtonElement, MouseEvent>) => {
+        if (!isLoading && !disabled) {
+          onClick?.(e);
+        }
+      },
+      [onClick, isLoading, disabled]
+    );
+
     return (
       <StyledButton
         ref={ref}
         {...props}
         $isLoading={isLoading}
         disabled={disabled || isLoading}
-        onClick={
-          onClick
-            ? (e: ReactMouseEvent<HTMLButtonElement, MouseEvent>) => {
-                if (!isLoading && !disabled) {
-                  onClick?.(e);
-                }
-              }
-            : undefined
-        }
+        onClick={onClick ? newOnClick : undefined}
       >
         <span>
           {isValidElement(iconBefore) &&

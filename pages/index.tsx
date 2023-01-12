@@ -8,6 +8,8 @@ import type {
 import { useTranslation } from "next-i18next";
 import Link from "next/link";
 import sampleSvgSprite from "@tabler/icons/123.svg";
+import { useState } from "react";
+import { useCallback } from "react";
 
 import { StyledMain, StyledPage } from "@/components/Demo";
 import logo from "@/img/logo.png";
@@ -19,15 +21,23 @@ import { requireTranslations } from "@/services/translation.service";
 import { requireAnonymous } from "@/features/auth/utilities";
 import Heading from "@/components/common/heading/Heading";
 import LanguageSwitcher from "@/components/common/language-switcher/LanguageSwitcher";
+import Button from "@/components/common/button/Button";
 
 import { wrapper } from "../src/store/store";
 
 import { NextPageWithLayout } from "./_app";
 
+const svgSprite = <SvgSprite src={sampleSvgSprite} title=".svg sprite" />;
+
 const Home: NextPageWithLayout = ({}: InferGetStaticPropsType<
   typeof getStaticProps
 >) => {
   const { t } = useTranslation("app");
+  const [, setV] = useState(1);
+
+  const add = useCallback(() => {
+    setV((v) => v + 1);
+  }, [setV]);
 
   return (
     <>
@@ -70,6 +80,9 @@ const Home: NextPageWithLayout = ({}: InferGetStaticPropsType<
               }}
             />
             <LanguageSwitcher />
+            <Button onClick={add} iconBefore={svgSprite}>
+              Test
+            </Button>
           </nav>
 
           <nav>
