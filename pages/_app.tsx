@@ -1,3 +1,5 @@
+import "../scripts/wdyr";
+
 import type { AppProps } from "next/app";
 import Script from "next/script";
 import { ReactElement, useEffect, ReactNode } from "react";

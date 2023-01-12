@@ -11,6 +11,21 @@ const meta: Meta<typeof Dialog> = {
   title: "UI/Floating UI/Dialog",
   component: Dialog,
   tags: ["autodocs"],
+  decorators: [
+    (Story) => (
+      <div
+        style={{
+          width: "100%",
+          height: "500px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export default meta;
@@ -18,29 +33,19 @@ type Story = StoryObj<typeof Dialog>;
 
 export const Uncontrolled: Story = {
   render: (args) => (
-    <div
-      style={{
-        width: "100%",
-        height: "500px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <Dialog {...args}>
-        <Dialog.Trigger>My trigger</Dialog.Trigger>
-        <Dialog.Content>
-          <Dialog.Heading>My dialog heading</Dialog.Heading>
-          <Dialog.Description>My dialog description</Dialog.Description>
-          <Dialog.Close>Close</Dialog.Close>
-        </Dialog.Content>
-      </Dialog>
-    </div>
+    <Dialog {...args}>
+      <Dialog.Trigger>My trigger</Dialog.Trigger>
+      <Dialog.Content>
+        <Dialog.Heading>My dialog heading</Dialog.Heading>
+        <Dialog.Description>My dialog description</Dialog.Description>
+        <Dialog.Close>Close</Dialog.Close>
+      </Dialog.Content>
+    </Dialog>
   ),
 };
 
 const ControlledDialog = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <Dialog open={isOpen}>
       <Dialog.Trigger
@@ -66,50 +71,28 @@ const ControlledDialog = () => {
 };
 
 export const Controlled: Story = {
-  render: () => (
-    <div
-      style={{
-        width: "100%",
-        height: "500px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <ControlledDialog />
-    </div>
-  ),
+  render: () => <ControlledDialog />,
 };
 
 export const CustomElements: Story = {
   render: (args) => (
-    <div
-      style={{
-        width: "100%",
-        height: "500px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <Dialog {...args}>
-        <Dialog.Trigger>
-          <Button>My trigger</Button>
-        </Dialog.Trigger>
-        <Dialog.Content>
-          <Dialog.Heading>
-            <Heading>My popover heading</Heading>
-          </Dialog.Heading>
-          <Dialog.Description>
-            <Text>
-              <p>My popover description</p>
-            </Text>
-          </Dialog.Description>
-          <Dialog.Close>
-            <Button>Close</Button>
-          </Dialog.Close>
-        </Dialog.Content>
-      </Dialog>
-    </div>
+    <Dialog {...args}>
+      <Dialog.Trigger>
+        <Button>My trigger</Button>
+      </Dialog.Trigger>
+      <Dialog.Content>
+        <Dialog.Heading>
+          <Heading>My popover heading</Heading>
+        </Dialog.Heading>
+        <Dialog.Description>
+          <Text>
+            <p>My popover description</p>
+          </Text>
+        </Dialog.Description>
+        <Dialog.Close>
+          <Button>Close</Button>
+        </Dialog.Close>
+      </Dialog.Content>
+    </Dialog>
   ),
 };

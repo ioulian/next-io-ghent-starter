@@ -4,7 +4,9 @@ import {
   MouseEvent as ReactMouseEvent,
   isValidElement,
   cloneElement,
+  memo,
 } from "react";
+import isEqual from "lodash/isEqual";
 
 import { InferComponentProps } from "@/types/styled";
 
@@ -93,8 +95,9 @@ const Button = forwardRef<
   }
 );
 
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV === "development") {
   Button.displayName = "Button";
+  Button.whyDidYouRender = true;
 }
 
-export default Button;
+export default memo(Button, isEqual);

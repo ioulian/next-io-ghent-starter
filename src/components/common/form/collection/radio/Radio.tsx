@@ -39,8 +39,9 @@ const Radio = forwardRef<
   }
 );
 
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV === "development") {
   Radio.displayName = "Radio";
+  Radio.whyDidYouRender = true;
 }
 
 export default Radio;

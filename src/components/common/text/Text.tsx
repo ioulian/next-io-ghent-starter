@@ -11,4 +11,8 @@ const Text: FC<InferComponentProps<typeof StyledText>> = ({
   return <StyledText {...props}>{children}</StyledText>;
 };
 
+if (process.env.NODE_ENV === "development") {
+  Text.whyDidYouRender = true;
+}
+
 export default Text;

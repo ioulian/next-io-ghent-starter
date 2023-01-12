@@ -43,6 +43,10 @@ module.exports = withBundleAnalyzer(
         ],
       });
 
+      config.resolve.alias["react-redux"] =
+        process.env.NODE_ENV === "development"
+          ? "react-redux/dist/react-redux.js"
+          : "react-redux/lib";
       return config;
     },
   })

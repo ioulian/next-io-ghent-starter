@@ -33,6 +33,8 @@ the project first.
 - [Storybook](https://github.com/storybookjs/storybook) with a11y checks,
   styled-components theme support, i18next support and Next.js support.
 - Common components preset (with a11y in mind): <https://ioulian.github.io/next-io-ghent-starter/>
+- [Why Did You Render](https://github.com/welldone-software/why-did-you-render)
+  included.
 
 ## Getting Started
 
@@ -83,7 +85,6 @@ contributions are welcome!
 
 ## TODO
 
-- add <https://github.com/vercel/next.js/tree/canary/examples/with-why-did-you-render>
 - find a good PWA generator
 - add .env checker
 

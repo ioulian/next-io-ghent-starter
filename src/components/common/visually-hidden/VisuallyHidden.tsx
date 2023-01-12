@@ -1,4 +1,5 @@
-import { FC } from "react";
+import { FC, memo } from "react";
+import isEqual from "lodash/isEqual";
 
 import { InferComponentProps } from "@/types/styled";
 
@@ -10,4 +11,8 @@ const VisuallyHidden: FC<InferComponentProps<typeof StyledVisuallyHidden>> = (
   return <StyledVisuallyHidden {...props} />;
 };
 
-export default VisuallyHidden;
+if (process.env.NODE_ENV === "development") {
+  VisuallyHidden.whyDidYouRender = true;
+}
+
+export default memo(VisuallyHidden, isEqual);

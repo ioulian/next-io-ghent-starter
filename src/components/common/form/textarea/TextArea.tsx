@@ -11,8 +11,9 @@ const TextArea = forwardRef<
   return <StyledTextarea cols={40} rows={5} {...props} ref={ref} />;
 });
 
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV === "development") {
   TextArea.displayName = "TextArea";
+  TextArea.whyDidYouRender = true;
 }
 
 export default TextArea;

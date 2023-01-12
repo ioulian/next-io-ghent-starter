@@ -163,4 +163,8 @@ const FormField: FC<
   );
 };
 
+if (process.env.NODE_ENV === "development") {
+  FormField.whyDidYouRender = true;
+}
+
 export default FormField;

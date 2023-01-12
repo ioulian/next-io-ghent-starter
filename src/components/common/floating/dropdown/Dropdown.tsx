@@ -318,8 +318,9 @@ const Dropdown = forwardRef<
   return <DropdownMenu {...props} ref={ref} />;
 });
 
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV === "development") {
   Dropdown.displayName = "Dropdown";
+  Dropdown.whyDidYouRender = true;
 }
 
 export default Dropdown;

@@ -99,4 +99,10 @@ const Tooltip: FC<{ children: ReactNode } & TooltipOptions> & {
 Tooltip.Trigger = TooltipTrigger;
 Tooltip.Content = TooltipContent;
 
+if (process.env.NODE_ENV === "development") {
+  Tooltip.whyDidYouRender = true;
+  TooltipTrigger.whyDidYouRender = true;
+  TooltipContent.whyDidYouRender = true;
+}
+
 export default Tooltip;

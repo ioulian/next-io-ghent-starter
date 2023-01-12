@@ -21,4 +21,8 @@ const Error: FC<{ id: string } & InferComponentProps<typeof StyledError>> = ({
   );
 };
 
+if (process.env.NODE_ENV === "development") {
+  Error.whyDidYouRender = true;
+}
+
 export default Error;

@@ -11,8 +11,9 @@ const Input = forwardRef<
   return <StyledInput {...props} ref={ref} />;
 });
 
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV === "development") {
   Input.displayName = "Input";
+  Input.whyDidYouRender = true;
 }
 
 export default Input;

@@ -32,4 +32,8 @@ const Stepper: FC<InferComponentProps<typeof StyledStepper>> = ({
   );
 };
 
+if (process.env.NODE_ENV === "development") {
+  Stepper.whyDidYouRender = true;
+}
+
 export default Stepper;

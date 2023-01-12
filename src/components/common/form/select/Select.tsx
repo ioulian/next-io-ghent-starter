@@ -23,8 +23,9 @@ const Select = forwardRef<
   );
 });
 
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV === "development") {
   Select.displayName = "Select";
+  Select.whyDidYouRender = true;
 }
 
 export default Select;

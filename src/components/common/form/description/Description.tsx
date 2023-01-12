@@ -19,4 +19,8 @@ const Description: FC<
   );
 };
 
+if (process.env.NODE_ENV === "development") {
+  Description.whyDidYouRender = true;
+}
+
 export default Description;

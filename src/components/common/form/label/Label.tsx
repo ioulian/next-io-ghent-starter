@@ -20,4 +20,8 @@ const Label: FC<
   );
 };
 
+if (process.env.NODE_ENV === "development") {
+  Label.whyDidYouRender = true;
+}
+
 export default Label;
