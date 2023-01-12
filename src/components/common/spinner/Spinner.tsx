@@ -1,4 +1,5 @@
-import { FC, ReactNode } from "react";
+import { FC, memo, ReactNode } from "react";
+import isEqual from "lodash/isEqual";
 
 import { InferComponentProps } from "@/types/styled";
 
@@ -31,4 +32,8 @@ const Spinner: FC<
   </StyledSpinner>
 );
 
-export default Spinner;
+if (process.env.NODE_ENV === "development") {
+  Spinner.whyDidYouRender = true;
+}
+
+export default memo(Spinner, isEqual);

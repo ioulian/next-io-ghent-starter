@@ -11,8 +11,9 @@ const SingleCheckbox = forwardRef<
   return <StyledInput {...props} type="checkbox" ref={ref} />;
 });
 
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV === "development") {
   SingleCheckbox.displayName = "SingleCheckbox";
+  SingleCheckbox.whyDidYouRender = true;
 }
 
 export default SingleCheckbox;

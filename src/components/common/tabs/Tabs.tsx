@@ -16,4 +16,8 @@ const Tabs: FC<InferComponentProps<typeof ReactTabs>> = ({
   );
 };
 
+if (process.env.NODE_ENV === "development") {
+  Tabs.whyDidYouRender = true;
+}
+
 export default Tabs;

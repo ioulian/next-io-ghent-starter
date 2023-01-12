@@ -91,8 +91,9 @@ const Form = forwardRef<
   }
 );
 
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV === "development") {
   Form.displayName = "Form";
+  Form.whyDidYouRender = true;
 }
 
 export default Form;

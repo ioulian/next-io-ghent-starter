@@ -81,6 +81,7 @@ export const Floater = forwardRef<
   }
 );
 
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV === "development") {
   Floater.displayName = "Floater";
+  Floater.whyDidYouRender = true;
 }

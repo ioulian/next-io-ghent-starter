@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 
 import { InferComponentProps } from "@/types/styled";
 
@@ -24,4 +24,8 @@ const Heading: FC<
   );
 };
 
-export default Heading;
+if (process.env.NODE_ENV === "development") {
+  Heading.whyDidYouRender = true;
+}
+
+export default memo(Heading);

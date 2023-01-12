@@ -39,8 +39,9 @@ const Checkbox = forwardRef<
   }
 );
 
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV === "development") {
   Checkbox.displayName = "Checkbox";
+  Checkbox.whyDidYouRender = true;
 }
 
 export default Checkbox;

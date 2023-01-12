@@ -9,6 +9,21 @@ const meta: Meta<typeof Tooltip> = {
   title: "UI/Floating UI/Tooltip",
   component: Tooltip,
   tags: ["autodocs"],
+  decorators: [
+    (Story) => (
+      <div
+        style={{
+          width: "100%",
+          height: "500px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export default meta;
@@ -16,25 +31,15 @@ type Story = StoryObj<typeof Tooltip>;
 
 export const Uncontrolled: Story = {
   render: (args) => (
-    <div
-      style={{
-        width: "100%",
-        height: "500px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <Tooltip {...args}>
-        <Tooltip.Trigger>My trigger</Tooltip.Trigger>
-        <Tooltip.Content>My tooltip</Tooltip.Content>
-      </Tooltip>
-    </div>
+    <Tooltip {...args}>
+      <Tooltip.Trigger>My trigger</Tooltip.Trigger>
+      <Tooltip.Content>My tooltip</Tooltip.Content>
+    </Tooltip>
   ),
 };
 
 const ControlledTooltip = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <Tooltip open={isOpen}>
       <Tooltip.Trigger
@@ -53,19 +58,7 @@ const ControlledTooltip = () => {
 };
 
 export const Controlled: Story = {
-  render: () => (
-    <div
-      style={{
-        width: "100%",
-        height: "500px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <ControlledTooltip />
-    </div>
-  ),
+  render: () => <ControlledTooltip />,
   args: {
     open: true,
   },
@@ -73,43 +66,23 @@ export const Controlled: Story = {
 
 export const CustomElements: Story = {
   render: (args) => (
-    <div
-      style={{
-        width: "100%",
-        height: "500px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <Tooltip {...args}>
-        <Tooltip.Trigger>
-          <Button>My trigger</Button>
-        </Tooltip.Trigger>
-        <Tooltip.Content>My tooltip</Tooltip.Content>
-      </Tooltip>
-    </div>
+    <Tooltip {...args}>
+      <Tooltip.Trigger>
+        <Button>My trigger</Button>
+      </Tooltip.Trigger>
+      <Tooltip.Content>My tooltip</Tooltip.Content>
+    </Tooltip>
   ),
 };
 
 export const Placement: Story = {
   render: (args) => (
-    <div
-      style={{
-        width: "100%",
-        height: "500px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <Tooltip {...args}>
-        <Tooltip.Trigger>
-          <Button>My trigger</Button>
-        </Tooltip.Trigger>
-        <Tooltip.Content>My tooltip</Tooltip.Content>
-      </Tooltip>
-    </div>
+    <Tooltip {...args}>
+      <Tooltip.Trigger>
+        <Button>My trigger</Button>
+      </Tooltip.Trigger>
+      <Tooltip.Content>My tooltip</Tooltip.Content>
+    </Tooltip>
   ),
   args: {
     placement: "right",

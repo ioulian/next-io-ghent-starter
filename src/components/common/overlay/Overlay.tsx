@@ -9,8 +9,20 @@ import { StyledOverlayContainer } from "./Overlay.styles";
 Modal.setAppElement("#__next");
 
 const Overlay: FC<{
+  /**
+   * Control overlay visibility
+   */
   isOpen: boolean;
+
+  /**
+   * Title of the overlay for accessibility reasons
+   */
   title: string;
+
+  /**
+   * Callback when user wants to close the overlay (escape button, outside
+   * click, close button click)
+   */
   onClose?: () => void;
   children: ReactNode;
 }> = ({ title, isOpen = false, children, onClose }) => {
@@ -55,5 +67,9 @@ const Overlay: FC<{
     </>
   );
 };
+
+if (process.env.NODE_ENV === "development") {
+  Overlay.whyDidYouRender = true;
+}
 
 export default Overlay;

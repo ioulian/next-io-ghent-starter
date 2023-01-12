@@ -23,4 +23,8 @@ const OverlayCloseButton: FC<
   );
 };
 
+if (process.env.NODE_ENV === "development") {
+  OverlayCloseButton.whyDidYouRender = true;
+}
+
 export default OverlayCloseButton;

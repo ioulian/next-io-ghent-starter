@@ -26,4 +26,8 @@ const Step: FC<
   );
 };
 
+if (process.env.NODE_ENV === "development") {
+  Step.whyDidYouRender = true;
+}
+
 export default Step;

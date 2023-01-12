@@ -15,7 +15,6 @@ export const Counter = () => {
   const dispatch = useAppDispatch();
   const count = useAppSelector(selectCount);
   const [incrementAmount, setIncrementAmount] = useState("2");
-
   const incrementValue = Number(incrementAmount) || 0;
 
   return (
@@ -54,3 +53,7 @@ export const Counter = () => {
     </div>
   );
 };
+
+if (process.env.NODE_ENV === "development") {
+  Counter.whyDidYouRender = true;
+}

@@ -15,6 +15,7 @@ const { i18n } = require("./next-i18next.config");
 module.exports = withBundleAnalyzer(
   withPWA({
     reactStrictMode: true,
+    poweredByHeader: false,
     i18n,
     compiler: {
       styledComponents: true,
@@ -42,6 +43,10 @@ module.exports = withBundleAnalyzer(
         ],
       });
 
+      config.resolve.alias["react-redux"] =
+        process.env.NODE_ENV === "development"
+          ? "react-redux/dist/react-redux.js"
+          : "react-redux/lib";
       return config;
     },
   })

@@ -1,8 +1,9 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
 import { useCookies } from "react-cookie";
+import isEqual from "lodash/isEqual";
 
 import { InferComponentProps } from "@/types/styled";
 
@@ -38,11 +39,12 @@ const LanguageSwitcher: FC<
                   className={isActiveLanguage ? "active" : undefined}
                   aria-label={
                     isActiveLanguage
-                      ? t("languageSwitcher.current", {
+                      ? (t("languageSwitcher.current", {
                           // @ts-ignore
                           locale: t(`languageSwitcher.locales.${locale}`),
-                        }) // @ts-ignore
-                      : t(`languageSwitcher.locales.${locale}`)
+                        }) as string)
+                      : // @ts-ignore
+                        (t(`languageSwitcher.locales.${locale}`) as string)
                   }
                   onClick={(e) => {
                     e.stopPropagation();
@@ -72,4 +74,8 @@ const LanguageSwitcher: FC<
   );
 };
 
-export default LanguageSwitcher;
+if (process.env.NODE_ENV === "development") {
+  LanguageSwitcher.whyDidYouRender = true;
+}
+
+export default memo(LanguageSwitcher, isEqual);

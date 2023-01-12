@@ -73,6 +73,7 @@
     "@types/styled-components": "5.1.26",
     "@types/uuid": "9.0.0",
     "@typescript-eslint/eslint-plugin": "5.48.1",
+    "@welldone-software/why-did-you-render": "7.0.1",
     "babel-loader": "8.3.0",
     "babel-plugin-styled-components": "2.0.7",
     "cross-env": "7.0.3",

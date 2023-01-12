@@ -213,4 +213,13 @@ Dialog.Content = DialogContent;
 Dialog.Heading = DialogHeading;
 Dialog.Description = DialogDescription;
 
+if (process.env.NODE_ENV === "development") {
+  Dialog.whyDidYouRender = true;
+  DialogTrigger.whyDidYouRender = true;
+  DialogClose.whyDidYouRender = true;
+  DialogContent.whyDidYouRender = true;
+  DialogHeading.whyDidYouRender = true;
+  DialogDescription.whyDidYouRender = true;
+}
+
 export default Dialog;

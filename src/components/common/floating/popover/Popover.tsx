@@ -211,4 +211,13 @@ Popover.Content = PopoverContent;
 Popover.Heading = PopoverHeading;
 Popover.Description = PopoverDescription;
 
+if (process.env.NODE_ENV === "development") {
+  Popover.whyDidYouRender = true;
+  PopoverTrigger.whyDidYouRender = true;
+  PopoverClose.whyDidYouRender = true;
+  PopoverContent.whyDidYouRender = true;
+  PopoverHeading.whyDidYouRender = true;
+  PopoverDescription.whyDidYouRender = true;
+}
+
 export default Popover;

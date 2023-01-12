@@ -35,4 +35,8 @@ const ApiFormFieldError: FC<{
   );
 };
 
+if (process.env.NODE_ENV === "development") {
+  ApiFormFieldError.whyDidYouRender = true;
+}
+
 export default ApiFormFieldError;

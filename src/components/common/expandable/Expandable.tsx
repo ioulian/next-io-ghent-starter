@@ -26,4 +26,8 @@ const Expandable: FC<
   );
 };
 
+if (process.env.NODE_ENV === "development") {
+  Expandable.whyDidYouRender = true;
+}
+
 export default Expandable;
