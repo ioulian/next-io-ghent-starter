@@ -10,7 +10,7 @@ import {
   useMemo,
 } from "react";
 
-import { Floater } from "../floater/Floater";
+import Floater from "../floater/Floater";
 
 import {
   TooltipContext,
@@ -20,7 +20,7 @@ import {
 } from "./hooks";
 
 const TooltipTrigger = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
-  function TooltipTrigger({ children, ...props }, propRef) {
+  ({ children, ...props }, propRef) => {
     const state = useTooltipState();
 
     const childrenRef = (children as any).ref;
@@ -55,7 +55,7 @@ const TooltipTrigger = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
 );
 
 const TooltipContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
-  function TooltipContent(props, propRef) {
+  (props, propRef) => {
     const state = useTooltipState();
 
     const ref = useMemo(
@@ -100,6 +100,9 @@ Tooltip.Trigger = TooltipTrigger;
 Tooltip.Content = TooltipContent;
 
 if (process.env.NODE_ENV === "development") {
+  TooltipTrigger.displayName = "TooltipTrigger";
+  TooltipContent.displayName = "TooltipContent";
+
   Tooltip.whyDidYouRender = true;
   TooltipTrigger.whyDidYouRender = true;
   TooltipContent.whyDidYouRender = true;

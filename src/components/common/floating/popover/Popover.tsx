@@ -11,11 +11,12 @@ import {
   HTMLProps,
   isValidElement,
   ReactNode,
+  useCallback,
   useLayoutEffect,
   useMemo,
 } from "react";
 
-import { Floater } from "../floater/Floater";
+import Floater from "../floater/Floater";
 
 import {
   PopoverContext,
@@ -25,7 +26,7 @@ import {
 } from "./hooks";
 
 const PopoverTrigger = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
-  function PopoverTrigger({ children, ...props }, propRef) {
+  ({ children, ...props }, propRef) => {
     const state = usePopoverState();
     const childrenRef = (children as any).ref;
 
@@ -60,7 +61,7 @@ const PopoverTrigger = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
 );
 
 const PopoverContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
-  function PopoverContent(props, propRef) {
+  (props, propRef) => {
     const state = usePopoverState();
 
     const ref = useMemo(
@@ -93,7 +94,7 @@ const PopoverContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
 );
 
 const PopoverHeading = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
-  function PopoverHeading({ children, ...props }, ref) {
+  ({ children, ...props }, ref) => {
     const { setLabelId } = usePopoverState();
     const id = useId();
 
@@ -126,7 +127,7 @@ const PopoverHeading = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
 );
 
 const PopoverDescription = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
-  function PopoverDescription({ children, ...props }, ref) {
+  ({ children, ...props }, ref) => {
     const { setDescriptionId } = usePopoverState();
     const id = useId();
 
@@ -159,20 +160,23 @@ const PopoverDescription = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
 );
 
 const PopoverClose = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
-  function PopoverClose({ children, ...props }, ref) {
+  ({ children, ...props }, ref) => {
     const state = usePopoverState();
+    const onClick = useCallback(() => {
+      state.setOpen(false);
+    }, [state]);
 
     if (isValidElement(children)) {
       return cloneElement(children, {
         ref,
-        onClick: () => state.setOpen(false),
+        onClick,
         ...props,
       });
     }
 
     return (
       <button
-        onClick={() => state.setOpen(false)}
+        onClick={onClick}
         {...props}
         // @ts-ignore
         ref={ref}
@@ -212,6 +216,12 @@ Popover.Heading = PopoverHeading;
 Popover.Description = PopoverDescription;
 
 if (process.env.NODE_ENV === "development") {
+  PopoverClose.displayName = "PopoverClose";
+  PopoverTrigger.displayName = "PopoverTrigger";
+  PopoverContent.displayName = "PopoverContent";
+  PopoverHeading.displayName = "PopoverHeading";
+  PopoverDescription.displayName = "PopoverDescription";
+
   Popover.whyDidYouRender = true;
   PopoverTrigger.whyDidYouRender = true;
   PopoverClose.whyDidYouRender = true;

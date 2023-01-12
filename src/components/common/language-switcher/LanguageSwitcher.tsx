@@ -1,4 +1,4 @@
-import { FC, memo } from "react";
+import { FC, memo, MouseEvent as ReactMouseEvent, useMemo } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
@@ -19,6 +19,23 @@ const LanguageSwitcher: FC<
   // These checks are needed when the component is being rendered in storybook
   const locales = router?.locales ?? ["nl", "fr", "en"];
   const currentLocale = router?.locale ?? "nl";
+
+  const changeLanguage = useMemo(
+    () =>
+      (locale: string) =>
+      (e: ReactMouseEvent<HTMLAnchorElement, MouseEvent>) => {
+        e.stopPropagation();
+        e.preventDefault();
+        setCookie("NEXT_LOCALE", locale, {
+          maxAge: 31536000,
+          path: "/",
+        });
+
+        // @ts-ignore
+        window.location = e.currentTarget.href;
+      },
+    [setCookie]
+  );
 
   return (
     <StyledLanguageSwitcher {...props}>
@@ -46,17 +63,7 @@ const LanguageSwitcher: FC<
                       : // @ts-ignore
                         (t(`languageSwitcher.locales.${locale}`) as string)
                   }
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    e.preventDefault();
-                    setCookie("NEXT_LOCALE", locale, {
-                      maxAge: 31536000,
-                      path: "/",
-                    });
-
-                    // @ts-ignore
-                    window.location = e.currentTarget.href;
-                  }}
+                  onClick={changeLanguage(locale)}
                 >
                   <abbr
                     // @ts-ignore

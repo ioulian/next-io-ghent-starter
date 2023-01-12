@@ -15,8 +15,9 @@ import {
   useLayoutEffect,
   useMemo,
 } from "react";
+import { useCallback } from "react";
 
-import { Floater } from "../floater/Floater";
+import Floater from "../floater/Floater";
 
 import {
   DialogContext,
@@ -26,7 +27,7 @@ import {
 } from "./hooks";
 
 const DialogTrigger = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
-  function DialogTrigger({ children, ...props }, propRef) {
+  ({ children, ...props }, propRef) => {
     const state = useDialogState();
     const childrenRef = (children as any).ref;
 
@@ -61,7 +62,7 @@ const DialogTrigger = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
 );
 
 const DialogContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
-  function DialogContent(props, propRef) {
+  (props, propRef) => {
     const state = useDialogState();
 
     const ref = useMemo(
@@ -96,7 +97,7 @@ const DialogContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
 );
 
 const DialogHeading = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
-  function DialogHeading({ children, ...props }, ref) {
+  ({ children, ...props }, ref) => {
     const { setLabelId } = useDialogState();
     const id = useId();
 
@@ -129,7 +130,7 @@ const DialogHeading = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
 );
 
 const DialogDescription = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
-  function DialogDescription({ children, ...props }, ref) {
+  ({ children, ...props }, ref) => {
     const { setDescriptionId } = useDialogState();
     const id = useId();
 
@@ -162,20 +163,23 @@ const DialogDescription = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
 );
 
 const DialogClose = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
-  function DialogClose({ children, ...props }, ref) {
+  ({ children, ...props }, ref) => {
     const state = useDialogState();
+    const onClick = useCallback(() => {
+      state.setOpen(false);
+    }, [state]);
 
     if (isValidElement(children)) {
       return cloneElement(children, {
         ref,
-        onClick: () => state.setOpen(false),
+        onClick,
         ...props,
       });
     }
 
     return (
       <button
-        onClick={() => state.setOpen(false)}
+        onClick={onClick}
         {...props}
         // @ts-ignore
         ref={ref}
@@ -214,6 +218,12 @@ Dialog.Heading = DialogHeading;
 Dialog.Description = DialogDescription;
 
 if (process.env.NODE_ENV === "development") {
+  DialogTrigger.displayName = "DialogTrigger";
+  DialogContent.displayName = "DialogContent";
+  DialogHeading.displayName = "DialogHeading";
+  DialogDescription.displayName = "DialogDescription";
+  DialogClose.displayName = "DialogClose";
+
   Dialog.whyDidYouRender = true;
   DialogTrigger.whyDidYouRender = true;
   DialogClose.whyDidYouRender = true;

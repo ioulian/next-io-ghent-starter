@@ -39,7 +39,7 @@ import {
 import { mergeRefs } from "react-merge-refs";
 import { useTheme } from "styled-components";
 
-import { Floater } from "../floater/Floater";
+import Floater from "../floater/Floater";
 
 import { StyledMenuWrapper } from "./Dropdown.styles";
 
@@ -79,10 +79,6 @@ export const DropdownMenuItem = forwardRef<
 >(({ children, ...props }, ref) => {
   return makeMenuItem(children, props, ref);
 });
-
-if (process.env.NODE_ENV !== "production") {
-  DropdownMenuItem.displayName = "DropdownMenuItem";
-}
 
 const DropdownMenu = forwardRef<
   HTMLButtonElement,
@@ -297,10 +293,6 @@ const DropdownMenu = forwardRef<
   );
 });
 
-if (process.env.NODE_ENV !== "production") {
-  DropdownMenu.displayName = "DropdownMenu";
-}
-
 const Dropdown = forwardRef<
   HTMLButtonElement,
   DropdownMenuProps & WithTypeAheadKey & HTMLProps<HTMLButtonElement>
@@ -320,7 +312,12 @@ const Dropdown = forwardRef<
 
 if (process.env.NODE_ENV === "development") {
   Dropdown.displayName = "Dropdown";
+  DropdownMenu.displayName = "DropdownMenu";
+  DropdownMenuItem.displayName = "DropdownMenuItem";
+
   Dropdown.whyDidYouRender = true;
+  DropdownMenu.whyDidYouRender = true;
+  DropdownMenuItem.whyDidYouRender = true;
 }
 
 export default Dropdown;

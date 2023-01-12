@@ -10,7 +10,7 @@ import { InferComponentProps } from "@/types/styled";
 
 import { StyledFloater, StyledFloaterArrow } from "./Floater.styles";
 
-export const Floater = forwardRef<
+const Floater = forwardRef<
   HTMLDivElement,
   {
     // state: TooltipState | PopoverState | DialogState;
@@ -85,3 +85,5 @@ if (process.env.NODE_ENV === "development") {
   Floater.displayName = "Floater";
   Floater.whyDidYouRender = true;
 }
+
+export default Floater;
