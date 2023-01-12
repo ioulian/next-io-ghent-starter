@@ -10,6 +10,7 @@ import {
   incrementIfOdd,
   selectCount,
 } from "./counterSlice";
+import TestComponent from "./TestComponent";
 
 export const Counter = () => {
   const dispatch = useAppDispatch();
@@ -50,6 +51,7 @@ export const Counter = () => {
         <button onClick={() => dispatch(incrementIfOdd(incrementValue))}>
           Add If Odd
         </button>
+        <TestComponent test={2} />
       </div>
     </div>
   );

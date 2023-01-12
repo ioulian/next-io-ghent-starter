@@ -36,10 +36,17 @@ the project first.
 
 ## Getting Started
 
+### Install
+
 ```bash
 yarn create next-app --https://github.com/ioulian/next-io-ghent-starter
 yarn dev
 ```
+
+### Remove demo content
+
+- Remove content from `pages/index.tsx` and `pages/serverside.tsx`
+- Remove `src/features/counter` and `src/components/Demo.ts`
 
 ## Go live checklist
 
@@ -54,9 +61,14 @@ yarn dev
 
 If you want to use redux on the server (authentication for example), you'll need
 to convert your app to use SSR on every page where you want to use redux. You'll
-want to enable cookie storage for select redux values.
+want to enable cookie storage for select redux values (in `src/store/store.ts`).
 
-If you want to use redux, but with SSG, you should remove HYDRATION from slices
+If you want to use redux, but with SSG, you should remove HYDRATION from slices.
+
+## JWT Auth
+
+If you want to use JWT Auth presets, you'll need to use SSR and use AuthFetcher
+in `pages/_app.tsx`.
 
 ## Learn More
 
