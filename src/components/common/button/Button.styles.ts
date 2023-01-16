@@ -1,4 +1,4 @@
-import { darken } from "polished";
+import darken from "polished/lib/color/darken";
 import styled, { css } from "styled-components";
 
 import { StyledSpinner } from "../spinner/Spinner.styles";

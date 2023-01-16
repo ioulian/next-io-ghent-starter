@@ -1,4 +1,4 @@
-import { rgba } from "polished";
+import rgba from "polished/lib/color/rgba";
 import { createGlobalStyle } from "styled-components";
 import media, { setBreakPoints } from "css-in-js-media";
 

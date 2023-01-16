@@ -1,4 +1,4 @@
-import { rgba } from "polished";
+import rgba from "polished/lib/color/rgba";
 import styled from "styled-components";
 
 export const StyledFloater = styled.div`
