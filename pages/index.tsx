@@ -22,6 +22,7 @@ import { requireAnonymous } from "@/features/auth/utilities";
 import Heading from "@/components/common/heading/Heading";
 import LanguageSwitcher from "@/components/common/language-switcher/LanguageSwitcher";
 import Button from "@/components/common/button/Button";
+import { success } from "@/components/common/toast/notify";
 
 import { wrapper } from "../src/store/store";
 
@@ -38,6 +39,10 @@ const Home: NextPageWithLayout = ({}: InferGetStaticPropsType<
   const add = useCallback(() => {
     setV((v) => v + 1);
   }, [setV]);
+
+  const testToast = useCallback(() => {
+    success("Toastify loaded dynamically!");
+  }, []);
 
   return (
     <>
@@ -82,6 +87,9 @@ const Home: NextPageWithLayout = ({}: InferGetStaticPropsType<
             <LanguageSwitcher />
             <Button onClick={add} iconBefore={svgSprite}>
               Test
+            </Button>
+            <Button onClick={testToast} iconBefore={svgSprite}>
+              Test toast
             </Button>
           </nav>
 
