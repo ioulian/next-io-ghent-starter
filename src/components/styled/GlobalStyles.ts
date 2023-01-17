@@ -160,7 +160,7 @@ const GlobalStyle = createGlobalStyle`
         inset: initial !important;
         border: initial !important;
         background: initial !important;
-        overflow: initial !important;
+        overflow: auto !important;
         border-radius: initial !important;
         padding: initial !important;
 

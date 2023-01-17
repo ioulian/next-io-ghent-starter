@@ -11,6 +11,6 @@ export const StyledOverlayCloseButton = styled.button`
   border-radius: 50%;
   position: fixed;
   top: 1rem;
-  right: 1rem;
+  right: 2rem;
   z-index: 2;
 `;

@@ -2,6 +2,7 @@ import { FC, ReactNode, useState } from "react";
 import Modal from "react-modal";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import { useTheme } from "styled-components";
+import { useCallback } from "react";
 
 import OverlayCloseButton from "./close-button/OverlayCloseButton";
 import { StyledOverlayContainer } from "./Overlay.styles";
@@ -29,6 +30,26 @@ const Overlay: FC<{
   const [ref, setRef] = useState<Modal | null>(null);
   const theme = useTheme();
 
+  const onRequestClose = useCallback(() => {
+    onClose?.();
+  }, [onClose]);
+
+  const onAfterOpen = useCallback(() => {
+    // @ts-ignore We know it exists
+    if (ref?.node) {
+      // @ts-ignore We know it exists
+      disableBodyScroll(ref.node);
+    }
+  }, [ref]);
+
+  const onAfterClose = useCallback(() => {
+    // @ts-ignore We know it exists
+    if (ref?.node) {
+      // @ts-ignore We know it exists
+      enableBodyScroll(ref.node);
+    }
+  }, [ref]);
+
   return (
     <>
       <Modal
@@ -38,27 +59,13 @@ const Overlay: FC<{
         shouldReturnFocusAfterClose={true}
         isOpen={isOpen}
         shouldCloseOnOverlayClick={true}
-        onRequestClose={() => {
-          onClose?.();
-        }}
         contentLabel={title}
         style={{
           overlay: {
             zIndex: theme.zIndex.overlay,
           },
         }}
-        onAfterOpen={() => {
-          if (ref) {
-            // @ts-ignore
-            disableBodyScroll(ref);
-          }
-        }}
-        onAfterClose={() => {
-          if (ref) {
-            // @ts-ignore
-            enableBodyScroll(ref);
-          }
-        }}
+        {...{ onAfterOpen, onAfterClose, onRequestClose }}
         ref={setRef}
       >
         <OverlayCloseButton onClick={onClose} />
