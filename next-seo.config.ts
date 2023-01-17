@@ -1,4 +1,6 @@
-module.exports = {
+import { DefaultSeoProps } from "next-seo";
+
+const config: DefaultSeoProps = {
   titleTemplate: "%s | iO Ghent",
   defaultTitle: "iO Ghent",
   openGraph: {
@@ -6,3 +8,5 @@ module.exports = {
     site_name: "iO Ghent",
   },
 };
+
+export default config;
