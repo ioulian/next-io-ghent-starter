@@ -90,6 +90,7 @@ contributions are welcome!
 - find a good PWA generator
 - add .env checker
 - Optimize Floating UI
+- add helper for <https://nextjs.org/docs/advanced-features/i18n-routing#search-engine-optimization>
 
 ## Component export convention
 
