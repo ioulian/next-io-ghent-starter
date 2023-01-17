@@ -10,7 +10,7 @@ import {
   useFloating,
   useInteractions,
   useRole,
-} from "@floating-ui/react-dom-interactions";
+} from "@floating-ui/react";
 import {
   createContext,
   Dispatch,
@@ -55,7 +55,7 @@ export const usePopover = ({
     middleware: [
       offset(theme.floating.popover.offset),
       flip(),
-      shift(),
+      shift({ padding: theme.floating.floater.shift }),
       arrow({ element: arrowRef }),
     ],
   });
@@ -112,7 +112,7 @@ type ContextType =
 
 export const PopoverContext = createContext<ContextType>(null);
 
-export const usePopoverState = () => {
+export const usePopoverContext = () => {
   const context = useContext(PopoverContext);
 
   if (context == null) {

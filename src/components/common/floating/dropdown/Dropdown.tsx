@@ -20,7 +20,9 @@ import {
   useListNavigation,
   useRole,
   useTypeahead,
-} from "@floating-ui/react-dom-interactions";
+  useMergeRefs,
+  useTransitionStyles,
+} from "@floating-ui/react";
 import {
   ButtonHTMLAttributes,
   Children,
@@ -32,11 +34,9 @@ import {
   ReactNode,
   useCallback,
   useEffect,
-  useMemo,
   useRef,
   useState,
 } from "react";
-import { mergeRefs } from "react-merge-refs";
 import { useTheme } from "styled-components";
 
 import Floater from "../floater/Floater";
@@ -105,7 +105,7 @@ const DropdownMenu = forwardRef<
   const {
     x,
     y,
-    reference,
+    refs,
     floating,
     strategy,
     context,
@@ -120,7 +120,7 @@ const DropdownMenu = forwardRef<
     middleware: [
       offset(theme.floating.popover.offset),
       flip(),
-      shift(),
+      shift({ padding: theme.floating.floater.shift }),
       arrow({ element: arrowRef }),
     ],
     whileElementsMounted: autoUpdate,
@@ -166,9 +166,9 @@ const DropdownMenu = forwardRef<
   // This effect closes all menus when an item gets clicked anywhere
   // in the tree.
   useEffect(() => {
-    function handleTreeClick() {
+    const handleTreeClick = () => {
       setOpen(false);
-    }
+    };
 
     tree?.events.on("click", handleTreeClick);
     return () => {
@@ -180,21 +180,22 @@ const DropdownMenu = forwardRef<
   // prevents unwanted focus synchronization as menus open and close with
   // keyboard navigation and the cursor is resting on the menu.
   useEffect(() => {
-    function onPointerMove({ pointerType }: PointerEvent) {
+    const onPointerMove = ({ pointerType }: PointerEvent) => {
       if (pointerType === "mouse") {
         setAllowHover(true);
       }
-    }
+    };
 
-    function onKeyDown() {
+    const onKeyDown = () => {
       setAllowHover(false);
-    }
+    };
 
     window.addEventListener("pointermove", onPointerMove, {
       once: true,
       capture: true,
     });
     window.addEventListener("keydown", onKeyDown, true);
+
     return () => {
       window.removeEventListener("pointermove", onPointerMove, {
         capture: true,
@@ -203,10 +204,10 @@ const DropdownMenu = forwardRef<
     };
   }, [allowHover]);
 
-  const referenceRef = useMemo(
-    () => mergeRefs([reference, forwardedRef]),
-    [reference, forwardedRef]
-  );
+  const referenceRef = useMergeRefs([refs.setReference, forwardedRef]);
+  const { isMounted, styles } = useTransitionStyles(context, {
+    duration: theme.timings.fast,
+  });
 
   return (
     <FloatingNode id={nodeId}>
@@ -216,7 +217,7 @@ const DropdownMenu = forwardRef<
           ...getReferenceProps({
             ...props,
             className: `${open ? "open" : ""}`,
-            onClick(event) {
+            onClick: (event) => {
               event.stopPropagation();
             },
             ...(nested && {
@@ -228,7 +229,7 @@ const DropdownMenu = forwardRef<
         referenceRef
       )}
       <FloatingPortal>
-        {open && (
+        {isMounted && (
           <FloatingFocusManager
             context={context}
             // Prevent outside content interference.
@@ -251,12 +252,13 @@ const DropdownMenu = forwardRef<
               {...getFloatingProps({
                 // Pressing tab dismisses the menu and places focus
                 // back on the trigger.
-                onKeyDown(event) {
+                onKeyDown: (event) => {
                   if (event.key === "Tab") {
                     setOpen(false);
                   }
                 },
               })}
+              style={styles}
             >
               <StyledMenuWrapper>
                 {Children.map(
@@ -268,15 +270,15 @@ const DropdownMenu = forwardRef<
                       getItemProps({
                         tabIndex: activeIndex === index ? 0 : -1,
                         role: "menuitem",
-                        ref(node: HTMLButtonElement) {
+                        ref: (node: HTMLButtonElement) => {
                           listItemsRef.current[index] = node;
                         },
-                        onClick(event) {
+                        onClick: (event) => {
                           child.props.onClick?.(event);
                           tree?.events.emit("click");
                         },
                         // Allow focus synchronization if the cursor did not move.
-                        onPointerEnter() {
+                        onPointerEnter: () => {
                           if (allowHover) {
                             setActiveIndex(index);
                           }

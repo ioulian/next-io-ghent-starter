@@ -1,9 +1,10 @@
-import { mergeRefs } from "react-merge-refs";
 import {
   FloatingFocusManager,
   FloatingPortal,
   useId,
-} from "@floating-ui/react-dom-interactions";
+  useMergeRefs,
+  useTransitionStyles,
+} from "@floating-ui/react";
 import {
   cloneElement,
   FC,
@@ -13,8 +14,8 @@ import {
   ReactNode,
   useCallback,
   useLayoutEffect,
-  useMemo,
 } from "react";
+import { useTheme } from "styled-components";
 
 import Floater from "../floater/Floater";
 
@@ -22,27 +23,24 @@ import {
   PopoverContext,
   PopoverOptions,
   usePopover,
-  usePopoverState,
+  usePopoverContext,
 } from "./hooks";
 
 const PopoverTrigger = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
   ({ children, ...props }, propRef) => {
-    const state = usePopoverState();
+    const context = usePopoverContext();
     const childrenRef = (children as any).ref;
 
-    const ref = useMemo(
-      () => mergeRefs([state.reference, propRef, childrenRef]),
-      [state.reference, propRef, childrenRef]
-    );
+    const ref = useMergeRefs([context.refs.setReference, propRef, childrenRef]);
 
     if (isValidElement(children)) {
       return cloneElement(
         children,
-        state.getReferenceProps({
+        context.getReferenceProps({
           ref,
           ...props,
           ...children.props,
-          "data-state": state.open ? "open" : "closed",
+          "data-state": context.open ? "open" : "closed",
         })
       );
     }
@@ -51,8 +49,8 @@ const PopoverTrigger = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
       <button
         ref={ref}
         // The user can style the trigger based on the state
-        data-state={state.open ? "open" : "closed"}
-        {...state.getReferenceProps(props)}
+        data-state={context.open ? "open" : "closed"}
+        {...context.getReferenceProps(props)}
       >
         {children}
       </button>
@@ -62,27 +60,28 @@ const PopoverTrigger = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
 
 const PopoverContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
   (props, propRef) => {
-    const state = usePopoverState();
-
-    const ref = useMemo(
-      () => mergeRefs([state.floating, propRef]),
-      [state.floating, propRef]
-    );
+    const context = usePopoverContext();
+    const ref = useMergeRefs([context.refs.setFloating, propRef]);
+    const theme = useTheme();
+    const { isMounted, styles } = useTransitionStyles(context.context, {
+      duration: theme.timings.fast,
+    });
 
     return (
       <FloatingPortal>
-        {state.open && (
-          <FloatingFocusManager context={state.context} modal={state.modal}>
+        {isMounted && (
+          <FloatingFocusManager context={context.context} modal={context.modal}>
             <Floater
               ref={ref}
-              position={{ x: state.x, y: state.y }}
-              arrowPosition={state.middlewareData.arrow}
-              strategy={state.strategy}
-              placement={state.placement}
-              arrowCallback={state.arrowCallback}
-              aria-labelledby={state.labelId}
-              aria-describedby={state.descriptionId}
-              {...state.getFloatingProps(props)}
+              position={{ x: context.x ?? 0, y: context.y ?? 0 }}
+              arrowPosition={context.middlewareData.arrow}
+              strategy={context.strategy}
+              placement={context.placement}
+              arrowCallback={context.arrowCallback}
+              aria-labelledby={context.labelId}
+              aria-describedby={context.descriptionId}
+              {...context.getFloatingProps(props)}
+              style={styles}
             >
               {props.children}
             </Floater>
@@ -95,7 +94,7 @@ const PopoverContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
 
 const PopoverHeading = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
   ({ children, ...props }, ref) => {
-    const { setLabelId } = usePopoverState();
+    const { setLabelId } = usePopoverContext();
     const id = useId();
 
     // Only sets `aria-labelledby` on the Popover root element
@@ -128,7 +127,7 @@ const PopoverHeading = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
 
 const PopoverDescription = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
   ({ children, ...props }, ref) => {
-    const { setDescriptionId } = usePopoverState();
+    const { setDescriptionId } = usePopoverContext();
     const id = useId();
 
     // Only sets `aria-describedby` on the Popover root element
@@ -161,7 +160,7 @@ const PopoverDescription = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
 
 const PopoverClose = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
   ({ children, ...props }, ref) => {
-    const state = usePopoverState();
+    const state = usePopoverContext();
     const onClick = useCallback(() => {
       state.setOpen(false);
     }, [state]);

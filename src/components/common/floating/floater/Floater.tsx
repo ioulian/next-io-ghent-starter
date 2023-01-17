@@ -1,10 +1,6 @@
 import { forwardRef } from "react";
 import { useTheme } from "styled-components";
-import {
-  Coords,
-  Placement,
-  Strategy,
-} from "@floating-ui/react-dom-interactions";
+import { Coords, Placement, Strategy } from "@floating-ui/react";
 
 import { InferComponentProps } from "@/types/styled";
 

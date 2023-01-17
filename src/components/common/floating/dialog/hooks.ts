@@ -4,7 +4,7 @@ import {
   useFloating,
   useInteractions,
   useRole,
-} from "@floating-ui/react-dom-interactions";
+} from "@floating-ui/react";
 import {
   createContext,
   Dispatch,
@@ -71,7 +71,7 @@ type ContextType =
 
 export const DialogContext = createContext<ContextType>(null);
 
-export const useDialogState = () => {
+export const useDialogContext = () => {
   const context = useContext(DialogContext);
 
   if (context == null) {

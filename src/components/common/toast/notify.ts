@@ -1,4 +1,7 @@
-const toastify = () => import(/* webpackChunkName: "toastify" */ "./toastify");
+/**
+ * If you want named chunks, use: import(webpackChunkName: "toastify" ...)
+ */
+const toastify = () => import("./toastify");
 
 export const success = (content: string | JSX.Element) => {
   return toastify().then((toast) => {

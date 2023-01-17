@@ -51,6 +51,7 @@ const theme: DefaultTheme = {
       offset: 10,
     },
     floater: {
+      shift: 5,
       arrow: {
         size: 10,
       },

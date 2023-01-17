@@ -40,9 +40,10 @@ declare module "styled-components" {
         offset: number;
       };
       dropdown: {
-        offset: 10;
+        offset: number;
       };
       floater: {
+        shift: number;
         arrow: {
           size: number;
         };

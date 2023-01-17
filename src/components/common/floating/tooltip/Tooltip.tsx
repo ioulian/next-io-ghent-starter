@@ -1,5 +1,8 @@
-import { mergeRefs } from "react-merge-refs";
-import { FloatingPortal } from "@floating-ui/react-dom-interactions";
+import {
+  FloatingPortal,
+  useMergeRefs,
+  useTransitionStyles,
+} from "@floating-ui/react";
 import {
   cloneElement,
   FC,
@@ -7,8 +10,8 @@ import {
   HTMLProps,
   isValidElement,
   ReactNode,
-  useMemo,
 } from "react";
+import { useTheme } from "styled-components";
 
 import Floater from "../floater/Floater";
 
@@ -16,27 +19,24 @@ import {
   TooltipContext,
   TooltipOptions,
   useTooltip,
-  useTooltipState,
+  useTooltipContext,
 } from "./hooks";
 
 const TooltipTrigger = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
   ({ children, ...props }, propRef) => {
-    const state = useTooltipState();
+    const context = useTooltipContext();
 
     const childrenRef = (children as any).ref;
-    const ref = useMemo(
-      () => mergeRefs([state.reference, propRef, childrenRef]),
-      [state.reference, propRef, childrenRef]
-    );
+    const ref = useMergeRefs([context.refs.setReference, propRef, childrenRef]);
 
     if (isValidElement(children)) {
       return cloneElement(
         children,
-        state.getReferenceProps({
+        context.getReferenceProps({
           ref,
           ...props,
           ...children.props,
-          "data-state": state.open ? "open" : "closed",
+          "data-state": context.open ? "open" : "closed",
         })
       );
     }
@@ -45,8 +45,8 @@ const TooltipTrigger = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
       <span
         ref={ref}
         // The user can style the trigger based on the state
-        data-state={state.open ? "open" : "closed"}
-        {...state.getReferenceProps(props)}
+        data-state={context.open ? "open" : "closed"}
+        {...context.getReferenceProps(props)}
       >
         {children}
       </span>
@@ -56,24 +56,25 @@ const TooltipTrigger = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
 
 const TooltipContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
   (props, propRef) => {
-    const state = useTooltipState();
-
-    const ref = useMemo(
-      () => mergeRefs([state.floating, propRef]),
-      [state.floating, propRef]
-    );
+    const context = useTooltipContext();
+    const ref = useMergeRefs([context.refs.setFloating, propRef]);
+    const theme = useTheme();
+    const { isMounted, styles } = useTransitionStyles(context.context, {
+      duration: theme.timings.fast,
+    });
 
     return (
       <FloatingPortal>
-        {state.open && (
+        {isMounted && (
           <Floater
             ref={ref}
-            position={{ x: state.x, y: state.y }}
-            arrowPosition={state.middlewareData.arrow}
-            strategy={state.strategy}
-            placement={state.placement}
-            arrowCallback={state.arrowCallback}
-            {...state.getFloatingProps(props)}
+            position={{ x: context.x ?? 0, y: context.y ?? 0 }}
+            arrowPosition={context.middlewareData.arrow}
+            strategy={context.strategy}
+            placement={context.placement}
+            arrowCallback={context.arrowCallback}
+            {...context.getFloatingProps(props)}
+            style={styles}
           />
         )}
       </FloatingPortal>

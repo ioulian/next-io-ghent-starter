@@ -11,7 +11,7 @@ import {
   useHover,
   useInteractions,
   useRole,
-} from "@floating-ui/react-dom-interactions";
+} from "@floating-ui/react";
 import {
   createContext,
   useCallback,
@@ -50,7 +50,7 @@ export const useTooltip = ({
     middleware: [
       offset(theme.floating.tooltip.offset),
       flip(),
-      shift(),
+      shift({ padding: theme.floating.floater.shift }),
       arrow({ element: arrowRef }),
     ],
   });
@@ -93,7 +93,7 @@ type ContextType = ReturnType<typeof useTooltip> | null;
 
 export const TooltipContext = createContext<ContextType>(null);
 
-export const useTooltipState = () => {
+export const useTooltipContext = () => {
   const context = useContext(TooltipContext);
 
   if (context == null) {

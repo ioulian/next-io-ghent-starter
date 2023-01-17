@@ -1,12 +1,16 @@
 import styled from "styled-components";
 
 export const StyledMenuWrapper = styled.div`
-  > * {
+  > button {
     width: 100%;
     display: block;
 
-    &:not(:last-child) {
-      margin-bottom: 5px;
+    &:not(:first-child) {
+      margin-top: 5px;
     }
+  }
+
+  > span {
+    position: absolute;
   }
 `;

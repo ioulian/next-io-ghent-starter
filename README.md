@@ -58,6 +58,7 @@ yarn dev
 - `src/lib/page-head.tsx` and make sure the favicons are all regenerated. Make
   sure "short_name" in `public/site.webmanifest` is <= 12 chars
 - `.gitignore` Generated files should be enabled if no build step exists
+- (Optional) You can use [JSON-LD](https://github.com/garmeeh/next-seo#json-ld) from next-seo bundle
 
 ## Redux
 
@@ -89,6 +90,7 @@ contributions are welcome!
 - find a good PWA generator
 - add .env checker
 - Optimize Floating UI
+- add helper for <https://nextjs.org/docs/advanced-features/i18n-routing#search-engine-optimization>
 
 ## Component export convention
 

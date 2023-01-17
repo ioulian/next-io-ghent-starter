@@ -1,4 +1,4 @@
-import { rgba } from "polished";
+import rgba from "polished/lib/color/rgba";
 import { createGlobalStyle } from "styled-components";
 import media, { setBreakPoints } from "css-in-js-media";
 
@@ -160,7 +160,7 @@ const GlobalStyle = createGlobalStyle`
         inset: initial !important;
         border: initial !important;
         background: initial !important;
-        overflow: initial !important;
+        overflow: auto !important;
         border-radius: initial !important;
         padding: initial !important;
 
