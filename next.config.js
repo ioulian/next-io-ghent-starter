@@ -23,7 +23,7 @@ module.exports = withBundleAnalyzer(
     images: {
       formats: ["image/avif", "image/webp"],
     },
-    webpack(config) {
+    webpack: (config) => {
       const fileLoaderRule = config.module.rules.find(
         (rule) => rule.test && rule.test.test(".svg")
       );
