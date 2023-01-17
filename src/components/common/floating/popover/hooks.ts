@@ -55,7 +55,7 @@ export const usePopover = ({
     middleware: [
       offset(theme.floating.popover.offset),
       flip(),
-      shift(),
+      shift({ padding: theme.floating.floater.shift }),
       arrow({ element: arrowRef }),
     ],
   });

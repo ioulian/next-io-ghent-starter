@@ -43,6 +43,7 @@ declare module "styled-components" {
         offset: number;
       };
       floater: {
+        shift: number;
         arrow: {
           size: number;
         };

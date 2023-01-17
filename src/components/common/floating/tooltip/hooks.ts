@@ -50,7 +50,7 @@ export const useTooltip = ({
     middleware: [
       offset(theme.floating.tooltip.offset),
       flip(),
-      shift(),
+      shift({ padding: theme.floating.floater.shift }),
       arrow({ element: arrowRef }),
     ],
   });

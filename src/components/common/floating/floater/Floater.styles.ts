@@ -11,6 +11,7 @@ export const StyledFloater = styled.div`
   padding: 4px;
   width: max-content;
   padding: 5px;
+  max-width: calc(100vw - ${({ theme }) => theme.floating.floater.shift * 2}px);
 `;
 
 export const StyledFloaterArrow = styled.div`
