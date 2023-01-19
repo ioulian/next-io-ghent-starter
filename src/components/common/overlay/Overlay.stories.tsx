@@ -9,6 +9,21 @@ const meta: Meta<typeof Overlay> = {
   title: "UI/Overlay",
   component: Overlay,
   tags: ["autodocs"],
+  decorators: [
+    (Story) => (
+      <div
+        style={{
+          width: "100%",
+          height: "500px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export default meta;
@@ -18,15 +33,7 @@ const ControlledOverlay = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
-    <div
-      style={{
-        width: "100%",
-        height: "500px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
+    <>
       <Button
         onClick={() => {
           setIsOpen(!isOpen);
@@ -168,10 +175,51 @@ const ControlledOverlay = () => {
           </p>
         </div>
       </Overlay>
-    </div>
+    </>
   );
 };
 
 export const Default: Story = {
   render: () => <ControlledOverlay />,
+};
+
+const WithControlsOverlay = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  return (
+    <>
+      <Button
+        onClick={() => {
+          setIsOpen(!isOpen);
+        }}
+      >
+        Open dialog
+      </Button>
+      <Overlay
+        isOpen={isOpen}
+        title="Example"
+        onClose={() => {
+          setIsOpen(false);
+        }}
+      >
+        <div style={{ backgroundColor: "white", padding: "1rem" }}>
+          <Button
+            tabIndex={-1}
+            onClick={() => {
+              console.log(1);
+            }}
+          >
+            button 1
+          </Button>
+          <Button onClick={() => {}} tabIndex={-1}>
+            button 2
+          </Button>
+        </div>
+      </Overlay>
+    </>
+  );
+};
+
+export const WithControls: Story = {
+  render: () => <WithControlsOverlay />,
 };

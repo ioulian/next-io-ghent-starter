@@ -129,6 +129,8 @@ const Home: NextPageWithLayout = ({}: InferGetStaticPropsType<
               }}
             >
               <div style={{ backgroundColor: "white", padding: "1rem" }}>
+                <button>button 1</button>
+                <button>button 2</button>
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                   Praesent porta dolor mi, at venenatis urna elementum a. Etiam
