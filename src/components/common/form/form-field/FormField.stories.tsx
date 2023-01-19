@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import ReactSelect from "react-select";
+import icon from "@tabler/icons/at.svg";
 
 import { email, required } from "../rules";
 import Form from "../form/Form";
@@ -10,6 +11,7 @@ import Radio from "../collection/radio/Radio";
 import List from "../collection/List";
 import Checkbox from "../collection/checkbox/Checkbox";
 import { StyledReactSelect } from "../react-select/ReactSelect.styles";
+import SvgSprite from "../../svg/SvgSprite";
 
 import Input from "./../input/Input";
 import FormField from "./FormField";
@@ -37,7 +39,7 @@ const meta: Meta<typeof FormField> = {
 export default meta;
 type Story = StoryObj<typeof FormField>;
 
-export const Default: Story = {
+export const WithInput: Story = {
   render: (args) => (
     <Form onSubmit={() => {}} error={ExampleApiError}>
       <FormField {...args} />
@@ -51,7 +53,7 @@ export const Default: Story = {
       ...email,
     },
     description: "Description",
-    children: <Input />,
+    children: <Input iconBefore={<SvgSprite src={icon} />} />,
   },
 };
 

@@ -6,28 +6,47 @@ const meta: Meta<typeof Spinner> = {
   title: "UI/Spinner",
   component: Spinner,
   tags: ["autodocs"],
+  decorators: [
+    (Story) => (
+      <div
+        style={{
+          width: "400px",
+          height: "400px",
+          border: " 1px dashed #777",
+        }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export default meta;
 type Story = StoryObj<typeof Spinner>;
 
 export const Default: Story = {
-  render: (args) => (
-    <div
-      style={{
-        width: "400px",
-        height: "400px",
-        background: "#eee",
-      }}
-    >
-      <Spinner {...args} />
-    </div>
-  ),
+  args: {},
+};
+
+export const WithLabel: Story = {
+  args: {
+    label: "Loading...",
+  },
+};
+
+export const WithCustomColors: Story = {
   args: {
     $fullWidth: true,
     $fullHeight: true,
-    label: "Loading...",
-    //primaryColor: "#0042c2",
-    //secondaryColor: "#b6c5c5",
+    primaryColor: "#fff",
+    secondaryColor: "#647373",
+    backgroundColor: "rgba(0, 0, 0, 0.25)",
+  },
+};
+
+export const FullWidth: Story = {
+  args: {
+    $fullWidth: true,
+    $fullHeight: true,
   },
 };

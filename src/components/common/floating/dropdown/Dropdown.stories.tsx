@@ -1,8 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import iconChevron from "@tabler/icons/chevron-right.svg";
+import { useState } from "react";
 
 import Button from "../../button/Button";
 import SvgSprite from "../../svg/SvgSprite";
+import Dialog from "../dialog/Dialog";
 
 import Dropdown, { DropdownMenuItem } from "./Dropdown";
 
@@ -122,10 +124,56 @@ export const CustomElements: Story = {
           <Button>Instagram</Button>
         </DropdownMenuItem>
       </Dropdown>
-      ,
     </Dropdown>
   ),
   args: {
     trigger: <Button>Menu</Button>,
   },
+};
+
+const WithDialogComponent = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  return (
+    <Dropdown trigger={<Button>Open</Button>}>
+      <DropdownMenuItem typeaheadKey="Copy">
+        <Button>Copy</Button>
+      </DropdownMenuItem>
+      <DropdownMenuItem typeaheadKey="Edit">
+        <Button>Edit</Button>
+      </DropdownMenuItem>
+      <DropdownMenuItem typeaheadKey="Delete">
+        <Dialog open={isOpen}>
+          <Dialog.Trigger
+            onClick={() => {
+              setIsOpen(!isOpen);
+            }}
+          >
+            <Button>Delete</Button>
+          </Dialog.Trigger>
+          <Dialog.Content>
+            <Dialog.Heading>Are you sure?</Dialog.Heading>
+            <Dialog.Description>This will delete the item.</Dialog.Description>
+            <Dialog.Close
+              onClick={() => {
+                setIsOpen(false);
+              }}
+            >
+              Close
+            </Dialog.Close>
+            <Button
+              onClick={() => {
+                console.log("delete");
+                setIsOpen(false);
+              }}
+            >
+              Confirm
+            </Button>
+          </Dialog.Content>
+        </Dialog>
+      </DropdownMenuItem>
+    </Dropdown>
+  );
+};
+export const WithDialog: Story = {
+  render: () => <WithDialogComponent />,
 };

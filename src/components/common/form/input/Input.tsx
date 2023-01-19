@@ -1,13 +1,21 @@
-import { forwardRef } from "react";
+import { forwardRef, ReactNode } from "react";
 
 import { InferComponentProps } from "@/types/styled";
 
-import { StyledInput } from "./Input.styles";
+import { StyledInput, StyledInputIconContainer } from "./Input.styles";
 
 const Input = forwardRef<
   HTMLInputElement,
-  InferComponentProps<typeof StyledInput>
->(({ ...props }, ref) => {
+  { iconBefore?: ReactNode } & InferComponentProps<typeof StyledInput>
+>(({ iconBefore, ...props }, ref) => {
+  if (iconBefore && !["checkbox", "radio"].includes(props.type ?? "")) {
+    return (
+      <StyledInputIconContainer>
+        {iconBefore}
+        <StyledInput {...props} ref={ref} />
+      </StyledInputIconContainer>
+    );
+  }
   return <StyledInput {...props} ref={ref} />;
 });
 

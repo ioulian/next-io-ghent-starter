@@ -67,6 +67,8 @@ const DialogContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
       duration: theme.timings.normal,
     });
 
+    console.log(context);
+
     return (
       <FloatingPortal>
         {isMounted && (

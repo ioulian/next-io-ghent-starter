@@ -102,6 +102,7 @@ export const StyledButton = styled.button<{
     justify-content: center;
     transition: opacity ${({ theme }) => theme.timings.fast}ms;
     opacity: ${({ $isLoading }) => ($isLoading ? "0" : "1")};
+    gap: 0.5rem;
 
     > svg {
       flex-shrink: 0;
@@ -121,13 +122,13 @@ export const StyledButton = styled.button<{
         `}
     }
 
-    > svg + span {
-      margin-left: 0.5rem;
-    }
-
-    > span + svg {
-      margin-left: 0.5rem;
-    }
+    //> svg + span {
+    //  margin-left: 0.5rem;
+    //}
+    //
+    //> span + svg {
+    //  margin-left: 0.5rem;
+    //}
   }
 
   > ${StyledSpinner} {

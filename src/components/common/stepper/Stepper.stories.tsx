@@ -21,3 +21,19 @@ export const Default: Story = {
     </Stepper>
   ),
 };
+
+export const InlineSteps: Story = {
+  render: (args) => (
+    <Stepper {...args}>
+      <Step state="complete" $inline>
+        Step 1
+      </Step>
+      <Step state="current" $inline>
+        Step 2
+      </Step>
+      <Step state="future" $inline>
+        Step 3
+      </Step>
+    </Stepper>
+  ),
+};

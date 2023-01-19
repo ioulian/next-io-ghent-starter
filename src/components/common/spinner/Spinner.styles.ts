@@ -38,16 +38,25 @@ export const StyledSpinnerIcon = styled.div<{
 
 export const StyledSpinnerLabel = styled.div`
   font-size: 0.875rem;
+  line-height: 1;
 `;
 
 export const StyledSpinner = styled.div<{
   $fullWidth?: boolean;
   $fullHeight?: boolean;
+  $backgroundColor?: string;
 }>`
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
+  line-height: 1;
+
+  ${({ $backgroundColor }) =>
+    $backgroundColor &&
+    css`
+      background-color: ${$backgroundColor};
+    `}
 
   ${({ $fullWidth }) =>
     $fullWidth
