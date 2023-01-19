@@ -67,8 +67,6 @@ const DialogContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
       duration: theme.timings.normal,
     });
 
-    console.log(context);
-
     return (
       <FloatingPortal>
         {isMounted && (
@@ -194,7 +192,6 @@ const DialogClose = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
 );
 
 // Based on: https://floating-ui.com/docs/popover
-
 const Dialog: FC<
   {
     children: ReactNode;
