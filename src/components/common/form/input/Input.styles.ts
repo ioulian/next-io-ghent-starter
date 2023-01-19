@@ -46,3 +46,20 @@ export const StyledInput = styled.input`
     border-radius: 50%;
   }
 `;
+
+export const StyledInputIconContainer = styled.div`
+  position: relative;
+
+  > svg {
+    width: 1rem;
+    height: 1rem;
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    pointer-events: none;
+  }
+
+  > ${StyledInput}:not([type="radio"]):not([type="checkbox"]) {
+    padding-left: 40px; // 17px * 2 + icon size
+  }
+`;

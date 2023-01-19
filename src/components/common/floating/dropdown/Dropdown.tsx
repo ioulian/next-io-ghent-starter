@@ -273,9 +273,11 @@ const DropdownMenu = forwardRef<
                         ref: (node: HTMLButtonElement) => {
                           listItemsRef.current[index] = node;
                         },
-                        onClick: (event) => {
-                          child.props.onClick?.(event);
-                          tree?.events.emit("click");
+                        onClick: (e) => {
+                          child.props.onClick?.(e);
+                          if (!e.defaultPrevented) {
+                            tree?.events.emit("click");
+                          }
                         },
                         // Allow focus synchronization if the cursor did not move.
                         onPointerEnter: () => {

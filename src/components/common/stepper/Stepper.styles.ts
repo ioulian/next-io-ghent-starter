@@ -14,9 +14,9 @@ export const StyledStepIndicator = styled.div`
   height: 2rem;
   border-radius: 50%;
   border: 1px solid currentColor;
-  margin-bottom: 0.5rem;
   margin-left: auto;
   margin-right: auto;
+  flex-shrink: 0;
 `;
 
 export const StyledStepContent = styled.div`
@@ -25,9 +25,24 @@ export const StyledStepContent = styled.div`
 
 export const StyledStep = styled.li<{
   $state?: "complete" | "current" | "future";
+  $inline?: boolean;
 }>`
   text-align: center;
   flex-shrink: 1;
+
+  ${({ $inline }) =>
+    $inline
+      ? css`
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          white-space: nowrap;
+        `
+      : css`
+          ${StyledStepIndicator} {
+            margin-bottom: 0.5rem;
+          }
+        `}
 
   ${({ $state }) =>
     $state !== "complete" &&

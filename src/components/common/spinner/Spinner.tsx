@@ -14,14 +14,16 @@ const Spinner: FC<
     label?: ReactNode;
     primaryColor?: string;
     secondaryColor?: string;
+    backgroundColor?: string;
   } & InferComponentProps<typeof StyledSpinner>
 > = ({
   label,
   primaryColor = "currentColor",
   secondaryColor = "transparent",
+  backgroundColor = "transparent",
   ...props
 }) => (
-  <StyledSpinner {...props}>
+  <StyledSpinner {...props} $backgroundColor={backgroundColor}>
     <StyledSpinnerIcon
       $primaryColor={primaryColor}
       $secondaryColor={secondaryColor}
