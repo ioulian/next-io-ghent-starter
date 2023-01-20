@@ -1,4 +1,12 @@
-import { FC, ReactNode, useState } from "react";
+import {
+  cloneElement,
+  FC,
+  isValidElement,
+  ReactElement,
+  ReactNode,
+  useId,
+  useState,
+} from "react";
 import Modal from "react-modal";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import { useTheme } from "styled-components";
@@ -16,9 +24,14 @@ const Overlay: FC<{
   isOpen: boolean;
 
   /**
-   * Title of the overlay for accessibility reasons
+   * Content label of the overlay for accessibility reasons
    */
-  title: string;
+  contentLabel: string;
+
+  /**
+   * Heading of the modal
+   */
+  heading: ReactElement;
 
   /**
    * Callback when user wants to close the overlay (escape button, outside
@@ -26,9 +39,12 @@ const Overlay: FC<{
    */
   onClose?: () => void;
   children: ReactNode;
-}> = ({ title, isOpen = false, children, onClose }) => {
+}> = ({ contentLabel, heading, isOpen = false, children, onClose }) => {
   const [ref, setRef] = useState<Modal | null>(null);
   const theme = useTheme();
+
+  const headingId = useId();
+  const contentId = useId();
 
   const onRequestClose = useCallback(() => {
     onClose?.();
@@ -50,6 +66,7 @@ const Overlay: FC<{
     }
   }, [ref]);
 
+  // TODO: make heading as a subcomponent
   return (
     <>
       <Modal
@@ -59,17 +76,28 @@ const Overlay: FC<{
         shouldReturnFocusAfterClose={true}
         isOpen={isOpen}
         shouldCloseOnOverlayClick={true}
-        contentLabel={title}
+        contentLabel={contentLabel}
         style={{
           overlay: {
             zIndex: theme.zIndex.overlay,
           },
         }}
+        aria={{
+          labelledby: headingId,
+          describedby: contentId,
+        }}
         {...{ onAfterOpen, onAfterClose, onRequestClose }}
         ref={setRef}
       >
         <OverlayCloseButton onClick={onClose} />
-        <StyledOverlayContainer>{children}</StyledOverlayContainer>
+        <StyledOverlayContainer id={contentId} tabIndex={0} role="document">
+          {isValidElement(heading) &&
+            cloneElement(heading, {
+              // @ts-ignore
+              id: headingId,
+            })}
+          {children}
+        </StyledOverlayContainer>
       </Modal>
     </>
   );
