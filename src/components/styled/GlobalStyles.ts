@@ -126,9 +126,6 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .ReactModalPortal {
-    position: absolute;
-    top: 0;
-    left: 0;
 
     .ReactModal {
       &__Overlay {

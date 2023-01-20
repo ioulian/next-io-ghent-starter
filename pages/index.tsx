@@ -123,7 +123,8 @@ const Home: NextPageWithLayout = ({}: InferGetStaticPropsType<
             </Button>
             <Overlay
               isOpen={isOpen}
-              title="Example"
+              contentLabel="Example"
+              heading={<Heading type="h2">Example</Heading>}
               onClose={() => {
                 setIsOpen(false);
               }}

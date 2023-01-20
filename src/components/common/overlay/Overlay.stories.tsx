@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 
 import Button from "../button/Button";
+import Heading from "../heading/Heading";
 
 import Overlay from "./Overlay";
 
@@ -43,7 +44,8 @@ const ControlledOverlay = () => {
       </Button>
       <Overlay
         isOpen={isOpen}
-        title="Example"
+        contentLabel="Example"
+        heading={<Heading type="h2">Example</Heading>}
         onClose={() => {
           setIsOpen(false);
         }}
@@ -197,7 +199,8 @@ const WithControlsOverlay = () => {
       </Button>
       <Overlay
         isOpen={isOpen}
-        title="Example"
+        contentLabel="Example"
+        heading={<Heading type="h2">Example</Heading>}
         onClose={() => {
           setIsOpen(false);
         }}
