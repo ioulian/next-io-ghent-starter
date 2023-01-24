@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 import { StyledSpinner } from "../spinner/Spinner.styles";
 
 export const StyledButton = styled.button<{
-  $type?: "primary" | "secondary" | "simple";
+  $type?: "primary" | "secondary" | "simple" | "link";
   $size?: "base" | "small" | "normal" | "large";
   $fullWidth?: boolean;
   $isLoading?: boolean;
@@ -62,6 +62,18 @@ export const StyledButton = styled.button<{
     $type === "simple" &&
     css`
       border-color: transparent;
+    `}
+
+  ${({ $type }) =>
+    $type === "link" &&
+    css`
+      border-color: transparent;
+      text-decoration: underline;
+
+      &:hover,
+      &:focus {
+        text-decoration: none;
+      }
     `}
 
   ${({ $size }) =>

@@ -44,7 +44,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
   }
 
-  ul {
+  ul, ol {
     margin-top: 0;
     margin-bottom: 0;
     list-style: none;
