@@ -6,6 +6,7 @@ import { initReactI18next } from "react-i18next";
 import { i18n as i18nConfig } from "../next-i18next.config";
 
 import { ThemeProvider } from "styled-components";
+import { Normalize } from "styled-normalize";
 
 // https://github.com/vercel/next.js/issues/36417#issuecomment-1117360509
 // const OriginalNextImage = NextImage.default;
@@ -41,10 +42,13 @@ export const parameters = {
 export const decorators = [
   // Global wrapper to apply Global style and theme
   (storyFn) => (
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      {storyFn()}
-    </ThemeProvider>
+    <>
+      <Normalize />
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        {storyFn()}
+      </ThemeProvider>
+    </>
   ),
 
   (Story, Context) => {

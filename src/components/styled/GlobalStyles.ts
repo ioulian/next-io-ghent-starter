@@ -109,6 +109,8 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
   }
 
+  ul
+
   h1,
   h2,
   h3,
