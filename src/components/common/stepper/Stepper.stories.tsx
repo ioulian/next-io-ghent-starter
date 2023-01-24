@@ -26,13 +26,13 @@ export const InlineSteps: Story = {
   render: (args) => (
     <Stepper {...args}>
       <Step state="complete" $inline>
-        Step 1
+        Choose materials
       </Step>
       <Step state="current" $inline>
-        Step 2
+        Drag & drop creation mode
       </Step>
       <Step state="future" $inline>
-        Step 3
+        Conversion
       </Step>
     </Stepper>
   ),

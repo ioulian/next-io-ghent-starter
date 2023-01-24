@@ -12,6 +12,7 @@ import List from "../collection/List";
 import Checkbox from "../collection/checkbox/Checkbox";
 import { StyledReactSelect } from "../react-select/ReactSelect.styles";
 import SvgSprite from "../../svg/SvgSprite";
+import Toggle from "../toggle/Toggle";
 
 import Input from "./../input/Input";
 import FormField from "./FormField";
@@ -111,6 +112,23 @@ export const WithSingleCheckbox: Story = {
       ...required,
     },
     children: <SingleCheckbox />,
+  },
+};
+
+export const WithToggle: Story = {
+  render: (args) => (
+    <Form onSubmit={() => {}} error={ExampleApiError}>
+      <FormField {...args} />
+    </Form>
+  ),
+  args: {
+    label: "I accept privacy policy",
+    name: "emailAddress",
+    $isToggle: true,
+    options: {
+      ...required,
+    },
+    children: <Toggle />,
   },
 };
 
