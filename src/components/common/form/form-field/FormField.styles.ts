@@ -6,6 +6,7 @@ import { StyledDescription } from "../description/Description.styles";
 import { StyledSelect } from "../select/Select.styles";
 import { StyledTextarea } from "../textarea/Textarea.styles";
 import { StyledInput } from "../input/Input.styles";
+import { StyledToggle } from "../toggle/Toggle.styles";
 
 export const StyledFormField = styled.div<{
   $error?: boolean;
@@ -25,10 +26,10 @@ export const StyledFormField = styled.div<{
       ${StyledInput},
       ${StyledSelect},
       ${StyledTextarea} {
-        border-color: ${({ theme }) => theme.colors.primary[500]};
+        border-color: ${({ theme }) => theme.form.error.color};
 
         &:focus {
-          outline-color: ${({ theme }) => theme.colors.primary[500]};
+          outline-color: ${({ theme }) => theme.form.error.color};
         }
       }
     `}
@@ -37,29 +38,25 @@ export const StyledFormField = styled.div<{
     margin-bottom: 0.5rem;
   }
 
-  ${({ $isToggle, $error }) =>
+  ${({ $isToggle }) =>
     $isToggle &&
     css`
-    padding-left: 2rem;
-    position: relative;
-    ${
-      $error &&
-      css`
-        ${StyledInput} {
-          border-color: ${({ theme }) => theme.colors.primary[500]};
+      position: relative;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
 
-          &:focus {
-            outline-color: ${({ theme }) => theme.colors.primary[500]};
-          }
-        }
-      `
-    }}
+      > ${StyledInput}, > ${StyledToggle} {
+        order: -1;
+        margin-right: 0.5rem;
+      }
 
-      > ${StyledInput} {
-        position: absolute;
-        left: 0;
-        top: 2px;
-        margin: 0;
+      > ${StyledLabel} {
+        margin-bottom: 0;
+      }
+
+      > ${StyledError}, > ${StyledDescription} {
+        width: 100%;
       }
     `}
 `;
