@@ -53,13 +53,25 @@ export const StyledInputIconContainer = styled.div`
   > svg {
     width: 1rem;
     height: 1rem;
+    pointer-events: none;
     position: absolute;
     top: 14px;
-    left: 14px;
-    pointer-events: none;
+
+    &:first-child {
+      left: 14px;
+    }
+
+    &:last-child {
+      right: 14px;
+    }
   }
 
   > ${StyledInput}:not([type="radio"]):not([type="checkbox"]) {
-    padding-left: 40px; // 17px * 2 + icon size
+    &:nth-child(2) {
+      padding-left: 40px; // 17px * 2 + icon size
+    }
+    &:nth-last-child(2) {
+      padding-right: 40px; // 17px * 2 + icon size
+    }
   }
 `;

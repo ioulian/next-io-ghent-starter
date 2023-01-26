@@ -57,9 +57,28 @@ const meta: Meta<typeof Form> = {
 export default meta;
 type Story = StoryObj<typeof Form>;
 
+type SampleFormData = {
+  firstName: string;
+  lastName: string;
+  emailAddress: string;
+  color: ColourOption;
+  hobbies: string[];
+  password: string;
+  passwordRepeat: string;
+  privacy: string;
+};
+
 export const Default: Story = {
   render: (args) => (
-    <Form {...args} onSubmit={() => {}}>
+    <Form<SampleFormData>
+      {...args}
+      defaultValues={{
+        color: colourOptions[0],
+      }}
+      onSubmit={(values) => {
+        console.log(values);
+      }}
+    >
       <Heading>Register here</Heading>
       <div
         style={{
@@ -68,7 +87,7 @@ export const Default: Story = {
           gap: "1.25rem",
         }}
       >
-        <FormField
+        <FormField<SampleFormData>
           style={{
             flexGrow: 1,
           }}
@@ -80,7 +99,7 @@ export const Default: Story = {
         >
           <Input />
         </FormField>
-        <FormField
+        <FormField<SampleFormData>
           style={{
             flexGrow: 1,
           }}
@@ -93,7 +112,7 @@ export const Default: Story = {
           <Input />
         </FormField>
       </div>
-      <FormField
+      <FormField<SampleFormData>
         label="Email address"
         name="emailAddress"
         options={{
@@ -103,7 +122,7 @@ export const Default: Story = {
       >
         <Input type="email" />
       </FormField>
-      <FormField
+      <FormField<SampleFormData>
         label="Favorite color"
         name="color"
         inputWrapper={StyledReactSelect}
@@ -111,19 +130,20 @@ export const Default: Story = {
           ...required,
         }}
       >
-        {({ field, props: { id, ...props } }) => (
-          <ReactSelect
-            {...field}
-            {...props}
-            inputId={id}
-            defaultValue={colourOptions[0]}
-            className="react-select"
-            classNamePrefix="react-select"
-            options={colourOptions}
-          />
-        )}
+        {({ field, props: { id, ...props } }) => {
+          return (
+            <ReactSelect
+              {...field}
+              {...props}
+              inputId={id}
+              className="react-select"
+              classNamePrefix="react-select"
+              options={colourOptions}
+            />
+          );
+        }}
       </FormField>
-      <FormField
+      <FormField<SampleFormData>
         label="Hobbies"
         name="hobbies"
         inputWrapper={List}
@@ -149,7 +169,7 @@ export const Default: Story = {
           gap: "1.25rem",
         }}
       >
-        <FormField
+        <FormField<SampleFormData>
           style={{
             flexGrow: 1,
           }}
@@ -162,7 +182,7 @@ export const Default: Story = {
         >
           <Input type="password" />
         </FormField>
-        <FormField
+        <FormField<SampleFormData>
           style={{
             flexGrow: 1,
           }}
@@ -173,7 +193,7 @@ export const Default: Story = {
           <Input type="password" />
         </FormField>
       </div>
-      <FormField
+      <FormField<SampleFormData>
         label="I accept privacy policy"
         name="privacy"
         $isToggle

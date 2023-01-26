@@ -1,4 +1,5 @@
-import { forwardRef } from "react";
+import { forwardRef, memo } from "react";
+import isEqual from "lodash/isEqual";
 
 import { InferComponentProps } from "@/types/styled";
 
@@ -16,4 +17,4 @@ if (process.env.NODE_ENV === "development") {
   SingleCheckbox.whyDidYouRender = true;
 }
 
-export default SingleCheckbox;
+export default memo(SingleCheckbox, isEqual);
