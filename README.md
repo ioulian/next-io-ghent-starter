@@ -34,7 +34,9 @@ the project first.
   styled-components theme support, i18next support and Next.js support.
 - Common components preset (with a11y in mind): <https://ioulian.github.io/next-io-ghent-starter/>
 - [Why Did You Render](https://github.com/welldone-software/why-did-you-render)
-  included.
+  included (but disabled by default).
+- Auto injection of `<link rel="alternate" />` for different languages (does not
+  support translated routes)
 
 ## Getting Started
 
@@ -75,6 +77,11 @@ If you want to use redux, but with SSG, you should remove HYDRATION from slices.
 If you want to use JWT Auth presets, you'll need to use SSR and use AuthFetcher
 in `pages/_app.tsx`.
 
+## Build
+
+On build step, we run some basic production checks. You should disable them if
+they are not needed.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
@@ -91,8 +98,7 @@ contributions are welcome!
 - <https://storybook.js.org/recipes/styled-components> Implement dark themes
 - find a good PWA generator
 - add .env checker
-- Optimize Floating UI
-- add helper for <https://nextjs.org/docs/advanced-features/i18n-routing#search-engine-optimization>
+- add <https://zxcvbn-ts.github.io/zxcvbn/> as a validation helper
 
 ## Component export convention
 

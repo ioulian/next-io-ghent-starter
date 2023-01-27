@@ -27,9 +27,9 @@
   "languageSwitcher": {
     "current": "Langue courante: {{ locale }}",
     "locales": {
-      "nl": "Nederlands",
-      "fr": "Français",
-      "en": "English"
+      "nl-BE": "Nederlands",
+      "fr-BE": "Français",
+      "en-GB": "English"
     }
   },
   "breadcrumb": {

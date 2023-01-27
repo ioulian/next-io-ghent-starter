@@ -20,6 +20,7 @@ import {
   UseFormStateReturn,
 } from "react-hook-form";
 import { useTranslation } from "next-i18next";
+import merge from "lodash/merge";
 
 import { InferComponentProps } from "@/types/styled";
 
@@ -69,10 +70,6 @@ const FormField = <T extends Record<string, any>>({
     | ReactElement<any, JSXElementConstructor<any>>[]
     | RenderProps<T>;
 } & Omit<InferComponentProps<typeof StyledFormField>, "children">) => {
-  // TODO: as we always "wacth" inputs, every formfield get's rerendered, even
-  // if it doesn't use watch. Rewrite this. Only needed for password repeat
-  // now...
-  // Maybe move the watch logic to input side and not form field
   const { register, unregister, watch, control, formState, getFieldState } =
     useFormContext<T>();
   const { t } = useTranslation("common");
@@ -84,10 +81,10 @@ const FormField = <T extends Record<string, any>>({
   }, [unregister, name]);
 
   const { error } = getFieldState(name, formState);
-  const registerProps = register(name, {
-    ...options,
-    ...(watchValidate?.(watch) ?? {}),
-  });
+  const registerProps = register(
+    name,
+    merge(options, watchValidate ? watchValidate(watch) : {})
+  );
   const describedBy = getAriaDescribedBy(name, !!description, !!error);
 
   return (

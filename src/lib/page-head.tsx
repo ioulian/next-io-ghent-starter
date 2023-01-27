@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 export const PageViewport = () => {
   return (
@@ -41,6 +42,33 @@ export const PageFavicons = () => {
       <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#f38a5d" />
       <meta name="msapplication-TileColor" content="#f38a5d" />
       <meta name="theme-color" content="#f38a5d" />
+    </Head>
+  );
+};
+
+export const AutoAltLocales = () => {
+  const router = useRouter();
+  console.log(router);
+
+  // Do nothing if only one locale is specified
+  if (!router.locales || router.locales.length <= 1) {
+    return null;
+  }
+
+  return (
+    <Head>
+      {router.locales
+        .filter((locale) => locale !== router.locale)
+        .map((locale) => (
+          <link
+            key={locale}
+            rel="alternate"
+            href={`${process.env.NEXT_PUBLIC_SITE_URL}/${locale}${
+              router.asPath !== "/" ? `${router.asPath}` : ""
+            }`}
+            hrefLang={locale}
+          />
+        ))}
     </Head>
   );
 };

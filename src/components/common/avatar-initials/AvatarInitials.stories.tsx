@@ -9,6 +9,7 @@ const AvatarInitials: FC<{
   textColor?: string;
 }> = ({ initials, backgroundColor, textColor }) => {
   return (
+    // eslint-disable-next-line @next/next/no-img-element
     <img
       style={{
         width: 42,

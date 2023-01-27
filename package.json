@@ -4,13 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "yarn check-build-prerequisites && next build",
     "postbuild": "next-sitemap",
     "start": "next start",
     "analyze": "cross-env ANALYZE=true yarn build && serve .next/analyze",
     "check-types": "tsc --noemit",
     "lint": "yarn check-types && next lint",
     "check-translations": "ts-node -O '{\"module\":\"commonjs\"}' scripts/check-translations.ts",
+    "check-build-prerequisites": "ts-node -O '{\"module\":\"commonjs\"}' scripts/check-build-prerequisites.ts",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build -o docs"
   },
