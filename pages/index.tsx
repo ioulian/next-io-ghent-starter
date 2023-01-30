@@ -10,7 +10,6 @@ import Link from "next/link";
 import sampleSvgSprite from "@tabler/icons/123.svg";
 import { useState } from "react";
 import { useCallback } from "react";
-import dynamic from "next/dynamic";
 
 import { StyledMain, StyledPage } from "@/components/Demo";
 import logo from "@/img/logo.png";
@@ -24,14 +23,11 @@ import Heading from "@/components/common/heading/Heading";
 import LanguageSwitcher from "@/components/common/language-switcher/LanguageSwitcher";
 import Button from "@/components/common/button/Button";
 import { success } from "@/components/common/toast/notify";
+import Overlay from "@/components/common/overlay/Overlay";
 
 import { wrapper } from "../src/store/store";
 
 import { NextPageWithLayout } from "./_app";
-
-const Overlay = dynamic(import("@/components/common/overlay/Overlay"), {
-  ssr: false,
-});
 
 const svgSprite = <SvgSprite src={sampleSvgSprite} title=".svg sprite" />;
 
@@ -124,12 +120,14 @@ const Home: NextPageWithLayout = ({}: InferGetStaticPropsType<
             <Overlay
               isOpen={isOpen}
               contentLabel="Example"
-              heading={<Heading type="h2">Example</Heading>}
               onClose={() => {
                 setIsOpen(false);
               }}
             >
               <div style={{ backgroundColor: "white", padding: "1rem" }}>
+                <Overlay.Heading>
+                  <Heading type="h2">Example</Heading>
+                </Overlay.Heading>
                 <button>button 1</button>
                 <button>button 2</button>
                 <p>
