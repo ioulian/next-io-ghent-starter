@@ -5,10 +5,8 @@ import {
   ReactElement,
   ReactNode,
   useId,
-  useState,
 } from "react";
 import Modal from "react-modal";
-import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import { useTheme } from "styled-components";
 import { useCallback } from "react";
 
@@ -40,28 +38,14 @@ const Overlay: FC<{
   onClose?: () => void;
   children: ReactNode;
 }> = ({ contentLabel, heading, isOpen = false, children, onClose }) => {
-  const [ref, setRef] = useState<Modal | null>(null);
   const theme = useTheme();
 
   const headingId = useId();
   const contentId = useId();
 
   const onRequestClose = useCallback(() => {
-    // @ts-ignore We know it exists
-    if (ref?.node.children[0]) {
-      // @ts-ignore We know it exists
-      enableBodyScroll(ref.node.children[0]);
-    }
     onClose?.();
-  }, [onClose, ref]);
-
-  const onAfterOpen = useCallback(() => {
-    // @ts-ignore We know it exists
-    if (ref?.node.children[0]) {
-      // @ts-ignore We know it exists
-      disableBodyScroll(ref.node.children[0]);
-    }
-  }, [ref]);
+  }, [onClose]);
 
   // TODO: make heading as a subcomponent
   return (
@@ -74,6 +58,7 @@ const Overlay: FC<{
         isOpen={isOpen}
         shouldCloseOnOverlayClick={true}
         contentLabel={contentLabel}
+        htmlOpenClassName="ReactModal__Html--open"
         style={{
           overlay: {
             zIndex: theme.zIndex.overlay,
@@ -83,8 +68,7 @@ const Overlay: FC<{
           labelledby: headingId,
           describedby: contentId,
         }}
-        {...{ onAfterOpen, onRequestClose }}
-        ref={setRef}
+        {...{ onRequestClose }}
       >
         <OverlayCloseButton onClick={onClose} />
         <StyledOverlayContainer id={contentId} tabIndex={0} role="document">

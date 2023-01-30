@@ -125,8 +125,12 @@ const GlobalStyle = createGlobalStyle`
     backdrop-filter: blur(10px);
   }
 
-  .ReactModalPortal {
+  .ReactModal__Html--open,
+  .ReactModal__Body--open {
+    overflow: hidden;
+  }
 
+  .ReactModalPortal {
     .ReactModal {
       &__Overlay {
         background-color: ${({ theme }) =>
@@ -139,8 +143,6 @@ const GlobalStyle = createGlobalStyle`
         align-items: center;
         justify-content: center;
         height: 100vh;
-        width: 100vh;
-        position: absolute !important;
 
         // TODO: remove if performance suffers
         backdrop-filter: blur(10px);
