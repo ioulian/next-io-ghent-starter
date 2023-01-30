@@ -1,10 +1,12 @@
 import {
   cloneElement,
   FC,
+  forwardRef,
+  HTMLProps,
   isValidElement,
-  ReactElement,
   ReactNode,
   useId,
+  useLayoutEffect,
 } from "react";
 import Modal from "react-modal";
 import { useTheme } from "styled-components";
@@ -12,8 +14,40 @@ import { useCallback } from "react";
 
 import OverlayCloseButton from "./close-button/OverlayCloseButton";
 import { StyledOverlayContainer } from "./Overlay.styles";
+import { OverlayContext, useOverlay, useOverlayContext } from "./hooks";
 
 Modal.setAppElement("#__next");
+
+const OverlayHeading = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
+  ({ children, ...props }, ref) => {
+    const { setHeadingId } = useOverlayContext();
+    const id = useId();
+
+    useLayoutEffect(() => {
+      setHeadingId(id);
+      return () => setHeadingId(undefined);
+    }, [id, setHeadingId]);
+
+    if (isValidElement(children)) {
+      return cloneElement(children, {
+        ref,
+        id,
+        ...props,
+      });
+    }
+
+    return (
+      <h2
+        {...props}
+        // @ts-ignore
+        ref={ref}
+        id={id}
+      >
+        {children}
+      </h2>
+    );
+  }
+);
 
 const Overlay: FC<{
   /**
@@ -27,27 +61,24 @@ const Overlay: FC<{
   contentLabel: string;
 
   /**
-   * Heading of the modal
-   */
-  heading: ReactElement;
-
-  /**
    * Callback when user wants to close the overlay (escape button, outside
    * click, close button click)
    */
   onClose?: () => void;
   children: ReactNode;
-}> = ({ contentLabel, heading, isOpen = false, children, onClose }) => {
+}> & {
+  Heading: typeof OverlayHeading;
+} = ({ contentLabel, isOpen = false, children, onClose }) => {
   const theme = useTheme();
 
-  const headingId = useId();
   const contentId = useId();
+
+  const overlay = useOverlay({ onClose });
 
   const onRequestClose = useCallback(() => {
     onClose?.();
   }, [onClose]);
 
-  // TODO: make heading as a subcomponent
   return (
     <>
       <Modal
@@ -65,26 +96,28 @@ const Overlay: FC<{
           },
         }}
         aria={{
-          labelledby: headingId,
+          ...(overlay.headingId ? { labelledby: overlay.headingId } : {}),
           describedby: contentId,
         }}
         {...{ onRequestClose }}
       >
-        <OverlayCloseButton onClick={onClose} />
-        <StyledOverlayContainer id={contentId} tabIndex={0} role="document">
-          {isValidElement(heading) &&
-            cloneElement(heading, {
-              // @ts-ignore
-              id: headingId,
-            })}
-          {children}
-        </StyledOverlayContainer>
+        <OverlayContext.Provider value={overlay}>
+          <OverlayCloseButton />
+          <StyledOverlayContainer id={contentId} tabIndex={0} role="document">
+            {children}
+          </StyledOverlayContainer>
+        </OverlayContext.Provider>
       </Modal>
     </>
   );
 };
 
+Overlay.Heading = OverlayHeading;
+
 if (process.env.NODE_ENV === "development") {
+  OverlayHeading.displayName = "OverlayHeading";
+
+  OverlayHeading.whyDidYouRender = true;
   Overlay.whyDidYouRender = true;
 }
 

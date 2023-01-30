@@ -48,7 +48,6 @@ export const PageFavicons = () => {
 
 export const AutoAltLocales = () => {
   const router = useRouter();
-  console.log(router);
 
   // Do nothing if only one locale is specified
   if (!router.locales || router.locales.length <= 1) {

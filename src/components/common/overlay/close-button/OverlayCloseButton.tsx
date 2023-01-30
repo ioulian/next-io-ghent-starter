@@ -6,6 +6,7 @@ import isEqual from "lodash/isEqual";
 import { InferComponentProps } from "@/types/styled";
 
 import SvgSprite from "../../svg/SvgSprite";
+import { useOverlayContext } from "../hooks";
 
 import { StyledOverlayCloseButton } from "./OverlayCloseButton.styles";
 
@@ -14,9 +15,12 @@ const OverlayCloseButton: FC<
 > = ({ ...props }) => {
   const { t } = useTranslation("common");
 
+  const { onClose } = useOverlayContext();
+
   return (
     <StyledOverlayCloseButton
       {...props}
+      onClick={onClose}
       aria-label={t("overlay.close-button.label")}
     >
       <SvgSprite src={iconClose} />
