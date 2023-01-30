@@ -52,17 +52,17 @@ const Overlay: FC<{
 
   const onAfterOpen = useCallback(() => {
     // @ts-ignore We know it exists
-    if (ref?.node) {
+    if (ref?.node.children[0]) {
       // @ts-ignore We know it exists
-      disableBodyScroll(ref.node);
+      disableBodyScroll(ref.node.children[0]);
     }
   }, [ref]);
 
   const onAfterClose = useCallback(() => {
     // @ts-ignore We know it exists
-    if (ref?.node) {
+    if (ref?.node.children[0]) {
       // @ts-ignore We know it exists
-      enableBodyScroll(ref.node);
+      enableBodyScroll(ref.node.children[0]);
     }
   }, [ref]);
 
