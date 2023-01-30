@@ -1,5 +1,6 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { useTranslation } from "next-i18next";
+import isEqual from "lodash/isEqual";
 
 import { InferComponentProps } from "@/types/styled";
 
@@ -14,7 +15,7 @@ const Error: FC<{ id: string } & InferComponentProps<typeof StyledError>> = ({
 }) => {
   const { t } = useTranslation("common");
   return (
-    <StyledError id={id} {...props}>
+    <StyledError id={id} {...props} role="alert">
       <VisuallyHidden>{t("form.error.prefix")}</VisuallyHidden>
       {children}
     </StyledError>
@@ -25,4 +26,4 @@ if (process.env.NODE_ENV === "development") {
   Error.whyDidYouRender = true;
 }
 
-export default Error;
+export default memo(Error, isEqual);

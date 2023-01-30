@@ -17,8 +17,8 @@ const LanguageSwitcher: FC<
   const [_, setCookie] = useCookies(["NEXT_LOCALE"]);
 
   // These checks are needed when the component is being rendered in storybook
-  const locales = router?.locales ?? ["nl", "fr", "en"];
-  const currentLocale = router?.locale ?? "nl";
+  const locales = router?.locales ?? ["nl-BE", "fr-BE", "en-GB"];
+  const currentLocale = router?.locale ?? "nl-BE";
 
   const changeLanguage = useMemo(
     () =>

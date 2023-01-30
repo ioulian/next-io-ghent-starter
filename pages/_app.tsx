@@ -14,7 +14,7 @@ import { Provider } from "react-redux";
 import { NextPage } from "next";
 
 import GlobalStyle from "@/styles/GlobalStyles";
-import { PageFavicons, PageViewport } from "@/lib/page-head";
+import { AutoAltLocales, PageFavicons, PageViewport } from "@/lib/page-head";
 import { GTM_ID, sendPageView } from "@/lib/gtm";
 import { getFetcher } from "@/services/api.service";
 import theme from "@/components/styled/Theme";
@@ -47,6 +47,7 @@ const App = ({ Component, ...rest }: AppPropsWithLayout) => {
       <Provider store={store}>
         <PageViewport />
         <PageFavicons />
+        <AutoAltLocales />
         {GTM_ID ? (
           <Script
             id="GTM"

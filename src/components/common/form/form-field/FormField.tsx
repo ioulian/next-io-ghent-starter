@@ -1,4 +1,3 @@
-import get from "lodash/get";
 import {
   Children,
   cloneElement,
@@ -15,12 +14,13 @@ import {
   ControllerFieldState,
   ControllerRenderProps,
   FieldPath,
-  FieldValues,
+  Path,
   RegisterOptions,
   useFormContext,
   UseFormStateReturn,
 } from "react-hook-form";
 import { useTranslation } from "next-i18next";
+import merge from "lodash/merge";
 
 import { InferComponentProps } from "@/types/styled";
 
@@ -32,14 +32,14 @@ import { BE_VALIDATION } from "../form/Form";
 
 import { StyledFormField } from "./FormField.styles";
 
-const BaseWrapper: FC<{ children: ReactNode }> = ({ children }) => (
+const BaseWrapper: FC<{ children?: ReactNode }> = ({ children }) => (
   <>{children}</>
 );
 
-type RenderProps = (props: {
-  field: ControllerRenderProps<FieldValues, FieldPath<FieldValues>>;
+type RenderProps<T extends Record<string, any>> = (props: {
+  field: ControllerRenderProps<T, FieldPath<T>>;
   fieldState: ControllerFieldState;
-  formState: UseFormStateReturn<FieldValues>;
+  formState: UseFormStateReturn<T>;
   props: {
     "aria-describedby"?: string;
     "aria-invalid"?: "false" | "true";
@@ -47,21 +47,7 @@ type RenderProps = (props: {
   };
 }) => ReactElement;
 
-const FormField: FC<
-  {
-    asFieldSet?: boolean;
-    options?: RegisterOptions<FieldValues, FieldPath<FieldValues>>;
-    name: string;
-    label?: ReactNode;
-    description?: ReactNode;
-    inputWrapper?: FC<PropsWithChildren>;
-    watchValidate?: any;
-    children?:
-      | ReactElement<any, JSXElementConstructor<any>>
-      | ReactElement<any, JSXElementConstructor<any>>[]
-      | RenderProps;
-  } & Omit<InferComponentProps<typeof StyledFormField>, "children">
-> = ({
+const FormField = <T extends Record<string, any>>({
   asFieldSet,
   name,
   label,
@@ -71,14 +57,21 @@ const FormField: FC<
   children,
   watchValidate,
   ...props
-}) => {
-  const {
-    register,
-    unregister,
-    watch,
-    control,
-    formState: { errors },
-  } = useFormContext();
+}: {
+  asFieldSet?: boolean;
+  options?: RegisterOptions<T, FieldPath<T>>;
+  name: Path<T>;
+  label?: ReactNode;
+  description?: ReactNode;
+  inputWrapper?: FC<PropsWithChildren>;
+  watchValidate?: any;
+  children?:
+    | ReactElement<any, JSXElementConstructor<any>>
+    | ReactElement<any, JSXElementConstructor<any>>[]
+    | RenderProps<T>;
+} & Omit<InferComponentProps<typeof StyledFormField>, "children">) => {
+  const { register, unregister, watch, control, formState, getFieldState } =
+    useFormContext<T>();
   const { t } = useTranslation("common");
 
   useEffect(() => {
@@ -87,21 +80,17 @@ const FormField: FC<
     };
   }, [unregister, name]);
 
-  const errorForThisField = get(errors, name);
-  const registerProps = register(name, {
-    ...options,
-    ...(watchValidate?.(watch) ?? {}),
-  });
-  const describedBy = getAriaDescribedBy(
+  const { error } = getFieldState(name, formState);
+  const registerProps = register(
     name,
-    !!description,
-    !!errorForThisField
+    merge(options, watchValidate ? watchValidate(watch) : {})
   );
+  const describedBy = getAriaDescribedBy(name, !!description, !!error);
 
   return (
     <StyledFormField
       as={asFieldSet ? "fieldset" : "div"}
-      $error={!!errorForThisField}
+      $error={!!error}
       {...props}
     >
       {label && (
@@ -124,7 +113,7 @@ const FormField: FC<
                 props: {
                   id: name,
                   ...(describedBy && { "aria-describedby": describedBy }),
-                  ...(errorForThisField && { "aria-invalid": "true" }),
+                  ...(error && { "aria-invalid": "true" }),
                 },
               });
             }}
@@ -140,19 +129,19 @@ const FormField: FC<
                   name,
                   id: name,
                   ...(describedBy && { "aria-describedby": describedBy }),
-                  ...(errorForThisField && { "aria-invalid": "true" }),
+                  ...(error && { "aria-invalid": "true" }),
                 })
               : null
           )}
         </InputWrapper>
       )}
-      {errorForThisField && (
+      {error && (
         <Error id={getErrorId(name)}>
-          {errorForThisField.type === BE_VALIDATION
-            ? (errorForThisField.message as unknown as string)
+          {error.type === BE_VALIDATION
+            ? (error.message as unknown as string)
             : (t(
                 // @ts-ignore
-                `form.validationErrors.${errorForThisField.message as string}`
+                `form.validationErrors.${error.message as string}`
               ) as string)}
         </Error>
       )}

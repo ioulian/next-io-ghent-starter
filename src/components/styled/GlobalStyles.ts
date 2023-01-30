@@ -141,6 +141,7 @@ const GlobalStyle = createGlobalStyle`
         height: 100vh;
         // TODO: remove if performance suffers
         backdrop-filter: blur(10px);
+        -webkit-overflow-scrolling: touch;
 
         &--after-open {
           opacity: 1;
