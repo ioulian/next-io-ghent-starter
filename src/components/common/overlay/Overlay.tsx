@@ -47,22 +47,19 @@ const Overlay: FC<{
   const contentId = useId();
 
   const onRequestClose = useCallback(() => {
+    // @ts-ignore We know it exists
+    if (ref?.node.children[0]) {
+      // @ts-ignore We know it exists
+      enableBodyScroll(ref.node.children[0]);
+    }
     onClose?.();
-  }, [onClose]);
+  }, [onClose, ref]);
 
   const onAfterOpen = useCallback(() => {
     // @ts-ignore We know it exists
     if (ref?.node.children[0]) {
       // @ts-ignore We know it exists
       disableBodyScroll(ref.node.children[0]);
-    }
-  }, [ref]);
-
-  const onAfterClose = useCallback(() => {
-    // @ts-ignore We know it exists
-    if (ref?.node.children[0]) {
-      // @ts-ignore We know it exists
-      enableBodyScroll(ref.node.children[0]);
     }
   }, [ref]);
 
@@ -86,7 +83,7 @@ const Overlay: FC<{
           labelledby: headingId,
           describedby: contentId,
         }}
-        {...{ onAfterOpen, onAfterClose, onRequestClose }}
+        {...{ onAfterOpen, onRequestClose }}
         ref={setRef}
       >
         <OverlayCloseButton onClick={onClose} />
