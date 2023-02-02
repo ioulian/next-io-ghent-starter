@@ -7,7 +7,7 @@ import type {
 } from "next";
 import { useTranslation } from "next-i18next";
 import Link from "next/link";
-import sampleSvgSprite from "@tabler/icons/123.svg";
+import sampleSvgSprite from "@tabler/icons/icons/arrow-right-circle.svg";
 import { useState } from "react";
 import { useCallback } from "react";
 
