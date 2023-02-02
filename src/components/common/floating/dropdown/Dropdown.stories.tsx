@@ -3,7 +3,6 @@ import iconChevron from "@tabler/icons/chevron-right.svg";
 import { useState } from "react";
 
 import Button from "../../button/Button";
-import Heading from "../../heading/Heading";
 import Overlay from "../../overlay/Overlay";
 import SvgSprite from "../../svg/SvgSprite";
 
@@ -155,7 +154,6 @@ const WithOverlayComponent = () => {
       <Overlay
         isOpen={isOpen}
         contentLabel="Example"
-        heading={<Heading type="h2">Example</Heading>}
         onClose={() => {
           setIsOpen(false);
         }}
