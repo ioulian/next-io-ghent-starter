@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 "use strict";
 
 // From: https://github.com/shadowwalker/next-pwa/blob/master/cache.js

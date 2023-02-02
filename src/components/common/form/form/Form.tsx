@@ -16,7 +16,7 @@ import { StyledForm } from "./Form.styles";
 
 export const BE_VALIDATION: string = "BE";
 
-// TODO: find a way to pass type to children, amybe use a function that we pass
+// TODO: find a way to pass type to children, maybe use a function that we pass
 // to form, from wich every child can get it types?
 const Form = <T extends Record<string, any>>({
   isLoading,
@@ -25,7 +25,7 @@ const Form = <T extends Record<string, any>>({
   onSubmit,
   onChange,
   children,
-  mode = "onBlur",
+  mode = "onChange",
   ...props
 }: {
   error?: ApiError;

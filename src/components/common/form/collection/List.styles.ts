@@ -7,7 +7,7 @@ export const StyledList = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 1rem;
 
   + ${StyledDescription}, + ${StyledError} {
     margin-top: 0.5rem;

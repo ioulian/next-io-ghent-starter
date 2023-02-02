@@ -10,10 +10,11 @@ const Toggle = forwardRef<
   HTMLInputElement,
   InferComponentProps<typeof StyledInput>
 >(({ ...props }, ref) => {
+  // We set aria-hidden to true, as we have another label for that element
   return (
     <StyledToggle>
       <StyledInput {...props} type="checkbox" ref={ref} />
-      <div></div>
+      <label htmlFor={props.id} aria-hidden="true"></label>
     </StyledToggle>
   );
 });

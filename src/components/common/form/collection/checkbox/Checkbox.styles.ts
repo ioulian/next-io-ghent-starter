@@ -7,14 +7,14 @@ export const StyledCheckbox = styled.div`
   align-items: center;
 
   > input {
-    margin-right: 0.75rem;
+    margin-right: 0.5rem;
 
     &:disabled + ${StyledLabel} {
       cursor: not-allowed;
     }
   }
 
-  > ${StyledLabel} {
+  ${StyledLabel} {
     margin-bottom: 0;
   }
 `;
