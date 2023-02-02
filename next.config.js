@@ -1,3 +1,5 @@
+// @ts-check
+
 const { resolve } = require("path");
 
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
@@ -7,6 +9,8 @@ const withPWA = require("next-pwa")({
   dest: "public",
   register: false,
   disable: process.env.NODE_ENV === "development",
+
+  // @ts-ignore
   runtimeCaching: require("./pwa-caching"),
 });
 
@@ -26,10 +30,12 @@ module.exports = withBundleAnalyzer(
     },
     webpack: (config) => {
       const fileLoaderRule = config.module.rules.find(
+        // @ts-ignore
         (rule) => rule.test && rule.test.test(".svg")
       );
       fileLoaderRule.exclude = [/\@tabler\/icons\//, /-sprite\.svg$/];
       config.module.rules.push({
+        // @ts-ignore
         test: function (path) {
           return (
             path.indexOf("@tabler/icons") !== -1 ||
