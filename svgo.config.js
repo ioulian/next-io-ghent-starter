@@ -1,3 +1,6 @@
+// @ts-check
+
+/** @type {import('svgo').Config} */
 module.exports = {
   plugins: [
     {

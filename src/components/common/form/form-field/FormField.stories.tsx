@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import ReactSelect from "react-select";
 import icon from "@tabler/icons/icons/at.svg";
+import searchIcon from "@tabler/icons/icons/search.svg";
 
 import { email, required } from "../rules";
 import Form from "../form/Form";
@@ -58,6 +59,21 @@ export const WithInput: Story = {
   },
 };
 
+export const WithSearch: Story = {
+  render: (args) => (
+    <Form onSubmit={() => {}} error={ExampleApiError}>
+      <FormField {...args} />
+    </Form>
+  ),
+  args: {
+    label: "Search",
+    name: "search",
+    children: (
+      <Input type="search" iconBefore={<SvgSprite src={searchIcon} />} />
+    ),
+  },
+};
+
 export const WithSelect: Story = {
   render: (args) => (
     <Form onSubmit={() => {}} error={ExampleApiError}>
@@ -73,9 +89,14 @@ export const WithSelect: Story = {
     description: "Description",
     children: (
       <Select addEmptyOption>
-        <option value="1">Value 1</option>
-        <option value="2">Value 2</option>
-        <option value="3">Value 3</option>
+        <optgroup label="Swedish Cars">
+          <option value="volvo">Volvo</option>
+          <option value="saab">Saab</option>
+        </optgroup>
+        <optgroup label="German Cars">
+          <option value="mercedes">Mercedes</option>
+          <option value="audi">Audi</option>
+        </optgroup>
       </Select>
     ),
   },
@@ -216,6 +237,37 @@ export const WithReactSelect: Story = {
         inputId={id}
         defaultValue={colourOptions[0]}
         className="react-select"
+        menuIsOpen
+        classNamePrefix="react-select"
+        options={colourOptions}
+      />
+    ),
+  },
+};
+
+export const WithMultiReactSelect: Story = {
+  render: (args) => (
+    <Form onSubmit={() => {}} error={ExampleApiError}>
+      <FormField {...args} />
+    </Form>
+  ),
+  args: {
+    label: "Choose",
+    name: "emailAddress",
+    inputWrapper: StyledReactSelect,
+    options: {
+      ...required,
+    },
+    asFieldSet: true,
+    children: ({ field, props: { id, ...props } }) => (
+      <ReactSelect
+        {...field}
+        {...props}
+        isMulti
+        inputId={id}
+        defaultValue={colourOptions[0]}
+        className="react-select"
+        menuIsOpen
         classNamePrefix="react-select"
         options={colourOptions}
       />

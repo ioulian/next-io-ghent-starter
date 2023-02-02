@@ -25,7 +25,8 @@ export const StyledFormField = styled.div<{
     css`
       ${StyledInput},
       ${StyledSelect},
-      ${StyledTextarea} {
+      ${StyledTextarea},
+      ${StyledToggle} > label {
         border-color: ${({ theme }) => theme.form.error.color};
 
         &:focus {
@@ -45,10 +46,10 @@ export const StyledFormField = styled.div<{
       display: flex;
       align-items: center;
       flex-wrap: wrap;
+      gap: 0.5rem;
 
       > ${StyledInput}, > ${StyledToggle} {
         order: -1;
-        margin-right: 0.5rem;
       }
 
       > ${StyledLabel} {

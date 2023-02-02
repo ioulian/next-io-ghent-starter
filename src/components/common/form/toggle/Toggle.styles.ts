@@ -7,17 +7,19 @@ export const StyledToggle = styled.div`
   > input {
     ${() => visuallyHidden}
 
-    &:checked + div {
-      background-color: ${({ theme }) => theme.colors.primary};
+    &:checked + label {
+      background-color: ${({ theme }) =>
+        theme.form.checkbox.checked.background};
+      border-color: ${({ theme }) => theme.form.checkbox.checked.border};
 
       &::before {
-        background-color: ${({ theme }) => theme.colors.white};
+        background-color: ${({ theme }) => theme.form.checkbox.checked.color};
         transform: translateX(calc(2.5rem - 6px - 14px));
       }
     }
   }
 
-  > div {
+  > label {
     ${() => baseFormFieldStyling};
     width: 2.5rem;
     height: 1.25rem;
@@ -25,7 +27,8 @@ export const StyledToggle = styled.div`
     display: block;
     position: relative;
     background-color: ${({ theme }) => theme.form.input.background};
-    transition: background-color ${({ theme }) => theme.timings.normal}ms;
+    transition: background-color ${({ theme }) => theme.timings.normal}ms,
+      border-color ${({ theme }) => theme.timings.normal}ms;
 
     &::before {
       width: 14px;

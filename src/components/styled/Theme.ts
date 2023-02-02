@@ -19,6 +19,7 @@ const theme: DefaultTheme = {
   fonts: {
     familyRegular: "Arial, sans-serif",
     familyHeadings:
+      // This check is needed because storybook can't handle @next/font yet
       sourceSansPro.style?.fontFamily ?? '"Source Sans Pro", sans-serif',
   },
   breakpoints: {

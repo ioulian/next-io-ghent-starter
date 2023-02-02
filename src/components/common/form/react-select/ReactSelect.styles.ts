@@ -1,3 +1,4 @@
+import { lighten } from "polished";
 import styled from "styled-components";
 
 import { escapeSVG } from "../../../../utils/svg";
@@ -14,7 +15,7 @@ export const StyledReactSelect = styled.div`
       box-shadow: ${({ theme }) => theme.form.input.shadow};
       border: 1px solid ${({ theme }) => theme.form.input.border};
       margin: 0;
-      height: 2.75rem;
+      //height: 2.75rem;
 
       &:hover {
         border-color: ${({ theme }) => theme.form.input.border};
@@ -22,7 +23,8 @@ export const StyledReactSelect = styled.div`
     }
 
     &__indicators {
-      width: 3rem;
+      //width: 3rem;
+      height: 42px;
     }
 
     &__indicator-separator {
@@ -50,7 +52,7 @@ export const StyledReactSelect = styled.div`
     }
 
     &__value-container {
-      padding-left: 1.5rem;
+      padding-left: 15px;
     }
 
     &__input-container {
@@ -62,6 +64,16 @@ export const StyledReactSelect = styled.div`
     &__placeholder {
       margin: 0;
       color: inherit;
+    }
+
+    &__option {
+      &--is-selected {
+        background-color: ${({ theme }) => theme.colors.primary};
+      }
+
+      &--is-focused:not(&--is-selected) {
+        background-color: ${({ theme }) => lighten(0.2, theme.colors.primary)};
+      }
     }
   }
 
