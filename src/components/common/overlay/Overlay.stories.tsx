@@ -212,16 +212,13 @@ const WithControlsOverlay = () => {
             <Heading type="h2">Example</Heading>
           </Overlay.Heading>
           <Button
-            tabIndex={-1}
             onClick={() => {
               console.log(1);
             }}
           >
             button 1
           </Button>
-          <Button onClick={() => {}} tabIndex={-1}>
-            button 2
-          </Button>
+          <Button onClick={() => {}}>button 2</Button>
         </div>
       </Overlay>
     </>
