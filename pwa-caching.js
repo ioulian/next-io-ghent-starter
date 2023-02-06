@@ -1,4 +1,8 @@
+// @ts-nocheck
+
 "use strict";
+
+// From: https://github.com/shadowwalker/next-pwa/blob/master/cache.js
 
 // Workbox RuntimeCaching config: https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-build#.RuntimeCachingEntry
 module.exports = [
