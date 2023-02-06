@@ -35,7 +35,10 @@ const Form = <T extends Record<string, any>>({
   onSubmit: (data?: T) => void;
   onChange?: (data?: DeepPartial<T> | T) => void;
 } & Omit<InferComponentProps<typeof StyledForm>, "onChange" | "onSubmit">) => {
-  const methods = useForm<T>({ defaultValues, mode });
+  const methods = useForm<T>({
+    defaultValues,
+    mode,
+  });
   const {
     handleSubmit,
     getValues,
@@ -66,10 +69,12 @@ const Form = <T extends Record<string, any>>({
   useEffect(() => {
     if (error) {
       error.violations?.forEach(({ propertyPath, message }, i) => {
-        setError(propertyPath as Path<T>, {
-          type: BE_VALIDATION,
-          message,
-        });
+        setTimeout(() => {
+          setError(propertyPath as Path<T>, {
+            type: BE_VALIDATION,
+            message,
+          });
+        }, 0);
 
         if (i === 0) {
           try {
