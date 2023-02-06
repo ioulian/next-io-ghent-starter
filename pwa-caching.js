@@ -1,8 +1,4 @@
-// @ts-nocheck
-
 "use strict";
-
-// From: https://github.com/shadowwalker/next-pwa/blob/master/cache.js
 
 // Workbox RuntimeCaching config: https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-build#.RuntimeCachingEntry
 module.exports = [
@@ -110,24 +106,10 @@ module.exports = [
   {
     urlPattern: /\/_next\/data\/.+\/.+\.json$/i,
     handler: "NetworkOnly",
-    options: {
-      cacheName: "next-data",
-      expiration: {
-        maxEntries: 32,
-        maxAgeSeconds: 24 * 60 * 60, // 24 hours
-      },
-    },
   },
   {
     urlPattern: /\.(?:json|xml|csv)$/i,
     handler: "NetworkOnly",
-    options: {
-      cacheName: "static-data-assets",
-      expiration: {
-        maxEntries: 32,
-        maxAgeSeconds: 24 * 60 * 60, // 24 hours
-      },
-    },
   },
   {
     urlPattern: ({ url }) => {
@@ -143,14 +125,6 @@ module.exports = [
     },
     handler: "NetworkOnly",
     method: "GET",
-    options: {
-      cacheName: "apis",
-      expiration: {
-        maxEntries: 16,
-        maxAgeSeconds: 24 * 60 * 60, // 24 hours
-      },
-      networkTimeoutSeconds: 10, // fall back to cache if api does not response within 10 seconds
-    },
   },
   {
     urlPattern: ({ url }) => {
@@ -161,14 +135,6 @@ module.exports = [
       return true;
     },
     handler: "NetworkOnly",
-    options: {
-      cacheName: "others",
-      expiration: {
-        maxEntries: 32,
-        maxAgeSeconds: 24 * 60 * 60, // 24 hours
-      },
-      networkTimeoutSeconds: 10,
-    },
   },
   {
     urlPattern: ({ url }) => {
@@ -176,13 +142,5 @@ module.exports = [
       return !isSameOrigin;
     },
     handler: "NetworkOnly",
-    options: {
-      cacheName: "cross-origin",
-      expiration: {
-        maxEntries: 32,
-        maxAgeSeconds: 60 * 60, // 1 hour
-      },
-      networkTimeoutSeconds: 10,
-    },
   },
 ];
