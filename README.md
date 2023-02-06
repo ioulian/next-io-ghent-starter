@@ -93,12 +93,9 @@ You can check out [the Next.js GitHub
 repository](https://github.com/vercel/next.js/) - your feedback and
 contributions are welcome!
 
-## TODO
+## Issues/TODO's
 
-- <https://storybook.js.org/recipes/styled-components> Implement dark themes
-- find a good PWA generator
-- add .env checker
-- add <https://zxcvbn-ts.github.io/zxcvbn/> as a validation helper
+Issues and TODO's can be found here: <https://github.com/ioulian/next-io-ghent-starter/issues>
 
 ## Component export convention
 
