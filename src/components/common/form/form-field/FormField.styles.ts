@@ -7,6 +7,7 @@ import { StyledSelect } from "../select/Select.styles";
 import { StyledTextarea } from "../textarea/Textarea.styles";
 import { StyledInput } from "../input/Input.styles";
 import { StyledToggle } from "../toggle/Toggle.styles";
+import { StyledReactSelect } from "../react-select/ReactSelect.styles";
 
 export const StyledFormField = styled.div<{
   $error?: boolean;
@@ -31,6 +32,14 @@ export const StyledFormField = styled.div<{
 
         &:focus {
           outline-color: ${({ theme }) => theme.form.error.color};
+        }
+      }
+
+      ${StyledReactSelect} {
+        .react-select {
+          &__control {
+            border-color: ${({ theme }) => theme.form.error.color};
+          }
         }
       }
     `}

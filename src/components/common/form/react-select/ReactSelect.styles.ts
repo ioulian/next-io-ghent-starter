@@ -15,7 +15,6 @@ export const StyledReactSelect = styled.div`
       box-shadow: ${({ theme }) => theme.form.input.shadow};
       border: 1px solid ${({ theme }) => theme.form.input.border};
       margin: 0;
-      //height: 2.75rem;
 
       &:hover {
         border-color: ${({ theme }) => theme.form.input.border};
@@ -23,12 +22,15 @@ export const StyledReactSelect = styled.div`
     }
 
     &__indicators {
-      //width: 3rem;
       height: 42px;
     }
 
     &__indicator-separator {
-      display: none;
+      background-color: ${({ theme }) => theme.form.input.border};
+
+      &:first-child {
+        display: none;
+      }
     }
 
     &__dropdown-indicator {
@@ -49,10 +51,27 @@ export const StyledReactSelect = styled.div`
 
     &__clear-indicator {
       width: 2.25rem;
+
+      &,
+      &:hover {
+        color: ${({ theme }) => theme.form.select.indicator};
+      }
     }
 
     &__value-container {
       padding-left: 15px;
+
+      &--is-multi {
+        padding-left: 4px;
+
+        .react-select__placeholder {
+          margin-left: 11px;
+        }
+
+        .react-select__input-container {
+          margin-left: 11px;
+        }
+      }
     }
 
     &__input-container {
@@ -74,6 +93,11 @@ export const StyledReactSelect = styled.div`
       &--is-focused:not(&--is-selected) {
         background-color: ${({ theme }) => lighten(0.2, theme.colors.primary)};
       }
+    }
+
+    &__multi-value {
+      background-color: transparent;
+      border: 1px solid ${({ theme }) => theme.form.input.border};
     }
   }
 

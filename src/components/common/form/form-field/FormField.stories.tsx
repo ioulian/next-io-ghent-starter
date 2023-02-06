@@ -11,9 +11,9 @@ import SingleCheckbox from "../single-checkbox/SingleCheckbox";
 import Radio from "../collection/radio/Radio";
 import List from "../collection/List";
 import Checkbox from "../collection/checkbox/Checkbox";
-import { StyledReactSelect } from "../react-select/ReactSelect.styles";
 import SvgSprite from "../../svg/SvgSprite";
 import Toggle from "../toggle/Toggle";
+import ReactSelectContainer from "../react-select/ReactSelect";
 
 import Input from "./../input/Input";
 import FormField from "./FormField";
@@ -61,7 +61,7 @@ export const WithInput: Story = {
 
 export const WithSearch: Story = {
   render: (args) => (
-    <Form onSubmit={() => {}} error={ExampleApiError}>
+    <Form onSubmit={() => {}}>
       <FormField {...args} />
     </Form>
   ),
@@ -76,7 +76,7 @@ export const WithSearch: Story = {
 
 export const WithSelect: Story = {
   render: (args) => (
-    <Form onSubmit={() => {}} error={ExampleApiError}>
+    <Form onSubmit={() => {}}>
       <FormField {...args} />
     </Form>
   ),
@@ -104,7 +104,7 @@ export const WithSelect: Story = {
 
 export const WithTextarea: Story = {
   render: (args) => (
-    <Form onSubmit={() => {}} error={ExampleApiError}>
+    <Form onSubmit={() => {}}>
       <FormField {...args} />
     </Form>
   ),
@@ -121,7 +121,7 @@ export const WithTextarea: Story = {
 
 export const WithSingleCheckbox: Story = {
   render: (args) => (
-    <Form onSubmit={() => {}} error={ExampleApiError}>
+    <Form onSubmit={() => {}}>
       <FormField {...args} />
     </Form>
   ),
@@ -138,7 +138,7 @@ export const WithSingleCheckbox: Story = {
 
 export const WithToggle: Story = {
   render: (args) => (
-    <Form onSubmit={() => {}} error={ExampleApiError}>
+    <Form onSubmit={() => {}}>
       <FormField {...args} />
     </Form>
   ),
@@ -155,7 +155,7 @@ export const WithToggle: Story = {
 
 export const WithRadioList: Story = {
   render: (args) => (
-    <Form onSubmit={() => {}} error={ExampleApiError}>
+    <Form onSubmit={() => {}}>
       <FormField {...args}>
         <Radio inputValue="value1">Value 1</Radio>
         <Radio inputValue="value2">Value 2</Radio>
@@ -176,7 +176,7 @@ export const WithRadioList: Story = {
 
 export const WithCheckboxList: Story = {
   render: (args) => (
-    <Form onSubmit={() => {}} error={ExampleApiError}>
+    <Form onSubmit={() => {}}>
       <FormField {...args}>
         <Checkbox inputValue="value1">Value 1</Checkbox>
         <Checkbox inputValue="value2">Value 2</Checkbox>
@@ -218,14 +218,14 @@ const colourOptions: readonly ColourOption[] = [
 
 export const WithReactSelect: Story = {
   render: (args) => (
-    <Form onSubmit={() => {}} error={ExampleApiError}>
+    <Form onSubmit={() => {}}>
       <FormField {...args} />
     </Form>
   ),
   args: {
     label: "Choose",
     name: "emailAddress",
-    inputWrapper: StyledReactSelect,
+    inputWrapper: ReactSelectContainer,
     options: {
       ...required,
     },
@@ -235,9 +235,9 @@ export const WithReactSelect: Story = {
         {...field}
         {...props}
         inputId={id}
+        isClearable
         defaultValue={colourOptions[0]}
         className="react-select"
-        menuIsOpen
         classNamePrefix="react-select"
         options={colourOptions}
       />
@@ -247,14 +247,14 @@ export const WithReactSelect: Story = {
 
 export const WithMultiReactSelect: Story = {
   render: (args) => (
-    <Form onSubmit={() => {}} error={ExampleApiError}>
+    <Form onSubmit={() => {}}>
       <FormField {...args} />
     </Form>
   ),
   args: {
     label: "Choose",
     name: "emailAddress",
-    inputWrapper: StyledReactSelect,
+    inputWrapper: ReactSelectContainer,
     options: {
       ...required,
     },
