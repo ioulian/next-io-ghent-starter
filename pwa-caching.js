@@ -109,7 +109,7 @@ module.exports = [
   },
   {
     urlPattern: /\/_next\/data\/.+\/.+\.json$/i,
-    handler: "NetworkFirst",
+    handler: "NetworkOnly",
     options: {
       cacheName: "next-data",
       expiration: {
@@ -120,7 +120,7 @@ module.exports = [
   },
   {
     urlPattern: /\.(?:json|xml|csv)$/i,
-    handler: "NetworkFirst",
+    handler: "NetworkOnly",
     options: {
       cacheName: "static-data-assets",
       expiration: {
@@ -141,7 +141,7 @@ module.exports = [
       if (pathname.startsWith("/api/")) return true;
       return false;
     },
-    handler: "NetworkFirst",
+    handler: "NetworkOnly",
     method: "GET",
     options: {
       cacheName: "apis",
@@ -160,7 +160,7 @@ module.exports = [
       if (pathname.startsWith("/api/")) return false;
       return true;
     },
-    handler: "NetworkFirst",
+    handler: "NetworkOnly",
     options: {
       cacheName: "others",
       expiration: {
@@ -175,7 +175,7 @@ module.exports = [
       const isSameOrigin = self.origin === url.origin;
       return !isSameOrigin;
     },
-    handler: "NetworkFirst",
+    handler: "NetworkOnly",
     options: {
       cacheName: "cross-origin",
       expiration: {
