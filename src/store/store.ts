@@ -34,6 +34,8 @@ export type RootState = ReturnType<typeof rootReducer>;
 //       getDefaultMiddleware().prepend(
 //         nextReduxCookieMiddleware({
 //           expires: getExpirationDate(),
+//           sameSite: "lax",
+//           secure: true,
 //           subtrees: [`${authSlice.name}.value`, `${counterSlice.name}.value`],
 //         })
 //       ),
