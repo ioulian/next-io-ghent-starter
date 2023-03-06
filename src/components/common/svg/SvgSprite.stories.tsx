@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import iconSample2 from "@tabler/icons/icons/arrow-right-circle.svg";
+import iconSample2 from "@tabler/icons/arrow-right-circle.svg";
 
 import iconSample from "./../../../../public/img/logo-sprite.svg";
 import SvgSprite from "./SvgSprite";

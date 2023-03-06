@@ -1,5 +1,5 @@
 import { FC, ReactNode } from "react";
-import iconChevron from "@tabler/icons/icons/chevron-down.svg";
+import iconChevron from "@tabler/icons/chevron-down.svg";
 
 import { InferComponentProps } from "@/types/styled";
 

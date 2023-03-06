@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import ReactSelect from "react-select";
-import icon from "@tabler/icons/icons/at.svg";
-import searchIcon from "@tabler/icons/icons/search.svg";
+import icon from "@tabler/icons/at.svg";
+import searchIcon from "@tabler/icons/search.svg";
 
 import { email, required } from "../rules";
 import Form from "../form/Form";

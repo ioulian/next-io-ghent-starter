@@ -1,5 +1,5 @@
 import { DefaultTheme } from "styled-components";
-import { Source_Sans_Pro } from "@next/font/google";
+import { Source_Sans_Pro } from "next/font/google";
 
 const sourceSansPro = Source_Sans_Pro({
   weight: ["400", "700"],
@@ -19,7 +19,7 @@ const theme: DefaultTheme = {
   fonts: {
     familyRegular: "Arial, sans-serif",
     familyHeadings:
-      // This check is needed because storybook can't handle @next/font yet
+      // This check is needed because storybook can't handle next/font yet
       sourceSansPro.style?.fontFamily ?? '"Source Sans Pro", sans-serif',
   },
   breakpoints: {
