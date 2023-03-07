@@ -17,3 +17,14 @@ export const Default: Story = {
     children: "More details ...",
   },
 };
+
+export const OpenByDefault: Story = {
+  args: {
+    open: true,
+    onToggle: (isOpen) => {
+      console.log(isOpen);
+    },
+    summary: "Click to expand",
+    children: "More details ...",
+  },
+};

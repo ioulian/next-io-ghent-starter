@@ -1,4 +1,4 @@
-import { FC, ReactNode, useId, useState } from "react";
+import { FC, ReactNode, useEffect, useId, useState } from "react";
 import iconChevron from "@tabler/icons/chevron-down.svg";
 import AnimateHeight from "react-animate-height";
 import { useTheme } from "styled-components";
@@ -19,11 +19,28 @@ const Expandable: FC<
      * Title of the block
      */
     summary: ReactNode;
+
+    /**
+     * Controlled
+     */
+    open?: boolean;
+
+    /**
+     * Is expandable currently open or not?
+     *
+     * @param isOpen
+     */
+    onToggle?: (isOpen: boolean) => void;
   } & InferComponentProps<typeof StyledExpandable>
-> = ({ summary, children, ...props }) => {
-  const [isOpen, setIsOpen] = useState(false);
+> = ({ summary, children, open = false, onToggle, ...props }) => {
+  const [isOpen, setIsOpen] = useState(open);
   const theme = useTheme();
   const id = useId();
+
+  useEffect(() => {
+    setIsOpen(open);
+  }, [open]);
+
   return (
     <StyledExpandable {...props} $isOpen={isOpen}>
       <StyledExpandableSummary
@@ -31,10 +48,11 @@ const Expandable: FC<
         aria-controls={id}
         onClick={() => {
           setIsOpen(!isOpen);
+          onToggle?.(!isOpen);
         }}
       >
         <span>{summary}</span>
-        <SvgSprite src={iconChevron} />
+        <SvgSprite src={iconChevron} aria-hidden />
       </StyledExpandableSummary>
       <AnimateHeight
         id={id}

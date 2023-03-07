@@ -1,12 +1,12 @@
 import styled, { css } from "styled-components";
 
-export const StyledExpandableSummary = styled.div`
+export const StyledExpandableSummary = styled.button`
   font-weight: 700;
   cursor: pointer;
   position: relative;
-  display: block;
   display: flex;
   justify-content: space-between;
+  width: 100%;
 
   > svg {
     width: 1.5rem;
