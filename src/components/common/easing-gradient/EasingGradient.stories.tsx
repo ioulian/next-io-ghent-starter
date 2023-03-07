@@ -41,7 +41,7 @@ const easings = {
 };
 
 const meta: Meta<typeof EasingGradient> = {
-  title: "UI/Easing Gradient",
+  title: "Tools/Easing Gradient",
   component: EasingGradient,
   argTypes: {
     from: {
