@@ -109,25 +109,11 @@ module.exports = [
   },
   {
     urlPattern: /\/_next\/data\/.+\/.+\.json$/i,
-    handler: "NetworkFirst",
-    options: {
-      cacheName: "next-data",
-      expiration: {
-        maxEntries: 32,
-        maxAgeSeconds: 24 * 60 * 60, // 24 hours
-      },
-    },
+    handler: "NetworkOnly",
   },
   {
     urlPattern: /\.(?:json|xml|csv)$/i,
-    handler: "NetworkFirst",
-    options: {
-      cacheName: "static-data-assets",
-      expiration: {
-        maxEntries: 32,
-        maxAgeSeconds: 24 * 60 * 60, // 24 hours
-      },
-    },
+    handler: "NetworkOnly",
   },
   {
     urlPattern: ({ url }) => {
@@ -141,16 +127,8 @@ module.exports = [
       if (pathname.startsWith("/api/")) return true;
       return false;
     },
-    handler: "NetworkFirst",
+    handler: "NetworkOnly",
     method: "GET",
-    options: {
-      cacheName: "apis",
-      expiration: {
-        maxEntries: 16,
-        maxAgeSeconds: 24 * 60 * 60, // 24 hours
-      },
-      networkTimeoutSeconds: 10, // fall back to cache if api does not response within 10 seconds
-    },
   },
   {
     urlPattern: ({ url }) => {
@@ -160,29 +138,13 @@ module.exports = [
       if (pathname.startsWith("/api/")) return false;
       return true;
     },
-    handler: "NetworkFirst",
-    options: {
-      cacheName: "others",
-      expiration: {
-        maxEntries: 32,
-        maxAgeSeconds: 24 * 60 * 60, // 24 hours
-      },
-      networkTimeoutSeconds: 10,
-    },
+    handler: "NetworkOnly",
   },
   {
     urlPattern: ({ url }) => {
       const isSameOrigin = self.origin === url.origin;
       return !isSameOrigin;
     },
-    handler: "NetworkFirst",
-    options: {
-      cacheName: "cross-origin",
-      expiration: {
-        maxEntries: 32,
-        maxAgeSeconds: 60 * 60, // 1 hour
-      },
-      networkTimeoutSeconds: 10,
-    },
+    handler: "NetworkOnly",
   },
 ];

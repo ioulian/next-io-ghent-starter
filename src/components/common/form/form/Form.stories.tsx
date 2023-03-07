@@ -68,7 +68,7 @@ type SampleFormData = {
   privacy: string;
 };
 
-export const Default: Story = {
+export const Example: Story = {
   render: (args) => (
     <Form<SampleFormData>
       {...args}

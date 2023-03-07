@@ -26,7 +26,7 @@ module.exports = {
   webpackFinal: async (config, { configType }) => {
     config.resolve.alias = {
       ...config.resolve.alias,
-      "@next/font/google": require.resolve("./nextFontGoogle"),
+      "next/font/google": require.resolve("./nextFontGoogle"),
     };
 
     const fileLoaderRule = config.module.rules.find(

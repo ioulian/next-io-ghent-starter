@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import iconChevron from "@tabler/icons/icons/chevron-right.svg";
+import iconChevron from "@tabler/icons/chevron-right.svg";
 import { useState } from "react";
 
 import Button from "../../button/Button";

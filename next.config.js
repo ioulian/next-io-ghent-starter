@@ -1,4 +1,4 @@
-// @ts-check
+// @ts-nocheck
 
 const { resolve } = require("path");
 
@@ -54,6 +54,7 @@ module.exports = withBundleAnalyzer(
         process.env.NODE_ENV === "development"
           ? "react-redux/dist/react-redux.js"
           : "react-redux/lib";
+
       return config;
     },
   })
