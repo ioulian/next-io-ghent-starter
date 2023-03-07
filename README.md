@@ -43,7 +43,7 @@ the project first.
 ### Install
 
 ```bash
-yarn create next-app --https://github.com/ioulian/next-io-ghent-starter
+yarn create next-app --example https://github.com/ioulian/next-io-ghent-starter
 yarn dev
 ```
 
