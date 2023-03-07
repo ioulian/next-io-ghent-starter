@@ -1,16 +1,12 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export const StyledExpandableSummary = styled.summary`
+export const StyledExpandableSummary = styled.div`
   font-weight: 700;
   cursor: pointer;
   position: relative;
   display: block;
   display: flex;
   justify-content: space-between;
-
-  &::-webkit-details-marker {
-    display: none;
-  }
 
   > svg {
     width: 1.5rem;
@@ -19,16 +15,18 @@ export const StyledExpandableSummary = styled.summary`
   }
 `;
 
-export const StyledExpandable = styled.details`
-  &[open] {
-    > ${StyledExpandableSummary} {
-      > svg {
-        transform: rotate(180deg);
-      }
-    }
-  }
+export const StyledExpandableContainer = styled.div`
+  padding-top: 1rem;
+`;
 
-  > div {
-    margin-top: 1rem;
-  }
+export const StyledExpandable = styled.div<{ $isOpen?: boolean }>`
+  ${({ $isOpen }) =>
+    $isOpen &&
+    css`
+      > ${StyledExpandableSummary} {
+        > svg {
+          transform: rotate(180deg);
+        }
+      }
+    `}
 `;
