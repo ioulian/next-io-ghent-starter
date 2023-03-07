@@ -24,7 +24,7 @@ const AvatarInitials: FC<{
 };
 
 const meta: Meta<typeof AvatarInitials> = {
-  title: "UI/Avatar Initials",
+  title: "Tools/Avatar Initials",
   component: AvatarInitials,
 };
 export default meta;
