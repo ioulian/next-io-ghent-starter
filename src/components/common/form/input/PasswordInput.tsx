@@ -1,4 +1,4 @@
-import { forwardRef, useState } from "react";
+import { forwardRef, useCallback, useState } from "react";
 import passwordShowIcon from "@tabler/icons/eye.svg";
 import passwordHideIcon from "@tabler/icons/eye-off.svg";
 import { useTranslation } from "react-i18next";
@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { InferComponentProps } from "@/types/styled";
 
 import SvgSprite from "../../svg/SvgSprite";
+import Button from "../../button/Button";
 
 import Input from "./Input";
 
@@ -15,24 +16,34 @@ const PasswordInput = forwardRef<
 >((props, ref) => {
   const { t } = useTranslation("common");
   const [showPassword, setShowPassword] = useState<boolean>(false);
+
+  const onClickCallback = useCallback(() => {
+    setShowPassword(!showPassword);
+  }, [showPassword]);
+
   return (
     <Input
       ref={ref}
       {...props}
       type={showPassword ? "text" : "password"}
       iconAfter={
-        <SvgSprite
-          src={showPassword ? passwordHideIcon : passwordShowIcon}
-          type="button"
-          aria-label={t(
+        <Button
+          iconBefore={
+            <SvgSprite
+              src={showPassword ? passwordHideIcon : passwordShowIcon}
+            />
+          }
+          iconOnly
+          $size="base"
+          $type="simple"
+          onClick={onClickCallback}
+        >
+          {t(
             `form.passwordInput.${
               showPassword ? "revealPassword" : "hidePassword"
             }`
           )}
-          onClick={() => {
-            setShowPassword(!showPassword);
-          }}
-        />
+        </Button>
       }
     />
   );
