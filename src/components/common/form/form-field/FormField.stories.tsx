@@ -14,6 +14,7 @@ import Checkbox from "../collection/checkbox/Checkbox";
 import SvgSprite from "../../svg/SvgSprite";
 import Toggle from "../toggle/Toggle";
 import ReactSelectContainer from "../react-select/ReactSelect";
+import PasswordInput from "../input/PasswordInput";
 
 import Input from "./../input/Input";
 import FormField from "./FormField";
@@ -71,6 +72,19 @@ export const WithSearch: Story = {
     children: (
       <Input type="search" iconBefore={<SvgSprite src={searchIcon} />} />
     ),
+  },
+};
+
+export const WithPassword: Story = {
+  render: (args) => (
+    <Form onSubmit={() => {}}>
+      <FormField {...args} />
+    </Form>
+  ),
+  args: {
+    label: "Password",
+    name: "password",
+    children: <PasswordInput />,
   },
 };
 

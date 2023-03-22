@@ -43,14 +43,14 @@ the project first.
 ### Install
 
 ```bash
-yarn create next-app --https://github.com/ioulian/next-io-ghent-starter
+yarn create next-app --example https://github.com/ioulian/next-io-ghent-starter
 yarn dev
 ```
 
 ### Remove demo content
 
 - Remove content from `pages/index.tsx` and `pages/serverside.tsx`
-- Remove `src/features/counter` and `src/components/Demo.ts`
+- Remove `src/features/counter` (also from `src/store/store.ts`) and `src/components/Demo.ts`
 
 ## Go live checklist
 

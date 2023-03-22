@@ -7,6 +7,12 @@ export const StyledInput = styled.input`
   ${() => baseFormFieldStyling};
   appearance: none;
 
+  &[type="password"] {
+    &::-ms-reveal {
+      display: none;
+    }
+  }
+
   &:not([type="radio"]):not([type="checkbox"]) {
     width: 100%;
     font-family: inherit;
@@ -61,9 +67,12 @@ export const StyledInputIconContainer = styled.div`
   > svg {
     width: 1rem;
     height: 1rem;
-    pointer-events: none;
     position: absolute;
     top: 14px;
+
+    &:not([type="button"]) {
+      pointer-events: none;
+    }
 
     &:first-child {
       left: 14px;
