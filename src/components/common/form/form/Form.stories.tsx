@@ -9,6 +9,7 @@ import Checkbox from "../collection/checkbox/Checkbox";
 import { StyledReactSelect } from "../react-select/ReactSelect.styles";
 import Heading from "../../heading/Heading";
 import Button from "../../button/Button";
+import PasswordInput from "../input/PasswordInput";
 
 import Input from "./../input/Input";
 import FormField from "./../form-field/FormField";
@@ -180,7 +181,7 @@ export const Example: Story = {
             ...password,
           }}
         >
-          <Input type="password" />
+          <PasswordInput />
         </FormField>
         <FormField<SampleFormData>
           style={{
