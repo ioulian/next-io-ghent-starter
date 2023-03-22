@@ -17,6 +17,10 @@
     "select": {
       "emptyValue": "Select..."
     },
+    "passwordInput": {
+      "revealPassword": "Reveal password",
+      "hidePassword": "Hide password"
+    },
     "validationErrors": {
       "required": "This field is required",
       "email": "This must be a valid email address",
