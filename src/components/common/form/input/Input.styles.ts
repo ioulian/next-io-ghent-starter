@@ -70,16 +70,25 @@ export const StyledInputIconContainer = styled.div`
     position: absolute;
     top: 14px;
 
-    &:not([type="button"]) {
-      pointer-events: none;
-    }
-
     &:first-child {
       left: 14px;
     }
 
     &:last-child {
       right: 14px;
+    }
+  }
+
+  > button {
+    position: absolute;
+    top: 10px;
+
+    &:first-child {
+      left: 10px;
+    }
+
+    &:last-child {
+      right: 10px;
     }
   }
 
