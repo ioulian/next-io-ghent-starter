@@ -22,7 +22,8 @@ const SvgSprite: FC<{ src: any } & HTMLProps<SVGElement>> = ({
     <svg
       {...typedProps}
       viewBox={src.viewBox}
-      role="img"
+      role={title ? "img" : undefined}
+      aria-hidden={!title ? true : undefined}
       aria-labelledby={title && titleId}
     >
       {title && <title id={titleId}>{title}</title>}
