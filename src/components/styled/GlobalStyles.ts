@@ -78,6 +78,11 @@ const GlobalStyle = createGlobalStyle`
     touch-action: manipulation;
   }
 
+  button,
+  a {
+    outline-offset: 4px;
+  }
+
   // Remove animations and transitions on devices that are low on resources or battery
   // From: https://hankchizljaw.com/wrote/a-modern-css-reset/
   @media (prefers-reduced-motion: reduce) {
