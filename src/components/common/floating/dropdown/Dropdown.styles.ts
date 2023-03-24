@@ -6,7 +6,7 @@ export const StyledMenuWrapper = styled.div`
     display: block;
 
     &:not(:first-child) {
-      margin-top: 5px;
+      margin-top: 0.25rem;
     }
   }
 
