@@ -5,9 +5,11 @@ import { InferComponentProps } from "@/types/styled";
 
 import { StyledVisuallyHidden } from "./VisuallyHidden.styles";
 
-const VisuallyHidden: FC<InferComponentProps<typeof StyledVisuallyHidden>> = (
-  props
-) => {
+const VisuallyHidden: FC<
+  { as?: keyof JSX.IntrinsicElements } & InferComponentProps<
+    typeof StyledVisuallyHidden
+  >
+> = (props) => {
   return <StyledVisuallyHidden {...props} />;
 };
 
