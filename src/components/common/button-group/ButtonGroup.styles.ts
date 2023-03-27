@@ -4,7 +4,8 @@ export const StyledButtonGroup = styled.div<{ $alignRight?: boolean }>`
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  flex-direction: ${({ $alignRight }) => ($alignRight ? "row-reverse" : "row")};
+  justify-content: ${({ $alignRight }) =>
+    $alignRight ? "flex-end" : "flex-start"};
 
   > hr {
     width: 1px;

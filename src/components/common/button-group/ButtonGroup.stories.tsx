@@ -30,11 +30,11 @@ export const Default: Story = {
 export const AlignRight: Story = {
   render: (args) => (
     <ButtonGroup {...args}>
-      <Button>Primary Action</Button>
-      <hr />
       <Button $size="base" $type="simple">
         Cancel
       </Button>
+      <hr />
+      <Button>Primary Action</Button>
     </ButtonGroup>
   ),
   args: {
