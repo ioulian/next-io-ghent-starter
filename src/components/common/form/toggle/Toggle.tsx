@@ -8,7 +8,7 @@ import { StyledToggle } from "./Toggle.styles";
 
 const Toggle = forwardRef<
   HTMLInputElement,
-  InferComponentProps<typeof StyledInput>
+  Omit<InferComponentProps<typeof StyledInput>, "children">
 >(({ ...props }, ref) => {
   // We set aria-hidden to true, as we have another label for that element
   return (

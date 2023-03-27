@@ -10,7 +10,7 @@ import { InferComponentProps } from "@/types/styled";
 import { StyledLanguageSwitcher } from "./LanguageSwitcher.styles";
 
 const LanguageSwitcher: FC<
-  InferComponentProps<typeof StyledLanguageSwitcher>
+  Omit<InferComponentProps<typeof StyledLanguageSwitcher>, "children">
 > = ({ ...props }) => {
   const { t } = useTranslation("common");
   const router = useRouter();

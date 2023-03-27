@@ -11,7 +11,7 @@ import { useOverlayContext } from "../hooks";
 import { StyledOverlayCloseButton } from "./OverlayCloseButton.styles";
 
 const OverlayCloseButton: FC<
-  InferComponentProps<typeof StyledOverlayCloseButton>
+  Omit<InferComponentProps<typeof StyledOverlayCloseButton>, "children">
 > = ({ ...props }) => {
   const { t } = useTranslation("common");
 

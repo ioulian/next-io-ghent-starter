@@ -7,7 +7,7 @@ import { StyledInput } from "../input/Input.styles";
 
 const SingleCheckbox = forwardRef<
   HTMLInputElement,
-  InferComponentProps<typeof StyledInput>
+  Omit<InferComponentProps<typeof StyledInput>, "children">
 >(({ ...props }, ref) => {
   return <StyledInput {...props} type="checkbox" ref={ref} />;
 });

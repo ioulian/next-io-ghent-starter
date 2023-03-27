@@ -7,6 +7,10 @@ export const StyledToggle = styled.div`
   > input {
     ${() => visuallyHidden}
 
+    &:focus + label {
+      outline: 2px solid ${({ theme }) => theme.colors.primary};
+    }
+
     &:checked + label {
       background-color: ${({ theme }) =>
         theme.form.checkbox.checked.background};
@@ -21,6 +25,7 @@ export const StyledToggle = styled.div`
 
   > label {
     ${() => baseFormFieldStyling};
+    outline-offset: 4px;
     width: 2.5rem;
     height: 1.25rem;
     border-radius: 0.625rem;

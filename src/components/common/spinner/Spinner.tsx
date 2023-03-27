@@ -1,4 +1,4 @@
-import { FC, memo, ReactNode } from "react";
+import { FC, memo } from "react";
 import isEqual from "lodash/isEqual";
 
 import { InferComponentProps } from "@/types/styled";
@@ -11,13 +11,12 @@ import {
 
 const Spinner: FC<
   {
-    label?: ReactNode;
     primaryColor?: string;
     secondaryColor?: string;
     backgroundColor?: string;
   } & InferComponentProps<typeof StyledSpinner>
 > = ({
-  label,
+  children,
   primaryColor = "currentColor",
   secondaryColor = "transparent",
   backgroundColor = "transparent",
@@ -30,7 +29,7 @@ const Spinner: FC<
     >
       <div></div>
     </StyledSpinnerIcon>
-    {label && <StyledSpinnerLabel>{label}</StyledSpinnerLabel>}
+    {children && <StyledSpinnerLabel>{children}</StyledSpinnerLabel>}
   </StyledSpinner>
 );
 

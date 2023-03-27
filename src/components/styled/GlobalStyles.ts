@@ -79,8 +79,13 @@ const GlobalStyle = createGlobalStyle`
   }
 
   button,
+  input,
   a {
     outline-offset: 4px;
+
+    &:focus {
+      outline: 2px solid ${({ theme }) => theme.colors.primary};
+    }
   }
 
   // Remove animations and transitions on devices that are low on resources or battery
