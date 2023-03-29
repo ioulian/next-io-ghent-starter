@@ -83,5 +83,10 @@ declare module "styled-components" {
         color: string;
       };
     };
+
+    fileProgress: {
+      progressBackground: string;
+      states: Record<API_REQUEST_STATUS, { main: string; accent: string }>;
+    };
   }
 }
