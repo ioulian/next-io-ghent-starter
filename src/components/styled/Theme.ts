@@ -92,6 +92,27 @@ const theme: DefaultTheme = {
       color: "#b30000",
     },
   },
+  fileProgress: {
+    progressBackground: "#eee",
+    states: {
+      idle: {
+        main: "#737575",
+        accent: "#909090",
+      },
+      failed: {
+        main: "#B30000",
+        accent: "#D12626",
+      },
+      loading: {
+        main: "#0059A1",
+        accent: "#0073CF",
+      },
+      succeeded: {
+        main: "#00BE62",
+        accent: "#00E375",
+      },
+    },
+  },
 };
 
 export default theme;
