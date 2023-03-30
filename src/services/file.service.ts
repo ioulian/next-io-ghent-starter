@@ -74,7 +74,6 @@ export const useFileUpload = (url: string) => {
   );
 
   const abort = useCallback(() => {
-    console.log("aborting");
     xhr.current?.abort();
   }, [xhr]);
 
