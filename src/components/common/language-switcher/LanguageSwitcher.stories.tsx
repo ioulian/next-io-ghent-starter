@@ -11,13 +11,4 @@ const meta: Meta<typeof LanguageSwitcher> = {
 export default meta;
 type Story = StoryObj<typeof LanguageSwitcher>;
 
-export const Default: Story = {
-  args: {
-    children: (
-      <>
-        <p>Paragraph 1</p>
-        <p>Paragraph 2</p>
-      </>
-    ),
-  },
-};
+export const Default: Story = {};
