@@ -1,7 +1,7 @@
 const { resolve } = require("path");
 
 module.exports = {
-  stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
+  stories: ["../src/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
     "@storybook/addon-links",
     {
@@ -24,11 +24,6 @@ module.exports = {
     autodocs: "tag",
   },
   webpackFinal: async (config, { configType }) => {
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      "next/font/google": require.resolve("./nextFontGoogle"),
-    };
-
     const fileLoaderRule = config.module.rules.find(
       (rule) => rule.test && rule.test.test(".svg")
     );
