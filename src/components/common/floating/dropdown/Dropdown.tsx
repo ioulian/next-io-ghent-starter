@@ -1,5 +1,4 @@
 import {
-  arrow,
   autoUpdate,
   flip,
   FloatingFocusManager,
@@ -22,17 +21,20 @@ import {
   useTypeahead,
   useMergeRefs,
   useTransitionStyles,
+  useListItem,
+  FloatingList,
+  arrow,
 } from "@floating-ui/react";
 import {
   ButtonHTMLAttributes,
-  Children,
   cloneElement,
-  ForwardedRef,
+  createContext,
   forwardRef,
   HTMLProps,
   isValidElement,
   ReactNode,
   useCallback,
+  useContext,
   useEffect,
   useRef,
   useState,
@@ -42,6 +44,22 @@ import { useTheme } from "styled-components";
 import Floater from "../floater/Floater";
 
 import { StyledMenuWrapper } from "./Dropdown.styles";
+
+const MenuContext = createContext<{
+  getItemProps: (
+    userProps?: React.HTMLProps<HTMLElement>
+  ) => Record<string, unknown>;
+  activeIndex: number | null;
+  setActiveIndex: React.Dispatch<React.SetStateAction<number | null>>;
+  setHasFocusInside: React.Dispatch<React.SetStateAction<boolean>>;
+  isOpen: boolean;
+}>({
+  getItemProps: () => ({}),
+  activeIndex: null,
+  setActiveIndex: () => {},
+  setHasFocusInside: () => {},
+  isOpen: false,
+});
 
 interface WithTypeAheadKey {
   typeaheadKey?: string;
@@ -53,15 +71,15 @@ interface DropdownMenuProps {
   children?: ReactNode;
 }
 
-const makeMenuItem = (
-  children: ReactNode,
-  props: WithTypeAheadKey & ButtonHTMLAttributes<HTMLButtonElement>,
-  ref: ForwardedRef<HTMLButtonElement>
-) => {
+export const DropdownTrigger = forwardRef<
+  HTMLButtonElement,
+  WithTypeAheadKey & ButtonHTMLAttributes<HTMLButtonElement>
+>(({ children, typeaheadKey, disabled, ...props }, ref) => {
   if (isValidElement(children)) {
     return cloneElement(children, {
       // @ts-ignore
       ref,
+
       ...props,
     });
   }
@@ -71,60 +89,109 @@ const makeMenuItem = (
       {children}
     </button>
   );
-};
+});
 
 export const DropdownMenuItem = forwardRef<
   HTMLButtonElement,
   WithTypeAheadKey & ButtonHTMLAttributes<HTMLButtonElement>
->(({ children, ...props }, ref) => {
-  return makeMenuItem(children, props, ref);
+>(({ children, typeaheadKey, disabled, ...props }, forwardedRef) => {
+  const menu = useContext(MenuContext);
+  const item = useListItem({ label: disabled ? null : typeaheadKey });
+  const tree = useFloatingTree();
+  const isActive = item.index === menu.activeIndex;
+
+  const ref = useMergeRefs([item.ref, forwardedRef]);
+  if (isValidElement(children)) {
+    return cloneElement(children, {
+      // @ts-ignore
+      ref,
+      type: "button",
+      role: "menuitem",
+      tabIndex: isActive ? 0 : -1,
+      disabled: disabled,
+      ...menu.getItemProps({
+        onClick(event: React.MouseEvent<HTMLButtonElement>) {
+          props.onClick?.(event);
+          tree?.events.emit("click");
+        },
+        onFocus(event: React.FocusEvent<HTMLButtonElement>) {
+          props.onFocus?.(event);
+          menu.setHasFocusInside(true);
+        },
+      }),
+      ...props,
+    });
+  }
+
+  return (
+    <button
+      ref={ref}
+      type="button"
+      role="menuitem"
+      className="MenuItem"
+      tabIndex={isActive ? 0 : -1}
+      disabled={disabled}
+      {...menu.getItemProps({
+        onClick(event: React.MouseEvent<HTMLButtonElement>) {
+          props.onClick?.(event);
+          tree?.events.emit("click");
+        },
+        onFocus(event: React.FocusEvent<HTMLButtonElement>) {
+          props.onFocus?.(event);
+          menu.setHasFocusInside(true);
+        },
+      })}
+      {...props}
+    >
+      {children}
+    </button>
+  );
 });
 
 const DropdownMenu = forwardRef<
   HTMLButtonElement,
   DropdownMenuProps & WithTypeAheadKey & HTMLProps<HTMLButtonElement>
 >(({ children, trigger, ...props }, forwardedRef) => {
-  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const [allowHover, setAllowHover] = useState(false);
+  const [hasFocusInside, setHasFocusInside] = useState(false);
 
-  const listItemsRef = useRef<Array<HTMLButtonElement | null>>([]);
-  const listContentRef = useRef(
-    Children.map(children, (child) =>
-      isValidElement(child) ? child.props.typeaheadKey : null
-    ) as Array<string | null>
+  const elementsRef = useRef<Array<HTMLButtonElement | null>>([]);
+  const labelsRef = useRef<Array<string | null>>(
+    //Children.map(children, (child) =>
+    //  isValidElement(child) ? child.props.typeaheadKey : null
+    //)
+    []
   );
+  const parent = useContext(MenuContext);
+  const arrowRef = useRef<HTMLDivElement | null>(null);
 
   const tree = useFloatingTree();
   const nodeId = useFloatingNodeId();
   const parentId = useFloatingParentNodeId();
-  const nested = parentId !== null;
-  const theme = useTheme();
-  const arrowRef = useRef<HTMLDivElement | null>(null);
+  const item = useListItem();
 
-  const {
-    x,
-    y,
-    refs,
-    floating,
-    strategy,
-    context,
-    placement,
-    update,
-    middlewareData,
-  } = useFloating<HTMLButtonElement>({
-    open,
-    nodeId,
-    onOpenChange: setOpen,
-    placement: nested ? "right-start" : "bottom-start",
-    middleware: [
-      offset(theme.floating.popover.offset),
-      flip(),
-      shift({ padding: theme.floating.floater.shift }),
-      arrow({ element: arrowRef }),
-    ],
-    whileElementsMounted: autoUpdate,
-  });
+  const isNested = parentId !== null;
+
+  const theme = useTheme()!;
+
+  const { x, y, refs, context, update, strategy, placement, middlewareData } =
+    useFloating<HTMLButtonElement>({
+      nodeId,
+      open: isOpen,
+      onOpenChange: setIsOpen,
+      placement: isNested ? "right-start" : "bottom-start",
+      middleware: [
+        offset({
+          mainAxis: theme.floating.popover.offset,
+          alignmentAxis: theme.floating.popover.offset,
+        }),
+        flip(),
+        shift({ padding: theme.floating.floater.shift }),
+        arrow({ element: arrowRef }),
+      ],
+      whileElementsMounted: autoUpdate,
+    });
 
   const arrowCallback = useCallback(
     (node: HTMLDivElement | null) => {
@@ -137,26 +204,26 @@ const DropdownMenu = forwardRef<
   const { getReferenceProps, getFloatingProps, getItemProps } = useInteractions(
     [
       useHover(context, {
-        handleClose: safePolygon({ restMs: 25 }),
-        enabled: nested && allowHover,
+        handleClose: safePolygon({ blockPointerEvents: true }),
+        enabled: isNested && !hasFocusInside,
         delay: { open: 75 },
       }),
       useClick(context, {
-        toggle: !nested || !allowHover,
+        toggle: !isNested,
         event: "mousedown",
-        ignoreMouse: nested,
+        ignoreMouse: isNested,
       }),
       useRole(context, { role: "menu" }),
-      useDismiss(context),
+      useDismiss(context, { bubbles: true }),
       useListNavigation(context, {
-        listRef: listItemsRef,
+        listRef: elementsRef,
         activeIndex,
-        nested,
+        nested: isNested,
         onNavigate: setActiveIndex,
       }),
       useTypeahead(context, {
-        listRef: listContentRef,
-        onMatch: open ? setActiveIndex : undefined,
+        listRef: labelsRef,
+        onMatch: isOpen ? setActiveIndex : undefined,
         activeIndex,
       }),
     ]
@@ -166,133 +233,98 @@ const DropdownMenu = forwardRef<
   // This effect closes all menus when an item gets clicked anywhere
   // in the tree.
   useEffect(() => {
-    const handleTreeClick = () => {
-      setOpen(false);
-    };
+    if (!tree) {
+      return;
+    }
 
-    tree?.events.on("click", handleTreeClick);
-    return () => {
-      tree?.events.off("click", handleTreeClick);
-    };
-  }, [tree]);
+    function handleTreeClick() {
+      setIsOpen(false);
+    }
 
-  // Determine if "hover" logic can run based on the modality of input. This
-  // prevents unwanted focus synchronization as menus open and close with
-  // keyboard navigation and the cursor is resting on the menu.
-  useEffect(() => {
-    const onPointerMove = ({ pointerType }: PointerEvent) => {
-      if (pointerType === "mouse") {
-        setAllowHover(true);
+    function onSubMenuOpen(event: { nodeId: string; parentId: string }) {
+      if (event.nodeId !== nodeId && event.parentId === parentId) {
+        setIsOpen(false);
       }
-    };
+    }
 
-    const onKeyDown = () => {
-      setAllowHover(false);
-    };
-
-    window.addEventListener("pointermove", onPointerMove, {
-      once: true,
-      capture: true,
-    });
-    window.addEventListener("keydown", onKeyDown, true);
+    tree.events.on("click", handleTreeClick);
+    tree.events.on("menuopen", onSubMenuOpen);
 
     return () => {
-      window.removeEventListener("pointermove", onPointerMove, {
-        capture: true,
-      });
-      window.removeEventListener("keydown", onKeyDown, true);
+      tree.events.off("click", handleTreeClick);
+      tree.events.off("menuopen", onSubMenuOpen);
     };
-  }, [allowHover]);
+  }, [tree, nodeId, parentId]);
 
-  const referenceRef = useMergeRefs([refs.setReference, forwardedRef]);
+  useEffect(() => {
+    if (isOpen && tree) {
+      tree.events.emit("menuopen", { parentId, nodeId });
+    }
+  }, [tree, isOpen, nodeId, parentId]);
+
   const { isMounted, styles } = useTransitionStyles(context, {
     duration: theme.timings.fast,
   });
 
   return (
     <FloatingNode id={nodeId}>
-      {makeMenuItem(
-        trigger,
-        {
-          ...getReferenceProps({
+      <DropdownTrigger
+        ref={useMergeRefs([refs.setReference, item.ref, forwardedRef])}
+        tabIndex={
+          !isNested ? undefined : parent.activeIndex === item.index ? 0 : -1
+        }
+        role={isNested ? "menuitem" : undefined}
+        data-open={isOpen ? "" : undefined}
+        data-nested={isNested ? "" : undefined}
+        data-focus-inside={hasFocusInside ? "" : undefined}
+        {...getReferenceProps(
+          parent.getItemProps({
             ...props,
-            className: `${open ? "open" : ""}`,
-            onClick: (event) => {
-              event.stopPropagation();
+            onFocus(event: React.FocusEvent<HTMLButtonElement>) {
+              props.onFocus?.(event);
+              setHasFocusInside(false);
+              parent.setHasFocusInside(true);
             },
-            ...(nested && {
-              // Indicates this is a nested <Menu /> acting as a <MenuItem />.
-              role: "menuitem",
-            }),
-          }),
-        },
-        referenceRef
-      )}
-      <FloatingPortal>
-        {isMounted && (
-          <FloatingFocusManager
-            context={context}
-            // Prevent outside content interference.
-            modal={!nested}
-            // Only initially focus the root floating menu.
-            initialFocus={nested ? -1 : 0}
-            // Only return focus to the root menu when menus close.
-            returnFocus={!nested}
-            // Allow touch screen readers to escape the modal root menu
-            // without selecting anything.
-            visuallyHiddenDismiss
-          >
-            <Floater
-              ref={floating}
-              position={{ x, y }}
-              arrowPosition={middlewareData.arrow}
-              strategy={strategy}
-              placement={placement}
-              arrowCallback={arrowCallback}
-              {...getFloatingProps({
-                // Pressing tab dismisses the menu and places focus
-                // back on the trigger.
-                onKeyDown: (event) => {
-                  if (event.key === "Tab") {
-                    setOpen(false);
-                  }
-                },
-              })}
-              style={styles}
-            >
-              <StyledMenuWrapper>
-                {Children.map(
-                  children,
-                  (child, index) =>
-                    isValidElement(child) &&
-                    cloneElement(
-                      child,
-                      getItemProps({
-                        tabIndex: activeIndex === index ? 0 : -1,
-                        role: "menuitem",
-                        ref: (node: HTMLButtonElement) => {
-                          listItemsRef.current[index] = node;
-                        },
-                        onClick: (e) => {
-                          child.props.onClick?.(e);
-                          if (!e.defaultPrevented) {
-                            tree?.events.emit("click");
-                          }
-                        },
-                        // Allow focus synchronization if the cursor did not move.
-                        onPointerEnter: () => {
-                          if (allowHover) {
-                            setActiveIndex(index);
-                          }
-                        },
-                      })
-                    )
-                )}
-              </StyledMenuWrapper>
-            </Floater>
-          </FloatingFocusManager>
+          })
         )}
-      </FloatingPortal>
+      >
+        {trigger}
+      </DropdownTrigger>
+      <MenuContext.Provider
+        value={{
+          activeIndex,
+          setActiveIndex,
+          getItemProps,
+          setHasFocusInside,
+          isOpen,
+        }}
+      >
+        <FloatingList elementsRef={elementsRef} labelsRef={labelsRef}>
+          {isMounted && (
+            <FloatingPortal>
+              <FloatingFocusManager
+                context={context}
+                modal={false}
+                initialFocus={isNested ? -1 : 0}
+                returnFocus={!isNested}
+              >
+                <Floater
+                  ref={refs.setFloating}
+                  position={{ x, y }}
+                  arrowPosition={middlewareData.arrow}
+                  strategy={strategy}
+                  placement={placement}
+                  arrowCallback={arrowCallback}
+                  {...getFloatingProps()}
+                  style={styles}
+                >
+                  <StyledMenuWrapper>{children}</StyledMenuWrapper>
+                </Floater>
+              </FloatingFocusManager>
+            </FloatingPortal>
+          )}
+        </FloatingList>
+      </MenuContext.Provider>
     </FloatingNode>
   );
 });
@@ -316,10 +348,12 @@ const Dropdown = forwardRef<
 
 if (process.env.NODE_ENV === "development") {
   Dropdown.displayName = "Dropdown";
+  DropdownTrigger.displayName = "DropdownTrigger";
   DropdownMenu.displayName = "DropdownMenu";
   DropdownMenuItem.displayName = "DropdownMenuItem";
 
   Dropdown.whyDidYouRender = true;
+  DropdownTrigger.whyDidYouRender = true;
   DropdownMenu.whyDidYouRender = true;
   DropdownMenuItem.whyDidYouRender = true;
 }

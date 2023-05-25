@@ -40,7 +40,7 @@ export const useTooltip = ({
   const open = controlledOpen ?? uncontrolledOpen;
   const setOpen = setControlledOpen ?? setUncontrolledOpen;
   const arrowRef = useRef<HTMLDivElement | null>(null);
-  const theme = useTheme();
+  const theme = useTheme()!;
 
   const data = useFloating({
     placement,

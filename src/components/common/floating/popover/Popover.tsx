@@ -62,7 +62,7 @@ const PopoverContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
   (props, propRef) => {
     const context = usePopoverContext();
     const ref = useMergeRefs([context.refs.setFloating, propRef]);
-    const theme = useTheme();
+    const theme = useTheme()!;
     const { isMounted, styles } = useTransitionStyles(context.context, {
       duration: theme.timings.fast,
     });

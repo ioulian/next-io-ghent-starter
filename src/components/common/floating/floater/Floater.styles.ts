@@ -9,8 +9,12 @@ export const StyledFloater = styled.div`
   box-shadow: 0px 4px 12px ${({ theme }) => rgba(theme.colors.black, 0.25)};
   border-radius: ${({ theme }) => theme.borderRadius.normal}px;
   width: max-content;
-  padding: 0.25rem;
+  padding: 5px;
   max-width: calc(100vw - ${({ theme }) => theme.floating.floater.shift * 2}px);
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 export const StyledFloaterArrow = styled.div`

@@ -17,13 +17,9 @@ const PasswordInput = forwardRef<
   const { t } = useTranslation("common");
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
-  const onClickCallback = useCallback(
-    (e) => {
-      e.preventDefault();
-      setShowPassword(!showPassword);
-    },
-    [showPassword]
-  );
+  const onClickCallback = useCallback(() => {
+    setShowPassword(!showPassword);
+  }, [showPassword]);
 
   return (
     <Input
@@ -37,6 +33,7 @@ const PasswordInput = forwardRef<
               src={showPassword ? passwordHideIcon : passwordShowIcon}
             />
           }
+          type="button"
           iconOnly
           $size="base"
           $type="simple"

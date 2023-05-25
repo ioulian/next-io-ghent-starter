@@ -45,7 +45,7 @@ const Floater = forwardRef<
       left: "rotate(45deg)",
     }[placementFirst] as string;
 
-    const theme = useTheme();
+    const theme = useTheme()!;
 
     return (
       <StyledFloater
