@@ -128,7 +128,6 @@ export const DropdownMenuItem = forwardRef<
       ref={ref}
       type="button"
       role="menuitem"
-      className="MenuItem"
       tabIndex={isActive ? 0 : -1}
       disabled={disabled}
       {...menu.getItemProps({
