@@ -48,6 +48,7 @@ const DialogTrigger = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
     return (
       <button
         ref={ref}
+        type="button"
         // The user can style the trigger based on the state
         data-state={context.open ? "open" : "closed"}
         {...context.getReferenceProps(props)}
@@ -62,7 +63,7 @@ const DialogContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
   (props, propRef) => {
     const context = useDialogContext();
     const ref = useMergeRefs([context.refs.setFloating, propRef]);
-    const theme = useTheme();
+    const theme = useTheme()!;
     const { isMounted, styles } = useTransitionStyles(context.context, {
       duration: theme.timings.normal,
     });
@@ -182,6 +183,7 @@ const DialogClose = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
       <button
         onClick={onClick}
         {...props}
+        type="button"
         // @ts-ignore
         ref={ref}
       >

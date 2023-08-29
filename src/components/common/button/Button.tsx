@@ -50,6 +50,7 @@ const Button = forwardRef<
       isLoading = false,
       disabled,
       onClick,
+      as,
       children,
       $isLoading,
       ...props
@@ -68,6 +69,8 @@ const Button = forwardRef<
     return (
       <StyledButton
         ref={ref}
+        type={!as || as === "button" ? "button" : undefined}
+        as={as}
         {...props}
         $isLoading={isLoading}
         disabled={disabled || isLoading}

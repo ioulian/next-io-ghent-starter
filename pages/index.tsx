@@ -128,8 +128,8 @@ const Home: NextPageWithLayout = ({}: InferGetStaticPropsType<
                 <Overlay.Heading>
                   <Heading type="h2">Example</Heading>
                 </Overlay.Heading>
-                <button>button 1</button>
-                <button>button 2</button>
+                <button type="button">button 1</button>
+                <button type="button">button 2</button>
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                   Praesent porta dolor mi, at venenatis urna elementum a. Etiam

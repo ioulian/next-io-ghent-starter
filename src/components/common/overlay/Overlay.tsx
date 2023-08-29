@@ -69,7 +69,7 @@ const Overlay: FC<{
 }> & {
   Heading: typeof OverlayHeading;
 } = ({ contentLabel, isOpen = false, children, onClose }) => {
-  const theme = useTheme();
+  const theme = useTheme()!;
 
   const contentId = useId();
 

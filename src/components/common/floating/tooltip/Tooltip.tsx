@@ -58,7 +58,7 @@ const TooltipContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
   (props, propRef) => {
     const context = useTooltipContext();
     const ref = useMergeRefs([context.refs.setFloating, propRef]);
-    const theme = useTheme();
+    const theme = useTheme()!;
     const { isMounted, styles } = useTransitionStyles(context.context, {
       duration: theme.timings.fast,
     });

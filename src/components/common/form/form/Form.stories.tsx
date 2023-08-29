@@ -204,7 +204,7 @@ export const Example: Story = {
       >
         <SingleCheckbox />
       </FormField>
-      <Button>Submit</Button>
+      <Button type="submit">Submit</Button>
     </Form>
   ),
   args: {
