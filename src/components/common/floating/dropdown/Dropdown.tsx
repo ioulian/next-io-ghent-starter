@@ -85,7 +85,7 @@ export const DropdownTrigger = forwardRef<
   }
 
   return (
-    <button ref={ref} {...props}>
+    <button ref={ref} {...props} type="button">
       {children}
     </button>
   );

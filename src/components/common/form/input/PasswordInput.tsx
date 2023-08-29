@@ -33,7 +33,6 @@ const PasswordInput = forwardRef<
               src={showPassword ? passwordHideIcon : passwordShowIcon}
             />
           }
-          type="button"
           iconOnly
           $size="base"
           $type="simple"

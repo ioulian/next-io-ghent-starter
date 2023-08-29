@@ -7,6 +7,7 @@
     "plugin:storybook/recommended"
   ],
   "rules": {
+    "react/button-has-type": "error",
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": [
       "error",

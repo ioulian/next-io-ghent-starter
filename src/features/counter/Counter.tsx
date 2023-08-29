@@ -21,6 +21,7 @@ export const Counter = () => {
     <div>
       <div>
         <button
+          type="button"
           aria-label="Decrement value"
           onClick={() => dispatch(decrement())}
         >
@@ -28,6 +29,7 @@ export const Counter = () => {
         </button>
         <span>{count}</span>
         <button
+          type="button"
           aria-label="Increment value"
           onClick={() => dispatch(increment())}
         >
@@ -40,13 +42,22 @@ export const Counter = () => {
           value={incrementAmount}
           onChange={(e) => setIncrementAmount(e.target.value)}
         />
-        <button onClick={() => dispatch(incrementByAmount(incrementValue))}>
+        <button
+          type="button"
+          onClick={() => dispatch(incrementByAmount(incrementValue))}
+        >
           Add Amount
         </button>
-        <button onClick={() => dispatch(incrementAsync(incrementValue))}>
+        <button
+          type="button"
+          onClick={() => dispatch(incrementAsync(incrementValue))}
+        >
           Add Async
         </button>
-        <button onClick={() => dispatch(incrementIfOdd(incrementValue))}>
+        <button
+          type="button"
+          onClick={() => dispatch(incrementIfOdd(incrementValue))}
+        >
           Add If Odd
         </button>
       </div>
