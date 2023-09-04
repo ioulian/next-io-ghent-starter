@@ -1,7 +1,7 @@
 import { DefaultTheme } from "styled-components";
-import { Source_Sans_Pro } from "next/font/google";
+import { Source_Sans_3 } from "next/font/google";
 
-const sourceSansPro = Source_Sans_Pro({
+const sourceSansPro = Source_Sans_3({
   weight: ["400", "700"],
   style: ["normal", "italic"],
   subsets: ["latin"],

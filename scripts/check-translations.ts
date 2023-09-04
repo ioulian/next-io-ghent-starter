@@ -4,6 +4,11 @@ import path from "path";
 import fs from "fs";
 
 import i18nextConfig from "./../next-i18next.config";
+import {
+  getErrorMessage,
+  getSimpleErrorMessage,
+  getSimpleSuccessMessage,
+} from "./utils";
 
 // Colors: https://stackoverflow.com/questions/9781218/how-to-change-node-jss-console-font-color
 
@@ -28,7 +33,7 @@ const getTranslationFiles = (locale: string): string[] =>
 const getTranslationFile = (locale: string, name: string): {} | undefined => {
   try {
     const file = fs.readFileSync(
-      path.join(__dirname, `./../public/locales/${locale}/${name}`)
+      path.join(__dirname, `./../public/locales/${locale}/${name}`),
     );
 
     if (!file) {
@@ -54,46 +59,46 @@ const check = async (): Promise<boolean> =>
       for (const primaryTranslationFileName of primaryTranslationFiles) {
         const primaryTranslationFile = getTranslationFile(
           primaryLocale,
-          primaryTranslationFileName
+          primaryTranslationFileName,
         );
         const primaryTranslationFileKeys = getKeysOfObjectRecursively(
-          primaryTranslationFile
+          primaryTranslationFile,
         );
 
         // Check the rest of the locales
         for (const locale of POSSIBLE_LOCALES.filter(
-          (currentLocale) => currentLocale !== primaryLocale
+          (currentLocale) => currentLocale !== primaryLocale,
         )) {
           const localeTranslationFile = getTranslationFile(
             locale,
-            primaryTranslationFileName
+            primaryTranslationFileName,
           );
 
           // Check if the file exists for the locale
           if (!localeTranslationFile) {
             console.error(
-              "\x1b[41m",
-              "\x1b[1m[File]",
-              "\x1b[0m",
-              `"\x1b[1m${primaryTranslationFileName}\x1b[0m" is missing for "\x1b[1m${locale}\x1b[0m".`
+              getErrorMessage(
+                `\x1b[1m${primaryTranslationFileName}\x1b[0m" is missing for "\x1b[1m${locale}\x1b[0m".`,
+                "File",
+              ),
             );
             isCorrect = false;
           } else {
             // Check if there are missing keys
             const translationFileKeys = getKeysOfObjectRecursively(
-              localeTranslationFile
+              localeTranslationFile,
             );
             const missingKeys = primaryTranslationFileKeys.filter(
-              (key) => !translationFileKeys.includes(key)
+              (key) => !translationFileKeys.includes(key),
             );
 
             if (missingKeys.length !== 0) {
               missingKeys.forEach((missingKey) => {
                 console.error(
-                  "\x1b[41m",
-                  "\x1b[1m[Key]",
-                  "\x1b[0m",
-                  `"\x1b[1m${missingKey}\x1b[0m" from "\x1b[1m${primaryLocale}\x1b[0m" is missing from "\x1b[1m${primaryTranslationFileName}\x1b[0m" for "\x1b[1m${locale}\x1b[0m".`
+                  getErrorMessage(
+                    `"\x1b[1m${missingKey}\x1b[0m" from "\x1b[1m${primaryLocale}\x1b[0m" is missing from "\x1b[1m${primaryTranslationFileName}\x1b[0m" for "\x1b[1m${locale}\x1b[0m".`,
+                    "Key",
+                  ),
                 );
               });
               isCorrect = false;
@@ -110,14 +115,14 @@ check().then((isCorrect) => {
   console.log("");
 
   if (!isCorrect) {
-    console.log(
-      "\x1b[31m",
-      "Some errors have been found! You can see them above.",
-      "\x1b[0m"
+    console.error(
+      getSimpleErrorMessage(
+        "Some errors have been found! You can see them above.",
+      ),
     );
     process.exit(1);
   }
 
-  console.log("\x1b[32m", "Everything checks out!", "\x1b[0m");
+  console.log(getSimpleSuccessMessage("Everything checks out!"));
   process.exit(0);
 });

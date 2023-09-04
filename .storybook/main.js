@@ -2,6 +2,9 @@ const { resolve } = require("path");
 
 module.exports = {
   stories: ["../src/**/*.stories.@(js|jsx|ts|tsx)"],
+  core: {
+    isableTelemetry: true,
+  },
   addons: [
     "@storybook/addon-links",
     {
@@ -25,7 +28,7 @@ module.exports = {
   },
   webpackFinal: async (config, { configType }) => {
     const fileLoaderRule = config.module.rules.find(
-      (rule) => rule.test && rule.test.test(".svg")
+      (rule) => rule.test && rule.test.test(".svg"),
     );
     fileLoaderRule.exclude = [/\@tabler\/icons\//, /-sprite\.svg$/];
     config.module.rules.push({

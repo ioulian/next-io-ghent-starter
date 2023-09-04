@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren } from "react";
-import { A11y } from "swiper";
+import { A11y } from "swiper/modules";
 import { Swiper, SwiperProps } from "swiper/react";
 
 import "swiper/css";
