@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import {
   DeepPartial,
+  DefaultValues,
   FormProvider,
   Mode,
   Path,
@@ -29,7 +30,7 @@ const Form = <T extends Record<string, any>>({
   ...props
 }: {
   error?: ApiError;
-  defaultValues?: DeepPartial<T>;
+  defaultValues?: DefaultValues<T>;
   isLoading?: boolean;
   mode?: Mode;
   onSubmit: (data?: T) => void;
