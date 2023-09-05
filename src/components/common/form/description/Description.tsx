@@ -1,6 +1,5 @@
 import { FC, memo } from "react";
 import { useTranslation } from "next-i18next";
-import isEqual from "lodash/isEqual";
 
 import { InferComponentProps } from "@/types/styled";
 
@@ -24,4 +23,4 @@ if (process.env.NODE_ENV === "development") {
   Description.whyDidYouRender = true;
 }
 
-export default memo(Description, isEqual);
+export default memo(Description);

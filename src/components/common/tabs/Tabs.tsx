@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { Tabs as ReactTabs } from "react-tabs";
 
 import { InferComponentProps } from "@/types/styled";
@@ -20,4 +20,4 @@ if (process.env.NODE_ENV === "development") {
   Tabs.whyDidYouRender = true;
 }
 
-export default Tabs;
+export default memo(Tabs);

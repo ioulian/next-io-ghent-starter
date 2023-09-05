@@ -1,5 +1,4 @@
 import { FC, HTMLProps, memo, useId } from "react";
-import isEqual from "lodash/isEqual";
 
 const SvgSprite: FC<{ src: any } & HTMLProps<SVGElement>> = ({
   src,
@@ -36,4 +35,4 @@ if (process.env.NODE_ENV === "development") {
   SvgSprite.whyDidYouRender = true;
 }
 
-export default memo(SvgSprite, isEqual);
+export default memo(SvgSprite);

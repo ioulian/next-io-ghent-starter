@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import { forwardRef, memo } from "react";
 
 import { InferComponentProps } from "@/types/styled";
 
@@ -20,7 +20,7 @@ const Radio = forwardRef<
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
     const linkedId = `${name}-${inputValue}`;
     return (
@@ -36,7 +36,7 @@ const Radio = forwardRef<
         <Label htmlFor={linkedId}>{children}</Label>
       </StyledRadio>
     );
-  }
+  },
 );
 
 if (process.env.NODE_ENV === "development") {
@@ -44,4 +44,4 @@ if (process.env.NODE_ENV === "development") {
   Radio.whyDidYouRender = true;
 }
 
-export default Radio;
+export default memo(Radio);

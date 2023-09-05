@@ -3,6 +3,7 @@ import {
   cloneElement,
   FC,
   isValidElement,
+  memo,
   ReactElement,
 } from "react";
 
@@ -26,7 +27,7 @@ const Stepper: FC<InferComponentProps<typeof StyledStepper>> = ({
             })}
             {index !== totalChildren - 1 && <StyledSpacer />}
           </>
-        ) : null
+        ) : null,
       )}
     </StyledStepper>
   );
@@ -36,4 +37,4 @@ if (process.env.NODE_ENV === "development") {
   Stepper.whyDidYouRender = true;
 }
 
-export default Stepper;
+export default memo(Stepper);

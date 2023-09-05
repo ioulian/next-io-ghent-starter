@@ -1,5 +1,4 @@
 import { FC, memo } from "react";
-import isEqual from "lodash/isEqual";
 
 import { InferComponentProps } from "@/types/styled";
 
@@ -37,4 +36,4 @@ if (process.env.NODE_ENV === "development") {
   Spinner.whyDidYouRender = true;
 }
 
-export default memo(Spinner, isEqual);
+export default memo(Spinner);

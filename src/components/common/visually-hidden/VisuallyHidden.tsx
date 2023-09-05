@@ -1,5 +1,4 @@
 import { FC, memo } from "react";
-import isEqual from "lodash/isEqual";
 
 import { InferComponentProps } from "@/types/styled";
 
@@ -17,4 +16,4 @@ if (process.env.NODE_ENV === "development") {
   VisuallyHidden.whyDidYouRender = true;
 }
 
-export default memo(VisuallyHidden, isEqual);
+export default memo(VisuallyHidden);

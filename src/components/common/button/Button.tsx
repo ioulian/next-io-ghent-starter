@@ -6,7 +6,6 @@ import {
   cloneElement,
   memo,
 } from "react";
-import isEqual from "lodash/isEqual";
 import { useCallback } from "react";
 
 import { InferComponentProps } from "@/types/styled";
@@ -106,4 +105,4 @@ if (process.env.NODE_ENV === "development") {
   Button.whyDidYouRender = true;
 }
 
-export default memo(Button, isEqual);
+export default memo(Button);

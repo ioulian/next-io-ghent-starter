@@ -1,5 +1,4 @@
 import { FC, memo } from "react";
-import isEqual from "lodash/isEqual";
 
 import { ApiError } from "@/types/error";
 
@@ -11,4 +10,4 @@ if (process.env.NODE_ENV === "development") {
   ApiFormError.whyDidYouRender = true;
 }
 
-export default memo(ApiFormError, isEqual);
+export default memo(ApiFormError);

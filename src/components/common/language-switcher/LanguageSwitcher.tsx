@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
 import { useCookies } from "react-cookie";
-import isEqual from "lodash/isEqual";
 
 import { InferComponentProps } from "@/types/styled";
 
@@ -85,4 +84,4 @@ if (process.env.NODE_ENV === "development") {
   LanguageSwitcher.whyDidYouRender = true;
 }
 
-export default memo(LanguageSwitcher, isEqual);
+export default memo(LanguageSwitcher);

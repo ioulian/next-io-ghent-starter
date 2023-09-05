@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 
 import { InferComponentProps } from "@/types/styled";
 
@@ -15,4 +15,4 @@ if (process.env.NODE_ENV === "development") {
   Tag.whyDidYouRender = true;
 }
 
-export default Tag;
+export default memo(Tag);
