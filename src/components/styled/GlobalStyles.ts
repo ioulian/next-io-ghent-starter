@@ -80,10 +80,12 @@ const GlobalStyle = createGlobalStyle`
 
   button,
   input,
+  select,
+  textarea,
   a {
     outline-offset: 4px;
 
-    &:focus {
+    &:focus-visible {
       outline: 2px solid ${({ theme }) => theme.colors.primary};
     }
   }
