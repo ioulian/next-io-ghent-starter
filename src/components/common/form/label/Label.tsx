@@ -16,7 +16,7 @@ const Label: FC<
   return (
     <StyledLabel {...props}>
       {children}
-      {required && <span aria-label={t("form.label.required")}>*</span>}
+      {required ? <span aria-label={t("form.label.required")}>*</span> : null}
     </StyledLabel>
   );
 };

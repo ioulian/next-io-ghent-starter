@@ -55,7 +55,7 @@ const Button = forwardRef<
       $isLoading,
       ...props
     },
-    ref
+    ref,
   ) => {
     const newOnClick = useCallback(
       (e: ReactMouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -63,7 +63,7 @@ const Button = forwardRef<
           onClick?.(e);
         }
       },
-      [onClick, isLoading, disabled]
+      [onClick, isLoading, disabled],
     );
 
     return (
@@ -82,12 +82,13 @@ const Button = forwardRef<
               // @ts-ignore
               "aria-hidden": "true",
             })}
-          {children &&
-            (iconOnly ? (
+          {children ? (
+            iconOnly ? (
               <VisuallyHidden>{children}</VisuallyHidden>
             ) : (
               <span>{children}</span>
-            ))}
+            )
+          ) : null}
           {isValidElement(iconAfter) &&
             cloneElement(iconAfter, {
               // @ts-ignore
@@ -97,7 +98,7 @@ const Button = forwardRef<
         <Spinner />
       </StyledButton>
     );
-  }
+  },
 );
 
 if (process.env.NODE_ENV === "development") {

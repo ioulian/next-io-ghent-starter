@@ -27,9 +27,9 @@ const Spinner: FC<
       $primaryColor={primaryColor}
       $secondaryColor={secondaryColor}
     >
-      <div></div>
+      <div />
     </StyledSpinnerIcon>
-    {children && <StyledSpinnerLabel>{children}</StyledSpinnerLabel>}
+    {children ? <StyledSpinnerLabel>{children}</StyledSpinnerLabel> : null}
   </StyledSpinner>
 );
 

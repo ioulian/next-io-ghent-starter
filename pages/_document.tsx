@@ -48,7 +48,7 @@ export default class MyDocument extends Document {
             </noscript>
           ) : undefined}
           <Main />
-          <div id="root-toastify"></div>
+          <div id="root-toastify" />
           <NextScript />
         </body>
       </Html>

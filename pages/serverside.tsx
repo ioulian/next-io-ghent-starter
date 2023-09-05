@@ -26,9 +26,9 @@ const Repo = () => {
 
   return (
     <>
-      {error && data && <p>Error loading</p>}
+      {!!error && !!data && <p>Error loading</p>}
       {!error && !data && <p>Loading...</p>}
-      {!error && data && (
+      {!error && !!data && (
         <div>
           <h2>{data.name}</h2>
           <p>{data.description}</p>
@@ -95,9 +95,9 @@ export const getServerSideProps: GetServerSideProps =
               resolve(result);
             })
             .catch(
-              catchServerSideProps(resolve, reject, store, resolvedUrl, res)
+              catchServerSideProps(resolve, reject, store, resolvedUrl, res),
             );
-        })
+        }),
   );
 
 export default ServerSide;

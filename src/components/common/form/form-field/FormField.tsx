@@ -32,9 +32,7 @@ import { BE_VALIDATION } from "../form/Form";
 
 import { StyledFormField } from "./FormField.styles";
 
-const BaseWrapper: FC<{ children?: ReactNode }> = ({ children }) => (
-  <>{children}</>
-);
+const BaseWrapper: FC<{ children?: ReactNode }> = ({ children }) => children;
 
 type RenderProps<T extends Record<string, any>> = (props: {
   field: ControllerRenderProps<T, FieldPath<T>>;
@@ -83,7 +81,7 @@ const FormField = <T extends Record<string, any>>({
   const { error } = getFieldState(name, formState);
   const registerProps = register(
     name,
-    merge(options, watchValidate ? watchValidate(watch) : {})
+    merge(options, watchValidate ? watchValidate(watch) : {}),
   );
   const describedBy = getAriaDescribedBy(name, !!description, !!error);
 
@@ -93,7 +91,7 @@ const FormField = <T extends Record<string, any>>({
       $error={!!error}
       {...props}
     >
-      {label && (
+      {!!label && (
         <Label
           as={asFieldSet ? "legend" : "label"}
           htmlFor={asFieldSet ? undefined : name}
@@ -131,23 +129,23 @@ const FormField = <T extends Record<string, any>>({
                   ...(describedBy && { "aria-describedby": describedBy }),
                   ...(error && { "aria-invalid": "true" }),
                 })
-              : null
+              : null,
           )}
         </InputWrapper>
       )}
-      {error && (
+      {error ? (
         <Error id={getErrorId(name)}>
           {error.type === BE_VALIDATION
             ? (error.message as unknown as string)
             : (t(
                 // @ts-ignore
-                `form.validationErrors.${error.message as string}`
+                `form.validationErrors.${error.message as string}`,
               ) as string)}
         </Error>
-      )}
-      {description && (
+      ) : null}
+      {description ? (
         <Description id={getDescriptionId(name)}>{description}</Description>
-      )}
+      ) : null}
     </StyledFormField>
   );
 };

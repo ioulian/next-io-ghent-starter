@@ -41,7 +41,7 @@ const DialogTrigger = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
           ...props,
           ...children.props,
           "data-state": context.open ? "open" : "closed",
-        })
+        }),
       );
     }
 
@@ -56,7 +56,7 @@ const DialogTrigger = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
         {children}
       </button>
     );
-  }
+  },
 );
 
 const DialogContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
@@ -70,7 +70,7 @@ const DialogContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
 
     return (
       <FloatingPortal>
-        {isMounted && (
+        {isMounted ? (
           <FloatingOverlay
             className="app-dialog-overlay"
             lockScroll
@@ -92,10 +92,10 @@ const DialogContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
               </Floater>
             </FloatingFocusManager>
           </FloatingOverlay>
-        )}
+        ) : null}
       </FloatingPortal>
     );
-  }
+  },
 );
 
 const DialogHeading = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
@@ -128,7 +128,7 @@ const DialogHeading = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
         {children}
       </h2>
     );
-  }
+  },
 );
 
 const DialogDescription = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
@@ -161,7 +161,7 @@ const DialogDescription = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
         {children}
       </p>
     );
-  }
+  },
 );
 
 const DialogClose = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
@@ -190,7 +190,7 @@ const DialogClose = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
         {children}
       </button>
     );
-  }
+  },
 );
 
 // Based on: https://floating-ui.com/docs/popover

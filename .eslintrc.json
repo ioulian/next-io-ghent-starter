@@ -41,6 +41,13 @@
           "builtin"
         ]
       }
-    ]
+    ],
+    "react/jsx-no-constructed-context-values": "error",
+    "react/jsx-no-useless-fragment": "error",
+    "react/jsx-no-leaked-render": "error",
+    "react/no-invalid-html-attribute": "error",
+    "react/no-object-type-as-default-prop": "error",
+    "react/self-closing-comp": "error",
+    "react/void-dom-elements-no-children": "error"
   }
 }

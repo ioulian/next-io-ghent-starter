@@ -36,6 +36,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
@@ -47,7 +48,7 @@ import { StyledMenuWrapper } from "./Dropdown.styles";
 
 const MenuContext = createContext<{
   getItemProps: (
-    userProps?: React.HTMLProps<HTMLElement>
+    userProps?: React.HTMLProps<HTMLElement>,
   ) => Record<string, unknown>;
   activeIndex: number | null;
   setActiveIndex: React.Dispatch<React.SetStateAction<number | null>>;
@@ -160,7 +161,7 @@ const DropdownMenu = forwardRef<
     //Children.map(children, (child) =>
     //  isValidElement(child) ? child.props.typeaheadKey : null
     //)
-    []
+    [],
   );
   const parent = useContext(MenuContext);
   const arrowRef = useRef<HTMLDivElement | null>(null);
@@ -197,7 +198,7 @@ const DropdownMenu = forwardRef<
       arrowRef.current = node;
       update();
     },
-    [update]
+    [update],
   );
 
   const { getReferenceProps, getFloatingProps, getItemProps } = useInteractions(
@@ -225,7 +226,7 @@ const DropdownMenu = forwardRef<
         onMatch: isOpen ? setActiveIndex : undefined,
         activeIndex,
       }),
-    ]
+    ],
   );
 
   // Event emitter allows you to communicate across tree components.
@@ -265,6 +266,17 @@ const DropdownMenu = forwardRef<
     duration: theme.timings.fast,
   });
 
+  const contextValue = useMemo(
+    () => ({
+      activeIndex,
+      setActiveIndex,
+      getItemProps,
+      setHasFocusInside,
+      isOpen,
+    }),
+    [activeIndex, setActiveIndex, getItemProps, setHasFocusInside, isOpen],
+  );
+
   return (
     <FloatingNode id={nodeId}>
       <DropdownTrigger
@@ -284,22 +296,14 @@ const DropdownMenu = forwardRef<
               setHasFocusInside(false);
               parent.setHasFocusInside(true);
             },
-          })
+          }),
         )}
       >
         {trigger}
       </DropdownTrigger>
-      <MenuContext.Provider
-        value={{
-          activeIndex,
-          setActiveIndex,
-          getItemProps,
-          setHasFocusInside,
-          isOpen,
-        }}
-      >
+      <MenuContext.Provider value={contextValue}>
         <FloatingList elementsRef={elementsRef} labelsRef={labelsRef}>
-          {isMounted && (
+          {isMounted ? (
             <FloatingPortal>
               <FloatingFocusManager
                 context={context}
@@ -321,7 +325,7 @@ const DropdownMenu = forwardRef<
                 </Floater>
               </FloatingFocusManager>
             </FloatingPortal>
-          )}
+          ) : null}
         </FloatingList>
       </MenuContext.Provider>
     </FloatingNode>
