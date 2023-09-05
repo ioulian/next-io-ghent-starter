@@ -46,7 +46,7 @@ const OverlayHeading = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
         {children}
       </h2>
     );
-  }
+  },
 );
 
 const Overlay: FC<{
@@ -80,35 +80,33 @@ const Overlay: FC<{
   }, [onClose]);
 
   return (
-    <>
-      <Modal
-        closeTimeoutMS={250}
-        shouldCloseOnEsc={true}
-        shouldFocusAfterRender={true}
-        shouldReturnFocusAfterClose={true}
-        isOpen={isOpen}
-        shouldCloseOnOverlayClick={true}
-        contentLabel={contentLabel}
-        htmlOpenClassName="ReactModal__Html--open"
-        style={{
-          overlay: {
-            zIndex: theme.zIndex.overlay,
-          },
-        }}
-        aria={{
-          ...(overlay.headingId ? { labelledby: overlay.headingId } : {}),
-          describedby: contentId,
-        }}
-        {...{ onRequestClose }}
-      >
-        <OverlayContext.Provider value={overlay}>
-          <OverlayCloseButton />
-          <StyledOverlayContainer id={contentId} tabIndex={0} role="document">
-            {children}
-          </StyledOverlayContainer>
-        </OverlayContext.Provider>
-      </Modal>
-    </>
+    <Modal
+      closeTimeoutMS={250}
+      shouldCloseOnEsc={true}
+      shouldFocusAfterRender={true}
+      shouldReturnFocusAfterClose={true}
+      isOpen={isOpen}
+      shouldCloseOnOverlayClick={true}
+      contentLabel={contentLabel}
+      htmlOpenClassName="ReactModal__Html--open"
+      style={{
+        overlay: {
+          zIndex: theme.zIndex.overlay,
+        },
+      }}
+      aria={{
+        ...(overlay.headingId ? { labelledby: overlay.headingId } : {}),
+        describedby: contentId,
+      }}
+      {...{ onRequestClose }}
+    >
+      <OverlayContext.Provider value={overlay}>
+        <OverlayCloseButton />
+        <StyledOverlayContainer id={contentId} tabIndex={0} role="document">
+          {children}
+        </StyledOverlayContainer>
+      </OverlayContext.Provider>
+    </Modal>
   );
 };
 

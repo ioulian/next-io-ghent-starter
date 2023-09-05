@@ -34,12 +34,12 @@ const LanguageSwitcher: FC<
         // @ts-ignore
         window.location = e.currentTarget.href;
       },
-    [setCookie]
+    [setCookie],
   );
 
   return (
     <StyledLanguageSwitcher {...props}>
-      {locales && (
+      {locales ? (
         <ul>
           {locales.map((locale) => {
             const isActiveLanguage = currentLocale === locale;
@@ -76,7 +76,7 @@ const LanguageSwitcher: FC<
             );
           })}
         </ul>
-      )}
+      ) : null}
     </StyledLanguageSwitcher>
   );
 };

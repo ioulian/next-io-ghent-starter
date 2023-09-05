@@ -14,7 +14,7 @@ const Toggle = forwardRef<
   return (
     <StyledToggle>
       <StyledInput {...props} type="checkbox" ref={ref} />
-      <label htmlFor={props.id} aria-hidden="true"></label>
+      <label htmlFor={props.id} aria-hidden="true" />
     </StyledToggle>
   );
 });

@@ -41,7 +41,7 @@ const PopoverTrigger = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
           ...props,
           ...children.props,
           "data-state": context.open ? "open" : "closed",
-        })
+        }),
       );
     }
 
@@ -56,7 +56,7 @@ const PopoverTrigger = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
         {children}
       </button>
     );
-  }
+  },
 );
 
 const PopoverContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
@@ -70,7 +70,7 @@ const PopoverContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
 
     return (
       <FloatingPortal>
-        {isMounted && (
+        {isMounted ? (
           <FloatingFocusManager context={context.context} modal={context.modal}>
             <Floater
               ref={ref}
@@ -87,10 +87,10 @@ const PopoverContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
               {props.children}
             </Floater>
           </FloatingFocusManager>
-        )}
+        ) : null}
       </FloatingPortal>
     );
-  }
+  },
 );
 
 const PopoverHeading = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
@@ -123,7 +123,7 @@ const PopoverHeading = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
         {children}
       </h2>
     );
-  }
+  },
 );
 
 const PopoverDescription = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
@@ -156,7 +156,7 @@ const PopoverDescription = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
         {children}
       </p>
     );
-  }
+  },
 );
 
 const PopoverClose = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
@@ -185,7 +185,7 @@ const PopoverClose = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
         {children}
       </button>
     );
-  }
+  },
 );
 
 // Based on: https://floating-ui.com/docs/popover

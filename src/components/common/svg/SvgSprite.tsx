@@ -24,9 +24,9 @@ const SvgSprite: FC<{ src: any } & HTMLProps<SVGElement>> = ({
       viewBox={src.viewBox}
       role={title ? "img" : undefined}
       aria-hidden={!title ? true : undefined}
-      aria-labelledby={title && titleId}
+      aria-labelledby={title ? titleId : undefined}
     >
-      {title && <title id={titleId}>{title}</title>}
+      {title ? <title id={titleId}>{title}</title> : null}
       <use xlinkHref={`#${src.id}`} />
     </svg>
   );

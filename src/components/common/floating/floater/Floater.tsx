@@ -29,7 +29,7 @@ const Floater = forwardRef<
       showArrow = true,
       ...props
     },
-    ref
+    ref,
   ) => {
     const placementFirst = placement.split("-")[0];
     const staticSide = {
@@ -53,7 +53,7 @@ const Floater = forwardRef<
         {...props}
         style={{
           transform: `translate3d(${Math.round(
-            position.x ?? 0
+            position.x ?? 0,
           )}px, ${Math.round(position.y ?? 0)}px, 0)`,
           position: strategy,
           visibility: position.x == null ? "hidden" : "visible",
@@ -61,7 +61,7 @@ const Floater = forwardRef<
         }}
       >
         {children}
-        {showArrow && arrowCallback && (
+        {showArrow && arrowCallback ? (
           <StyledFloaterArrow
             ref={arrowCallback}
             style={{
@@ -70,11 +70,11 @@ const Floater = forwardRef<
               [staticSide]: `-${theme.floating.floater.arrow.size / 2}px`,
               transform: rotation,
             }}
-          ></StyledFloaterArrow>
-        )}
+          />
+        ) : null}
       </StyledFloater>
     );
-  }
+  },
 );
 
 if (process.env.NODE_ENV === "development") {

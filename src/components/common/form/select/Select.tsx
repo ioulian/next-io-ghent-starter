@@ -15,9 +15,9 @@ const Select = forwardRef<
 
   return (
     <StyledSelect {...props} ref={ref}>
-      {addEmptyOption && (
+      {addEmptyOption ? (
         <option value="">{t("form.select.emptyValue")}</option>
-      )}
+      ) : null}
       {children}
     </StyledSelect>
   );

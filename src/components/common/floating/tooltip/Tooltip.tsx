@@ -37,7 +37,7 @@ const TooltipTrigger = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
           ...props,
           ...children.props,
           "data-state": context.open ? "open" : "closed",
-        })
+        }),
       );
     }
 
@@ -51,7 +51,7 @@ const TooltipTrigger = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
         {children}
       </span>
     );
-  }
+  },
 );
 
 const TooltipContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
@@ -65,7 +65,7 @@ const TooltipContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
 
     return (
       <FloatingPortal>
-        {isMounted && (
+        {isMounted ? (
           <Floater
             ref={ref}
             position={{ x: context.x ?? 0, y: context.y ?? 0 }}
@@ -76,10 +76,10 @@ const TooltipContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
             {...context.getFloatingProps(props)}
             style={styles}
           />
-        )}
+        ) : null}
       </FloatingPortal>
     );
-  }
+  },
 );
 
 // Based on: https://floating-ui.com/docs/tooltip

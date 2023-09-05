@@ -85,9 +85,7 @@ const FileProgress: FC<
               )}
               {status === "loading" && (
                 <span>
-                  <>
-                    {filesize(current)} / {filesize(total)}
-                  </>
+                  {filesize(current)} / {filesize(total)}
                 </span>
               )}
               {status === "succeeded" && (
@@ -109,15 +107,15 @@ const FileProgress: FC<
                     total === 0 ? 0 : Math.min((current / total) * 100, 100)
                   }%`,
                 }}
-              ></div>
+              />
             </div>
           </StyledFileProgressProgressBar>
         </StyledFileProgressContent>
       </div>
-      {error && (
+      {!!error && (
         <StyledFileProgressError>
           {error.violations?.find(
-            (violation) => violation.propertyPath === "file"
+            (violation) => violation.propertyPath === "file",
           )?.message ?? error.message}
         </StyledFileProgressError>
       )}

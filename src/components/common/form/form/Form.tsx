@@ -102,7 +102,7 @@ const Form = <T extends Record<string, any>>({
         {...props}
         onSubmit={!isLoading ? handleSubmit(onSubmit) : () => {}}
       >
-        {error && <ApiFormError error={error} />}
+        {error ? <ApiFormError error={error} /> : null}
         {children}
       </StyledForm>
     </FormProvider>
