@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { FC } from "react";
 
+import { easings } from "@/utils/easings";
+
 import { createEasingGradient } from "./utilities";
 
 const EasingGradient: FC<{
@@ -33,13 +35,6 @@ const EasingGradient: FC<{
   );
 };
 
-const easings = {
-  default: "cubic-bezier(0.5, 0, 0.5, 1)",
-  easeInSine: "cubic-bezier(0.47, 0, 0.745, 0.715)",
-  easeOutSine: "cubic-bezier(0.39, 0.575, 0.565, 1)",
-  easeInOutSine: "cubic-bezier(0.445, 0.05, 0.55, 0.95)",
-};
-
 const meta: Meta<typeof EasingGradient> = {
   title: "Tools/Easing Gradient",
   component: EasingGradient,
@@ -69,6 +64,6 @@ export const Example: Story = {
     useEasing: true,
     direction: 0,
     stops: 16,
-    easing: easings.default,
+    easing: easings.easeInOutQuad,
   },
 };
