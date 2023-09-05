@@ -4,6 +4,8 @@ import {
   forwardRef,
   HTMLProps,
   isValidElement,
+  memo,
+  NamedExoticComponent,
   ReactNode,
   useId,
   useLayoutEffect,
@@ -49,7 +51,9 @@ const OverlayHeading = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
   },
 );
 
-const Overlay: FC<{
+const MemoizedOverlayHeading = memo(OverlayHeading);
+
+interface OverlayPropsType {
   /**
    * Control overlay visibility
    */
@@ -66,9 +70,14 @@ const Overlay: FC<{
    */
   onClose?: () => void;
   children: ReactNode;
-}> & {
-  Heading: typeof OverlayHeading;
-} = ({ contentLabel, isOpen = false, children, onClose }) => {
+}
+
+const Overlay: FC<OverlayPropsType> = ({
+  contentLabel,
+  isOpen = false,
+  children,
+  onClose,
+}) => {
   const theme = useTheme()!;
 
   const contentId = useId();
@@ -110,13 +119,20 @@ const Overlay: FC<{
   );
 };
 
-Overlay.Heading = OverlayHeading;
+const MemoizedOverlay = memo(
+  Overlay,
+) as NamedExoticComponent<OverlayPropsType> & {
+  Heading: typeof MemoizedOverlayHeading;
+};
+MemoizedOverlay.Heading = MemoizedOverlayHeading;
 
 if (process.env.NODE_ENV === "development") {
   OverlayHeading.displayName = "OverlayHeading";
 
+  MemoizedOverlayHeading.whyDidYouRender = true;
   OverlayHeading.whyDidYouRender = true;
+  MemoizedOverlay.whyDidYouRender = true;
   Overlay.whyDidYouRender = true;
 }
 
-export default Overlay;
+export default MemoizedOverlay;

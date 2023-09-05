@@ -1,4 +1,4 @@
-import { FC, ReactNode, useEffect, useId, useState } from "react";
+import { FC, ReactNode, memo, useEffect, useId, useState } from "react";
 import iconChevron from "@tabler/icons/chevron-down.svg";
 import AnimateHeight from "react-animate-height";
 import { useTheme } from "styled-components";
@@ -69,4 +69,4 @@ if (process.env.NODE_ENV === "development") {
   Expandable.whyDidYouRender = true;
 }
 
-export default Expandable;
+export default memo(Expandable);

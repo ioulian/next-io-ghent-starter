@@ -1,4 +1,11 @@
-import { Children, cloneElement, FC, isValidElement, ReactNode } from "react";
+import {
+  Children,
+  cloneElement,
+  FC,
+  isValidElement,
+  memo,
+  ReactNode,
+} from "react";
 import { useTranslation } from "next-i18next";
 
 import { InferComponentProps } from "@/types/styled";
@@ -43,4 +50,4 @@ if (process.env.NODE_ENV === "development") {
   Breadcrumb.whyDidYouRender = true;
 }
 
-export default Breadcrumb;
+export default memo(Breadcrumb);

@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import { forwardRef, memo } from "react";
 import { useTranslation } from "next-i18next";
 
 import { InferComponentProps } from "@/types/styled";
@@ -28,4 +28,4 @@ if (process.env.NODE_ENV === "development") {
   Select.whyDidYouRender = true;
 }
 
-export default Select;
+export default memo(Select);

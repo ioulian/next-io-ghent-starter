@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import { forwardRef, memo } from "react";
 
 import { InferComponentProps } from "@/types/styled";
 
@@ -16,4 +16,4 @@ if (process.env.NODE_ENV === "development") {
   TextArea.whyDidYouRender = true;
 }
 
-export default TextArea;
+export default memo(TextArea);

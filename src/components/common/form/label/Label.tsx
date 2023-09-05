@@ -1,6 +1,5 @@
 import { FC, memo } from "react";
 import { useTranslation } from "next-i18next";
-import isEqual from "lodash/isEqual";
 
 import { InferComponentProps } from "@/types/styled";
 
@@ -25,4 +24,4 @@ if (process.env.NODE_ENV === "development") {
   Label.whyDidYouRender = true;
 }
 
-export default memo(Label, isEqual);
+export default memo(Label);

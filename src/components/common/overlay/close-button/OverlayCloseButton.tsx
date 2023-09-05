@@ -1,7 +1,6 @@
 import { FC, memo } from "react";
 import { useTranslation } from "next-i18next";
 import iconClose from "@tabler/icons/x.svg";
-import isEqual from "lodash/isEqual";
 
 import { InferComponentProps } from "@/types/styled";
 
@@ -32,4 +31,4 @@ if (process.env.NODE_ENV === "development") {
   OverlayCloseButton.whyDidYouRender = true;
 }
 
-export default memo(OverlayCloseButton, isEqual);
+export default memo(OverlayCloseButton);

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 
 import { InferComponentProps } from "@/types/styled";
 
@@ -14,4 +14,4 @@ if (process.env.NODE_ENV === "development") {
   ReactSelectContainer.whyDidYouRender = true;
 }
 
-export default ReactSelectContainer;
+export default memo(ReactSelectContainer);

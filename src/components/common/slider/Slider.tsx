@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren } from "react";
+import { FC, PropsWithChildren, memo } from "react";
 import { A11y } from "swiper/modules";
 import { Swiper, SwiperProps } from "swiper/react";
 
@@ -19,4 +19,4 @@ const Slider: FC<PropsWithChildren<SwiperProps>> = ({
   );
 };
 
-export default Slider;
+export default memo(Slider);

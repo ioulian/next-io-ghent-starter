@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { filesize } from "filesize";
 import iconCheck from "@tabler/icons/check.svg";
 import iconError from "@tabler/icons/x.svg";
@@ -123,4 +123,4 @@ const FileProgress: FC<
   );
 };
 
-export default FileProgress;
+export default memo(FileProgress);

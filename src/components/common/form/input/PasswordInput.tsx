@@ -1,4 +1,4 @@
-import { forwardRef, useCallback, useState } from "react";
+import { forwardRef, memo, useCallback, useState } from "react";
 import passwordShowIcon from "@tabler/icons/eye.svg";
 import passwordHideIcon from "@tabler/icons/eye-off.svg";
 import { useTranslation } from "react-i18next";
@@ -41,7 +41,7 @@ const PasswordInput = forwardRef<
           {t(
             `form.passwordInput.${
               showPassword ? "revealPassword" : "hidePassword"
-            }`
+            }`,
           )}
         </Button>
       }
@@ -56,4 +56,4 @@ if (process.env.NODE_ENV === "development") {
   PasswordInput.whyDidYouRender = true;
 }
 
-export default PasswordInput;
+export default memo(PasswordInput);

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 
 import { InferComponentProps } from "@/types/styled";
 
@@ -12,4 +12,4 @@ if (process.env.NODE_ENV === "development") {
   List.whyDidYouRender = true;
 }
 
-export default List;
+export default memo(List);

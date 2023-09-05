@@ -1,4 +1,4 @@
-import { forwardRef, ReactNode } from "react";
+import { forwardRef, memo, ReactNode } from "react";
 
 import { InferComponentProps } from "@/types/styled";
 
@@ -30,4 +30,4 @@ if (process.env.NODE_ENV === "development") {
   Input.whyDidYouRender = true;
 }
 
-export default Input;
+export default memo(Input);

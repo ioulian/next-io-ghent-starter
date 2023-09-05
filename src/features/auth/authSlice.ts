@@ -28,16 +28,16 @@ export const login = createAsyncThunk(
   "auth/login",
   async (
     { username, password }: { username: string; password: string },
-    { rejectWithValue }
-  ) => thunkHandler(loginApi(username, password), rejectWithValue)
+    { rejectWithValue },
+  ) => thunkHandler(loginApi(username, password), rejectWithValue),
 );
 
 export const loginSocial = createAsyncThunk(
   "auth/loginSocial",
   async (
     { grantType, token }: { grantType: GrantType; token: string },
-    { rejectWithValue }
-  ) => thunkHandler(loginSocialApi(grantType, token), rejectWithValue)
+    { rejectWithValue },
+  ) => thunkHandler(loginSocialApi(grantType, token), rejectWithValue),
 );
 
 export const authSlice = createSlice({

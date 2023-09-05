@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 
 import { InferComponentProps } from "@/types/styled";
 
@@ -8,6 +8,7 @@ const Text: FC<InferComponentProps<typeof StyledText>> = ({
   children,
   ...props
 }) => {
+  console.log("render");
   return <StyledText {...props}>{children}</StyledText>;
 };
 
@@ -15,4 +16,4 @@ if (process.env.NODE_ENV === "development") {
   Text.whyDidYouRender = true;
 }
 
-export default Text;
+export default memo(Text);
