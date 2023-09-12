@@ -1,11 +1,6 @@
 {
-  "plugins": [
-    "@typescript-eslint"
-  ],
-  "extends": [
-    "next/core-web-vitals",
-    "plugin:storybook/recommended"
-  ],
+  "plugins": ["@typescript-eslint"],
+  "extends": ["next/core-web-vitals", "plugin:storybook/recommended"],
   "rules": {
     "react/button-has-type": "error",
     "no-unused-vars": "off",
@@ -37,9 +32,7 @@
           }
         ],
         "newlines-between": "always",
-        "pathGroupsExcludedImportTypes": [
-          "builtin"
-        ]
+        "pathGroupsExcludedImportTypes": ["builtin"]
       }
     ],
     "react/jsx-no-constructed-context-values": "error",
@@ -49,5 +42,8 @@
     "react/no-object-type-as-default-prop": "error",
     "react/self-closing-comp": "error",
     "react/void-dom-elements-no-children": "error"
+  },
+  "settings": {
+    "linkComponents": ["Link"]
   }
 }
