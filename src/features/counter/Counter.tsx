@@ -1,3 +1,5 @@
+/* eslint-disable i18next/no-literal-string */
+
 import { memo, useState } from "react";
 
 import { useAppSelector, useAppDispatch } from "../../store/hooks";

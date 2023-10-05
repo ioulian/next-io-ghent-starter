@@ -64,13 +64,13 @@ export const useFileUpload = (url: string) => {
           xhr.current.open("PUT", url, true);
           xhr.current.setRequestHeader(
             "Content-Type",
-            "application/octet-stream"
+            "application/octet-stream",
           );
           xhr.current.send(formdata);
         }
       });
     },
-    [url]
+    [url],
   );
 
   const abort = useCallback(() => {

@@ -3,6 +3,8 @@ import ReactSelect from "react-select";
 import icon from "@tabler/icons/at.svg";
 import searchIcon from "@tabler/icons/search.svg";
 
+/* eslint-disable i18next/no-literal-string */
+
 import { email, required } from "../rules";
 import Form from "../form/Form";
 import Select from "../select/Select";

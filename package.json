@@ -82,6 +82,7 @@
     "cross-env": "7.0.3",
     "eslint": "8.48.0",
     "eslint-config-next": "13.4.19",
+    "eslint-plugin-i18next": "6.0.3",
     "eslint-plugin-storybook": "0.6.13",
     "next-sitemap": "4.2.2",
     "prettier": "3.0.3",

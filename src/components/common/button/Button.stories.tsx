@@ -1,3 +1,5 @@
+/* eslint-disable i18next/no-literal-string */
+
 import type { Meta, StoryObj } from "@storybook/react";
 import iconChevronRight from "@tabler/icons/chevron-right.svg";
 import iconChevronLeft from "@tabler/icons/chevron-left.svg";

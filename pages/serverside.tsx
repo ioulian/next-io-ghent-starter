@@ -26,7 +26,9 @@ const Repo = () => {
 
   return (
     <>
+      {/* eslint-disable-next-line i18next/no-literal-string */}
       {!!error && !!data && <p>Error loading</p>}
+      {/* eslint-disable-next-line i18next/no-literal-string */}
       {!error && !data && <p>Loading...</p>}
       {!error && !!data && (
         <div>
@@ -62,6 +64,7 @@ const ServerSide: NextPageWithLayout = ({}: InferGetServerSidePropsType<
               priority
             />
           </div>
+          {/* eslint-disable-next-line i18next/no-literal-string */}
           <h1>Server side example</h1>
           <Repo />
         </StyledMain>
