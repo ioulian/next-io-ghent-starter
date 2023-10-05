@@ -5,7 +5,7 @@ import type {
   GetServerSidePropsContext,
   InferGetServerSidePropsType,
 } from "next";
-import useSWR, { SWRConfig } from "swr";
+import useSWR from "swr";
 import merge from "lodash/merge";
 
 import { StyledMain, StyledPage } from "@/components/Demo";
@@ -41,11 +41,11 @@ const Repo = () => {
   );
 };
 
-const ServerSide: NextPageWithLayout = ({
-  fallback,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const ServerSide: NextPageWithLayout = ({}: InferGetServerSidePropsType<
+  typeof getServerSideProps
+>) => {
   return (
-    <SWRConfig value={{ fallback }}>
+    <>
       <NextSeo
         title="Serverside example"
         description="This will be the page meta description"
@@ -66,7 +66,7 @@ const ServerSide: NextPageWithLayout = ({
           <Repo />
         </StyledMain>
       </StyledPage>
-    </SWRConfig>
+    </>
   );
 };
 

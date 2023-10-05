@@ -45,7 +45,7 @@ export const usePopover = ({
   const open = controlledOpen ?? uncontrolledOpen;
   const setOpen = setControlledOpen ?? setUncontrolledOpen;
   const arrowRef = useRef<HTMLDivElement | null>(null);
-  const theme = useTheme()!;
+  const theme = useTheme();
 
   const data = useFloating({
     placement,
@@ -64,7 +64,7 @@ export const usePopover = ({
       arrowRef.current = node;
       data.update();
     },
-    [data]
+    [data],
   );
 
   const context = data.context;
@@ -99,7 +99,7 @@ export const usePopover = ({
       modal,
       labelId,
       descriptionId,
-    ]
+    ],
   );
 };
 

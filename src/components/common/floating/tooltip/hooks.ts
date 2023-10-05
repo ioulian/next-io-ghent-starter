@@ -40,7 +40,7 @@ export const useTooltip = ({
   const open = controlledOpen ?? uncontrolledOpen;
   const setOpen = setControlledOpen ?? setUncontrolledOpen;
   const arrowRef = useRef<HTMLDivElement | null>(null);
-  const theme = useTheme()!;
+  const theme = useTheme();
 
   const data = useFloating({
     placement,
@@ -60,7 +60,7 @@ export const useTooltip = ({
       arrowRef.current = node;
       data.update();
     },
-    [data]
+    [data],
   );
 
   const context = data.context;
@@ -85,7 +85,7 @@ export const useTooltip = ({
       ...interactions,
       ...data,
     }),
-    [open, setOpen, arrowCallback, interactions, data]
+    [open, setOpen, arrowCallback, interactions, data],
   );
 };
 

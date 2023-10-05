@@ -173,7 +173,7 @@ const DropdownMenu = forwardRef<
 
   const isNested = parentId !== null;
 
-  const theme = useTheme()!;
+  const theme = useTheme();
 
   const { x, y, refs, context, update, strategy, placement, middlewareData } =
     useFloating<HTMLButtonElement>({
@@ -277,6 +277,8 @@ const DropdownMenu = forwardRef<
     [activeIndex, setActiveIndex, getItemProps, setHasFocusInside, isOpen],
   );
 
+  const position = useMemo(() => ({ x, y }), [x, y]);
+
   return (
     <FloatingNode id={nodeId}>
       <DropdownTrigger
@@ -313,7 +315,7 @@ const DropdownMenu = forwardRef<
               >
                 <Floater
                   ref={refs.setFloating}
-                  position={{ x, y }}
+                  position={position}
                   arrowPosition={middlewareData.arrow}
                   strategy={strategy}
                   placement={placement}

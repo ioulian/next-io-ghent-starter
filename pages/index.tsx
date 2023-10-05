@@ -8,14 +8,14 @@ import type {
 import { useTranslation } from "next-i18next";
 import Link from "next/link";
 import sampleSvgSprite from "@tabler/icons/arrow-right-circle.svg";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useCallback } from "react";
 
 import { StyledMain, StyledPage } from "@/components/Demo";
 import logo from "@/img/logo.png";
 import logoSvg from "@/img/logo.svg";
 import logoSvgSprite from "@/img/logo-sprite.svg";
-import { Counter } from "@/features/counter/Counter";
+import Counter from "@/features/counter/Counter";
 import SvgSprite from "@/components/common/svg/SvgSprite";
 import { requireTranslations } from "@/services/translation.service";
 import { requireAnonymous } from "@/features/auth/utilities";
@@ -38,12 +38,21 @@ const Home: NextPageWithLayout = ({}: InferGetStaticPropsType<
   const [, setV] = useState(1);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
+  // Force rerender test
   const add = useCallback(() => {
     setV((v) => v + 1);
   }, [setV]);
 
   const testToast = useCallback(() => {
     success("Toastify loaded dynamically!");
+  }, []);
+
+  const toggleOverlay = useCallback(() => {
+    setIsOpen((v) => !v);
+  }, []);
+
+  const closeOverlay = useCallback(() => {
+    setIsOpen(false);
   }, []);
 
   return (
@@ -81,10 +90,13 @@ const Home: NextPageWithLayout = ({}: InferGetStaticPropsType<
             <SvgSprite
               src={sampleSvgSprite}
               title=".svg sprite"
-              style={{
-                width: 24,
-                height: 24,
-              }}
+              style={useMemo(
+                () => ({
+                  width: 24,
+                  height: 24,
+                }),
+                [],
+              )}
             />
             <LanguageSwitcher />
             <Button onClick={add} iconBefore={svgSprite}>
@@ -97,9 +109,12 @@ const Home: NextPageWithLayout = ({}: InferGetStaticPropsType<
 
           <nav>
             <Link
-              href={{
-                pathname: "/serverside",
-              }}
+              href={useMemo(
+                () => ({
+                  pathname: "/serverside",
+                }),
+                [],
+              )}
             >
               Go to server side example
             </Link>
@@ -110,21 +125,18 @@ const Home: NextPageWithLayout = ({}: InferGetStaticPropsType<
           </div>
 
           <div>
-            <Button
-              onClick={() => {
-                setIsOpen(!isOpen);
-              }}
-            >
-              Open dialog
-            </Button>
+            <Button onClick={toggleOverlay}>Open dialog</Button>
             <Overlay
               isOpen={isOpen}
               contentLabel="Example"
-              onClose={() => {
-                setIsOpen(false);
-              }}
+              onClose={closeOverlay}
             >
-              <div style={{ backgroundColor: "white", padding: "1rem" }}>
+              <div
+                style={useMemo(
+                  () => ({ backgroundColor: "white", padding: "1rem" }),
+                  [],
+                )}
+              >
                 <Overlay.Heading>
                   <Heading type="h2">Example</Heading>
                 </Overlay.Heading>

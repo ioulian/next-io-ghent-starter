@@ -14,6 +14,7 @@ import {
   PropsWithChildren,
   useCallback,
   useLayoutEffect,
+  useMemo,
 } from "react";
 import { useTheme } from "styled-components";
 
@@ -63,10 +64,15 @@ const PopoverContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
   (props, propRef) => {
     const context = usePopoverContext();
     const ref = useMergeRefs([context.refs.setFloating, propRef]);
-    const theme = useTheme()!;
+    const theme = useTheme();
     const { isMounted, styles } = useTransitionStyles(context.context, {
       duration: theme.timings.fast,
     });
+
+    const position = useMemo(
+      () => ({ x: context.x ?? 0, y: context.y ?? 0 }),
+      [context.x, context.y],
+    );
 
     return (
       <FloatingPortal>
@@ -74,7 +80,7 @@ const PopoverContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
           <FloatingFocusManager context={context.context} modal={context.modal}>
             <Floater
               ref={ref}
-              position={{ x: context.x ?? 0, y: context.y ?? 0 }}
+              position={position}
               arrowPosition={context.middlewareData.arrow}
               strategy={context.strategy}
               placement={context.placement}

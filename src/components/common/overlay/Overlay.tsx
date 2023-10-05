@@ -9,6 +9,7 @@ import {
   PropsWithChildren,
   useId,
   useLayoutEffect,
+  useMemo,
 } from "react";
 import Modal from "react-modal";
 import { useTheme } from "styled-components";
@@ -77,15 +78,33 @@ const Overlay: FC<PropsWithChildren<OverlayPropsType>> = ({
   children,
   onClose,
 }) => {
-  const theme = useTheme()!;
+  const theme = useTheme();
 
   const contentId = useId();
 
-  const overlay = useOverlay({ onClose });
+  const overlayOptions = useMemo(() => ({ onClose }), [onClose]);
+  const overlay = useOverlay(overlayOptions);
 
   const onRequestClose = useCallback(() => {
     onClose?.();
   }, [onClose]);
+
+  const overlayStyle = useMemo(
+    () => ({
+      overlay: {
+        zIndex: theme.zIndex.overlay,
+      },
+    }),
+    [theme.zIndex.overlay],
+  );
+
+  const overlayAria = useMemo(
+    () => ({
+      ...(overlay.headingId ? { labelledby: overlay.headingId } : {}),
+      describedby: contentId,
+    }),
+    [contentId, overlay.headingId],
+  );
 
   return (
     <Modal
@@ -97,15 +116,8 @@ const Overlay: FC<PropsWithChildren<OverlayPropsType>> = ({
       shouldCloseOnOverlayClick
       contentLabel={contentLabel}
       htmlOpenClassName="ReactModal__Html--open"
-      style={{
-        overlay: {
-          zIndex: theme.zIndex.overlay,
-        },
-      }}
-      aria={{
-        ...(overlay.headingId ? { labelledby: overlay.headingId } : {}),
-        describedby: contentId,
-      }}
+      style={overlayStyle}
+      aria={overlayAria}
       {...{ onRequestClose }}
     >
       <OverlayContext.Provider value={overlay}>

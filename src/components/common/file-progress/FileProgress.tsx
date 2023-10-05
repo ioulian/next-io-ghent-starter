@@ -1,4 +1,4 @@
-import { FC, memo } from "react";
+import { FC, memo, useMemo } from "react";
 import { filesize } from "filesize";
 import iconCheck from "@tabler/icons/check.svg";
 import iconError from "@tabler/icons/x.svg";
@@ -50,6 +50,21 @@ const FileProgress: FC<
     status: API_REQUEST_STATUS;
   } & InferComponentProps<typeof StyledFileProgress>
 > = ({ status, current = 0, error, total = 0, children, ...props }) => {
+  const iconErrorStyle = useMemo(
+    () => ({ color: FileUploadStates.failed.main }),
+    [],
+  );
+  const iconCheckStyle = useMemo(
+    () => ({ color: FileUploadStates.succeeded.main }),
+    [],
+  );
+  const progressBarStyle = useMemo(
+    () => ({
+      backgroundColor: FileUploadStates[status].main,
+      width: `${total === 0 ? 0 : Math.min((current / total) * 100, 100)}%`,
+    }),
+    [current, total, status],
+  );
   return (
     <StyledFileProgress {...props}>
       <div>
@@ -76,12 +91,7 @@ const FileProgress: FC<
             <span>{children}</span>
             <span>
               {status === "failed" && (
-                <SvgSprite
-                  src={iconError}
-                  style={{
-                    color: FileUploadStates.failed.main,
-                  }}
-                />
+                <SvgSprite src={iconError} style={iconErrorStyle} />
               )}
               {status === "loading" && (
                 <span>
@@ -89,25 +99,13 @@ const FileProgress: FC<
                 </span>
               )}
               {status === "succeeded" && (
-                <SvgSprite
-                  src={iconCheck}
-                  style={{
-                    color: FileUploadStates.succeeded.main,
-                  }}
-                />
+                <SvgSprite src={iconCheck} style={iconCheckStyle} />
               )}
             </span>
           </StyledFilePorgressInfo>
           <StyledFileProgressProgressBar>
             <div>
-              <div
-                style={{
-                  backgroundColor: FileUploadStates[status].main,
-                  width: `${
-                    total === 0 ? 0 : Math.min((current / total) * 100, 100)
-                  }%`,
-                }}
-              />
+              <div style={progressBarStyle} />
             </div>
           </StyledFileProgressProgressBar>
         </StyledFileProgressContent>

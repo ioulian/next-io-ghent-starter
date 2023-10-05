@@ -14,6 +14,7 @@ import {
   isValidElement,
   PropsWithChildren,
   useLayoutEffect,
+  useMemo,
 } from "react";
 import { useCallback } from "react";
 import { useTheme } from "styled-components";
@@ -63,10 +64,15 @@ const DialogContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
   (props, propRef) => {
     const context = useDialogContext();
     const ref = useMergeRefs([context.refs.setFloating, propRef]);
-    const theme = useTheme()!;
+    const theme = useTheme();
     const { isMounted, styles } = useTransitionStyles(context.context, {
       duration: theme.timings.normal,
     });
+
+    const position = useMemo(
+      () => ({ x: context.x ?? 0, y: context.y ?? 0 }),
+      [context.x, context.y],
+    );
 
     return (
       <FloatingPortal>
@@ -80,7 +86,7 @@ const DialogContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
               <Floater
                 ref={ref}
                 showArrow={false}
-                position={{ x: context.x ?? 0, y: context.y ?? 0 }}
+                position={position}
                 arrowPosition={context.middlewareData.arrow}
                 strategy={context.strategy}
                 placement={context.placement}

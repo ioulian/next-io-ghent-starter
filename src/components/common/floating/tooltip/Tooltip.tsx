@@ -10,6 +10,7 @@ import {
   HTMLProps,
   isValidElement,
   PropsWithChildren,
+  useMemo,
 } from "react";
 import { useTheme } from "styled-components";
 
@@ -58,17 +59,21 @@ const TooltipContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
   (props, propRef) => {
     const context = useTooltipContext();
     const ref = useMergeRefs([context.refs.setFloating, propRef]);
-    const theme = useTheme()!;
+    const theme = useTheme();
     const { isMounted, styles } = useTransitionStyles(context.context, {
       duration: theme.timings.fast,
     });
+    const position = useMemo(
+      () => ({ x: context.x ?? 0, y: context.y ?? 0 }),
+      [context.x, context.y],
+    );
 
     return (
       <FloatingPortal>
         {isMounted ? (
           <Floater
             ref={ref}
-            position={{ x: context.x ?? 0, y: context.y ?? 0 }}
+            position={position}
             arrowPosition={context.middlewareData.arrow}
             strategy={context.strategy}
             placement={context.placement}
