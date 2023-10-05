@@ -88,7 +88,7 @@ export const AccessibleIconButton: Story = {
 
 export const NextLink: Story = {
   render: (args) => (
-    <Link href="/test" passHref legacyBehavior>
+    <Link href="/test" passHref legacyBehavior target="_blank">
       <Button {...args} />
     </Link>
   ),

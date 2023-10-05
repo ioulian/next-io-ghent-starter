@@ -281,7 +281,7 @@ export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
           .then(({ result }) => {
             resolve(result);
           });
-      })
+      }),
 );
 
 export default Home;

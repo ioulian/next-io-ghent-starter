@@ -42,7 +42,8 @@
     "react/no-invalid-html-attribute": "error",
     "react/no-object-type-as-default-prop": "error",
     "react/self-closing-comp": "error",
-    "react/void-dom-elements-no-children": "error"
+    "react/void-dom-elements-no-children": "error",
+    "react/jsx-no-target-blank": ["error", { "warnOnSpreadAttributes": true }]
   },
   "settings": {
     "linkComponents": ["Link"]
