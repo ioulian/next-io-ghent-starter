@@ -11,7 +11,7 @@ import {
   forwardRef,
   HTMLProps,
   isValidElement,
-  ReactNode,
+  PropsWithChildren,
   useCallback,
   useLayoutEffect,
 } from "react";
@@ -189,11 +189,7 @@ const PopoverClose = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
 );
 
 // Based on: https://floating-ui.com/docs/popover
-const Popover: FC<
-  {
-    children: ReactNode;
-  } & PopoverOptions
-> & {
+const Popover: FC<PropsWithChildren & PopoverOptions> & {
   Trigger: typeof PopoverTrigger;
   Close: typeof PopoverClose;
   Content: typeof PopoverContent;

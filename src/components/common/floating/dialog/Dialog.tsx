@@ -12,7 +12,7 @@ import {
   forwardRef,
   HTMLProps,
   isValidElement,
-  ReactNode,
+  PropsWithChildren,
   useLayoutEffect,
 } from "react";
 import { useCallback } from "react";
@@ -194,11 +194,7 @@ const DialogClose = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
 );
 
 // Based on: https://floating-ui.com/docs/popover
-const Dialog: FC<
-  {
-    children: ReactNode;
-  } & DialogOptions
-> & {
+const Dialog: FC<PropsWithChildren & DialogOptions> & {
   Trigger: typeof DialogTrigger;
   Close: typeof DialogClose;
   Content: typeof DialogContent;

@@ -6,7 +6,7 @@ import {
   isValidElement,
   memo,
   NamedExoticComponent,
-  ReactNode,
+  PropsWithChildren,
   useId,
   useLayoutEffect,
 } from "react";
@@ -69,10 +69,9 @@ interface OverlayPropsType {
    * click, close button click)
    */
   onClose?: () => void;
-  children: ReactNode;
 }
 
-const Overlay: FC<OverlayPropsType> = ({
+const Overlay: FC<PropsWithChildren<OverlayPropsType>> = ({
   contentLabel,
   isOpen = false,
   children,
@@ -119,9 +118,9 @@ const Overlay: FC<OverlayPropsType> = ({
   );
 };
 
-const MemoizedOverlay = memo(
-  Overlay,
-) as NamedExoticComponent<OverlayPropsType> & {
+const MemoizedOverlay = memo(Overlay) as NamedExoticComponent<
+  PropsWithChildren<OverlayPropsType>
+> & {
   Heading: typeof MemoizedOverlayHeading;
 };
 MemoizedOverlay.Heading = MemoizedOverlayHeading;

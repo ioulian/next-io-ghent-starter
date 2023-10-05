@@ -9,7 +9,7 @@ import {
   forwardRef,
   HTMLProps,
   isValidElement,
-  ReactNode,
+  PropsWithChildren,
 } from "react";
 import { useTheme } from "styled-components";
 
@@ -83,7 +83,7 @@ const TooltipContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
 );
 
 // Based on: https://floating-ui.com/docs/tooltip
-const Tooltip: FC<{ children: ReactNode } & TooltipOptions> & {
+const Tooltip: FC<PropsWithChildren & TooltipOptions> & {
   Trigger: typeof TooltipTrigger;
   Content: typeof TooltipContent;
 } = ({ children, ...options }) => {
