@@ -107,6 +107,7 @@ const Overlay: FC<PropsWithChildren<OverlayPropsType>> = ({
   );
 
   return (
+    // @ts-ignore
     <Modal
       closeTimeoutMS={250}
       shouldCloseOnEsc

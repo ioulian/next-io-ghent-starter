@@ -6,7 +6,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { RequireResult } from "./serverSideProps.service";
 
 // From node_modules/next-i18next/dist/types/serverSideTranslations.d.ts
-type ArrayElementOrSelf<T> = T extends Array<infer U> ? U[] : T[];
+type ArrayElementOrSelf<T> = T extends ReadonlyArray<infer U> ? U[] : T[];
 
 export const getTranslations = async (
   locale: string,

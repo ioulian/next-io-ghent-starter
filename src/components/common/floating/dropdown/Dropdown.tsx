@@ -80,7 +80,6 @@ export const DropdownTrigger = forwardRef<
     return cloneElement(children, {
       // @ts-ignore
       ref,
-
       ...props,
     });
   }
@@ -156,13 +155,8 @@ const DropdownMenu = forwardRef<
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [hasFocusInside, setHasFocusInside] = useState(false);
 
-  const elementsRef = useRef<Array<HTMLButtonElement | null>>([]);
-  const labelsRef = useRef<Array<string | null>>(
-    //Children.map(children, (child) =>
-    //  isValidElement(child) ? child.props.typeaheadKey : null
-    //)
-    [],
-  );
+  const elementsRef = useRef<(HTMLButtonElement | null)[]>([]);
+  const labelsRef = useRef<(string | null)[]>([]);
   const parent = useContext(MenuContext);
   const arrowRef = useRef<HTMLDivElement | null>(null);
 
@@ -201,32 +195,32 @@ const DropdownMenu = forwardRef<
     [update],
   );
 
+  const hover = useHover(context, {
+    handleClose: safePolygon({ blockPointerEvents: true }),
+    enabled: isNested,
+    delay: { open: 75 },
+  });
+  const click = useClick(context, {
+    toggle: !isNested,
+    event: "mousedown",
+    ignoreMouse: isNested,
+  });
+  const role = useRole(context, { role: "menu" });
+  const dismiss = useDismiss(context, { bubbles: true });
+  const listNavigation = useListNavigation(context, {
+    listRef: elementsRef,
+    activeIndex,
+    nested: isNested,
+    onNavigate: setActiveIndex,
+  });
+  const typeahead = useTypeahead(context, {
+    listRef: labelsRef,
+    onMatch: isOpen ? setActiveIndex : undefined,
+    activeIndex,
+  });
+
   const { getReferenceProps, getFloatingProps, getItemProps } = useInteractions(
-    [
-      useHover(context, {
-        handleClose: safePolygon({ blockPointerEvents: true }),
-        enabled: isNested && !hasFocusInside,
-        delay: { open: 75 },
-      }),
-      useClick(context, {
-        toggle: !isNested,
-        event: "mousedown",
-        ignoreMouse: isNested,
-      }),
-      useRole(context, { role: "menu" }),
-      useDismiss(context, { bubbles: true }),
-      useListNavigation(context, {
-        listRef: elementsRef,
-        activeIndex,
-        nested: isNested,
-        onNavigate: setActiveIndex,
-      }),
-      useTypeahead(context, {
-        listRef: labelsRef,
-        onMatch: isOpen ? setActiveIndex : undefined,
-        activeIndex,
-      }),
-    ],
+    [hover, click, role, dismiss, listNavigation, typeahead],
   );
 
   // Event emitter allows you to communicate across tree components.
@@ -237,15 +231,15 @@ const DropdownMenu = forwardRef<
       return;
     }
 
-    function handleTreeClick() {
+    const handleTreeClick = () => {
       setIsOpen(false);
-    }
+    };
 
-    function onSubMenuOpen(event: { nodeId: string; parentId: string }) {
+    const onSubMenuOpen = (event: { nodeId: string; parentId: string }) => {
       if (event.nodeId !== nodeId && event.parentId === parentId) {
         setIsOpen(false);
       }
-    }
+    };
 
     tree.events.on("click", handleTreeClick);
     tree.events.on("menuopen", onSubMenuOpen);
