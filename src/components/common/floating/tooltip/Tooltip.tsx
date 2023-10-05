@@ -68,20 +68,22 @@ const TooltipContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
       [context.x, context.y],
     );
 
+    if (!isMounted) {
+      return null;
+    }
+
     return (
       <FloatingPortal>
-        {isMounted ? (
-          <Floater
-            ref={ref}
-            position={position}
-            arrowPosition={context.middlewareData.arrow}
-            strategy={context.strategy}
-            placement={context.placement}
-            arrowCallback={context.arrowCallback}
-            {...context.getFloatingProps(props)}
-            style={styles}
-          />
-        ) : null}
+        <Floater
+          ref={ref}
+          position={position}
+          arrowPosition={context.middlewareData.arrow}
+          strategy={context.strategy}
+          placement={context.placement}
+          arrowCallback={context.arrowCallback}
+          {...context.getFloatingProps(props)}
+          style={styles}
+        />
       </FloatingPortal>
     );
   },

@@ -340,7 +340,7 @@ const Dropdown = forwardRef<
 >((props, ref) => {
   const parentId = useFloatingParentNodeId();
 
-  if (parentId == null) {
+  if (parentId === null) {
     return (
       <FloatingTree>
         <DropdownMenu {...props} ref={ref} />

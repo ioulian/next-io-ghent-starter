@@ -51,6 +51,7 @@ const theme: DefaultTheme = {
     },
     floater: {
       shift: 5,
+      flip: 5,
       arrow: {
         size: 10,
       },

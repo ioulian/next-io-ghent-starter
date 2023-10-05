@@ -1460,19 +1460,24 @@
   dependencies:
     "@floating-ui/dom" "^1.5.1"
 
-"@floating-ui/react@0.25.3":
-  version "0.25.3"
-  resolved "https://registry.yarnpkg.com/@floating-ui/react/-/react-0.25.3.tgz#241b3a18d0e99e8fc25d581002646a6fd75d4c40"
-  integrity sha512-Ti3ClVZIUqZq1OCkfbhsBA8u3m8jJ0h9gAInFwdrLaa+yTAZx3bFH8YR+/wQwPmRrpgJJ3cRhCfx4puz0PqVIA==
+"@floating-ui/react@0.26.0":
+  version "0.26.0"
+  resolved "https://registry.yarnpkg.com/@floating-ui/react/-/react-0.26.0.tgz#f33317652d382f21ce2584c43bb009154e6b7700"
+  integrity sha512-W70xgicegogSoy+8Hfmpd/NWEuL26vsatIHkpVydmigJ84YYhs5/GlBCkLcETWajCjD9XKwlHUv6ezwbLLiung==
   dependencies:
     "@floating-ui/react-dom" "^2.0.2"
-    "@floating-ui/utils" "^0.1.1"
+    "@floating-ui/utils" "^0.1.5"
     tabbable "^6.0.1"
 
 "@floating-ui/utils@^0.1.1":
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/@floating-ui/utils/-/utils-0.1.1.tgz#1a5b1959a528e374e8037c4396c3e825d6cf4a83"
   integrity sha512-m0G6wlnhm/AX0H12IOWtK8gASEMffnX08RtKkCgTdHb9JpHKGloI7icFfLg9ZmQeavcvR0PKmzxClyuFPSjKWw==
+
+"@floating-ui/utils@^0.1.5":
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/@floating-ui/utils/-/utils-0.1.6.tgz#22958c042e10b67463997bd6ea7115fe28cbcaf9"
+  integrity sha512-OfX7E2oUDYxtBvsuS4e/jSn4Q9Qb6DzgeYtsAdkPZ47znpoNsMgZw0+tVijiv3uGNR6dgNlty6r9rzIzHjtd/A==
 
 "@humanwhocodes/config-array@^0.11.10":
   version "0.11.11"

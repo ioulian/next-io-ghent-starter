@@ -40,7 +40,7 @@ export const useDialog = ({
   const context = data.context;
 
   const click = useClick(context, {
-    enabled: controlledOpen == null,
+    enabled: typeof controlledOpen === "undefined",
   });
   const dismiss = useDismiss(context, { outsidePressEvent: "mousedown" });
   const role = useRole(context);
@@ -58,7 +58,7 @@ export const useDialog = ({
       setLabelId,
       setDescriptionId,
     }),
-    [open, setOpen, interactions, data, labelId, descriptionId]
+    [open, setOpen, interactions, data, labelId, descriptionId],
   );
 };
 
@@ -74,7 +74,7 @@ export const DialogContext = createContext<ContextType>(null);
 export const useDialogContext = () => {
   const context = useContext(DialogContext);
 
-  if (context == null) {
+  if (context === null) {
     throw new Error("Dialog components must be wrapped in <Dialog />");
   }
 

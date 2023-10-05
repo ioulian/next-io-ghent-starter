@@ -74,31 +74,33 @@ const DialogContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
       [context.x, context.y],
     );
 
+    if (!isMounted) {
+      return null;
+    }
+
     return (
       <FloatingPortal>
-        {isMounted ? (
-          <FloatingOverlay
-            className="app-dialog-overlay"
-            lockScroll
-            style={styles}
-          >
-            <FloatingFocusManager context={context.context}>
-              <Floater
-                ref={ref}
-                showArrow={false}
-                position={position}
-                arrowPosition={context.middlewareData.arrow}
-                strategy={context.strategy}
-                placement={context.placement}
-                aria-labelledby={context.labelId}
-                aria-describedby={context.descriptionId}
-                {...context.getFloatingProps(props)}
-              >
-                {props.children}
-              </Floater>
-            </FloatingFocusManager>
-          </FloatingOverlay>
-        ) : null}
+        <FloatingOverlay
+          className="app-dialog-overlay"
+          lockScroll
+          style={styles}
+        >
+          <FloatingFocusManager context={context.context}>
+            <Floater
+              ref={ref}
+              showArrow={false}
+              position={position}
+              arrowPosition={context.middlewareData.arrow}
+              strategy={context.strategy}
+              placement={context.placement}
+              aria-labelledby={context.labelId}
+              aria-describedby={context.descriptionId}
+              {...context.getFloatingProps(props)}
+            >
+              {props.children}
+            </Floater>
+          </FloatingFocusManager>
+        </FloatingOverlay>
       </FloatingPortal>
     );
   },

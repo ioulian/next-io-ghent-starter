@@ -49,7 +49,11 @@ export const useTooltip = ({
     whileElementsMounted: autoUpdate,
     middleware: [
       offset(theme.floating.tooltip.offset),
-      flip(),
+      flip({
+        crossAxis: placement.includes("-"),
+        fallbackAxisSideDirection: "start",
+        padding: theme.floating.floater.flip,
+      }),
       shift({ padding: theme.floating.floater.shift }),
       arrow({ element: arrowRef }),
     ],
@@ -67,10 +71,10 @@ export const useTooltip = ({
 
   const hover = useHover(context, {
     move: false,
-    enabled: controlledOpen == null,
+    enabled: typeof controlledOpen === "undefined",
   });
   const focus = useFocus(context, {
-    enabled: controlledOpen == null,
+    enabled: typeof controlledOpen === "undefined",
   });
   const dismiss = useDismiss(context);
   const role = useRole(context, { role: "tooltip" });
@@ -96,7 +100,7 @@ export const TooltipContext = createContext<ContextType>(null);
 export const useTooltipContext = () => {
   const context = useContext(TooltipContext);
 
-  if (context == null) {
+  if (context === null) {
     throw new Error("Tooltip components must be wrapped in <Tooltip />");
   }
 

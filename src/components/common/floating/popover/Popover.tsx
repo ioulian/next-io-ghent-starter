@@ -31,7 +31,6 @@ const PopoverTrigger = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
   ({ children, ...props }, propRef) => {
     const context = usePopoverContext();
     const childrenRef = (children as any).ref;
-
     const ref = useMergeRefs([context.refs.setReference, propRef, childrenRef]);
 
     if (isValidElement(children)) {
@@ -74,26 +73,28 @@ const PopoverContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
       [context.x, context.y],
     );
 
+    if (!isMounted) {
+      return null;
+    }
+
     return (
       <FloatingPortal>
-        {isMounted ? (
-          <FloatingFocusManager context={context.context} modal={context.modal}>
-            <Floater
-              ref={ref}
-              position={position}
-              arrowPosition={context.middlewareData.arrow}
-              strategy={context.strategy}
-              placement={context.placement}
-              arrowCallback={context.arrowCallback}
-              aria-labelledby={context.labelId}
-              aria-describedby={context.descriptionId}
-              {...context.getFloatingProps(props)}
-              style={styles}
-            >
-              {props.children}
-            </Floater>
-          </FloatingFocusManager>
-        ) : null}
+        <FloatingFocusManager context={context.context} modal={context.modal}>
+          <Floater
+            ref={ref}
+            position={position}
+            arrowPosition={context.middlewareData.arrow}
+            strategy={context.strategy}
+            placement={context.placement}
+            arrowCallback={context.arrowCallback}
+            aria-labelledby={context.labelId}
+            aria-describedby={context.descriptionId}
+            {...context.getFloatingProps(props)}
+            style={styles}
+          >
+            {props.children}
+          </Floater>
+        </FloatingFocusManager>
       </FloatingPortal>
     );
   },

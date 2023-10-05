@@ -53,7 +53,7 @@ const Floater = forwardRef<
           position.y ?? 0,
         )}px, 0)`,
         position: strategy,
-        visibility: position.x == null ? "hidden" : "visible",
+        visibility: position.x === null ? "hidden" : "visible",
         ...props.style,
       }),
       [position.y, position.x, props.style, strategy],
