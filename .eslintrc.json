@@ -38,6 +38,7 @@
     "react/jsx-no-constructed-context-values": "error",
     "react/jsx-no-useless-fragment": "error",
     "react/jsx-no-leaked-render": "error",
+    "react/jsx-boolean-value": ["error", "never"],
     "react/no-invalid-html-attribute": "error",
     "react/no-object-type-as-default-prop": "error",
     "react/self-closing-comp": "error",

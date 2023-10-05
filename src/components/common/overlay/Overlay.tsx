@@ -91,11 +91,11 @@ const Overlay: FC<OverlayPropsType> = ({
   return (
     <Modal
       closeTimeoutMS={250}
-      shouldCloseOnEsc={true}
-      shouldFocusAfterRender={true}
-      shouldReturnFocusAfterClose={true}
+      shouldCloseOnEsc
+      shouldFocusAfterRender
+      shouldReturnFocusAfterClose
       isOpen={isOpen}
-      shouldCloseOnOverlayClick={true}
+      shouldCloseOnOverlayClick
       contentLabel={contentLabel}
       htmlOpenClassName="ReactModal__Html--open"
       style={{

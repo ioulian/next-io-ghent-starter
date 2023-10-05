@@ -74,7 +74,7 @@ const App = ({ Component, ...rest }: AppPropsWithLayout) => {
               fallback: props.pageProps.fallback,
             }}
           >
-            <NextNprogress showOnShallow={true} color={theme.colors.primary} />
+            <NextNprogress showOnShallow color={theme.colors.primary} />
             {getLayout(<Component {...props.pageProps} />)}
           </SWRConfig>
         </ThemeProvider>
