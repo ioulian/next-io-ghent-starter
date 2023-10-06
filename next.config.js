@@ -31,7 +31,7 @@ module.exports = withBundleAnalyzer(
     webpack: (config) => {
       const fileLoaderRule = config.module.rules.find(
         // @ts-ignore
-        (rule) => rule.test && rule.test.test(".svg")
+        (rule) => rule.test && rule.test.test && rule.test.test(".svg"),
       );
       fileLoaderRule.exclude = [/\@tabler\/icons\//, /-sprite\.svg$/];
       config.module.rules.push({
@@ -57,5 +57,5 @@ module.exports = withBundleAnalyzer(
 
       return config;
     },
-  })
+  }),
 );
