@@ -38,5 +38,9 @@
   },
   "breadcrumb": {
     "label": "Breadcrumb"
+  },
+  "ellipsis": {
+    "expand": "Read more",
+    "collapse": "Collapse"
   }
 }

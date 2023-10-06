@@ -1,7 +1,16 @@
-import { FC, ReactNode, memo, useEffect, useId, useState } from "react";
+import {
+  FC,
+  ReactNode,
+  memo,
+  useCallback,
+  useEffect,
+  useId,
+  useState,
+} from "react";
 import iconChevron from "@tabler/icons/chevron-down.svg";
 import AnimateHeight from "react-animate-height";
 import { useTheme } from "styled-components";
+import { useUpdateEffect } from "react-use";
 
 import { InferComponentProps } from "@/types/styled";
 
@@ -41,15 +50,20 @@ const Expandable: FC<
     setIsOpen(open);
   }, [open]);
 
+  useUpdateEffect(() => {
+    onToggle?.(isOpen);
+  }, [onToggle, isOpen]);
+
+  const onClick = useCallback(() => {
+    setIsOpen((v) => !v);
+  }, []);
+
   return (
     <StyledExpandable {...props} $isOpen={isOpen}>
       <StyledExpandableSummary
         aria-expanded={isOpen}
         aria-controls={id}
-        onClick={() => {
-          setIsOpen(!isOpen);
-          onToggle?.(!isOpen);
-        }}
+        onClick={onClick}
       >
         <span>{summary}</span>
         <SvgSprite src={iconChevron} aria-hidden />
