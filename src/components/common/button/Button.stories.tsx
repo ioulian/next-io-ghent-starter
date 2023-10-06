@@ -67,6 +67,18 @@ export const IconOnly: Story = {
   },
 };
 
+export const Text: Story = {
+  render: (args) => <Button {...args} />,
+  args: {
+    $size: "base",
+    $type: "simple",
+    children: "Settings",
+    disabled: false,
+    isLoading: false,
+    $fullWidth: false,
+  },
+};
+
 export const AccessibleIconButton: Story = {
   render: (args) => (
     <Tooltip placement="bottom">
