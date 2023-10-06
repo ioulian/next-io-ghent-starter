@@ -1,3 +1,5 @@
+/* eslint-disable i18next/no-literal-string */
+
 import ReactSelect from "react-select";
 import type { Meta, StoryObj } from "@storybook/react";
 

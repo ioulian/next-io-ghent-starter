@@ -1,8 +1,7 @@
 import "../scripts/wdyr";
 
 import type { AppProps } from "next/app";
-import Script from "next/script";
-import { ReactElement, useEffect, ReactNode } from "react";
+import { ReactElement, useEffect, ReactNode, useMemo } from "react";
 import { useRouter } from "next/router";
 import { ThemeProvider } from "styled-components";
 import { Normalize } from "styled-normalize";
@@ -15,7 +14,7 @@ import { NextPage } from "next";
 
 import GlobalStyle from "@/styles/GlobalStyles";
 import { AutoAltLocales, PageFavicons, PageViewport } from "@/lib/page-head";
-import { GTM_ID, sendPageView } from "@/lib/gtm";
+import { GTMScript, GTM_ID, sendPageView } from "@/lib/gtm";
 import { getFetcher } from "@/services/api.service";
 import theme from "@/components/styled/Theme";
 
@@ -42,39 +41,28 @@ const App = ({ Component, ...rest }: AppPropsWithLayout) => {
 
   const getLayout = Component.getLayout ?? ((page) => page);
 
+  const SWRConfigValue = useMemo(
+    () => ({
+      fetcher: getFetcher(),
+      //fetcher: getAuthFetcher(store, router.locale as AppLocale),
+      fallback: props.pageProps.fallback,
+    }),
+    [props],
+  );
+
   return (
     <div>
       <Provider store={store}>
         <PageViewport />
         <PageFavicons />
         <AutoAltLocales />
-        {GTM_ID ? (
-          <Script
-            id="GTM"
-            strategy="afterInteractive"
-            dangerouslySetInnerHTML={{
-              __html: `
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer', '${GTM_ID}');
-          `,
-            }}
-          />
-        ) : undefined}
+        <GTMScript />
         <DefaultSeo {...SEO} />
         <Normalize />
         <ThemeProvider theme={theme}>
           <GlobalStyle />
-          <SWRConfig
-            value={{
-              fetcher: getFetcher(),
-              //fetcher: getAuthFetcher(store, router.locale as AppLocale),
-              fallback: props.pageProps.fallback,
-            }}
-          >
-            <NextNprogress showOnShallow={true} color={theme.colors.primary} />
+          <SWRConfig value={SWRConfigValue}>
+            <NextNprogress showOnShallow color={theme.colors.primary} />
             {getLayout(<Component {...props.pageProps} />)}
           </SWRConfig>
         </ThemeProvider>

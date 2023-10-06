@@ -1,4 +1,6 @@
-import { useState } from "react";
+/* eslint-disable i18next/no-literal-string */
+
+import { memo, useState } from "react";
 
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
 
@@ -11,7 +13,7 @@ import {
   selectCount,
 } from "./counterSlice";
 
-export const Counter = () => {
+const Counter = () => {
   const dispatch = useAppDispatch();
   const count = useAppSelector(selectCount);
   const [incrementAmount, setIncrementAmount] = useState("2");
@@ -68,3 +70,5 @@ export const Counter = () => {
 if (process.env.NODE_ENV === "development") {
   Counter.whyDidYouRender = true;
 }
+
+export default memo(Counter);

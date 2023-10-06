@@ -36,6 +36,14 @@ const LanguageSwitcher: FC<
     [setCookie],
   );
 
+  const href = useMemo(
+    () => ({
+      pathname: router?.pathname,
+      query: router?.query,
+    }),
+    [router?.pathname, router?.query],
+  );
+
   return (
     <StyledLanguageSwitcher {...props}>
       {locales ? (
@@ -45,10 +53,7 @@ const LanguageSwitcher: FC<
             return (
               <li key={locale}>
                 <Link
-                  href={{
-                    pathname: router?.pathname,
-                    query: router?.query,
-                  }}
+                  href={href}
                   locale={locale}
                   lang={locale}
                   hrefLang={locale}

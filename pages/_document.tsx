@@ -7,7 +7,7 @@ import Document, {
 } from "next/document";
 import { ServerStyleSheet } from "styled-components";
 
-import { GTM_ID } from "@/lib/gtm";
+import { GTMNoScript, GTM_ID } from "@/lib/gtm";
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -36,17 +36,7 @@ export default class MyDocument extends Document {
       <Html translate="no">
         <Head />
         <body>
-          {GTM_ID ? (
-            <noscript>
-              <iframe
-                title="GTM NoScript Iframe"
-                src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
-                height="0"
-                width="0"
-                style={{ display: "none", visibility: "hidden" }}
-              />
-            </noscript>
-          ) : undefined}
+          <GTMNoScript />
           <Main />
           <div id="root-toastify" />
           <NextScript />

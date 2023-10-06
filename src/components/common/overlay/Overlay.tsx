@@ -6,9 +6,10 @@ import {
   isValidElement,
   memo,
   NamedExoticComponent,
-  ReactNode,
+  PropsWithChildren,
   useId,
   useLayoutEffect,
+  useMemo,
 } from "react";
 import Modal from "react-modal";
 import { useTheme } from "styled-components";
@@ -69,44 +70,55 @@ interface OverlayPropsType {
    * click, close button click)
    */
   onClose?: () => void;
-  children: ReactNode;
 }
 
-const Overlay: FC<OverlayPropsType> = ({
+const Overlay: FC<PropsWithChildren<OverlayPropsType>> = ({
   contentLabel,
   isOpen = false,
   children,
   onClose,
 }) => {
-  const theme = useTheme()!;
+  const theme = useTheme();
 
   const contentId = useId();
 
-  const overlay = useOverlay({ onClose });
+  const overlayOptions = useMemo(() => ({ onClose }), [onClose]);
+  const overlay = useOverlay(overlayOptions);
 
   const onRequestClose = useCallback(() => {
     onClose?.();
   }, [onClose]);
 
+  const overlayStyle = useMemo(
+    () => ({
+      overlay: {
+        zIndex: theme.zIndex.overlay,
+      },
+    }),
+    [theme.zIndex.overlay],
+  );
+
+  const overlayAria = useMemo(
+    () => ({
+      ...(overlay.headingId ? { labelledby: overlay.headingId } : {}),
+      describedby: contentId,
+    }),
+    [contentId, overlay.headingId],
+  );
+
   return (
+    // @ts-ignore
     <Modal
       closeTimeoutMS={250}
-      shouldCloseOnEsc={true}
-      shouldFocusAfterRender={true}
-      shouldReturnFocusAfterClose={true}
+      shouldCloseOnEsc
+      shouldFocusAfterRender
+      shouldReturnFocusAfterClose
       isOpen={isOpen}
-      shouldCloseOnOverlayClick={true}
+      shouldCloseOnOverlayClick
       contentLabel={contentLabel}
       htmlOpenClassName="ReactModal__Html--open"
-      style={{
-        overlay: {
-          zIndex: theme.zIndex.overlay,
-        },
-      }}
-      aria={{
-        ...(overlay.headingId ? { labelledby: overlay.headingId } : {}),
-        describedby: contentId,
-      }}
+      style={overlayStyle}
+      aria={overlayAria}
       {...{ onRequestClose }}
     >
       <OverlayContext.Provider value={overlay}>
@@ -119,9 +131,9 @@ const Overlay: FC<OverlayPropsType> = ({
   );
 };
 
-const MemoizedOverlay = memo(
-  Overlay,
-) as NamedExoticComponent<OverlayPropsType> & {
+const MemoizedOverlay = memo(Overlay) as NamedExoticComponent<
+  PropsWithChildren<OverlayPropsType>
+> & {
   Heading: typeof MemoizedOverlayHeading;
 };
 MemoizedOverlay.Heading = MemoizedOverlayHeading;

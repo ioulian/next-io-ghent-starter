@@ -11,9 +11,10 @@ import {
   forwardRef,
   HTMLProps,
   isValidElement,
-  ReactNode,
+  PropsWithChildren,
   useCallback,
   useLayoutEffect,
+  useMemo,
 } from "react";
 import { useTheme } from "styled-components";
 
@@ -30,7 +31,6 @@ const PopoverTrigger = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
   ({ children, ...props }, propRef) => {
     const context = usePopoverContext();
     const childrenRef = (children as any).ref;
-
     const ref = useMergeRefs([context.refs.setReference, propRef, childrenRef]);
 
     if (isValidElement(children)) {
@@ -63,31 +63,38 @@ const PopoverContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
   (props, propRef) => {
     const context = usePopoverContext();
     const ref = useMergeRefs([context.refs.setFloating, propRef]);
-    const theme = useTheme()!;
+    const theme = useTheme();
     const { isMounted, styles } = useTransitionStyles(context.context, {
       duration: theme.timings.fast,
     });
 
+    const position = useMemo(
+      () => ({ x: context.x ?? 0, y: context.y ?? 0 }),
+      [context.x, context.y],
+    );
+
+    if (!isMounted) {
+      return null;
+    }
+
     return (
       <FloatingPortal>
-        {isMounted ? (
-          <FloatingFocusManager context={context.context} modal={context.modal}>
-            <Floater
-              ref={ref}
-              position={{ x: context.x ?? 0, y: context.y ?? 0 }}
-              arrowPosition={context.middlewareData.arrow}
-              strategy={context.strategy}
-              placement={context.placement}
-              arrowCallback={context.arrowCallback}
-              aria-labelledby={context.labelId}
-              aria-describedby={context.descriptionId}
-              {...context.getFloatingProps(props)}
-              style={styles}
-            >
-              {props.children}
-            </Floater>
-          </FloatingFocusManager>
-        ) : null}
+        <FloatingFocusManager context={context.context} modal={context.modal}>
+          <Floater
+            ref={ref}
+            position={position}
+            arrowPosition={context.middlewareData.arrow}
+            strategy={context.strategy}
+            placement={context.placement}
+            arrowCallback={context.arrowCallback}
+            aria-labelledby={context.labelId}
+            aria-describedby={context.descriptionId}
+            {...context.getFloatingProps(props)}
+            style={styles}
+          >
+            {props.children}
+          </Floater>
+        </FloatingFocusManager>
       </FloatingPortal>
     );
   },
@@ -189,11 +196,7 @@ const PopoverClose = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
 );
 
 // Based on: https://floating-ui.com/docs/popover
-const Popover: FC<
-  {
-    children: ReactNode;
-  } & PopoverOptions
-> & {
+const Popover: FC<PropsWithChildren & PopoverOptions> & {
   Trigger: typeof PopoverTrigger;
   Close: typeof PopoverClose;
   Content: typeof PopoverContent;

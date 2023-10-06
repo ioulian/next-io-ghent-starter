@@ -9,7 +9,8 @@ import {
   forwardRef,
   HTMLProps,
   isValidElement,
-  ReactNode,
+  PropsWithChildren,
+  useMemo,
 } from "react";
 import { useTheme } from "styled-components";
 
@@ -58,32 +59,38 @@ const TooltipContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
   (props, propRef) => {
     const context = useTooltipContext();
     const ref = useMergeRefs([context.refs.setFloating, propRef]);
-    const theme = useTheme()!;
+    const theme = useTheme();
     const { isMounted, styles } = useTransitionStyles(context.context, {
       duration: theme.timings.fast,
     });
+    const position = useMemo(
+      () => ({ x: context.x ?? 0, y: context.y ?? 0 }),
+      [context.x, context.y],
+    );
+
+    if (!isMounted) {
+      return null;
+    }
 
     return (
       <FloatingPortal>
-        {isMounted ? (
-          <Floater
-            ref={ref}
-            position={{ x: context.x ?? 0, y: context.y ?? 0 }}
-            arrowPosition={context.middlewareData.arrow}
-            strategy={context.strategy}
-            placement={context.placement}
-            arrowCallback={context.arrowCallback}
-            {...context.getFloatingProps(props)}
-            style={styles}
-          />
-        ) : null}
+        <Floater
+          ref={ref}
+          position={position}
+          arrowPosition={context.middlewareData.arrow}
+          strategy={context.strategy}
+          placement={context.placement}
+          arrowCallback={context.arrowCallback}
+          {...context.getFloatingProps(props)}
+          style={styles}
+        />
       </FloatingPortal>
     );
   },
 );
 
 // Based on: https://floating-ui.com/docs/tooltip
-const Tooltip: FC<{ children: ReactNode } & TooltipOptions> & {
+const Tooltip: FC<PropsWithChildren & TooltipOptions> & {
   Trigger: typeof TooltipTrigger;
   Content: typeof TooltipContent;
 } = ({ children, ...options }) => {

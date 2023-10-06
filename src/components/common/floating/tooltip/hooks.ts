@@ -40,7 +40,7 @@ export const useTooltip = ({
   const open = controlledOpen ?? uncontrolledOpen;
   const setOpen = setControlledOpen ?? setUncontrolledOpen;
   const arrowRef = useRef<HTMLDivElement | null>(null);
-  const theme = useTheme()!;
+  const theme = useTheme();
 
   const data = useFloating({
     placement,
@@ -49,7 +49,11 @@ export const useTooltip = ({
     whileElementsMounted: autoUpdate,
     middleware: [
       offset(theme.floating.tooltip.offset),
-      flip(),
+      flip({
+        crossAxis: placement.includes("-"),
+        fallbackAxisSideDirection: "start",
+        padding: theme.floating.floater.flip,
+      }),
       shift({ padding: theme.floating.floater.shift }),
       arrow({ element: arrowRef }),
     ],
@@ -60,17 +64,17 @@ export const useTooltip = ({
       arrowRef.current = node;
       data.update();
     },
-    [data]
+    [data],
   );
 
   const context = data.context;
 
   const hover = useHover(context, {
     move: false,
-    enabled: controlledOpen == null,
+    enabled: typeof controlledOpen === "undefined",
   });
   const focus = useFocus(context, {
-    enabled: controlledOpen == null,
+    enabled: typeof controlledOpen === "undefined",
   });
   const dismiss = useDismiss(context);
   const role = useRole(context, { role: "tooltip" });
@@ -85,7 +89,7 @@ export const useTooltip = ({
       ...interactions,
       ...data,
     }),
-    [open, setOpen, arrowCallback, interactions, data]
+    [open, setOpen, arrowCallback, interactions, data],
   );
 };
 
@@ -96,7 +100,7 @@ export const TooltipContext = createContext<ContextType>(null);
 export const useTooltipContext = () => {
   const context = useContext(TooltipContext);
 
-  if (context == null) {
+  if (context === null) {
     throw new Error("Tooltip components must be wrapped in <Tooltip />");
   }
 

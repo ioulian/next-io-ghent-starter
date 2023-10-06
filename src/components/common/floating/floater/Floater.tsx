@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import { CSSProperties, forwardRef, useMemo } from "react";
 import { useTheme } from "styled-components";
 import { Coords, Placement, Strategy } from "@floating-ui/react";
 
@@ -45,32 +45,41 @@ const Floater = forwardRef<
       left: "rotate(45deg)",
     }[placementFirst] as string;
 
-    const theme = useTheme()!;
+    const theme = useTheme();
+
+    const style = useMemo<CSSProperties>(
+      () => ({
+        transform: `translate3d(${Math.round(position.x ?? 0)}px, ${Math.round(
+          position.y ?? 0,
+        )}px, 0)`,
+        position: strategy,
+        visibility: position.x === null ? "hidden" : "visible",
+        ...props.style,
+      }),
+      [position.y, position.x, props.style, strategy],
+    );
+
+    const arrowStyle = useMemo(
+      () => ({
+        left: arrowPosition?.x ? `${arrowPosition.x}px` : "",
+        top: arrowPosition?.y ? `${arrowPosition.y}px` : "",
+        [staticSide]: `-${theme.floating.floater.arrow.size / 2}px`,
+        transform: rotation,
+      }),
+      [
+        arrowPosition?.x,
+        arrowPosition?.y,
+        rotation,
+        staticSide,
+        theme.floating.floater.arrow.size,
+      ],
+    );
 
     return (
-      <StyledFloater
-        ref={ref}
-        {...props}
-        style={{
-          transform: `translate3d(${Math.round(
-            position.x ?? 0,
-          )}px, ${Math.round(position.y ?? 0)}px, 0)`,
-          position: strategy,
-          visibility: position.x == null ? "hidden" : "visible",
-          ...props.style,
-        }}
-      >
+      <StyledFloater ref={ref} {...props} style={style}>
         {children}
         {showArrow && arrowCallback ? (
-          <StyledFloaterArrow
-            ref={arrowCallback}
-            style={{
-              left: arrowPosition?.x ? `${arrowPosition.x}px` : "",
-              top: arrowPosition?.y ? `${arrowPosition.y}px` : "",
-              [staticSide]: `-${theme.floating.floater.arrow.size / 2}px`,
-              transform: rotation,
-            }}
-          />
+          <StyledFloaterArrow ref={arrowCallback} style={arrowStyle} />
         ) : null}
       </StyledFloater>
     );

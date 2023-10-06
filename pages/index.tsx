@@ -8,14 +8,14 @@ import type {
 import { useTranslation } from "next-i18next";
 import Link from "next/link";
 import sampleSvgSprite from "@tabler/icons/arrow-right-circle.svg";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useCallback } from "react";
 
 import { StyledMain, StyledPage } from "@/components/Demo";
 import logo from "@/img/logo.png";
 import logoSvg from "@/img/logo.svg";
 import logoSvgSprite from "@/img/logo-sprite.svg";
-import { Counter } from "@/features/counter/Counter";
+import Counter from "@/features/counter/Counter";
 import SvgSprite from "@/components/common/svg/SvgSprite";
 import { requireTranslations } from "@/services/translation.service";
 import { requireAnonymous } from "@/features/auth/utilities";
@@ -38,12 +38,21 @@ const Home: NextPageWithLayout = ({}: InferGetStaticPropsType<
   const [, setV] = useState(1);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
+  // Force rerender test
   const add = useCallback(() => {
     setV((v) => v + 1);
   }, [setV]);
 
   const testToast = useCallback(() => {
     success("Toastify loaded dynamically!");
+  }, []);
+
+  const toggleOverlay = useCallback(() => {
+    setIsOpen((v) => !v);
+  }, []);
+
+  const closeOverlay = useCallback(() => {
+    setIsOpen(false);
   }, []);
 
   return (
@@ -81,15 +90,20 @@ const Home: NextPageWithLayout = ({}: InferGetStaticPropsType<
             <SvgSprite
               src={sampleSvgSprite}
               title=".svg sprite"
-              style={{
-                width: 24,
-                height: 24,
-              }}
+              style={useMemo(
+                () => ({
+                  width: 24,
+                  height: 24,
+                }),
+                [],
+              )}
             />
             <LanguageSwitcher />
+            {/* eslint-disable-next-line i18next/no-literal-string */}
             <Button onClick={add} iconBefore={svgSprite}>
               Test
             </Button>
+            {/* eslint-disable-next-line i18next/no-literal-string */}
             <Button onClick={testToast} iconBefore={svgSprite}>
               Test toast
             </Button>
@@ -97,9 +111,13 @@ const Home: NextPageWithLayout = ({}: InferGetStaticPropsType<
 
           <nav>
             <Link
-              href={{
-                pathname: "/serverside",
-              }}
+              href={useMemo(
+                () => ({
+                  pathname: "/serverside",
+                }),
+                [],
+              )}
+              // eslint-disable-next-line i18next/no-literal-string
             >
               Go to server side example
             </Link>
@@ -110,26 +128,28 @@ const Home: NextPageWithLayout = ({}: InferGetStaticPropsType<
           </div>
 
           <div>
-            <Button
-              onClick={() => {
-                setIsOpen(!isOpen);
-              }}
-            >
-              Open dialog
-            </Button>
+            {/* eslint-disable-next-line i18next/no-literal-string */}
+            <Button onClick={toggleOverlay}>Open dialog</Button>
             <Overlay
               isOpen={isOpen}
               contentLabel="Example"
-              onClose={() => {
-                setIsOpen(false);
-              }}
+              onClose={closeOverlay}
             >
-              <div style={{ backgroundColor: "white", padding: "1rem" }}>
+              <div
+                style={useMemo(
+                  () => ({ backgroundColor: "white", padding: "1rem" }),
+                  [],
+                )}
+              >
                 <Overlay.Heading>
+                  {/* eslint-disable-next-line i18next/no-literal-string */}
                   <Heading type="h2">Example</Heading>
                 </Overlay.Heading>
+                {/* eslint-disable-next-line i18next/no-literal-string */}
                 <button type="button">button 1</button>
+                {/* eslint-disable-next-line i18next/no-literal-string */}
                 <button type="button">button 2</button>
+                {/* eslint-disable-next-line i18next/no-literal-string */}
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                   Praesent porta dolor mi, at venenatis urna elementum a. Etiam
@@ -147,6 +167,7 @@ const Home: NextPageWithLayout = ({}: InferGetStaticPropsType<
                   placerat. Fusce congue euismod arcu. Suspendisse molestie id
                   erat vitae pretium.
                 </p>
+                {/* eslint-disable-next-line i18next/no-literal-string */}
                 <p>
                   Sed et dui finibus, sodales augue nec, imperdiet augue. Aenean
                   congue sagittis dolor nec semper. Phasellus in interdum nisi.
@@ -163,6 +184,7 @@ const Home: NextPageWithLayout = ({}: InferGetStaticPropsType<
                   metus id efficitur consequat. Nam eros mi, egestas a urna nec,
                   dictum sodales sem.
                 </p>
+                {/* eslint-disable-next-line i18next/no-literal-string */}
                 <p>
                   Sed hendrerit odio eget sem molestie rhoncus. Donec at arcu
                   orci. Fusce sagittis vel tellus vitae viverra. Duis vel
@@ -178,6 +200,7 @@ const Home: NextPageWithLayout = ({}: InferGetStaticPropsType<
                   Vestibulum luctus orci ex, fringilla elementum lacus eleifend
                   sit amet. In hac habitasse platea dictumst.
                 </p>
+                {/* eslint-disable-next-line i18next/no-literal-string */}
                 <p>
                   Fusce sit amet nisi lacinia nisi bibendum ullamcorper sed et
                   urna. Donec eu euismod leo, at suscipit arcu. Suspendisse non
@@ -195,6 +218,7 @@ const Home: NextPageWithLayout = ({}: InferGetStaticPropsType<
                   luctus et ultrices posuere cubilia curae; Praesent vitae dui
                   nec leo elementum tristique. Donec auctor sed dui ut semper.
                 </p>
+                {/* eslint-disable-next-line i18next/no-literal-string */}
                 <p>
                   Proin non elit vulputate, malesuada ipsum et, vestibulum
                   lectus. Donec nec est vel nisl ultricies dictum et ac augue.
@@ -209,6 +233,7 @@ const Home: NextPageWithLayout = ({}: InferGetStaticPropsType<
                   condimentum neque dictum faucibus. Duis viverra quam id nibh
                   maximus placerat.
                 </p>
+                {/* eslint-disable-next-line i18next/no-literal-string */}
                 <p>
                   Etiam lobortis fringilla elit, a venenatis ex posuere ut. In
                   sed blandit arcu. Sed feugiat iaculis neque, ultrices dictum
@@ -220,6 +245,7 @@ const Home: NextPageWithLayout = ({}: InferGetStaticPropsType<
                   sapien malesuada lobortis. Phasellus pellentesque nulla quam.
                   Fusce feugiat mauris lorem, et rhoncus ante scelerisque nec.
                 </p>
+                {/* eslint-disable-next-line i18next/no-literal-string */}
                 <p>
                   Morbi pharetra felis in dui dignissim commodo sed a mi. Etiam
                   odio odio, sollicitudin nec lacus non, rutrum vulputate dui.
@@ -231,6 +257,7 @@ const Home: NextPageWithLayout = ({}: InferGetStaticPropsType<
                   orci. Etiam sit amet feugiat mauris, vel mattis metus. Sed
                   vehicula ante id tristique viverra.
                 </p>
+                {/* eslint-disable-next-line i18next/no-literal-string */}
                 <p>
                   Nunc sed arcu in nulla rhoncus mollis in ac nisl. Donec varius
                   facilisis metus quis ultrices. Fusce quis tincidunt nisi, nec
@@ -246,6 +273,7 @@ const Home: NextPageWithLayout = ({}: InferGetStaticPropsType<
                   ullamcorper laoreet, eros ante tempor ante, et commodo leo
                   augue at metus. Donec viverra in lorem bibendum laoreet.
                 </p>
+                {/* eslint-disable-next-line i18next/no-literal-string */}
                 <p>
                   Fusce pulvinar dignissim odio, vitae egestas ex sodales in.
                   Suspendisse vel maximus neque. Praesent purus risus, fermentum
@@ -255,6 +283,7 @@ const Home: NextPageWithLayout = ({}: InferGetStaticPropsType<
                   erat tincidunt gravida. Duis porta nibh vitae odio placerat
                   vestibulum.
                 </p>
+                {/* eslint-disable-next-line i18next/no-literal-string */}
                 <p>
                   Nullam auctor dignissim mattis. Etiam sed augue eleifend,
                   aliquet massa vitae, tincidunt erat. Cras egestas volutpat
@@ -281,7 +310,7 @@ export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
           .then(({ result }) => {
             resolve(result);
           });
-      })
+      }),
 );
 
 export default Home;

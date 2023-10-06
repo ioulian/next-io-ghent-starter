@@ -33,7 +33,7 @@ export interface PopoverOptions {
 
 export const usePopover = ({
   initialOpen = false,
-  placement,
+  placement = "bottom",
   modal = true,
   open: controlledOpen,
   onOpenChange: setControlledOpen,
@@ -45,7 +45,7 @@ export const usePopover = ({
   const open = controlledOpen ?? uncontrolledOpen;
   const setOpen = setControlledOpen ?? setUncontrolledOpen;
   const arrowRef = useRef<HTMLDivElement | null>(null);
-  const theme = useTheme()!;
+  const theme = useTheme();
 
   const data = useFloating({
     placement,
@@ -54,7 +54,11 @@ export const usePopover = ({
     whileElementsMounted: autoUpdate,
     middleware: [
       offset(theme.floating.popover.offset),
-      flip(),
+      flip({
+        crossAxis: placement.includes("-"),
+        fallbackAxisSideDirection: "start",
+        padding: theme.floating.floater.flip,
+      }),
       shift({ padding: theme.floating.floater.shift }),
       arrow({ element: arrowRef }),
     ],
@@ -64,13 +68,13 @@ export const usePopover = ({
       arrowRef.current = node;
       data.update();
     },
-    [data]
+    [data],
   );
 
   const context = data.context;
 
   const click = useClick(context, {
-    enabled: controlledOpen == null,
+    enabled: typeof controlledOpen === "undefined",
   });
   const dismiss = useDismiss(context);
   const role = useRole(context);
@@ -99,7 +103,7 @@ export const usePopover = ({
       modal,
       labelId,
       descriptionId,
-    ]
+    ],
   );
 };
 
@@ -115,7 +119,7 @@ export const PopoverContext = createContext<ContextType>(null);
 export const usePopoverContext = () => {
   const context = useContext(PopoverContext);
 
-  if (context == null) {
+  if (context === null) {
     throw new Error("Popover components must be wrapped in <Popover />");
   }
 

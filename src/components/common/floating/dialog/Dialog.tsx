@@ -12,8 +12,9 @@ import {
   forwardRef,
   HTMLProps,
   isValidElement,
-  ReactNode,
+  PropsWithChildren,
   useLayoutEffect,
+  useMemo,
 } from "react";
 import { useCallback } from "react";
 import { useTheme } from "styled-components";
@@ -63,36 +64,43 @@ const DialogContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
   (props, propRef) => {
     const context = useDialogContext();
     const ref = useMergeRefs([context.refs.setFloating, propRef]);
-    const theme = useTheme()!;
+    const theme = useTheme();
     const { isMounted, styles } = useTransitionStyles(context.context, {
       duration: theme.timings.normal,
     });
 
+    const position = useMemo(
+      () => ({ x: context.x ?? 0, y: context.y ?? 0 }),
+      [context.x, context.y],
+    );
+
+    if (!isMounted) {
+      return null;
+    }
+
     return (
       <FloatingPortal>
-        {isMounted ? (
-          <FloatingOverlay
-            className="app-dialog-overlay"
-            lockScroll
-            style={styles}
-          >
-            <FloatingFocusManager context={context.context}>
-              <Floater
-                ref={ref}
-                showArrow={false}
-                position={{ x: context.x ?? 0, y: context.y ?? 0 }}
-                arrowPosition={context.middlewareData.arrow}
-                strategy={context.strategy}
-                placement={context.placement}
-                aria-labelledby={context.labelId}
-                aria-describedby={context.descriptionId}
-                {...context.getFloatingProps(props)}
-              >
-                {props.children}
-              </Floater>
-            </FloatingFocusManager>
-          </FloatingOverlay>
-        ) : null}
+        <FloatingOverlay
+          className="app-dialog-overlay"
+          lockScroll
+          style={styles}
+        >
+          <FloatingFocusManager context={context.context}>
+            <Floater
+              ref={ref}
+              showArrow={false}
+              position={position}
+              arrowPosition={context.middlewareData.arrow}
+              strategy={context.strategy}
+              placement={context.placement}
+              aria-labelledby={context.labelId}
+              aria-describedby={context.descriptionId}
+              {...context.getFloatingProps(props)}
+            >
+              {props.children}
+            </Floater>
+          </FloatingFocusManager>
+        </FloatingOverlay>
       </FloatingPortal>
     );
   },
@@ -194,11 +202,7 @@ const DialogClose = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
 );
 
 // Based on: https://floating-ui.com/docs/popover
-const Dialog: FC<
-  {
-    children: ReactNode;
-  } & DialogOptions
-> & {
+const Dialog: FC<PropsWithChildren & DialogOptions> & {
   Trigger: typeof DialogTrigger;
   Close: typeof DialogClose;
   Content: typeof DialogContent;

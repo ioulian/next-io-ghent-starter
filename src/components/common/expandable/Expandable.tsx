@@ -34,7 +34,7 @@ const Expandable: FC<
   } & InferComponentProps<typeof StyledExpandable>
 > = ({ summary, children, open = false, onToggle, ...props }) => {
   const [isOpen, setIsOpen] = useState(open);
-  const theme = useTheme()!;
+  const theme = useTheme();
   const id = useId();
 
   useEffect(() => {

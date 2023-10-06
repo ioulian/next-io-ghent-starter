@@ -13,7 +13,7 @@ export const useOverlay = ({ onClose }: OverlayOptions) => {
       headingId,
       setHeadingId,
     }),
-    [onClose, headingId]
+    [onClose, headingId],
   );
 };
 
@@ -24,7 +24,7 @@ export const OverlayContext = createContext<ContextType>(null);
 export const useOverlayContext = () => {
   const context = useContext(OverlayContext);
 
-  if (context == null) {
+  if (context === null) {
     throw new Error("Overlay components must be wrapped in <Overlay />");
   }
 

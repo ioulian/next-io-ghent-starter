@@ -5,7 +5,7 @@ import type {
   GetServerSidePropsContext,
   InferGetServerSidePropsType,
 } from "next";
-import useSWR, { SWRConfig } from "swr";
+import useSWR from "swr";
 import merge from "lodash/merge";
 
 import { StyledMain, StyledPage } from "@/components/Demo";
@@ -26,7 +26,9 @@ const Repo = () => {
 
   return (
     <>
+      {/* eslint-disable-next-line i18next/no-literal-string */}
       {!!error && !!data && <p>Error loading</p>}
+      {/* eslint-disable-next-line i18next/no-literal-string */}
       {!error && !data && <p>Loading...</p>}
       {!error && !!data && (
         <div>
@@ -41,11 +43,11 @@ const Repo = () => {
   );
 };
 
-const ServerSide: NextPageWithLayout = ({
-  fallback,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const ServerSide: NextPageWithLayout = ({}: InferGetServerSidePropsType<
+  typeof getServerSideProps
+>) => {
   return (
-    <SWRConfig value={{ fallback }}>
+    <>
       <NextSeo
         title="Serverside example"
         description="This will be the page meta description"
@@ -62,11 +64,12 @@ const ServerSide: NextPageWithLayout = ({
               priority
             />
           </div>
+          {/* eslint-disable-next-line i18next/no-literal-string */}
           <h1>Server side example</h1>
           <Repo />
         </StyledMain>
       </StyledPage>
-    </SWRConfig>
+    </>
   );
 };
 

@@ -1,3 +1,5 @@
+/* eslint-disable i18next/no-literal-string */
+
 import type { Meta, StoryObj } from "@storybook/react";
 
 import Tag from "../tag/Tag";
