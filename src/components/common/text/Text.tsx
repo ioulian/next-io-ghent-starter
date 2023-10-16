@@ -8,7 +8,6 @@ const Text: FC<InferComponentProps<typeof StyledText>> = ({
   children,
   ...props
 }) => {
-  console.log("render");
   return <StyledText {...props}>{children}</StyledText>;
 };
 

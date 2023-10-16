@@ -5,8 +5,8 @@ import iconChevron from "@tabler/icons/chevron-right.svg";
 import { useState } from "react";
 
 import Button from "../../button/Button";
-import Overlay from "../../overlay/Overlay";
 import SvgSprite from "../../svg/SvgSprite";
+import Dialog from "../dialog/Dialog";
 
 import Dropdown, { DropdownMenuItem } from "./Dropdown";
 
@@ -153,14 +153,8 @@ const WithOverlayComponent = () => {
           <Button>Delete</Button>
         </DropdownMenuItem>
       </Dropdown>
-      <Overlay
-        isOpen={isOpen}
-        contentLabel="Example"
-        onClose={() => {
-          setIsOpen(false);
-        }}
-      >
-        <div style={{ backgroundColor: "white", padding: "1rem" }}>
+      <Dialog open={isOpen} onOpenChange={(isNewOpen) => setIsOpen(isNewOpen)}>
+        <Dialog.Content>
           Delete this item?
           <Button
             onClick={() => {
@@ -176,8 +170,8 @@ const WithOverlayComponent = () => {
           >
             Ok
           </Button>
-        </div>
-      </Overlay>
+        </Dialog.Content>
+      </Dialog>
     </>
   );
 };

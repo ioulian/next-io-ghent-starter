@@ -10,6 +10,7 @@ const sourceSansPro = Source_Sans_3({
 // Use types
 const theme: DefaultTheme = {
   name: "Default",
+  allowBlur: true,
   colors: {
     white: "#fff",
     black: "#000",
@@ -59,7 +60,6 @@ const theme: DefaultTheme = {
   },
   zIndex: {
     contextMenu: 100,
-    overlay: 200,
   },
   form: {
     input: {

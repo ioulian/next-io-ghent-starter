@@ -3,6 +3,7 @@ import "styled-components";
 declare module "styled-components" {
   export interface DefaultTheme {
     name: string;
+    allowBlur: boolean;
     colors: {
       white: string;
       black: string;
@@ -52,7 +53,6 @@ declare module "styled-components" {
     };
     zIndex: {
       contextMenu: number;
-      overlay: number;
     };
     form: {
       input: {

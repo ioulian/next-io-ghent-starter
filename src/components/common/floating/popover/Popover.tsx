@@ -65,7 +65,10 @@ const PopoverContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
     const ref = useMergeRefs([context.refs.setFloating, propRef]);
     const theme = useTheme();
     const { isMounted, styles } = useTransitionStyles(context.context, {
-      duration: theme.timings.fast,
+      duration: {
+        open: theme.timings.normal,
+        close: theme.timings.fast,
+      },
     });
 
     const position = useMemo(

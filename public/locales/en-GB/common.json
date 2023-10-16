@@ -1,9 +1,4 @@
 {
-  "overlay": {
-    "close-button": {
-      "label": "Close"
-    }
-  },
   "form": {
     "description": {
       "prefix": "Description:"

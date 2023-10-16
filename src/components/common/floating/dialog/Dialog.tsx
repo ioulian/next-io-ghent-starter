@@ -1,6 +1,5 @@
 import {
   FloatingFocusManager,
-  FloatingOverlay,
   FloatingPortal,
   useId,
   useMergeRefs,
@@ -14,7 +13,6 @@ import {
   isValidElement,
   PropsWithChildren,
   useLayoutEffect,
-  useMemo,
 } from "react";
 import { useCallback } from "react";
 import { useTheme } from "styled-components";
@@ -27,6 +25,7 @@ import {
   useDialog,
   useDialogContext,
 } from "./hooks";
+import { StyledFloatingOverlay } from "./Dialog.styles";
 
 const DialogTrigger = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
   ({ children, ...props }, propRef) => {
@@ -66,13 +65,11 @@ const DialogContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
     const ref = useMergeRefs([context.refs.setFloating, propRef]);
     const theme = useTheme();
     const { isMounted, styles } = useTransitionStyles(context.context, {
-      duration: theme.timings.normal,
+      duration: {
+        open: theme.timings.normal,
+        close: theme.timings.fast,
+      },
     });
-
-    const position = useMemo(
-      () => ({ x: context.x ?? 0, y: context.y ?? 0 }),
-      [context.x, context.y],
-    );
 
     if (!isMounted) {
       return null;
@@ -80,19 +77,10 @@ const DialogContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
 
     return (
       <FloatingPortal>
-        <FloatingOverlay
-          className="app-dialog-overlay"
-          lockScroll
-          style={styles}
-        >
+        <StyledFloatingOverlay lockScroll style={styles}>
           <FloatingFocusManager context={context.context}>
             <Floater
               ref={ref}
-              showArrow={false}
-              position={position}
-              arrowPosition={context.middlewareData.arrow}
-              strategy={context.strategy}
-              placement={context.placement}
               aria-labelledby={context.labelId}
               aria-describedby={context.descriptionId}
               {...context.getFloatingProps(props)}
@@ -100,7 +88,7 @@ const DialogContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
               {props.children}
             </Floater>
           </FloatingFocusManager>
-        </FloatingOverlay>
+        </StyledFloatingOverlay>
       </FloatingPortal>
     );
   },
