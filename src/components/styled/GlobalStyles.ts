@@ -1,4 +1,3 @@
-import rgba from "polished/lib/color/rgba";
 import { createGlobalStyle } from "styled-components";
 import media, { setBreakPoints } from "css-in-js-media";
 
@@ -128,64 +127,6 @@ const GlobalStyle = createGlobalStyle`
   h5,
   h6 {
     margin: 0;
-  }
-
-  .app-dialog-overlay {
-    background-color: ${({ theme }) =>
-      rgba(theme.colors.black, 0.5)} !important;
-    // TODO: remove if performance suffers
-    backdrop-filter: blur(10px);
-    display: grid;
-    place-items: center;
-  }
-
-  .ReactModal__Html--open,
-  .ReactModal__Body--open {
-    overflow: hidden;
-  }
-
-  .ReactModalPortal {
-    .ReactModal {
-      &__Overlay {
-        background-color: ${({ theme }) =>
-          rgba(theme.colors.black, 0.5)} !important;
-        overflow-y: auto;
-        overflow-x: hidden;
-        opacity: 0;
-        transition: opacity 250ms ease-in-out;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-
-        // TODO: remove if performance suffers
-        backdrop-filter: blur(10px);
-        -webkit-overflow-scrolling: touch;
-
-        &--after-open {
-          opacity: 1;
-        }
-        &--before-close {
-          opacity: 0;
-        }
-      }
-
-      &__Content {
-        max-height: 100%;
-        min-width: 100%;
-        position: initial !important;
-        inset: initial !important;
-        border: initial !important;
-        background: initial !important;
-        overflow: auto !important;
-        border-radius: initial !important;
-        padding: initial !important;
-
-        ${media(">=tablet")} {
-          min-width: auto;
-        }
-      }
-    }
   }
 `;
 

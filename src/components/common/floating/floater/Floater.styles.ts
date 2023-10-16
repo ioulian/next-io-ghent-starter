@@ -8,7 +8,7 @@ export const StyledFloater = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   box-shadow: 0px 4px 12px ${({ theme }) => rgba(theme.colors.black, 0.25)};
   border-radius: ${({ theme }) => theme.borderRadius.normal}px;
-  width: max-content;
+  //width: max-content;
   padding: 5px;
   max-width: calc(100vw - ${({ theme }) => theme.floating.floater.shift * 2}px);
 

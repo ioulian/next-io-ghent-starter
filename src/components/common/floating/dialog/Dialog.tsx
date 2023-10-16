@@ -1,6 +1,5 @@
 import {
   FloatingFocusManager,
-  FloatingOverlay,
   FloatingPortal,
   useId,
   useMergeRefs,
@@ -26,6 +25,7 @@ import {
   useDialog,
   useDialogContext,
 } from "./hooks";
+import { StyledFloatingOverlay } from "./Dialog.styles";
 
 const DialogTrigger = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
   ({ children, ...props }, propRef) => {
@@ -65,7 +65,10 @@ const DialogContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
     const ref = useMergeRefs([context.refs.setFloating, propRef]);
     const theme = useTheme();
     const { isMounted, styles } = useTransitionStyles(context.context, {
-      duration: theme.timings.normal,
+      duration: {
+        open: theme.timings.normal,
+        close: theme.timings.fast,
+      },
     });
 
     if (!isMounted) {
@@ -74,11 +77,7 @@ const DialogContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
 
     return (
       <FloatingPortal>
-        <FloatingOverlay
-          className="app-dialog-overlay"
-          lockScroll
-          style={styles}
-        >
+        <StyledFloatingOverlay lockScroll style={styles}>
           <FloatingFocusManager context={context.context}>
             <Floater
               ref={ref}
@@ -89,7 +88,7 @@ const DialogContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
               {props.children}
             </Floater>
           </FloatingFocusManager>
-        </FloatingOverlay>
+        </StyledFloatingOverlay>
       </FloatingPortal>
     );
   },

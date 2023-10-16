@@ -42,10 +42,10 @@ export const useDialog = ({
   const click = useClick(context, {
     enabled: typeof controlledOpen === "undefined",
   });
-  const dismiss = useDismiss(context, { outsidePressEvent: "mousedown" });
+  const dismiss = useDismiss(context, { outsidePressEvent: "pointerdown" });
   const role = useRole(context);
 
-  const interactions = useInteractions([click, dismiss, role]);
+  const interactions = useInteractions([click, role, dismiss]);
 
   return useMemo(
     () => ({
