@@ -135,6 +135,8 @@ const GlobalStyle = createGlobalStyle`
       rgba(theme.colors.black, 0.5)} !important;
     // TODO: remove if performance suffers
     backdrop-filter: blur(10px);
+    display: grid;
+    place-items: center;
   }
 
   .ReactModal__Html--open,

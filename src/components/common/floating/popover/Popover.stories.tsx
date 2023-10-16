@@ -49,7 +49,7 @@ export const Uncontrolled: Story = {
 const ControlledPopover = () => {
   const [isOpen, setIsOpen] = useState<boolean>(true);
   return (
-    <Popover open={isOpen}>
+    <Popover open={isOpen} onOpenChange={(isNewOpen) => setIsOpen(isNewOpen)}>
       <Popover.Trigger
         onClick={() => {
           setIsOpen(!isOpen);

@@ -14,7 +14,6 @@ import {
   isValidElement,
   PropsWithChildren,
   useLayoutEffect,
-  useMemo,
 } from "react";
 import { useCallback } from "react";
 import { useTheme } from "styled-components";
@@ -69,11 +68,6 @@ const DialogContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
       duration: theme.timings.normal,
     });
 
-    const position = useMemo(
-      () => ({ x: context.x ?? 0, y: context.y ?? 0 }),
-      [context.x, context.y],
-    );
-
     if (!isMounted) {
       return null;
     }
@@ -88,11 +82,6 @@ const DialogContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
           <FloatingFocusManager context={context.context}>
             <Floater
               ref={ref}
-              showArrow={false}
-              position={position}
-              arrowPosition={context.middlewareData.arrow}
-              strategy={context.strategy}
-              placement={context.placement}
               aria-labelledby={context.labelId}
               aria-describedby={context.descriptionId}
               {...context.getFloatingProps(props)}

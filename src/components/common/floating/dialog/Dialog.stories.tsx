@@ -49,26 +49,28 @@ export const Uncontrolled: Story = {
 const ControlledDialog = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
-    <Dialog open={isOpen}>
-      <Dialog.Trigger
+    <>
+      <Button
         onClick={() => {
           setIsOpen(!isOpen);
         }}
       >
-        My trigger
-      </Dialog.Trigger>
-      <Dialog.Content>
-        <Dialog.Heading>My dialog heading</Dialog.Heading>
-        <Dialog.Description>My dialog description</Dialog.Description>
-        <Dialog.Close
-          onClick={() => {
-            setIsOpen(false);
-          }}
-        >
-          Close
-        </Dialog.Close>
-      </Dialog.Content>
-    </Dialog>
+        Open Dialog
+      </Button>
+      <Dialog open={isOpen} onOpenChange={(isNewOpen) => setIsOpen(isNewOpen)}>
+        <Dialog.Content>
+          <Dialog.Heading>My dialog heading</Dialog.Heading>
+          <Dialog.Description>My dialog description</Dialog.Description>
+          <Dialog.Close
+            onClick={() => {
+              setIsOpen(false);
+            }}
+          >
+            Close
+          </Dialog.Close>
+        </Dialog.Content>
+      </Dialog>
+    </>
   );
 };
 
