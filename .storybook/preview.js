@@ -1,3 +1,4 @@
+import "./../scripts/wdyr-storybook";
 import theme from "./../src/components/styled/Theme";
 import GlobalStyle from "./../src/components/styled/GlobalStyles";
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
