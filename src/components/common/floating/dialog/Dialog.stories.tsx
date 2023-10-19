@@ -192,6 +192,29 @@ export const PopoverInDialog: Story = {
   ),
 };
 
+export const DialogInDialog: Story = {
+  render: (args) => (
+    <Dialog {...args}>
+      <Dialog.Trigger>My trigger</Dialog.Trigger>
+      <Dialog.Content>
+        <Dialog.Heading>My dialog heading</Dialog.Heading>
+        <Dialog.Description>
+          My dialog description
+          <Dialog>
+            <Dialog.Trigger>My trigger 2</Dialog.Trigger>
+            <Dialog.Content>
+              <Dialog.Heading>My dialog heading 2</Dialog.Heading>
+              <Dialog.Description>My dialog description 2</Dialog.Description>
+              <Dialog.Close>Close 2</Dialog.Close>
+            </Dialog.Content>
+          </Dialog>
+        </Dialog.Description>
+        <Dialog.Close>Close</Dialog.Close>
+      </Dialog.Content>
+    </Dialog>
+  ),
+};
+
 const ControlledDialog = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
