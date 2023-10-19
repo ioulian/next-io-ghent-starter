@@ -8,6 +8,7 @@ import {
   useClick,
   useDismiss,
   useFloating,
+  useFloatingNodeId,
   useInteractions,
   useRole,
 } from "@floating-ui/react";
@@ -41,6 +42,7 @@ export const usePopover = ({
   const [uncontrolledOpen, setUncontrolledOpen] = useState(initialOpen);
   const [labelId, setLabelId] = useState<string | undefined>();
   const [descriptionId, setDescriptionId] = useState<string | undefined>();
+  const nodeId = useFloatingNodeId();
 
   const open = controlledOpen ?? uncontrolledOpen;
   const setOpen = setControlledOpen ?? setUncontrolledOpen;
@@ -48,6 +50,7 @@ export const usePopover = ({
   const theme = useTheme();
 
   const data = useFloating({
+    nodeId,
     placement,
     open,
     onOpenChange: setOpen,
@@ -83,6 +86,7 @@ export const usePopover = ({
 
   return useMemo(
     () => ({
+      nodeId,
       open,
       setOpen,
       ...interactions,
@@ -95,6 +99,7 @@ export const usePopover = ({
       setDescriptionId,
     }),
     [
+      nodeId,
       open,
       setOpen,
       interactions,

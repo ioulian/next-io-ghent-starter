@@ -2,6 +2,7 @@ import {
   useClick,
   useDismiss,
   useFloating,
+  useFloatingNodeId,
   useInteractions,
   useRole,
 } from "@floating-ui/react";
@@ -28,11 +29,13 @@ export const useDialog = ({
   const [uncontrolledOpen, setUncontrolledOpen] = useState(initialOpen);
   const [labelId, setLabelId] = useState<string | undefined>();
   const [descriptionId, setDescriptionId] = useState<string | undefined>();
+  const nodeId = useFloatingNodeId();
 
   const open = controlledOpen ?? uncontrolledOpen;
   const setOpen = setControlledOpen ?? setUncontrolledOpen;
 
   const data = useFloating({
+    nodeId,
     open,
     onOpenChange: setOpen,
   });
@@ -42,13 +45,16 @@ export const useDialog = ({
   const click = useClick(context, {
     enabled: typeof controlledOpen === "undefined",
   });
-  const dismiss = useDismiss(context, { outsidePressEvent: "pointerdown" });
+  const dismiss = useDismiss(context, {
+    outsidePressEvent: "pointerdown",
+  });
   const role = useRole(context);
 
   const interactions = useInteractions([click, role, dismiss]);
 
   return useMemo(
     () => ({
+      nodeId,
       open,
       setOpen,
       ...interactions,
@@ -58,7 +64,7 @@ export const useDialog = ({
       setLabelId,
       setDescriptionId,
     }),
-    [open, setOpen, interactions, data, labelId, descriptionId],
+    [open, setOpen, interactions, nodeId, data, labelId, descriptionId],
   );
 };
 

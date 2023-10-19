@@ -6,6 +6,11 @@ import { InferComponentProps } from "@/types/styled";
 
 import { StyledFloater, StyledFloaterArrow } from "./Floater.styles";
 
+const roundByDPR = (value: number): number => {
+  const dpr = window.devicePixelRatio || 1;
+  return Math.round(value * dpr) / dpr;
+};
+
 const Floater = forwardRef<
   HTMLDivElement,
   {
@@ -36,7 +41,7 @@ const Floater = forwardRef<
     const style = useMemo<CSSProperties>(
       () => ({
         transform: position
-          ? `translate3d(${Math.round(position.x ?? 0)}px, ${Math.round(
+          ? `translate3d(${roundByDPR(position.x ?? 0)}px, ${roundByDPR(
               position.y ?? 0,
             )}px, 0)`
           : undefined,

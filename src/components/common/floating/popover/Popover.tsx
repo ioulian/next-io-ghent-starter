@@ -1,6 +1,9 @@
 import {
   FloatingFocusManager,
+  FloatingNode,
   FloatingPortal,
+  FloatingTree,
+  useFloatingParentNodeId,
   useId,
   useMergeRefs,
   useTransitionStyles,
@@ -9,6 +12,7 @@ import {
   cloneElement,
   FC,
   forwardRef,
+  Fragment,
   HTMLProps,
   isValidElement,
   PropsWithChildren,
@@ -63,6 +67,7 @@ const PopoverContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
   (props, propRef) => {
     const context = usePopoverContext();
     const ref = useMergeRefs([context.refs.setFloating, propRef]);
+    const parentId = useFloatingParentNodeId();
     const theme = useTheme();
     const { isMounted, styles } = useTransitionStyles(context.context, {
       duration: {
@@ -80,25 +85,34 @@ const PopoverContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
       return null;
     }
 
+    const Wrapper = parentId === null ? FloatingTree : Fragment;
+
     return (
-      <FloatingPortal>
-        <FloatingFocusManager context={context.context} modal={context.modal}>
-          <Floater
-            ref={ref}
-            position={position}
-            arrowPosition={context.middlewareData.arrow}
-            strategy={context.strategy}
-            placement={context.placement}
-            arrowCallback={context.arrowCallback}
-            aria-labelledby={context.labelId}
-            aria-describedby={context.descriptionId}
-            {...context.getFloatingProps(props)}
-            style={styles}
-          >
-            {props.children}
-          </Floater>
-        </FloatingFocusManager>
-      </FloatingPortal>
+      <Wrapper>
+        <FloatingNode id={context.nodeId}>
+          <FloatingPortal>
+            <FloatingFocusManager
+              context={context.context}
+              modal={context.modal}
+            >
+              <Floater
+                ref={ref}
+                position={position}
+                arrowPosition={context.middlewareData.arrow}
+                strategy={context.strategy}
+                placement={context.placement}
+                arrowCallback={context.arrowCallback}
+                aria-labelledby={context.labelId}
+                aria-describedby={context.descriptionId}
+                {...context.getFloatingProps(props)}
+                style={styles}
+              >
+                {props.children}
+              </Floater>
+            </FloatingFocusManager>
+          </FloatingPortal>
+        </FloatingNode>
+      </Wrapper>
     );
   },
 );

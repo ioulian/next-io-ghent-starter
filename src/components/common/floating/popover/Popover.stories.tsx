@@ -46,6 +46,31 @@ export const Uncontrolled: Story = {
   ),
 };
 
+export const PopoverInPopover: Story = {
+  render: (args) => (
+    <Popover {...args}>
+      <Popover.Trigger>My trigger</Popover.Trigger>
+      <Popover.Content>
+        <Popover.Heading>My popover heading</Popover.Heading>
+        <Popover.Description>
+          My popover description
+          <Popover>
+            <Popover.Trigger>My trigger 2</Popover.Trigger>
+            <Popover.Content>
+              <Popover.Heading>My popover heading 2</Popover.Heading>
+              <Popover.Description>
+                My popover description 2
+              </Popover.Description>
+              <Popover.Close>Close 2</Popover.Close>
+            </Popover.Content>
+          </Popover>
+        </Popover.Description>
+        <Popover.Close>Close</Popover.Close>
+      </Popover.Content>
+    </Popover>
+  ),
+};
+
 const ControlledPopover = () => {
   const [isOpen, setIsOpen] = useState<boolean>(true);
   return (
