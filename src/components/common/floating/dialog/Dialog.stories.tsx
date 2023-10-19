@@ -7,6 +7,7 @@ import styled from "styled-components";
 import Button from "../../button/Button";
 import Heading from "../../heading/Heading";
 import Text from "../../text/Text";
+import Popover from "../popover/Popover";
 
 import Dialog from "./Dialog";
 
@@ -162,6 +163,29 @@ export const Uncontrolled: Story = {
       <Dialog.Content>
         <Dialog.Heading>My dialog heading</Dialog.Heading>
         <Dialog.Description>My dialog description</Dialog.Description>
+        <Dialog.Close>Close</Dialog.Close>
+      </Dialog.Content>
+    </Dialog>
+  ),
+};
+
+export const PopoverInDialog: Story = {
+  render: (args) => (
+    <Dialog {...args}>
+      <Dialog.Trigger>My trigger</Dialog.Trigger>
+      <Dialog.Content>
+        <Dialog.Heading>My dialog heading</Dialog.Heading>
+        <Dialog.Description>
+          My dialog description
+          <Popover>
+            <Popover.Trigger>My trigger</Popover.Trigger>
+            <Popover.Content>
+              <Popover.Heading>My popover heading</Popover.Heading>
+              <Popover.Description>My popover description</Popover.Description>
+              <Popover.Close>Close</Popover.Close>
+            </Popover.Content>
+          </Popover>
+        </Dialog.Description>
         <Dialog.Close>Close</Dialog.Close>
       </Dialog.Content>
     </Dialog>

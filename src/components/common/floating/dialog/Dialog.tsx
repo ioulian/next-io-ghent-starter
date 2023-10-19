@@ -1,6 +1,9 @@
 import {
   FloatingFocusManager,
+  FloatingNode,
   FloatingPortal,
+  FloatingTree,
+  useFloatingParentNodeId,
   useId,
   useMergeRefs,
   useTransitionStyles,
@@ -9,6 +12,7 @@ import {
   cloneElement,
   FC,
   forwardRef,
+  Fragment,
   HTMLProps,
   isValidElement,
   PropsWithChildren,
@@ -63,6 +67,7 @@ const DialogContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
   (props, propRef) => {
     const context = useDialogContext();
     const ref = useMergeRefs([context.refs.setFloating, propRef]);
+    const parentId = useFloatingParentNodeId();
     const theme = useTheme();
     const { isMounted, styles } = useTransitionStyles(context.context, {
       duration: {
@@ -75,21 +80,27 @@ const DialogContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
       return null;
     }
 
+    const Wrapper = parentId === null ? FloatingTree : Fragment;
+
     return (
-      <FloatingPortal>
-        <StyledFloatingOverlay lockScroll style={styles}>
-          <FloatingFocusManager context={context.context}>
-            <Floater
-              ref={ref}
-              aria-labelledby={context.labelId}
-              aria-describedby={context.descriptionId}
-              {...context.getFloatingProps(props)}
-            >
-              {props.children}
-            </Floater>
-          </FloatingFocusManager>
-        </StyledFloatingOverlay>
-      </FloatingPortal>
+      <Wrapper>
+        <FloatingNode id={context.nodeId}>
+          <FloatingPortal>
+            <StyledFloatingOverlay lockScroll style={styles}>
+              <FloatingFocusManager context={context.context}>
+                <Floater
+                  ref={ref}
+                  aria-labelledby={context.labelId}
+                  aria-describedby={context.descriptionId}
+                  {...context.getFloatingProps(props)}
+                >
+                  {props.children}
+                </Floater>
+              </FloatingFocusManager>
+            </StyledFloatingOverlay>
+          </FloatingPortal>
+        </FloatingNode>
+      </Wrapper>
     );
   },
 );

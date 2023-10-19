@@ -136,24 +136,24 @@ export const CustomElements: Story = {
 const WithOverlayComponent = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
-    <>
-      <Dropdown trigger={<Button>Open</Button>}>
-        <DropdownMenuItem typeaheadKey="Copy">
-          <Button>Copy</Button>
-        </DropdownMenuItem>
-        <DropdownMenuItem typeaheadKey="Edit">
-          <Button>Edit</Button>
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          typeaheadKey="Delete"
-          onClick={() => {
-            setIsOpen(!isOpen);
-          }}
-        >
-          <Button>Delete</Button>
-        </DropdownMenuItem>
-      </Dropdown>
+    <Dropdown trigger={<Button>Open</Button>}>
+      <DropdownMenuItem typeaheadKey="Copy">
+        <Button>Copy</Button>
+      </DropdownMenuItem>
+      <DropdownMenuItem typeaheadKey="Edit">
+        <Button>Edit</Button>
+      </DropdownMenuItem>
       <Dialog open={isOpen} onOpenChange={(isNewOpen) => setIsOpen(isNewOpen)}>
+        <Dialog.Trigger>
+          <DropdownMenuItem
+            typeaheadKey="Delete"
+            onClick={() => {
+              setIsOpen(!isOpen);
+            }}
+          >
+            <Button>Delete</Button>
+          </DropdownMenuItem>
+        </Dialog.Trigger>
         <Dialog.Content>
           Delete this item?
           <Button
@@ -172,7 +172,7 @@ const WithOverlayComponent = () => {
           </Button>
         </Dialog.Content>
       </Dialog>
-    </>
+    </Dropdown>
   );
 };
 export const WithOverlay: Story = {
