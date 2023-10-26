@@ -83,6 +83,7 @@
     "eslint-config-next": "13.5.4",
     "eslint-plugin-i18next": "6.0.3",
     "eslint-plugin-storybook": "0.6.14",
+    "next-safe": "3.4.1",
     "next-sitemap": "4.2.3",
     "prettier": "3.0.3",
     "serve": "14.2.1",

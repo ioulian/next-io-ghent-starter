@@ -9,10 +9,9 @@ const withPWA = require("next-pwa")({
   dest: "public",
   register: false,
   disable: process.env.NODE_ENV === "development",
-
-  // @ts-ignore
   runtimeCaching: require("./pwa-caching"),
 });
+const nextSafe = require("next-safe");
 
 const { i18n } = require("./next-i18next.config");
 
@@ -27,6 +26,30 @@ module.exports = withBundleAnalyzer(
     },
     images: {
       formats: ["image/avif", "image/webp"],
+    },
+    async headers() {
+      return [
+        {
+          source: "/:path*",
+          headers: nextSafe({
+            contentSecurityPolicy: {
+              "prefetch-src": false,
+              "img-src": [
+                "'self'",
+                "data:",
+                //process.env.NEXT_PUBLIC_API_DOMAIN,
+              ],
+              "style-src": ["'self'", "'unsafe-inline'"],
+              "font-src": ["'self'", "data:"],
+              "connect-src": [
+                "'self'",
+                //process.env.NEXT_PUBLIC_API_DOMAIN,
+              ],
+            },
+            isDev: process.env.NODE_ENV === "development",
+          }),
+        },
+      ];
     },
     webpack: (config) => {
       const fileLoaderRule = config.module.rules.find(
