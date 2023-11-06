@@ -16,7 +16,7 @@
     "build-storybook": "storybook build -o docs"
   },
   "dependencies": {
-    "@floating-ui/react": "0.26.0",
+    "@floating-ui/react": "0.26.1",
     "@reduxjs/toolkit": "1.9.7",
     "@tabler/icons": "2.38.0",
     "colorjs.io": "0.4.5",
