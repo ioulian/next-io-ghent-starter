@@ -27,10 +27,20 @@ const Repo = () => {
   return (
     <>
       {/* eslint-disable-next-line i18next/no-literal-string */}
-      {!!error && !!data && <p>Error loading</p>}
+      <p>
+        This call doesn&apos;t work on client as CSP header blocks connection to
+        api.github.com. Enable it in next.config.js.
+      </p>
+      {/* eslint-disable-next-line i18next/no-literal-string */}
+      <p>
+        The reason you see data is because the data was first fetched by the
+        server.
+      </p>
+      {/* eslint-disable-next-line i18next/no-literal-string */}
+      {!!error && !data && <p>Error loading on the client</p>}
       {/* eslint-disable-next-line i18next/no-literal-string */}
       {!error && !data && <p>Loading...</p>}
-      {!error && !!data && (
+      {!!data && (
         <div>
           <h2>{data.name}</h2>
           <p>{data.description}</p>
