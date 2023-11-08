@@ -1,4 +1,4 @@
-import jwtDecode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
 import { apiToJson, getContentTypeHeaders } from "./../../services/api.service";
 
@@ -17,7 +17,7 @@ export interface AuthTokens {
 
 export const login = (
   username: string,
-  password: string
+  password: string,
 ): Promise<AuthTokens> => {
   return new Promise((resolve, reject) => {
     fetch(
@@ -34,7 +34,7 @@ export const login = (
           client_id: process.env.NEXT_PUBLIC_AUTH_CLIENT_ID,
           client_secret: process.env.NEXT_PUBLIC_AUTH_CLIENT_SECRET,
         }),
-      }
+      },
     )
       .then(apiToJson())
       .then(async (body) => {
@@ -52,7 +52,7 @@ export const login = (
 
 export const loginSocial = (
   grantType: GrantType,
-  token: string
+  token: string,
 ): Promise<AuthTokens> => {
   return new Promise((resolve, reject) => {
     fetch(
@@ -68,7 +68,7 @@ export const loginSocial = (
           client_id: process.env.NEXT_PUBLIC_AUTH_CLIENT_ID,
           client_secret: process.env.NEXT_PUBLIC_AUTH_CLIENT_SECRET,
         }),
-      }
+      },
     )
       .then(apiToJson())
       .then(async (body) => {
@@ -101,7 +101,7 @@ export const refreshTokens = ({
           client_id: process.env.NEXT_PUBLIC_AUTH_CLIENT_ID,
           client_secret: process.env.NEXT_PUBLIC_AUTH_CLIENT_SECRET,
         }),
-      }
+      },
     )
       .then(apiToJson())
       .then((body) => {
@@ -120,8 +120,8 @@ export const refreshTokens = ({
 };
 
 export const isTokenExpired = (token: string): boolean => {
-  const decoded = jwtDecode(token) as { exp: number };
-  const expiresIn = decoded.exp * 1000;
+  const decoded = jwtDecode(token);
+  const expiresIn = decoded.exp ?? 1 * 1000;
 
   // We add 2 seconds of overlay to make sure we refresh token before doing the request
   return expiresIn - new Date().getTime() - 2000 <= 0;
