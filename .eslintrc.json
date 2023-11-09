@@ -47,7 +47,8 @@
     "react/no-object-type-as-default-prop": "error",
     "react/self-closing-comp": "error",
     "react/void-dom-elements-no-children": "error",
-    "react/jsx-no-target-blank": ["error", { "warnOnSpreadAttributes": true }]
+    "react/jsx-no-target-blank": ["error", { "warnOnSpreadAttributes": true }],
+    "no-constant-binary-expression": "error"
   },
   "settings": {
     "linkComponents": ["Link"]
