@@ -1,7 +1,7 @@
 import { forwardRef, memo, useCallback, useState } from "react";
 import passwordShowIcon from "@tabler/icons/eye.svg";
 import passwordHideIcon from "@tabler/icons/eye-off.svg";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 import { InferComponentProps } from "@/types/styled";
 
