@@ -100,12 +100,27 @@ export const AccessibleIconButton: Story = {
   },
 };
 
-export const NextLink: Story = {
+export const NextLinkLegacy: Story = {
   render: (args) => (
     <Link href="/test" passHref legacyBehavior target="_blank">
       <Button {...args} />
     </Link>
   ),
+  args: {
+    $type: "primary",
+    as: "a",
+    children: "Navigate to another page",
+    disabled: false,
+    isLoading: false,
+    iconOnly: false,
+    $fullWidth: false,
+    $size: "normal",
+    iconAfter: <SvgSprite src={iconChevronRight} />,
+  },
+};
+
+export const NextLink: Story = {
+  render: (args) => <Button as={Link} href="/test" target="_blank" {...args} />,
   args: {
     $type: "primary",
     as: "a",
