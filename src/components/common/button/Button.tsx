@@ -5,8 +5,10 @@ import {
   isValidElement,
   cloneElement,
   memo,
+  ComponentProps,
 } from "react";
 import { useCallback } from "react";
+import Link from "next/link";
 
 import { InferComponentProps } from "@/types/styled";
 
@@ -18,7 +20,7 @@ import { StyledButton } from "./Button.styles";
 const Button = forwardRef<
   HTMLButtonElement,
   {
-    as?: keyof JSX.IntrinsicElements;
+    as?: keyof JSX.IntrinsicElements | typeof Link;
 
     /**
      * Add an icon before
@@ -39,7 +41,8 @@ const Button = forwardRef<
      * Will hide children and show icons only
      */
     iconOnly?: boolean;
-  } & InferComponentProps<typeof StyledButton>
+  } & InferComponentProps<typeof StyledButton> &
+    ComponentProps<"a">
 >(
   (
     {
