@@ -22,7 +22,8 @@ export const StyledButton = styled.button<{
   line-height: 1.5rem;
   border: 1px solid ${({ theme }) => theme.colors.primary};
   border-radius: 4px;
-  transition: border-color ${({ theme }) => theme.timings.fast}ms,
+  transition:
+    border-color ${({ theme }) => theme.timings.fast}ms,
     background-color ${({ theme }) => theme.timings.fast}ms,
     color ${({ theme }) => theme.timings.fast}ms;
 

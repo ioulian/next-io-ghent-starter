@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 
 export const useIsActiveRoute = (
   path: string,
-  exact: boolean = false
+  exact: boolean = false,
 ): boolean => {
   const router = useRouter();
 

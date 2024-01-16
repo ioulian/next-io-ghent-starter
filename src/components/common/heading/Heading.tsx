@@ -20,14 +20,14 @@ const Heading = forwardRef<
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <StyledHeading $size={size} as={type} {...props} ref={ref}>
         {children}
       </StyledHeading>
     );
-  }
+  },
 );
 
 if (process.env.NODE_ENV === "development") {

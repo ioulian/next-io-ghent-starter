@@ -17,7 +17,7 @@ const setup = () => {
       <ToastContainer
         position={toast.POSITION.TOP_RIGHT}
         toastClassName="c-toast"
-      />
+      />,
     );
   }
 };

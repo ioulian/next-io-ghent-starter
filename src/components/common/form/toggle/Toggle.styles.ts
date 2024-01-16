@@ -32,7 +32,8 @@ export const StyledToggle = styled.div`
     display: block;
     position: relative;
     background-color: ${({ theme }) => theme.form.input.background};
-    transition: background-color ${({ theme }) => theme.timings.normal}ms,
+    transition:
+      background-color ${({ theme }) => theme.timings.normal}ms,
       border-color ${({ theme }) => theme.timings.normal}ms;
 
     &::before {
@@ -44,7 +45,8 @@ export const StyledToggle = styled.div`
       top: 2px;
       left: 2px;
       position: absolute;
-      transition: transform ${({ theme }) => theme.timings.normal}ms,
+      transition:
+        transform ${({ theme }) => theme.timings.normal}ms,
         background-color ${({ theme }) => theme.timings.normal}ms;
     }
   }

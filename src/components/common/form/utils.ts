@@ -9,7 +9,7 @@ export const getErrorId = (id: string): string => {
 export const getAriaDescribedBy = (
   id: string,
   hasDescription: boolean = false,
-  hasError: boolean = false
+  hasError: boolean = false,
 ): string | undefined => {
   const errorId = getErrorId(id);
   const descrId = getDescriptionId(id);
