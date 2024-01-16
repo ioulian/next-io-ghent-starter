@@ -14,6 +14,7 @@ const Toggle = forwardRef<
   return (
     <StyledToggle>
       <StyledInput {...props} type="checkbox" ref={ref} />
+      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
       <label htmlFor={props.id} aria-hidden="true" />
     </StyledToggle>
   );
