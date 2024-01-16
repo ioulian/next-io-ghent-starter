@@ -11,7 +11,7 @@ export const createEasingGradient = (
   from: string,
   to: string,
   easing: string = "cubic-bezier(0.5, 0, 0.5, 1)",
-  stops: number = 16
+  stops: number = 16,
 ) => {
   const coordinates = easingCoordinates(easing, stops);
 
@@ -20,12 +20,11 @@ export const createEasingGradient = (
     .map(
       ({ x, y }) =>
         `${serialize(
-          // @ts-ignore
           mix(parse(from), parse(to), y, {
             space: "lab",
             outputSpace: "srgb",
-          })
-        )} ${Math.abs(x * 100).toFixed(2)}%`
+          }),
+        )} ${Math.abs(x * 100).toFixed(2)}%`,
     )
     .join(", ");
 };

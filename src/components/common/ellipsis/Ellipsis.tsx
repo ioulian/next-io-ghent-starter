@@ -35,7 +35,7 @@ const Ellipsis: FC<
   const id = useId();
 
   // Use resize observer against the collapsed helper content
-  const [ref, rect] = useResizeObserver();
+  const [ref, rect] = useResizeObserver<HTMLDivElement>();
   useEffect(() => {
     if (ref.current) {
       const isEllipsisActive =

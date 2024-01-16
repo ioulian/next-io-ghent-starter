@@ -88,6 +88,8 @@ export const authSlice = createSlice({
         state.status = "failed";
         state.error = action.payload as SerializedError;
       })
+      // FIXME:
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .addCase(HYDRATE, (state, { payload }: any) => {
         return {
           ...state,

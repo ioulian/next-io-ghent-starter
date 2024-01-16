@@ -30,8 +30,7 @@ const LanguageSwitcher: FC<
           path: "/",
         });
 
-        // @ts-ignore
-        window.location = e.currentTarget.href;
+        window.location.href = e.currentTarget.href;
       },
     [setCookie],
   );
@@ -61,16 +60,16 @@ const LanguageSwitcher: FC<
                   aria-label={
                     isActiveLanguage
                       ? (t("languageSwitcher.current", {
-                          // @ts-ignore
+                          // @ts-expect-error Is d
                           locale: t(`languageSwitcher.locales.${locale}`),
                         }) as string)
-                      : // @ts-ignore
+                      : // @ts-expect-error Is dynamic
                         (t(`languageSwitcher.locales.${locale}`) as string)
                   }
                   onClick={changeLanguage(locale)}
                 >
                   <abbr
-                    // @ts-ignore
+                    // @ts-expect-error Is dynamic
                     title={t(`languageSwitcher.locales.${locale}`)}
                   >
                     {locale}

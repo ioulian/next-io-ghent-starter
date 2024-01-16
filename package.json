@@ -82,6 +82,8 @@
     "eslint-config-next": "14.0.1",
     "eslint-plugin-i18next": "6.0.3",
     "eslint-plugin-jsx-a11y": "6.8.0",
+    "eslint-plugin-react-hooks": "4.6.0",
+    "eslint-plugin-sonarjs": "0.23.0",
     "eslint-plugin-storybook": "0.6.15",
     "next-safe": "3.4.1",
     "next-sitemap": "4.2.3",

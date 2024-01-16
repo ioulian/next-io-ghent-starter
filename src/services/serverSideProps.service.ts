@@ -9,8 +9,8 @@ export class UserLoggedOutError extends Error {}
 export class UserLoggedInError extends Error {}
 export class NotFoundError extends Error {}
 
-export type RequireResult<T = any> = {
-  result: GetServerSidePropsResult<{ [key: string]: any }>;
+export type RequireResult<T = unknown> = {
+  result: GetServerSidePropsResult<{ [key: string]: unknown }>;
   response?: T;
 };
 
@@ -20,14 +20,14 @@ export const emptyRequireResult = { result: { props: {} }, response: {} };
 export const catchServerSideProps =
   (
     resolve: (
-      value: RequireResult["result"] | PromiseLike<RequireResult["result"]>
+      value: RequireResult["result"] | PromiseLike<RequireResult["result"]>,
     ) => void,
     reject: (err: Error) => void,
     store: AppStore,
     resolvedUrl: string,
-    res: ServerResponse
+    res: ServerResponse,
   ) =>
-  (err: any) => {
+  (err: unknown) => {
     console.log(err);
     if (err instanceof UserLoggedOutError) {
       store.dispatch(logout());

@@ -15,6 +15,8 @@ export interface AuthTokens {
   expires_in: number;
 }
 
+const genericNoTokensError = "No tokens received, please try again later.";
+
 export const login = (
   username: string,
   password: string,
@@ -40,7 +42,7 @@ export const login = (
       .then(async (body) => {
         const { access_token, refresh_token } = body as unknown as AuthTokens;
         if (!access_token || !refresh_token) {
-          reject(new Error("No tokens received, please try again later."));
+          reject(new Error(genericNoTokensError));
           return;
         }
 
@@ -74,7 +76,7 @@ export const loginSocial = (
       .then(async (body) => {
         const { access_token } = body as unknown as AuthTokens;
         if (!access_token) {
-          reject(new Error("No tokens received, please try again later."));
+          reject(new Error(genericNoTokensError));
           return;
         }
 
@@ -107,7 +109,7 @@ export const refreshTokens = ({
       .then((body) => {
         const { access_token, refresh_token } = body as unknown as AuthTokens;
         if (!access_token || !refresh_token) {
-          reject(new Error("No tokens received, please try again later."));
+          reject(new Error(genericNoTokensError));
           return;
         }
 

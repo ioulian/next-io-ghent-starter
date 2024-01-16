@@ -34,6 +34,8 @@ import { StyledFloatingOverlay } from "./Dialog.styles";
 const DialogTrigger = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
   ({ children, ...props }, propRef) => {
     const context = useDialogContext();
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const childrenRef = (children as any).ref;
     const ref = useMergeRefs([context.refs.setReference, propRef, childrenRef]);
 
@@ -105,73 +107,65 @@ const DialogContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
   },
 );
 
-const DialogHeading = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
-  ({ children, ...props }, ref) => {
-    const { setLabelId } = useDialogContext();
-    const id = useId();
+const DialogHeading = forwardRef<
+  HTMLHeadingElement,
+  HTMLProps<HTMLHeadingElement>
+>(({ children, ...props }, ref) => {
+  const { setLabelId } = useDialogContext();
+  const id = useId();
 
-    // Only sets `aria-labelledby` on the Dialog root element
-    // if this component is mounted inside it.
-    useLayoutEffect(() => {
-      setLabelId(id);
-      return () => setLabelId(undefined);
-    }, [id, setLabelId]);
+  // Only sets `aria-labelledby` on the Dialog root element
+  // if this component is mounted inside it.
+  useLayoutEffect(() => {
+    setLabelId(id);
+    return () => setLabelId(undefined);
+  }, [id, setLabelId]);
 
-    if (isValidElement(children)) {
-      return cloneElement(children, {
-        ref,
-        id,
-        ...props,
-      });
-    }
+  if (isValidElement(children)) {
+    return cloneElement(children, {
+      ref,
+      id,
+      ...props,
+    });
+  }
 
-    return (
-      <h2
-        {...props}
-        // @ts-ignore
-        ref={ref}
-        id={id}
-      >
-        {children}
-      </h2>
-    );
-  },
-);
+  return (
+    <h2 {...props} ref={ref} id={id}>
+      {children}
+    </h2>
+  );
+});
 
-const DialogDescription = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
-  ({ children, ...props }, ref) => {
-    const { setDescriptionId } = useDialogContext();
-    const id = useId();
+const DialogDescription = forwardRef<
+  HTMLParagraphElement,
+  HTMLProps<HTMLParagraphElement>
+>(({ children, ...props }, ref) => {
+  const { setDescriptionId } = useDialogContext();
+  const id = useId();
 
-    // Only sets `aria-describedby` on the Dialog root element
-    // if this component is mounted inside it.
-    useLayoutEffect(() => {
-      setDescriptionId(id);
-      return () => setDescriptionId(undefined);
-    }, [id, setDescriptionId]);
+  // Only sets `aria-describedby` on the Dialog root element
+  // if this component is mounted inside it.
+  useLayoutEffect(() => {
+    setDescriptionId(id);
+    return () => setDescriptionId(undefined);
+  }, [id, setDescriptionId]);
 
-    if (isValidElement(children)) {
-      return cloneElement(children, {
-        ref,
-        id,
-        ...props,
-      });
-    }
+  if (isValidElement(children)) {
+    return cloneElement(children, {
+      ref,
+      id,
+      ...props,
+    });
+  }
 
-    return (
-      <p
-        {...props}
-        // @ts-ignore
-        ref={ref}
-        id={id}
-      >
-        {children}
-      </p>
-    );
-  },
-);
+  return (
+    <p {...props} ref={ref} id={id}>
+      {children}
+    </p>
+  );
+});
 
-const DialogClose = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
+const DialogClose = forwardRef<HTMLButtonElement, HTMLProps<HTMLButtonElement>>(
   ({ children, ...props }, ref) => {
     const context = useDialogContext();
     const onClick = useCallback(() => {
@@ -187,13 +181,7 @@ const DialogClose = forwardRef<HTMLElement, HTMLProps<HTMLElement>>(
     }
 
     return (
-      <button
-        onClick={onClick}
-        {...props}
-        type="button"
-        // @ts-ignore
-        ref={ref}
-      >
+      <button onClick={onClick} {...props} type="button" ref={ref}>
         {children}
       </button>
     );

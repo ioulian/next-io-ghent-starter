@@ -1,6 +1,8 @@
 import { FC, HTMLProps, memo, useId } from "react";
 
-const SvgSprite: FC<{ src: any } & HTMLProps<SVGElement>> = ({
+const SvgSprite: FC<
+  { src: { id: string; viewBox: string } } & HTMLProps<SVGElement>
+> = ({
   src,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   children,

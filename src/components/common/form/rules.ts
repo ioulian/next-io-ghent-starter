@@ -19,6 +19,8 @@ export const password = {
   },
 };
 
+// FIXME:
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const passwordRepeat = (otherField: string) => (watch: any) => ({
   validate: (val: string) => {
     if (watch(otherField) !== val) {

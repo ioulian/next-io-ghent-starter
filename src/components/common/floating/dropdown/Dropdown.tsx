@@ -78,7 +78,7 @@ export const DropdownTrigger = forwardRef<
 >(({ children, typeaheadKey, disabled, ...props }, ref) => {
   if (isValidElement(children)) {
     return cloneElement(children, {
-      // @ts-ignore
+      // @ts-expect-error FIXME:
       ref,
       ...props,
     });
@@ -101,9 +101,10 @@ export const DropdownMenuItem = forwardRef<
   const isActive = item.index === menu.activeIndex;
 
   const ref = useMergeRefs([item.ref, forwardedRef]);
+
   if (isValidElement(children)) {
     return cloneElement(children, {
-      // @ts-ignore
+      // @ts-expect-error FIXME:
       ref,
       type: "button",
       role: "menuitem",

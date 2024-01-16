@@ -81,7 +81,7 @@ const Button = forwardRef<
         <span>
           {isValidElement(iconBefore) &&
             cloneElement(iconBefore, {
-              // @ts-ignore
+              // @ts-expect-error TODO: fix me
               "aria-hidden": "true",
             })}
           {children ? (
@@ -93,7 +93,7 @@ const Button = forwardRef<
           ) : null}
           {isValidElement(iconAfter) &&
             cloneElement(iconAfter, {
-              // @ts-ignore
+              // @ts-expect-error TODO: fix me
               "aria-hidden": "true",
             })}
         </span>

@@ -1,7 +1,9 @@
 // https://github.com/reduxjs/redux-toolkit/issues/390
 export const thunkHandler = async <T>(
   asyncFn: T,
-  rejectWithValue: any
+  // FIXME:
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  rejectWithValue: any,
 ): Promise<Awaited<Promise<T>>> => {
   try {
     return await asyncFn;

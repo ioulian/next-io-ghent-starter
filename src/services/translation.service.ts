@@ -12,8 +12,7 @@ export const getTranslations = async (
   locale: string,
   nameSpaces: ArrayElementOrSelf<Namespace> | string | string[] | undefined,
 ): Promise<SSRConfig> => {
-  const i18nLocal = await serverSideTranslations(locale as string, nameSpaces);
-  return i18nLocal;
+  return await serverSideTranslations(locale as string, nameSpaces);
 };
 
 export const requireTranslations =
