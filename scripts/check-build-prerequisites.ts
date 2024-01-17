@@ -19,7 +19,7 @@ if (
       "Site URL is still set to LOCALHOST, please set this to the correct URL!",
     ),
   );
-  //process.exit(1);
+  process.exit(1);
 }
 
 export {};
