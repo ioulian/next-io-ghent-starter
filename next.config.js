@@ -1,18 +1,24 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { resolve } = require("path");
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const withPWA = require("next-pwa")({
   dest: "public",
   register: false,
   disable: process.env.NODE_ENV === "development",
   runtimeCaching: require("./pwa-caching"),
 });
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const nextSafe = require("next-safe");
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { i18n } = require("./next-i18next.config");
 
 /** @type {import('next').NextConfig} */
@@ -53,12 +59,12 @@ module.exports = withBundleAnalyzer(
     },
     webpack: (config) => {
       const fileLoaderRule = config.module.rules.find(
-        // @ts-ignore
+        // @ts-expect-error ignore
         (rule) => rule.test && rule.test.test && rule.test.test(".svg"),
       );
       fileLoaderRule.exclude = [/\@tabler\/icons\//, /-sprite\.svg$/];
       config.module.rules.push({
-        // @ts-ignore
+        // @ts-expect-error ignore
         test: function (path) {
           return (
             path.indexOf("@tabler/icons") !== -1 ||
@@ -72,11 +78,6 @@ module.exports = withBundleAnalyzer(
           resolve("public"),
         ],
       });
-
-      config.resolve.alias["react-redux"] =
-        process.env.NODE_ENV === "development"
-          ? "react-redux/dist/react-redux.js"
-          : "react-redux/lib";
 
       return config;
     },
