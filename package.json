@@ -1,8 +1,9 @@
 {
   "name": "next-io-ghent-starter",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
+    "prepare": "husky install",
     "dev": "next dev --experimental-https",
     "build": "yarn check-build-prerequisites && next build",
     "postbuild": "next-sitemap",
