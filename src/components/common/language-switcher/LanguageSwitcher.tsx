@@ -8,12 +8,13 @@ import { InferComponentProps } from "@/types/styled";
 
 import { StyledLanguageSwitcher } from "./LanguageSwitcher.styles";
 
+// TODO: fix locale typing in whole project
 const LanguageSwitcher: FC<
   Omit<InferComponentProps<typeof StyledLanguageSwitcher>, "children">
 > = ({ ...props }) => {
   const { t } = useTranslation("common");
   const router = useRouter();
-  const [_, setCookie] = useCookies(["NEXT_LOCALE"]);
+  const [, setCookie] = useCookies(["NEXT_LOCALE"]);
 
   // These checks are needed when the component is being rendered in storybook
   const locales = router?.locales ?? ["nl-BE", "fr-BE", "en-GB"];
@@ -60,7 +61,7 @@ const LanguageSwitcher: FC<
                   aria-label={
                     isActiveLanguage
                       ? (t("languageSwitcher.current", {
-                          // @ts-expect-error Is d
+                          // @ts-expect-error Is dynamic
                           locale: t(`languageSwitcher.locales.${locale}`),
                         }) as string)
                       : // @ts-expect-error Is dynamic
