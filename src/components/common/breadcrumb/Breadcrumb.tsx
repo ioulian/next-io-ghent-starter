@@ -1,25 +1,14 @@
-import {
-  Children,
-  cloneElement,
-  FC,
-  isValidElement,
-  memo,
-  ReactNode,
-} from "react";
+import { Children, cloneElement, FC, isValidElement, memo } from "react";
 import { useTranslation } from "next-i18next";
 
 import { InferComponentProps } from "@/types/styled";
 
 import { StyledBreadcrumb } from "./Breadcrumb.styles";
 
-const Breadcrumb: FC<
-  {
-    /**
-     * Title of the block
-     */
-    summary: ReactNode;
-  } & InferComponentProps<typeof StyledBreadcrumb>
-> = ({ summary, children, ...props }) => {
+const Breadcrumb: FC<InferComponentProps<typeof StyledBreadcrumb>> = ({
+  children,
+  ...props
+}) => {
   const { t } = useTranslation("common");
   return (
     <StyledBreadcrumb aria-label={t("breadcrumb.label")} {...props}>

@@ -9,26 +9,14 @@ const Heading = forwardRef<
   {
     type?: HeadingType;
     size?: HeadingSize;
-  } & InferComponentProps<typeof StyledHeading>
->(
-  (
-    {
-      type = "h2",
-      size = type,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      $size,
-      children,
-      ...props
-    },
-    ref,
-  ) => {
-    return (
-      <StyledHeading $size={size} as={type} {...props} ref={ref}>
-        {children}
-      </StyledHeading>
-    );
-  },
-);
+  } & Omit<InferComponentProps<typeof StyledHeading>, "$size">
+>(({ type = "h2", size = type, children, ...props }, ref) => {
+  return (
+    <StyledHeading $size={size} as={type} {...props} ref={ref}>
+      {children}
+    </StyledHeading>
+  );
+});
 
 if (process.env.NODE_ENV === "development") {
   Heading.displayName = "Heading";

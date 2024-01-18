@@ -75,7 +75,7 @@ interface DropdownMenuProps {
 export const DropdownTrigger = forwardRef<
   HTMLButtonElement,
   WithTypeAheadKey & ButtonHTMLAttributes<HTMLButtonElement>
->(({ children, typeaheadKey, disabled, ...props }, ref) => {
+>(({ children, ...props }, ref) => {
   if (isValidElement(children)) {
     return cloneElement(children, {
       // @ts-expect-error FIXME:
