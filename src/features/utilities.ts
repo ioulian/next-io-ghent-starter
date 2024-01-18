@@ -1,10 +1,16 @@
+import {
+  AsyncThunkConfig,
+  GetThunkAPI,
+} from "@reduxjs/toolkit/dist/createAsyncThunk";
+
 // https://github.com/reduxjs/redux-toolkit/issues/390
 export const thunkHandler = async <T>(
   asyncFn: T,
-  // FIXME:
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  rejectWithValue: any,
-): Promise<Awaited<Promise<T>>> => {
+  rejectWithValue: GetThunkAPI<AsyncThunkConfig>["rejectWithValue"],
+): Promise<
+  | Awaited<Promise<T>>
+  | ReturnType<GetThunkAPI<AsyncThunkConfig>["rejectWithValue"]>
+> => {
   try {
     return await asyncFn;
   } catch (error) {
