@@ -55,6 +55,7 @@ const theme: DefaultTheme = {
       flip: 5,
       arrow: {
         size: 10,
+        padding: 10,
       },
     },
   },
