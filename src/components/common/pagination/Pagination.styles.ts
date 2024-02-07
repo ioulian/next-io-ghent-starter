@@ -22,7 +22,8 @@ export const StyledPagination = styled.div`
     &:not(.break):not(.previous):not(.next) {
       border-radius: 4px;
       border: 1px solid rgba(115, 117, 117, 0.1);
-      transition: color ${({ theme }) => theme.timings.fast}ms,
+      transition:
+        color ${({ theme }) => theme.timings.fast}ms,
         background-color ${({ theme }) => theme.timings.fast}ms,
         border-color ${({ theme }) => theme.timings.fast}ms;
     }

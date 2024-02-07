@@ -1,11 +1,4 @@
-import {
-  Children,
-  cloneElement,
-  FC,
-  isValidElement,
-  memo,
-  ReactElement,
-} from "react";
+import { Children, cloneElement, FC, isValidElement, memo } from "react";
 
 import { InferComponentProps } from "@/types/styled";
 
@@ -21,7 +14,7 @@ const Stepper: FC<InferComponentProps<typeof StyledStepper>> = ({
       {Children.map(children, (child, index) =>
         isValidElement(child) ? (
           <>
-            {cloneElement(child as ReactElement<any>, {
+            {cloneElement(child, {
               ...child.props,
               index,
             })}

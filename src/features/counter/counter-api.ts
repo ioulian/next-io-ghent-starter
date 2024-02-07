@@ -6,7 +6,6 @@ export const fetchCount = async (amount = 1): Promise<{ data: number }> => {
     },
     body: JSON.stringify({ amount }),
   });
-  const result = await response.json();
 
-  return result;
+  return await response.json();
 };

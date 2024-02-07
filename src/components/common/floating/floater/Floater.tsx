@@ -74,8 +74,14 @@ const Floater = forwardRef<
           left: "rotate(45deg)",
         }[placementFirst] as string;
         return {
-          left: arrowPosition?.x ? `${arrowPosition.x}px` : "",
-          top: arrowPosition?.y ? `${arrowPosition.y}px` : "",
+          left:
+            typeof arrowPosition?.x !== "undefined" && arrowPosition?.x !== null
+              ? `${arrowPosition.x}px`
+              : "",
+          top:
+            typeof arrowPosition?.y !== "undefined" && arrowPosition?.y !== null
+              ? `${arrowPosition.y}px`
+              : "",
           [staticSide]: `-${theme.floating.floater.arrow.size / 2}px`,
           transform: rotation,
         };

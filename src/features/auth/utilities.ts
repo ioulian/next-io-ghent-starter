@@ -33,14 +33,14 @@ export const useAuthCheck = (requireAuth?: boolean) => {
     // Should log in
     if (requireAuth === true && !isLoggedIn) {
       router.push(
-        `${process.env.NEXT_PUBLIC_AUTH_REDIRECT_IF_LOGGED_OUT}?back=${router.asPath}`
+        `${process.env.NEXT_PUBLIC_AUTH_REDIRECT_IF_LOGGED_OUT}?back=${router.asPath}`,
       );
     }
   }
 };
 
 export const redirectToHomepageIfLoggedIn = (
-  store: AppStore
+  store: AppStore,
 ): Promise<RequireResult> =>
   new Promise((resolve, reject) => {
     const tokens = selectAuthTokens(store.getState());
@@ -59,7 +59,7 @@ export const redirectToHomepageIfLoggedIn = (
   });
 
 export const redirectToLoginIfLoggedOut = (
-  store: AppStore
+  store: AppStore,
 ): Promise<RequireResult> =>
   new Promise((resolve, reject) => {
     const tokens = selectAuthTokens(store.getState());

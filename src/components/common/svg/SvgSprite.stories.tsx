@@ -7,7 +7,7 @@ import SvgSprite from "./SvgSprite";
 const icons = {
   iconSample,
   iconSample2,
-};
+} as const;
 
 const meta: Meta<typeof SvgSprite> = {
   tags: ["autodocs"],
@@ -19,11 +19,13 @@ const meta: Meta<typeof SvgSprite> = {
       mapping: icons,
       control: {
         type: "select",
-        labels: Object.entries(icons).reduce((labels, [name, value]) => {
-          // @ts-ignore
-          labels[name] = value.id;
-          return labels;
-        }, {}),
+        labels: Object.entries(icons).reduce<Record<string, string>>(
+          (labels, [name, value]) => {
+            labels[name] = value.id;
+            return labels;
+          },
+          {},
+        ),
       },
     },
   },

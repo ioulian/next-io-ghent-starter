@@ -1,9 +1,19 @@
 {
-  "plugins": ["@typescript-eslint", "i18next"],
+  "plugins": [
+    "@typescript-eslint",
+    "i18next",
+    "jsx-a11y",
+    "sonarjs",
+    "react-hooks"
+  ],
   "extends": [
     "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended",
     "plugin:storybook/recommended",
-    "plugin:i18next/recommended"
+    "plugin:i18next/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:sonarjs/recommended",
+    "plugin:react-hooks/recommended"
   ],
   "rules": {
     "react/button-has-type": "error",
@@ -11,9 +21,7 @@
     "@typescript-eslint/no-unused-vars": [
       "error",
       {
-        "varsIgnorePattern": "_",
-        "args": "after-used",
-        "ignoreRestSiblings": true,
+        "varsIgnorePattern": "^_",
         "destructuredArrayIgnorePattern": "^_"
       }
     ],
@@ -48,7 +56,8 @@
     "react/self-closing-comp": "error",
     "react/void-dom-elements-no-children": "error",
     "react/jsx-no-target-blank": ["error", { "warnOnSpreadAttributes": true }],
-    "no-constant-binary-expression": "error"
+    "no-constant-binary-expression": "error",
+    "sonarjs/cognitive-complexity": "off"
   },
   "settings": {
     "linkComponents": ["Link"]

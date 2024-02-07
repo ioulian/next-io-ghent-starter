@@ -8,14 +8,10 @@ const hasValidationErrors = (propertyPath: string, error?: ApiError) => {
   }
 
   const violations = error.violations.filter(
-    (violation) => violation.propertyPath === propertyPath
+    (violation) => violation.propertyPath === propertyPath,
   );
 
-  if (violations.length === 0) {
-    return false;
-  }
-
-  return true;
+  return violations.length !== 0;
 };
 
 const ApiFormFieldError: FC<{

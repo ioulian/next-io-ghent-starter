@@ -48,6 +48,7 @@ declare module "styled-components" {
         shift: number;
         arrow: {
           size: number;
+          padding: number;
         };
       };
     };

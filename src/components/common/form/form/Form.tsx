@@ -17,9 +17,12 @@ import { StyledForm } from "./Form.styles";
 
 export const BE_VALIDATION: string = "BE";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type FormValueType = Record<string, any>;
+
 // TODO: find a way to pass type to children, maybe use a function that we pass
 // to form, from wich every child can get it types?
-const Form = <T extends Record<string, any>>({
+const Form = <T extends FormValueType>({
   isLoading,
   error,
   defaultValues,

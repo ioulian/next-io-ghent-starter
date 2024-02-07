@@ -68,7 +68,7 @@ export const getAuthHeaders = (store: AppStore) =>
   });
 
 export const apiToJson =
-  <T = any>() =>
+  <T = unknown>() =>
   (res: Response): Promise<T> => {
     if (res.ok) {
       const contentType = res.headers.get("content-type");
@@ -102,7 +102,7 @@ export const apiToJson =
   };
 
 export const getFetcher =
-  <T = any>() =>
+  <T = unknown>() =>
   async (...args: [input: RequestInfo, init?: RequestInit]) => {
     const [input, init] = args;
     const res = await fetch(input, init);
@@ -110,7 +110,7 @@ export const getFetcher =
   };
 
 export const getAuthFetcher =
-  <T = any>(store: AppStore) =>
+  <T = unknown>(store: AppStore) =>
   async (...args: [input: RequestInfo, init?: RequestInit]) => {
     const [input, init] = args;
     const newInit = await injectAuthHeaders(store, init);
@@ -125,7 +125,7 @@ export const getAuthFetcher =
 
 const injectAuthHeaders = async (
   store: AppStore,
-  init?: RequestInit
+  init?: RequestInit,
 ): Promise<RequestInit> => {
   let toReturn: RequestInit = {};
 

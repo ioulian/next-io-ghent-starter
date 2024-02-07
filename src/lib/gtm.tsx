@@ -7,10 +7,10 @@ export const sendPageView = (url: string) => {
   if (
     GTM_ID &&
     typeof window !== "undefined" &&
-    // @ts-ignore
+    // @ts-expect-error TODO: add global type
     typeof window.dataLayer !== "undefined"
   ) {
-    // @ts-ignore
+    // @ts-expect-error TODO: add global type
     window.dataLayer.push({
       event: "pageview",
       page: url,

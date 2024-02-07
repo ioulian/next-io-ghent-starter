@@ -27,7 +27,8 @@ export const StyledInput = styled.input`
     width: 1.25rem;
     background-repeat: no-repeat;
     background-position: center;
-    transition: background-color ${({ theme }) => theme.timings.fast}ms,
+    transition:
+      background-color ${({ theme }) => theme.timings.fast}ms,
       border-color ${({ theme }) => theme.timings.fast}ms;
 
     &:checked {
@@ -43,7 +44,7 @@ export const StyledInput = styled.input`
     &:checked {
       background-image: url(${({ theme }) =>
         escapeSVG(
-          `<svg width='24' height='24' viewBox='0 0 24 24' fill='${theme.form.checkbox.checked.color}' xmlns='http://www.w3.org/2000/svg'><path d='M9 22l-10-10.598 2.798-2.859 7.149 7.473 13.144-14.016 2.909 2.806z' /></svg>`
+          `<svg width='24' height='24' viewBox='0 0 24 24' fill='${theme.form.checkbox.checked.color}' xmlns='http://www.w3.org/2000/svg'><path d='M9 22l-10-10.598 2.798-2.859 7.149 7.473 13.144-14.016 2.909 2.806z' /></svg>`,
         )});
     }
   }
@@ -55,7 +56,7 @@ export const StyledInput = styled.input`
     &:checked {
       background-image: url(${({ theme }) =>
         escapeSVG(
-          `<svg width='24' height='24' viewBox='0 0 24 24' fill='${theme.form.checkbox.checked.color}' xmlns='http://www.w3.org/2000/svg'><circle cx='12' cy='12' r='12' /></svg>`
+          `<svg width='24' height='24' viewBox='0 0 24 24' fill='${theme.form.checkbox.checked.color}' xmlns='http://www.w3.org/2000/svg'><circle cx='12' cy='12' r='12' /></svg>`,
         )});
     }
   }

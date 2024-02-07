@@ -46,7 +46,7 @@ export const generateEntitiesHook =
   (query: QueryType = { pagination: "false" }, shouldFetch: boolean = true) => {
     const API = getApiEndpointForIRI(IRI, query);
     const { data, error, mutate } = useSWR<ListReturn<View>>(
-      shouldFetch ? API : null
+      shouldFetch ? API : null,
     );
 
     return {
@@ -87,7 +87,7 @@ export const generateEntityPatchHook =
       patch: (
         body: Partial<Dto>,
         updateList: boolean = false,
-        query?: QueryType
+        query?: QueryType,
       ) =>
         new Promise<View>((resolve, reject) => {
           if (id) {
@@ -202,7 +202,7 @@ export const generateEntitiesPrecache =
   <View>(IRI: string) =>
   async (
     store: AppStore,
-    query: QueryType = { pagination: "false" }
+    query: QueryType = { pagination: "false" },
   ): Promise<{
     [key: string]: ListReturn<View> | null;
   }> => {
@@ -210,7 +210,7 @@ export const generateEntitiesPrecache =
     return {
       [API]:
         ((await getAuthFetcher(store)(API).catch(
-          () => {}
+          () => {},
         )) as ListReturn<View>) ?? null,
     };
   };
@@ -220,7 +220,7 @@ export const generateEntityPrecache =
   async (
     store: AppStore,
     id?: string,
-    query?: QueryType
+    query?: QueryType,
   ): Promise<{
     [key: string]: View | null;
   }> => {

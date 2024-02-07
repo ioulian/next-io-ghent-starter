@@ -14,7 +14,7 @@ import { NextPage } from "next";
 
 import GlobalStyle from "@/styles/GlobalStyles";
 import { AutoAltLocales, PageFavicons, PageViewport } from "@/lib/page-head";
-import { GTMScript, GTM_ID, sendPageView } from "@/lib/gtm";
+import { GTMScript, sendPageView } from "@/lib/gtm";
 import { getFetcher } from "@/services/api.service";
 import theme from "@/components/styled/Theme";
 

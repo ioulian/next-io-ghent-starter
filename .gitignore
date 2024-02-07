@@ -42,3 +42,5 @@ yarn-error.log*
 /public/workbox*
 /public/sitemap*.xml
 /public/robots.txt
+
+certificates

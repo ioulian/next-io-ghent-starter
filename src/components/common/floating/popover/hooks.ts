@@ -63,7 +63,10 @@ export const usePopover = ({
         padding: theme.floating.floater.flip,
       }),
       shift({ padding: theme.floating.floater.shift }),
-      arrow({ element: arrowRef }),
+      arrow({
+        element: arrowRef,
+        padding: theme.floating.floater.arrow.padding,
+      }),
     ],
   });
   const arrowCallback = useCallback(

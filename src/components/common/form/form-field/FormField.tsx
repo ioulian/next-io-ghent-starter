@@ -28,13 +28,13 @@ import Description from "../description/Description";
 import Error from "../error/Error";
 import Label from "../label/Label";
 import { getAriaDescribedBy, getDescriptionId, getErrorId } from "../utils";
-import { BE_VALIDATION } from "../form/Form";
+import { BE_VALIDATION, type FormValueType } from "../form/Form";
 
 import { StyledFormField } from "./FormField.styles";
 
 const BaseWrapper: FC<{ children?: ReactNode }> = ({ children }) => children;
 
-type RenderProps<T extends Record<string, any>> = (props: {
+type RenderProps<T extends FormValueType> = (props: {
   field: ControllerRenderProps<T, FieldPath<T>>;
   fieldState: ControllerFieldState;
   formState: UseFormStateReturn<T>;
@@ -45,7 +45,7 @@ type RenderProps<T extends Record<string, any>> = (props: {
   };
 }) => ReactElement;
 
-const FormField = <T extends Record<string, any>>({
+const FormField = <T extends FormValueType>({
   asFieldSet,
   name,
   label,
@@ -62,9 +62,12 @@ const FormField = <T extends Record<string, any>>({
   label?: ReactNode;
   description?: ReactNode;
   inputWrapper?: FC<PropsWithChildren>;
+  // FIXME:
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   watchValidate?: any;
-  children?:
-    | ReactElement<any, JSXElementConstructor<any>>
+  children?: // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  | ReactElement<any, JSXElementConstructor<any>>
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     | ReactElement<any, JSXElementConstructor<any>>[]
     | RenderProps<T>;
 } & Omit<InferComponentProps<typeof StyledFormField>, "children">) => {
@@ -121,7 +124,7 @@ const FormField = <T extends Record<string, any>>({
         <InputWrapper>
           {Children.map(children, (child) =>
             isValidElement(child)
-              ? cloneElement(child as ReactElement<any>, {
+              ? cloneElement(child, {
                   ...child.props,
                   ...registerProps,
                   name,
@@ -138,7 +141,7 @@ const FormField = <T extends Record<string, any>>({
           {error.type === BE_VALIDATION
             ? (error.message as unknown as string)
             : (t(
-                // @ts-ignore
+                // @ts-expect-error FIXME:
                 `form.validationErrors.${error.message as string}`,
               ) as string)}
         </Error>

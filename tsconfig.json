@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2015",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "checkJs": true,
     "skipLibCheck": true,
@@ -21,33 +17,15 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "@/types/*": [
-        "src/@types/*"
-      ],
-      "@/components/*": [
-        "src/components/*"
-      ],
-      "@/utils/*": [
-        "src/utils/*"
-      ],
-      "@/lib/*": [
-        "src/lib/*"
-      ],
-      "@/hooks/*": [
-        "src/hooks/*"
-      ],
-      "@/img/*": [
-        "public/img/*"
-      ],
-      "@/styles/*": [
-        "src/components/styled/*"
-      ],
-      "@/features/*": [
-        "src/features/*"
-      ],
-      "@/services/*": [
-        "src/services/*"
-      ]
+      "@/types/*": ["src/@types/*"],
+      "@/components/*": ["src/components/*"],
+      "@/utils/*": ["src/utils/*"],
+      "@/lib/*": ["src/lib/*"],
+      "@/hooks/*": ["src/hooks/*"],
+      "@/img/*": ["public/img/*"],
+      "@/styles/*": ["src/components/styled/*"],
+      "@/features/*": ["src/features/*"],
+      "@/services/*": ["src/services/*"]
     },
     "incremental": true
   },
@@ -61,9 +39,5 @@
     "**/*.ts",
     "**/*.tsx"
   ],
-  "exclude": [
-    "node_modules",
-    "public/workbox-*",
-    "public/sw.js"
-  ]
+  "exclude": ["node_modules", "public/workbox-*", "public/sw.js"]
 }

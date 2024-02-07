@@ -41,7 +41,7 @@ const Button = forwardRef<
      * Will hide children and show icons only
      */
     iconOnly?: boolean;
-  } & InferComponentProps<typeof StyledButton> &
+  } & Omit<InferComponentProps<typeof StyledButton>, "$isLoading"> &
     ComponentProps<"a">
 >(
   (
@@ -54,7 +54,6 @@ const Button = forwardRef<
       onClick,
       as,
       children,
-      $isLoading,
       ...props
     },
     ref,
@@ -81,7 +80,7 @@ const Button = forwardRef<
         <span>
           {isValidElement(iconBefore) &&
             cloneElement(iconBefore, {
-              // @ts-ignore
+              // @ts-expect-error TODO: fix me
               "aria-hidden": "true",
             })}
           {children ? (
@@ -93,7 +92,7 @@ const Button = forwardRef<
           ) : null}
           {isValidElement(iconAfter) &&
             cloneElement(iconAfter, {
-              // @ts-ignore
+              // @ts-expect-error TODO: fix me
               "aria-hidden": "true",
             })}
         </span>

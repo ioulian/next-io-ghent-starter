@@ -75,10 +75,12 @@ interface DropdownMenuProps {
 export const DropdownTrigger = forwardRef<
   HTMLButtonElement,
   WithTypeAheadKey & ButtonHTMLAttributes<HTMLButtonElement>
+  // We need to remove these props as the may not be passed to the elements
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
 >(({ children, typeaheadKey, disabled, ...props }, ref) => {
   if (isValidElement(children)) {
     return cloneElement(children, {
-      // @ts-ignore
+      // @ts-expect-error FIXME:
       ref,
       ...props,
     });
@@ -101,9 +103,11 @@ export const DropdownMenuItem = forwardRef<
   const isActive = item.index === menu.activeIndex;
 
   const ref = useMergeRefs([item.ref, forwardedRef]);
+
   if (isValidElement(children)) {
     return cloneElement(children, {
-      // @ts-ignore
+      ...props,
+      // @ts-expect-error FIXME:
       ref,
       type: "button",
       role: "menuitem",
@@ -119,12 +123,12 @@ export const DropdownMenuItem = forwardRef<
           menu.setHasFocusInside(true);
         },
       }),
-      ...props,
     });
   }
 
   return (
     <button
+      {...props}
       ref={ref}
       type="button"
       role="menuitem"
@@ -140,7 +144,6 @@ export const DropdownMenuItem = forwardRef<
           menu.setHasFocusInside(true);
         },
       })}
-      {...props}
     >
       {children}
     </button>
@@ -182,7 +185,10 @@ const DropdownMenu = forwardRef<
         }),
         flip(),
         shift({ padding: theme.floating.floater.shift }),
-        arrow({ element: arrowRef }),
+        arrow({
+          element: arrowRef,
+          padding: theme.floating.floater.arrow.padding,
+        }),
       ],
       whileElementsMounted: autoUpdate,
     });

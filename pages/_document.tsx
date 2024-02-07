@@ -7,7 +7,7 @@ import Document, {
 } from "next/document";
 import { ServerStyleSheet } from "styled-components";
 
-import { GTMNoScript, GTM_ID } from "@/lib/gtm";
+import { GTMNoScript } from "@/lib/gtm";
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {

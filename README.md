@@ -37,6 +37,7 @@ the project first.
   included (but disabled by default).
 - Auto injection of `<link rel="alternate" />` for different languages (does not
   support translated routes)
+- Husky + lint-staged pre-commit hooks
 
 ## Getting Started
 

@@ -15,7 +15,7 @@ const defaultState: ObserverRect = {
   right: 0,
 };
 
-export function useResizeObserver<T extends HTMLElement = any>() {
+export function useResizeObserver<T extends HTMLElement = HTMLElement>() {
   const frameID = useRef(0);
   const ref = useRef<T>(null);
 
