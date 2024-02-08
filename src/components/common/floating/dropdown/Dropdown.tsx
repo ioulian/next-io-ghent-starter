@@ -180,8 +180,8 @@ const DropdownMenu = forwardRef<
       placement: isNested ? "right-start" : "bottom-start",
       middleware: [
         offset({
-          mainAxis: theme.floating.popover.offset,
-          alignmentAxis: theme.floating.popover.offset,
+          mainAxis: theme.floating.dropdown.offset,
+          alignmentAxis: theme.floating.dropdown.offset,
         }),
         flip(),
         shift({ padding: theme.floating.floater.shift }),
@@ -263,7 +263,10 @@ const DropdownMenu = forwardRef<
   }, [tree, isOpen, nodeId, parentId]);
 
   const { isMounted, styles } = useTransitionStyles(context, {
-    duration: theme.timings.fast,
+    duration: {
+      open: theme.timings.normal,
+      close: theme.timings.fast,
+    },
   });
 
   const contextValue = useMemo(
