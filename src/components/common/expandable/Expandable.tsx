@@ -42,7 +42,7 @@ const Expandable: FC<
     onToggle?: (isOpen: boolean) => void;
   } & InferComponentProps<typeof StyledExpandable>
 > = ({ summary, children, open = false, onToggle, ...props }) => {
-  const [isOpen, setIsOpen] = useState(open);
+  const [isOpen, setIsOpen] = useState<boolean>(open);
   const theme = useTheme();
   const id = useId();
 

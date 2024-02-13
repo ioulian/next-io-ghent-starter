@@ -151,9 +151,9 @@ const DropdownMenu = forwardRef<
   HTMLButtonElement,
   DropdownMenuProps & WithTypeAheadKey & HTMLProps<HTMLButtonElement>
 >(({ children, trigger, ...props }, forwardedRef) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const [hasFocusInside, setHasFocusInside] = useState(false);
+  const [hasFocusInside, setHasFocusInside] = useState<boolean>(false);
 
   const elementsRef = useRef<(HTMLButtonElement | null)[]>([]);
   const labelsRef = useRef<(string | null)[]>([]);
