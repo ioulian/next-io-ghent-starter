@@ -78,9 +78,8 @@ const Button = forwardRef<
         onClick={onClick ? newOnClick : undefined}
       >
         <span>
-          {isValidElement(iconBefore) &&
+          {isValidElement<Record<string, unknown>>(iconBefore) &&
             cloneElement(iconBefore, {
-              // @ts-expect-error TODO: fix me
               "aria-hidden": "true",
             })}
           {children ? (
@@ -90,9 +89,8 @@ const Button = forwardRef<
               <span>{children}</span>
             )
           ) : null}
-          {isValidElement(iconAfter) &&
+          {isValidElement<Record<string, unknown>>(iconAfter) &&
             cloneElement(iconAfter, {
-              // @ts-expect-error TODO: fix me
               "aria-hidden": "true",
             })}
         </span>

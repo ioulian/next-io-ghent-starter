@@ -26,7 +26,6 @@ import {
   arrow,
 } from "@floating-ui/react";
 import {
-  ButtonHTMLAttributes,
   cloneElement,
   createContext,
   forwardRef,
@@ -74,13 +73,12 @@ interface DropdownMenuProps {
 
 export const DropdownTrigger = forwardRef<
   HTMLButtonElement,
-  WithTypeAheadKey & ButtonHTMLAttributes<HTMLButtonElement>
+  WithTypeAheadKey & HTMLProps<HTMLButtonElement>
   // We need to remove these props as the may not be passed to the elements
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
 >(({ children, typeaheadKey, disabled, ...props }, ref) => {
   if (isValidElement(children)) {
     return cloneElement(children, {
-      // @ts-expect-error FIXME:
       ref,
       ...props,
     });
@@ -95,7 +93,7 @@ export const DropdownTrigger = forwardRef<
 
 export const DropdownMenuItem = forwardRef<
   HTMLButtonElement,
-  WithTypeAheadKey & ButtonHTMLAttributes<HTMLButtonElement>
+  WithTypeAheadKey & HTMLProps<HTMLButtonElement>
 >(({ children, typeaheadKey, disabled, ...props }, forwardedRef) => {
   const menu = useContext(MenuContext);
   const item = useListItem({ label: disabled ? null : typeaheadKey });
@@ -104,11 +102,10 @@ export const DropdownMenuItem = forwardRef<
 
   const ref = useMergeRefs([item.ref, forwardedRef]);
 
-  if (isValidElement(children)) {
+  if (isValidElement<Record<string, unknown>>(children)) {
     return cloneElement(children, {
-      ...props,
-      // @ts-expect-error FIXME:
       ref,
+      ...props,
       type: "button",
       role: "menuitem",
       tabIndex: isActive ? 0 : -1,
