@@ -9,6 +9,9 @@ const meta: Meta<typeof Stepper> = {
   title: "UI/Stepper",
   component: Stepper,
   tags: ["autodocs"],
+  parameters: {
+    layout: "padded",
+  },
 };
 
 export default meta;

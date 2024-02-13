@@ -53,8 +53,12 @@ const meta: Meta<typeof EasingGradient> = {
       control: { type: "select" },
     },
   },
+  parameters: {
+    layout: "fullscreen",
+  },
 };
 export default meta;
+
 type Story = StoryObj<typeof EasingGradient>;
 
 export const Example: Story = {

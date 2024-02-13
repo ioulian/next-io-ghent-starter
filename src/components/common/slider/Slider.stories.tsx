@@ -9,6 +9,9 @@ const meta: Meta<typeof Slider> = {
   title: "UI/Slider",
   component: Slider,
   tags: ["autodocs"],
+  parameters: {
+    layout: "padded",
+  },
 };
 
 export default meta;

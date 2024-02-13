@@ -39,6 +39,9 @@ const meta: Meta<typeof FormField> = {
   title: "UI/Form/FormField",
   component: FormField,
   tags: ["autodocs"],
+  parameters: {
+    layout: "padded",
+  },
 };
 
 export default meta;
