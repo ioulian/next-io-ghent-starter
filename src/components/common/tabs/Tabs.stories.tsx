@@ -9,6 +9,9 @@ const meta: Meta<typeof Tabs> = {
   title: "UI/Tabs",
   component: Tabs,
   tags: ["autodocs"],
+  parameters: {
+    layout: "padded",
+  },
 };
 
 export default meta;

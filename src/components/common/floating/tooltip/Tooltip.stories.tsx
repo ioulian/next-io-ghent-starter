@@ -11,21 +11,6 @@ const meta: Meta<typeof Tooltip> = {
   title: "UI/Floating UI/Tooltip",
   component: Tooltip,
   tags: ["autodocs"],
-  decorators: [
-    (Story) => (
-      <div
-        style={{
-          width: "100%",
-          height: "500px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Story />
-      </div>
-    ),
-  ],
 };
 
 export default meta;

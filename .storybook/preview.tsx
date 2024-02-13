@@ -1,6 +1,9 @@
-import "./../scripts/wdyr-storybook";
-import theme from "./../src/components/styled/Theme";
-import GlobalStyle from "./../src/components/styled/GlobalStyles";
+import "../scripts/wdyr-storybook";
+
+import React from "react";
+import theme from "../src/components/styled/Theme";
+import { Preview } from "@storybook/react";
+import GlobalStyle from "../src/components/styled/GlobalStyles";
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
@@ -80,3 +83,11 @@ export const decorators = [
     return <Story />;
   },
 ];
+
+const preview: Preview = {
+  parameters: {
+    layout: "centered",
+  },
+};
+
+export default preview;

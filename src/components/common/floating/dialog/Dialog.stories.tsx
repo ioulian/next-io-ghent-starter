@@ -136,21 +136,6 @@ const meta: Meta<typeof Dialog> = {
   title: "UI/Floating UI/Dialog",
   component: Dialog,
   tags: ["autodocs"],
-  decorators: [
-    (Story) => (
-      <div
-        style={{
-          width: "100%",
-          minHeight: "500px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Story />
-      </div>
-    ),
-  ],
 };
 
 export default meta;

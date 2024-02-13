@@ -55,6 +55,9 @@ const meta: Meta<typeof Form> = {
   title: "UI/Form/Form",
   component: Form,
   tags: ["autodocs"],
+  parameters: {
+    layout: "padded",
+  },
 };
 
 export default meta;

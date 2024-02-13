@@ -6,19 +6,6 @@ const meta: Meta<typeof Spinner> = {
   title: "UI/Spinner",
   component: Spinner,
   tags: ["autodocs"],
-  decorators: [
-    (Story) => (
-      <div
-        style={{
-          width: "400px",
-          height: "400px",
-          border: " 1px dashed #777",
-        }}
-      >
-        <Story />
-      </div>
-    ),
-  ],
 };
 
 export default meta;

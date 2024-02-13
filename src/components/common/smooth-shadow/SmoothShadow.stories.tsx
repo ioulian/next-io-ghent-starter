@@ -21,21 +21,6 @@ const SmoothShadow: FC<SmoothShadowOptionsType> = (options) => {
 const meta: Meta<typeof SmoothShadow> = {
   title: "Tools/Smooth shadow",
   component: SmoothShadow,
-  decorators: [
-    (Story) => (
-      <div
-        style={{
-          width: "100%",
-          height: "500px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Story />
-      </div>
-    ),
-  ],
   argTypes: {
     color: {
       control: { type: "color" },
