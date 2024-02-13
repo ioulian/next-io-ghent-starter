@@ -3,6 +3,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import iconChevron from "@tabler/icons/chevron-right.svg";
 import { useState } from "react";
+import { action } from "@storybook/addon-actions";
 
 import Button from "../../button/Button";
 import SvgSprite from "../../svg/SvgSprite";
@@ -22,7 +23,7 @@ type Story = StoryObj<typeof Dropdown>;
 export const Basic: Story = {
   render: (args) => (
     <Dropdown {...args}>
-      <DropdownMenuItem onClick={() => console.log("Undo")} typeaheadKey="Undo">
+      <DropdownMenuItem onClick={action("Undo")} typeaheadKey="Undo">
         Undo
       </DropdownMenuItem>
       <DropdownMenuItem typeaheadKey="Redo">Redo</DropdownMenuItem>
@@ -132,6 +133,7 @@ const WithOverlayComponent = () => {
         <Dialog.Trigger>
           <DropdownMenuItem
             typeaheadKey="Delete"
+            closeOnClick={false}
             onClick={() => {
               setIsOpen(!isOpen);
             }}

@@ -1,6 +1,7 @@
 /* eslint-disable i18next/no-literal-string */
 
 import type { Meta, StoryObj } from "@storybook/react";
+import { action } from "@storybook/addon-actions";
 
 import Ellipsis from "./Ellipsis";
 
@@ -15,9 +16,7 @@ type Story = StoryObj<typeof Ellipsis>;
 
 export const Default: Story = {
   args: {
-    onToggle: (isOpen) => {
-      console.log(isOpen);
-    },
+    onToggle: action("onToggle"),
     children: (
       <>
         <p>
@@ -148,9 +147,7 @@ export const Default: Story = {
 
 export const AutoDisableButton: Story = {
   args: {
-    onToggle: (isOpen) => {
-      console.log(isOpen);
-    },
+    onToggle: action("onToggle"),
     children: (
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent porta
@@ -165,9 +162,7 @@ export const AutoDisableButton: Story = {
 export const Controlled: Story = {
   args: {
     open: true,
-    onToggle: (isOpen) => {
-      console.log(isOpen);
-    },
+    onToggle: action("onToggle"),
     children: (
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent porta

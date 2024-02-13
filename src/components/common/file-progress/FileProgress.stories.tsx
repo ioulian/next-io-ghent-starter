@@ -2,6 +2,7 @@
 
 import type { Meta, StoryObj } from "@storybook/react";
 import { FC, useEffect } from "react";
+import { action } from "@storybook/addon-actions";
 
 import { useFileUpload } from "@/services/file.service";
 
@@ -94,10 +95,10 @@ const FileItem: FC = () => {
           onClick={() => {
             upload(file)
               .then(() => {
-                console.log("done");
+                action("Upload done")();
               })
               .catch((ex) => {
-                console.log("failed", ex);
+                action("Upload failed")(ex);
               });
           }}
         >

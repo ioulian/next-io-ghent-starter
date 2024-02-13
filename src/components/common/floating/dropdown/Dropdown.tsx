@@ -93,59 +93,68 @@ export const DropdownTrigger = forwardRef<
 
 export const DropdownMenuItem = forwardRef<
   HTMLButtonElement,
-  WithTypeAheadKey & HTMLProps<HTMLButtonElement>
->(({ children, typeaheadKey, disabled, ...props }, forwardedRef) => {
-  const menu = useContext(MenuContext);
-  const item = useListItem({ label: disabled ? null : typeaheadKey });
-  const tree = useFloatingTree();
-  const isActive = item.index === menu.activeIndex;
+  { closeOnClick?: boolean } & WithTypeAheadKey & HTMLProps<HTMLButtonElement>
+>(
+  (
+    { children, typeaheadKey, disabled, closeOnClick = true, ...props },
+    forwardedRef,
+  ) => {
+    const menu = useContext(MenuContext);
+    const item = useListItem({ label: disabled ? null : typeaheadKey });
+    const tree = useFloatingTree();
+    const isActive = item.index === menu.activeIndex;
 
-  const ref = useMergeRefs([item.ref, forwardedRef]);
+    const ref = useMergeRefs([item.ref, forwardedRef]);
 
-  if (isValidElement<Record<string, unknown>>(children)) {
-    return cloneElement(children, {
-      ref,
-      ...props,
-      type: "button",
-      role: "menuitem",
-      tabIndex: isActive ? 0 : -1,
-      disabled: disabled,
-      ...menu.getItemProps({
-        onClick(event: React.MouseEvent<HTMLButtonElement>) {
-          props.onClick?.(event);
-          tree?.events.emit("click");
-        },
-        onFocus(event: React.FocusEvent<HTMLButtonElement>) {
-          props.onFocus?.(event);
-          menu.setHasFocusInside(true);
-        },
-      }),
-    });
-  }
+    if (isValidElement<Record<string, unknown>>(children)) {
+      return cloneElement(children, {
+        ref,
+        ...props,
+        type: "button",
+        role: "menuitem",
+        tabIndex: isActive ? 0 : -1,
+        disabled: disabled,
+        ...menu.getItemProps({
+          onClick(event: React.MouseEvent<HTMLButtonElement>) {
+            props.onClick?.(event);
+            if (closeOnClick) {
+              tree?.events.emit("click");
+            }
+          },
+          onFocus(event: React.FocusEvent<HTMLButtonElement>) {
+            props.onFocus?.(event);
+            menu.setHasFocusInside(true);
+          },
+        }),
+      });
+    }
 
-  return (
-    <button
-      {...props}
-      ref={ref}
-      type="button"
-      role="menuitem"
-      tabIndex={isActive ? 0 : -1}
-      disabled={disabled}
-      {...menu.getItemProps({
-        onClick(event: React.MouseEvent<HTMLButtonElement>) {
-          props.onClick?.(event);
-          tree?.events.emit("click");
-        },
-        onFocus(event: React.FocusEvent<HTMLButtonElement>) {
-          props.onFocus?.(event);
-          menu.setHasFocusInside(true);
-        },
-      })}
-    >
-      {children}
-    </button>
-  );
-});
+    return (
+      <button
+        {...props}
+        ref={ref}
+        type="button"
+        role="menuitem"
+        tabIndex={isActive ? 0 : -1}
+        disabled={disabled}
+        {...menu.getItemProps({
+          onClick(event: React.MouseEvent<HTMLButtonElement>) {
+            props.onClick?.(event);
+            if (closeOnClick) {
+              tree?.events.emit("click");
+            }
+          },
+          onFocus(event: React.FocusEvent<HTMLButtonElement>) {
+            props.onFocus?.(event);
+            menu.setHasFocusInside(true);
+          },
+        })}
+      >
+        {children}
+      </button>
+    );
+  },
+);
 
 const DropdownMenu = forwardRef<
   HTMLButtonElement,
