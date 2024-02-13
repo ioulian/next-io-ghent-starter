@@ -26,7 +26,6 @@ import {
   arrow,
 } from "@floating-ui/react";
 import {
-  ButtonHTMLAttributes,
   cloneElement,
   createContext,
   forwardRef,
@@ -74,13 +73,12 @@ interface DropdownMenuProps {
 
 export const DropdownTrigger = forwardRef<
   HTMLButtonElement,
-  WithTypeAheadKey & ButtonHTMLAttributes<HTMLButtonElement>
+  WithTypeAheadKey & HTMLProps<HTMLButtonElement>
   // We need to remove these props as the may not be passed to the elements
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
 >(({ children, typeaheadKey, disabled, ...props }, ref) => {
   if (isValidElement(children)) {
     return cloneElement(children, {
-      // @ts-expect-error FIXME:
       ref,
       ...props,
     });
@@ -95,68 +93,76 @@ export const DropdownTrigger = forwardRef<
 
 export const DropdownMenuItem = forwardRef<
   HTMLButtonElement,
-  WithTypeAheadKey & ButtonHTMLAttributes<HTMLButtonElement>
->(({ children, typeaheadKey, disabled, ...props }, forwardedRef) => {
-  const menu = useContext(MenuContext);
-  const item = useListItem({ label: disabled ? null : typeaheadKey });
-  const tree = useFloatingTree();
-  const isActive = item.index === menu.activeIndex;
+  { closeOnClick?: boolean } & WithTypeAheadKey & HTMLProps<HTMLButtonElement>
+>(
+  (
+    { children, typeaheadKey, disabled, closeOnClick = true, ...props },
+    forwardedRef,
+  ) => {
+    const menu = useContext(MenuContext);
+    const item = useListItem({ label: disabled ? null : typeaheadKey });
+    const tree = useFloatingTree();
+    const isActive = item.index === menu.activeIndex;
 
-  const ref = useMergeRefs([item.ref, forwardedRef]);
+    const ref = useMergeRefs([item.ref, forwardedRef]);
 
-  if (isValidElement(children)) {
-    return cloneElement(children, {
-      ...props,
-      // @ts-expect-error FIXME:
-      ref,
-      type: "button",
-      role: "menuitem",
-      tabIndex: isActive ? 0 : -1,
-      disabled: disabled,
-      ...menu.getItemProps({
-        onClick(event: React.MouseEvent<HTMLButtonElement>) {
-          props.onClick?.(event);
-          tree?.events.emit("click");
-        },
-        onFocus(event: React.FocusEvent<HTMLButtonElement>) {
-          props.onFocus?.(event);
-          menu.setHasFocusInside(true);
-        },
-      }),
-    });
-  }
+    if (isValidElement<Record<string, unknown>>(children)) {
+      return cloneElement(children, {
+        ref,
+        ...props,
+        type: "button",
+        role: "menuitem",
+        tabIndex: isActive ? 0 : -1,
+        disabled: disabled,
+        ...menu.getItemProps({
+          onClick(event: React.MouseEvent<HTMLButtonElement>) {
+            props.onClick?.(event);
+            if (closeOnClick) {
+              tree?.events.emit("click");
+            }
+          },
+          onFocus(event: React.FocusEvent<HTMLButtonElement>) {
+            props.onFocus?.(event);
+            menu.setHasFocusInside(true);
+          },
+        }),
+      });
+    }
 
-  return (
-    <button
-      {...props}
-      ref={ref}
-      type="button"
-      role="menuitem"
-      tabIndex={isActive ? 0 : -1}
-      disabled={disabled}
-      {...menu.getItemProps({
-        onClick(event: React.MouseEvent<HTMLButtonElement>) {
-          props.onClick?.(event);
-          tree?.events.emit("click");
-        },
-        onFocus(event: React.FocusEvent<HTMLButtonElement>) {
-          props.onFocus?.(event);
-          menu.setHasFocusInside(true);
-        },
-      })}
-    >
-      {children}
-    </button>
-  );
-});
+    return (
+      <button
+        {...props}
+        ref={ref}
+        type="button"
+        role="menuitem"
+        tabIndex={isActive ? 0 : -1}
+        disabled={disabled}
+        {...menu.getItemProps({
+          onClick(event: React.MouseEvent<HTMLButtonElement>) {
+            props.onClick?.(event);
+            if (closeOnClick) {
+              tree?.events.emit("click");
+            }
+          },
+          onFocus(event: React.FocusEvent<HTMLButtonElement>) {
+            props.onFocus?.(event);
+            menu.setHasFocusInside(true);
+          },
+        })}
+      >
+        {children}
+      </button>
+    );
+  },
+);
 
 const DropdownMenu = forwardRef<
   HTMLButtonElement,
   DropdownMenuProps & WithTypeAheadKey & HTMLProps<HTMLButtonElement>
 >(({ children, trigger, ...props }, forwardedRef) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const [hasFocusInside, setHasFocusInside] = useState(false);
+  const [hasFocusInside, setHasFocusInside] = useState<boolean>(false);
 
   const elementsRef = useRef<(HTMLButtonElement | null)[]>([]);
   const labelsRef = useRef<(string | null)[]>([]);

@@ -35,7 +35,8 @@ export const useTooltip = ({
   open: controlledOpen,
   onOpenChange: setControlledOpen,
 }: TooltipOptions = {}) => {
-  const [uncontrolledOpen, setUncontrolledOpen] = useState(initialOpen);
+  const [uncontrolledOpen, setUncontrolledOpen] =
+    useState<boolean>(initialOpen);
 
   const open = controlledOpen ?? uncontrolledOpen;
   const setOpen = setControlledOpen ?? setUncontrolledOpen;

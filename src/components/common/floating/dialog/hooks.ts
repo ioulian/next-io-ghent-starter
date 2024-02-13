@@ -26,7 +26,8 @@ export const useDialog = ({
   open: controlledOpen,
   onOpenChange: setControlledOpen,
 }: DialogOptions = {}) => {
-  const [uncontrolledOpen, setUncontrolledOpen] = useState(initialOpen);
+  const [uncontrolledOpen, setUncontrolledOpen] =
+    useState<boolean>(initialOpen);
   const [labelId, setLabelId] = useState<string | undefined>();
   const [descriptionId, setDescriptionId] = useState<string | undefined>();
   const nodeId = useFloatingNodeId();

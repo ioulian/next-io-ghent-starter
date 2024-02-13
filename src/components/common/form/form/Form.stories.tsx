@@ -2,6 +2,7 @@
 
 import ReactSelect from "react-select";
 import type { Meta, StoryObj } from "@storybook/react";
+import { action } from "@storybook/addon-actions";
 
 import { email, password, passwordRepeat, required } from "../rules";
 import Form from "../form/Form";
@@ -81,9 +82,7 @@ export const Example: Story = {
       defaultValues={{
         color: colourOptions[0],
       }}
-      onSubmit={(values) => {
-        console.log(values);
-      }}
+      onSubmit={action("onSubmit")}
     >
       <Heading>Register here</Heading>
       <div

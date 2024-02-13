@@ -16,7 +16,7 @@ import {
 const POSSIBLE_LOCALES = i18nextConfig.i18n.locales;
 
 const getKeysOfObjectRecursively = (object = {}, parentKey = ""): string[] => {
-  // @ts-ignore
+  // @ts-expect-error FIXME:
   return Object.entries(object).reduce((list, [key, value]) => {
     const currentKey = parentKey ? `${parentKey}.${key}` : key;
     if (typeof value === "object" && value !== null) {
@@ -30,7 +30,10 @@ const getKeysOfObjectRecursively = (object = {}, parentKey = ""): string[] => {
 const getTranslationFiles = (locale: string): string[] =>
   fs.readdirSync(path.join(__dirname, `./../public/locales/${locale}`));
 
-const getTranslationFile = (locale: string, name: string): {} | undefined => {
+const getTranslationFile = (
+  locale: string,
+  name: string,
+): Record<string, unknown> | undefined => {
   try {
     const file = fs.readFileSync(
       path.join(__dirname, `./../public/locales/${locale}/${name}`),

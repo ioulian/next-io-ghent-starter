@@ -39,7 +39,8 @@ export const usePopover = ({
   open: controlledOpen,
   onOpenChange: setControlledOpen,
 }: PopoverOptions = {}) => {
-  const [uncontrolledOpen, setUncontrolledOpen] = useState(initialOpen);
+  const [uncontrolledOpen, setUncontrolledOpen] =
+    useState<boolean>(initialOpen);
   const [labelId, setLabelId] = useState<string | undefined>();
   const [descriptionId, setDescriptionId] = useState<string | undefined>();
   const nodeId = useFloatingNodeId();
