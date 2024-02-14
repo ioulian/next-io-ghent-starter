@@ -162,6 +162,7 @@ const WithOverlayComponent = () => {
     </Dropdown>
   );
 };
+
 export const WithOverlay: Story = {
   render: () => <WithOverlayComponent />,
 };
