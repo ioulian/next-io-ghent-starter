@@ -1,4 +1,4 @@
-# next-io-ghent-starter kit (Next.js v13)
+# next-io-ghent-starter kit (Next.js v14)
 
 This is a [Next.js](https://nextjs.org/) starter kit created to be used as a
 template to start new projects in iO Ghent campus. The idea behind is that you
